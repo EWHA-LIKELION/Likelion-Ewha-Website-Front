@@ -1,3 +1,11 @@
+---
+name: "Basic Issue Template"
+about: "Create Basic Issue"
+title: ""
+labels: ""
+assignees: ""
+---
+
 ## 📝 작업 개요
 - 작업개요
 
