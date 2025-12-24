@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const BottomBar = () => {
+  // Back to top 클릭 시 스크롤 상단 이동
   const handleBackToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -64,30 +65,32 @@ const Footer = styled.footer`
 `;
 
 const Inner = styled.div`
-  width: 100%;
-  max-width: 970px;
   display: flex;
   flex-direction: column;
+  width: 100%;
   gap: 32px;
 
-  /* PC */
+  /* PC: 가운데 970px 컨텐츠 */
+  max-width: 970px;
+
   @media (min-width: 800px) {
     padding: 40px 0;
   }
 
-  /* MO */
+  /* MO: 좌우 20px 고정 + 전체 화면 기준 */
   @media (max-width: 799px) {
-    width: 393px;
-    padding: 24px 20px 40px 20px;
+    width: 100%;
+    max-width: none;            
+    padding: 24px 20px 40px;    
     gap: 17px;
   }
 `;
 
 const TopRow = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   align-items: center;
-  align-self: stretch;
+  width: 100%;
 `;
 
 const LogoWrap = styled.div`
@@ -96,20 +99,19 @@ const LogoWrap = styled.div`
 
   img {
     display: block;
-    width: auto;
     height: auto;
+    width: auto;
   }
 `;
 
 const BackToTopButton = styled.button`
   display: flex;
-  padding: 28px 0;
   align-items: flex-start;
   gap: 8px;
-  align-self: stretch;
+  padding: 28px 0;
 
   background: transparent;
-  border: 0;
+  border: none;
   cursor: pointer;
 `;
 
@@ -123,8 +125,6 @@ const BackToTopText = styled.span`
 
 const BackToTopIcon = styled.img`
   display: block;
-  width: auto;
-  height: auto;
 `;
 
 const LeftStack = styled.div`
@@ -144,7 +144,6 @@ const EmailLabel = styled.div`
   color: var(--neutral-70, #9b9b9b);
   font-family: Pretendard, sans-serif;
   font-size: 12px;
-  font-weight: 400;
   line-height: 20px;
 `;
 
@@ -152,13 +151,11 @@ const EmailValue = styled.div`
   color: var(--neutral-95, #dcdcdc);
   font-family: Pretendard, sans-serif;
   font-size: 16px;
-  font-weight: 400;
   line-height: 24px;
 `;
 
 const SocialRow = styled.div`
   display: flex;
-  width: 225.882px;
   justify-content: flex-end;
   align-items: center;
   gap: 18.824px;
@@ -170,19 +167,12 @@ const SocialLink = styled.a`
 
   img {
     display: block;
-    width: auto;
-    height: auto;
   }
 `;
 
 const Divider = styled.div`
-  width: 970px;
-  height: 0;
+  width: 100%;
   border-top: 1px solid var(--line-strong, #70737c85);
-
-  @media (max-width: 799px) {
-    width: 100%;
-  }
 `;
 
 const Copyright = styled.div`
@@ -191,6 +181,5 @@ const Copyright = styled.div`
   text-align: center;
   font-family: Pretendard, sans-serif;
   font-size: 14px;
-  font-weight: 400;
   line-height: 22px;
 `;
