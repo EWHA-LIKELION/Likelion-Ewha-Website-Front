@@ -20,5 +20,4 @@ assignees: ''
 ## ✅ 확인
 - [ ] Assignees
 - [ ] Labels
-- [ ] Projects
 - [ ] Milestone
