@@ -1,35 +1,86 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { useLayoutEffect, useRef, useState } from "react";
 
-const TopBar = ({ onClickMenu }) => {
+const TopBar = () => {
+  const headerRef = useRef(null);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [selected, setSelected] = useState(null);
+  const [headerH, setHeaderH] = useState(0);
+
+  const toggleMenu = () => setIsOpen((prev) => !prev);
+
+  useLayoutEffect(() => {
+    const update = () => {
+      if (!headerRef.current) return;
+      setHeaderH(headerRef.current.offsetHeight);
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
   return (
-    <Topbar>
-      <Inner>
-        <Logo to="/" aria-label="LIKELION EWHA Home">
-          <img src="/icons/logo_top.svg" alt="LIKELION EWHA" />
-        </Logo>
+    <>
+      <Topbar ref={headerRef}>
+        <Inner>
+          <Logo to="/" aria-label="LIKELION EWHA Home">
+            <img src="/icons/logo_top.svg" alt="LIKELION EWHA" />
+          </Logo>
 
-        {/*PC*/}
-        <PcNav aria-label="Primary">
-          <MenuLink to="/project">PROJECT</MenuLink>
-          <MenuLink to="/people">PEOPLE</MenuLink>
-          <MenuLink to="/recruit">RECRUIT</MenuLink>
-        </PcNav>
+          {/* PC */}
+          <PcNav aria-label="Primary">
+            <MenuLink to="/project">PROJECT</MenuLink>
+            <MenuLink to="/people">PEOPLE</MenuLink>
+            <MenuLink to="/recruit">RECRUIT</MenuLink>
+          </PcNav>
 
-        {/*MO*/}
-        <MoMenuButton
-          type="button"
-          aria-label="Open menu"
-          onClick={onClickMenu}
-        >
-          <img src="/icons/hamburger.svg" alt="" />
-        </MoMenuButton>
-      </Inner>
-    </Topbar>
+          {/* MO */}
+          <MoMenuButton
+            type="button"
+            aria-label="Open menu"
+            onClick={toggleMenu}
+          >
+            <img src="/icons/hamburger.svg" alt="" />
+          </MoMenuButton>
+        </Inner>
+      </Topbar>
+
+      <MoPanelSlot $open={isOpen} aria-label="Mobile menu slot">
+        <MoPanel $headerH={headerH} aria-label="Mobile menu">
+          <MoMenu>
+            <MoItem
+              to="/project"
+              $active={selected === "project"}
+              onClick={() => setSelected("project")}
+            >
+              PROJECT
+            </MoItem>
+            <MoItem
+              to="/people"
+              $active={selected === "people"}
+              onClick={() => setSelected("people")}
+            >
+              PEOPLE
+            </MoItem>
+            <MoItem
+              to="/recruit"
+              $active={selected === "recruit"}
+              onClick={() => setSelected("recruit")}
+            >
+              RECRUIT
+            </MoItem>
+          </MoMenu>
+        </MoPanel>
+      </MoPanelSlot>
+    </>
   );
 };
 
 export default TopBar;
+
 
 const Topbar = styled.header`
   display: flex;
@@ -51,9 +102,9 @@ const Inner = styled.div`
     gap: 10px;
   }
 
-  /* MO: 320px ~ 799px */
+  /* MO: 좌우 20px 고정 */
   @media (max-width: 799px) {
-    width: 393px;
+    width: 100%;
     min-width: 320px;
     padding: 10px 20px;
   }
@@ -106,11 +157,64 @@ const MoMenuButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    aspect-ratio: 1/1;
   }
 
   img {
     display: block;
-    width: auto;
-    height: auto;
+    width: 28px;
+    height: 28px;
   }
+`;
+
+
+const MoPanelSlot = styled.div`
+  display: none;
+
+  @media (max-width: 799px) {
+    display: ${({ $open }) => ($open ? "block" : "none")};
+    width: 100%;
+  }
+`;
+
+const MoPanel = styled.aside`
+  display: none;
+
+  @media (max-width: 799px) {
+    display: flex;
+
+    width: 200px;
+    min-width: 152px;
+    max-width: 391px;
+    min-height: 240px;
+    height: calc(100dvh - ${({ $headerH }) => `${$headerH}px`});
+    margin-left: auto;
+    padding: 40px 28px;
+    align-items: flex-start;
+    gap: 10px;
+
+    background: var(--neutral-15, #1c1c1c);
+  }
+`;
+
+const MoMenu = styled.nav`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+`;
+
+const MoItem = styled(NavLink)`
+  color: ${({ $active }) => ($active ? "#00FF67" : "#FFF")};
+  text-align: center;
+  font-family: "Bayon", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  text-decoration: none;
 `;
