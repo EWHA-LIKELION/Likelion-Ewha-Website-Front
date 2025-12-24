@@ -1,9 +1,10 @@
 ---
-name: "Basic Issue Template"
-about: "Create Basic Issue"
-title: ""
-labels: ""
-assignees: ""
+name: Basic Issue Template
+about: Create Basic Issue
+title: ''
+labels: ''
+assignees: ''
+
 ---
 
 ## 📝 작업 개요
@@ -15,3 +16,9 @@ assignees: ""
 
 ## 📋 참고 사항 (선택)
 - 참고사항
+
+## ✅ 확인
+- [ ] Assignees
+- [ ] Labels
+- [ ] Projects
+- [ ] Milestone
