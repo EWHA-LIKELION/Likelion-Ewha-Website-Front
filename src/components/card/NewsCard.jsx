@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-const NewsCard = ({ imageSrc = "/icons/defaultImg.svg", alt = "디폴트 이미지" }) => {
+const DEFAULT_IMAGE = "/icons/defaultImg.svg";
+
+const NewsCard = ({ imageSrc = DEFAULT_IMAGE }) => {
   return (
     <CardWrapper>
       <CardImage 
         src={imageSrc} 
-        alt={alt}
+        alt="news image"
         onError={(e) => {
-          e.target.src = "/icons/defaultImg.svg";
+          e.target.src = DEFAULT_IMAGE;
         }}
       />
     </CardWrapper>
