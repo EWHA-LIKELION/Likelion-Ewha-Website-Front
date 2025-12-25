@@ -60,7 +60,7 @@ const Button = styled.button`
 
   color: ${(props) => {
     if (props.$styleType === 1) {
-      return props.$active ? "var(--common-100)" : "var(--neutral-20)";
+      return props.$active ? "var(--common-100)" : "var(--neutral-30)";
     } else {
       return props.$active ? "var(--common-100)" : "var(--neutral-70)";
     }
