@@ -43,7 +43,6 @@ const CardWrapper = styled.div`
   display: flex;
   width: 19.375rem;
   height: 22.125rem;
-  min-width: 19.375rem;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
@@ -51,6 +50,11 @@ const CardWrapper = styled.div`
 
   border-radius: 1.25rem;
   background: var(--cool-neutral-98);
+
+  @media (max-width: 1129px) {
+    width: 100%;
+    min-width: 19.375rem;
+  }
 `;
 
 const CardImage = styled.img`
