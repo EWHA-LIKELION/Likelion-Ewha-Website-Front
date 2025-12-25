@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 
-const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false }) => {
+const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false, disabled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
   const dropdownRef = useRef(null);
@@ -30,6 +30,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
       <SelectButton 
         $isOpen={isOpen}
         $error={error}
+        $disabled={disabled}
         className="h5-regular"
       >
         <TextWrapper>
@@ -37,9 +38,9 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
             {selectedValue ? `${selectedValue}${unit}` : placeholder}
           </SelectedText>
         </TextWrapper>
-        <ArrowButton onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
+        <ArrowButton onClick={() => !disabled && setIsOpen(!isOpen)} $isOpen={isOpen} $disabled={disabled}>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
-            <path d="M0.530273 0.53125L7.53027 7.53125L14.5303 0.53125" stroke="#9B9B9B" stroke-width="1.5" stroke-linejoin="round"/>
+            <path d="M0.530273 0.53125L7.53027 7.53125L14.5303 0.53125" stroke="#9B9B9B" strokeWidth="1.5" strokeLinejoin="round"/>
           </svg>
         </ArrowButton>
       </SelectButton>
@@ -78,7 +79,7 @@ const SelectButton = styled.button`
   background: var(--common-100);
   border-radius: 0.25rem;
   border: 1px solid ${(props) => (props.$error ? 'var(--primary-sub)' : 'var(--neutral-95)')};
-  cursor: default;
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'default')};
 `;
 
 const TextWrapper = styled.div`
@@ -98,11 +99,12 @@ const ArrowButton = styled.div`
   align-items: center;
   justify-content: center;
 
-  cursor: pointer;
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
   transition: all 0.2s ease;
+  pointer-events: ${(props) => (props.$disabled ? 'none' : 'auto')};
 
   &:hover {
-    filter: brightness(0.9);
+    filter: ${(props) => (props.$disabled ? 'none' : 'brightness(0.9)')};
   }
 
   svg {
