@@ -36,7 +36,13 @@ const Wrapper = styled.div`
   width: fit-content;
   background: var(--common-100);
   padding: 0;
-  border: 1px solid var(--neutral-90);
+  border: 1px solid ${(props) => {
+    if (props.$styleType === 1) {
+      return "var(--neutral-90)";
+    } else {
+      return "var(--neutral-95)";
+    }
+  }};
 `;
 
 const Button = styled.button`
@@ -76,6 +82,7 @@ const Button = styled.button`
 
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
   
   &:hover {
     filter: brightness(0.9);
