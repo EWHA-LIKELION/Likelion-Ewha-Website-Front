@@ -14,7 +14,7 @@ const ProjectCard1 = ({
     <CardWrapper $styleType={styleType}>
       <CardImage 
         src={imageSrc} 
-        alt="people image"
+        alt="project image"
         onError={(e) => {
           e.target.src = DEFAULT_IMAGE;
         }}
