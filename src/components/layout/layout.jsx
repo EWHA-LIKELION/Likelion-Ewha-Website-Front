@@ -1,8 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
-import TopBar from "../components/topbar";
-import BottomBar from "../components/bottombar";
+import TopBar from "../navigation/topbar";
+import BottomBar from "../navigation/bottombar";
 
 const Layout = () => {
   const [moMenuOpen, setMoMenuOpen] = useState(false);
