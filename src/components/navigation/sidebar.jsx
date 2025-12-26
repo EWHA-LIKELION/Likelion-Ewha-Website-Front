@@ -78,7 +78,7 @@ export default Sidebar;
 
 const Wrapper = styled.aside`
   display: inline-flex;
-  height: 1024px;
+  height: 100%;
   padding: 40px 32px;
   flex-direction: column;
   align-items: center;
@@ -135,8 +135,8 @@ const MenuItem = styled(NavLink)`
 `;
 
 const MenuText = styled.span`
-  color: ${({ $active }) => ($active ? "#00FF67" : "var(--static-white, #fff)")};
-  font-family: Pretendard, sans-serif;
+  color: ${({ $active }) => ($active ? "#00FF67" : "var(--neutral-95, #DCDCDC)")};
+  font-family: Cafe24 PRO Slim, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -168,7 +168,7 @@ const LogoutRow = styled.div`
 
 const LogoutText = styled.span`
   color: var(--neutral-70, #9b9b9b);
-  font-family: Pretendard, sans-serif;
+  font-family: Cafe24 PRO Slim, sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;

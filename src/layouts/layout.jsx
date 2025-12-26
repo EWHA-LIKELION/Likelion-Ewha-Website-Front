@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { NavLink, Outlet } from "react-router-dom";
-import TopBar from "../../components/navigation/topbar";
-import BottomBar from "../../components/navigation/bottombar";
+import TopBar from "../components/navigation/topbar.jsx";
+import BottomBar from "../components/navigation/bottombar.jsx";
+import Sidebar from "../components/navigation/sidebar.jsx";
 
 const Layout = () => {
   const [moMenuOpen, setMoMenuOpen] = useState(false);
@@ -22,6 +23,10 @@ const Layout = () => {
       <TopBar onToggleMobileMenu={setMoMenuOpen} />
 
       <ContentRow>
+        <DesktopSidebar>
+          <Sidebar />
+        </DesktopSidebar>
+
         <MainArea>
           <Outlet />
         </MainArea>
@@ -72,12 +77,23 @@ const ContentRow = styled.div`
   flex: 1;
   display: flex;
   align-items: stretch;
+  min-height: 0;
+`;
+
+const DesktopSidebar = styled.aside`
+  display: none;
+
+  @media (min-width: 800px) {
+    display: flex;
+    align-self: stretch;
+  }
 `;
 
 const MainArea = styled.main`
   flex: 1;
   background: #fff;
   padding: 20px;
+  min-width: 0;
 `;
 
 const MoPanel = styled.aside`
@@ -101,7 +117,7 @@ const MoMenu = styled.nav`
 `;
 
 const MoItem = styled(NavLink)`
-  color: ${({ $active }) => ($active ? "#00FF67" : "#FFF")};
+  color: ${({ $active }) => ($active ? "#00FF67" : "#fff")};
   text-align: center;
   font-family: "Bayon", sans-serif;
   font-size: 24px;
