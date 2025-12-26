@@ -27,7 +27,7 @@ const TopBar = ({ onToggleMobileMenu }) => {
     <Topbar>
       <Inner>
         <Logo to="/" aria-label="LIKELION EWHA Home">
-          <img src="/icons/logo_top.svg" alt="LIKELION EWHA" />
+          <img src="/icons/logotop.svg" alt="LIKELION EWHA" />
         </Logo>
 
         {/* PC버전 메뉴 */}

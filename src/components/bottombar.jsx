@@ -11,12 +11,12 @@ const BottomBar = () => {
       <Inner>
         <TopRow>
           <LogoWrap>
-            <img src="/icons/logo_buttom.svg" alt="LIKELION EWHA" />
+            <img src="/icons/logobuttom.svg" alt="LIKELION EWHA" />
           </LogoWrap>
 
           <BackToTopButton type="button" onClick={handleBackToTop}>
             <BackToTopText>Back to top</BackToTopText>
-            <BackToTopIcon src="/icons/back_to_top.svg" alt="" />
+            <BackToTopIcon src="/icons/backtotop.svg" alt="" />
           </BackToTopButton>
         </TopRow>
 
