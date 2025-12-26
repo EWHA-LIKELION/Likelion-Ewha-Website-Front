@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 
-// 1. 내부 컴포넌트: 개별 토스트 메시지 (타이머 로직 포함)
+// 1. 내부 컴포넌트: 개별 토스트 메시지 (타이머 로직) 
 
 const ToastItem = ({ id, message, onClose }) => {
   useEffect(() => {
