@@ -98,6 +98,7 @@ const MainArea = styled.main`
 
 const MoPanel = styled.aside`
   display: none;
+  z-index: 9999;
 
   @media (max-width: 799px) {
     display: ${({ $open }) => ($open ? "flex" : "none")};
