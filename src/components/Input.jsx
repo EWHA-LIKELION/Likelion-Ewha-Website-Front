@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import styled, { css } from 'styled-components';
 
 /* -------------------------------------------------------------------------- */
@@ -22,21 +22,21 @@ function Input({
   onChange,
 }) {
   const [isFocused, setIsFocused] = useState(false);
+  const inputId = useId();
+  const hasValue = value !== undefined && value !== '';
 
   /** input 상태 */
   const inputState = error
     ? 'error'
     : isFocused
     ? 'focused'
-    : (value !== undefined && value !== '')
-    ? 'filled'
     : 'default';
 
   return (
     <Wrapper>
       {/* ---------------- Label (form / auth) ---------------- */}
       {(variant === 'form' || variant === 'auth') && label && (
-        <Label $variant={variant} $state={inputState}>
+        <Label htmlFor={inputId} $variant={variant} $state={inputState}>
           {label}
           {required && <Required>*</Required>}
         </Label>
@@ -44,28 +44,29 @@ function Input({
 
       {/* ---------------- Sub Text (form only) ---------------- */}
       {variant === 'form' && subText && (
-        <SubText>{subText}</SubText>
+        <SubText $multiline={multiline}>{subText}</SubText>
       )}
 
       {/* ---------------- Input Box ---------------- */}
-      <InputBox $variant={variant} $state={inputState}>
+      <InputBox $variant={variant} $state={inputState} $multiline={multiline}>
         {startIcon && <Icon>{startIcon}</Icon>}
 
         {multiline ? (
           <StyledTextArea
-            $variant={variant}
+            id={inputId}
             placeholder={placeholder}
-            {...(value !== undefined && { value })}
+            value={value}
             onChange={onChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
           />
         ) : (
           <StyledInput
+            id={inputId}
             $variant={variant}
             placeholder={placeholder}
             type={type}
-            {...(value !== undefined && { value })}
+            value={value}
             onChange={onChange}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
@@ -103,40 +104,20 @@ const Wrapper = styled.div`
 /* -------------------------------- Label -------------------------------- */
 
 const Label = styled.label`
+  color: #2a2a2a;
+  font-weight: 700;
   font-size: 16px;
 
-  ${({ $variant, $state }) => {
-    /* ---------- form (Text Inputs 2) ---------- */
-    if ($variant === 'form') {
-      return css`
-        color: #2A2A2A;
-        font-weight: 700;
-        font-size: 16px;
-
-        @media (max-width: 799px) { /* 모바일 */
-          font-size: 14px;
-        }
-      `;
-    }
-
-    /* ---------- auth (Text Inputs 3) ---------- */
-    if ($variant === 'auth') {
-      return css`
-        color: #2A2A2A;
-        font-weight: 700;
-        font-size: 16px;
-        @media (max-width: 799px) { /* 모바일 */
-          font-size: 14px;
-        }
-      `;
-    }
-  }}
+  @media (max-width: 799px) {
+    font-size: 14px;
+  }
 `;
 
 const Required = styled.span`
   margin-left: 2px;
   color: #FF7B2E;
   font-size: 16px;
+
   @media (max-width: 799px) { /* 모바일 */
     font-size: 12px;
   }
@@ -148,14 +129,21 @@ const SubText = styled.span`
   font-size: 12px;
   font-weight: 400;
   color: #737373;
+
+  ${({ $multiline }) =>
+    $multiline &&
+    css`
+      margin-left: 20px;
+    `}
 `;
 
 /* ----------------------------- Input Box ----------------------------- */
 
 const InputBox = styled.div`
   display: flex;
-  align-items: center;
-  border-radius: 50px;
+  align-items: ${({ $multiline }) =>
+    $multiline ? 'flex-start' : 'center'};
+  border-radius: ${({ $multiline }) => ($multiline ? '12px' : '50px')};
   align-self: stretch;
   background: #F4F4F5;
   border-color: #F4F4F5;
@@ -174,6 +162,7 @@ const InputBox = styled.div`
         width: 395px;
         height: 52px;
         padding: 12px 24px;
+        font-size: 16px;
           @media (max-width: 799px) { /* 모바일 */
             width: 320px;
             height: 40px;
@@ -215,6 +204,7 @@ const baseInputStyle = css`
   background: transparent;
   outline: none;
   font-size: 14px;
+  color: #2A2A2A;
 `;
 
 const StyledInput = styled.input`
@@ -259,7 +249,7 @@ const StyledInput = styled.input`
 const StyledTextArea = styled.textarea`
   ${baseInputStyle}
   resize: none;
-  height: 120px;
+  height: 266px;
 `;
 
 /* -------------------------------- Icon -------------------------------- */
