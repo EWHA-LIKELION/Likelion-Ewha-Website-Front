@@ -67,6 +67,7 @@ const ModalSecondaryButton = styled(BaseModalButton)`
     background-color: #FFF;
     border: 1.5px solid var(--Primary-Main, #DCDCDC);
     color: #9B9B9B;
+    
 `;
 
 /* ===== Secondary (small) ===== */

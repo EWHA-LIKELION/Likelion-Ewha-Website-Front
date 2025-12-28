@@ -34,7 +34,7 @@ export const DisabledSubmitButton = (props) => (
 export const RecruitInfoButton = (props) => (
     <DefaultButton {...props}>
         <span>14기 모집 안내 바로가기</span>
-        <img src="/icons/Arrow_Right.svg" />
+        <img src="/icons/arrowRight.svg" />
     </DefaultButton>
 );
 
@@ -112,5 +112,3 @@ const DefaultButton = styled(BaseButton)`
     background-color: #474747;
     color: #ffffff;
 `;
-
-
