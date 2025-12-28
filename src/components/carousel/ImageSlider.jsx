@@ -85,7 +85,6 @@ const ImageSlider = () => {
         type="image"
         image={{
           src: selectedImg,
-          width: "58.125rem",
           alt: "확대 이미지",
         }}
       />

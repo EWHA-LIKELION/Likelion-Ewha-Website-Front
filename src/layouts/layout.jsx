@@ -23,9 +23,7 @@ const Layout = () => {
       <TopBar onToggleMobileMenu={setMoMenuOpen} />
 
       <ContentRow>
-        <DesktopSidebar>
-          <Sidebar />
-        </DesktopSidebar>
+        <DesktopSidebar>{/*<Sidebar />}*/}</DesktopSidebar>
 
         <MainArea>
           <Outlet />
