@@ -24,6 +24,7 @@ const CardWrapper = styled.div`
   height: 15rem;
   border-radius: 1rem;
   overflow: hidden;
+  flex-shrink: 0;
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
