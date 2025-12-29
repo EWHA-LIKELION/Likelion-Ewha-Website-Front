@@ -58,7 +58,7 @@ const CardWrapper = styled.div`
   align-items: center;
   overflow: hidden;
   gap: 1.5rem;
-  transition: gap 0.2s ease, height 0.2s ease, min-width 0.2s ease;
+  transition: all 0.2s ease;
 
   border-radius: 1.25rem;
   background: var(--cool-neutral-98);
@@ -72,6 +72,7 @@ const CardWrapper = styled.div`
     gap: 1rem;
     height: 16.375rem;
     min-width: 12.5rem;
+    border-radius: 0.625rem;
   }
 `;
 
@@ -79,7 +80,7 @@ const CardImage = styled.img`
   width: 100%;
   height: 12.5rem;
   object-fit: cover;
-  transition: height 0.2s ease;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
     height: 8.75rem;
@@ -90,7 +91,7 @@ const Name = styled.div`
   color: var(--neutral-20);
   margin-bottom: 0.38rem;
   text-align: center;
-  transition: margin-bottom 0.2s ease;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
     margin-bottom: 0.25rem;
@@ -104,7 +105,7 @@ const PartPosition = styled.div`
   gap: 0.5rem;
   margin-bottom: 1.12rem;
   color: var(--neutral-30);
-  transition: margin-bottom 0.2s ease;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
     margin-bottom: 0.75rem;
