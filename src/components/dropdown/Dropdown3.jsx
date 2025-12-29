@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const DropDown3 = ({ question, answer, styleType = 1 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+
+  useEffect(() => {
+      const handleResize = () => {
+        setIsMobile(window.innerWidth <= 799);
+      };
+  
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
 
   return (
     <Container $isOpen={isOpen} $styleType={styleType}>
@@ -12,7 +22,14 @@ const DropDown3 = ({ question, answer, styleType = 1 }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <TextWrapper>
-          <QuestionText className={styleType === 1 ? "h4-bold" : "body-bold"} $styleType={styleType}>
+          <QuestionText 
+            className={
+              isMobile 
+                ? (styleType === 1 ? "body-bold" : "footnote-bold") 
+                : (styleType === 1 ? "h4-bold" : "body-bold")
+            } 
+            $styleType={styleType}
+          >
             {question}
           </QuestionText>
         </TextWrapper>
@@ -29,11 +46,17 @@ const DropDown3 = ({ question, answer, styleType = 1 }) => {
         </ArrowButton>
       </SelectButton>
       
-      {isOpen && (
-        <AnswerContent className={styleType === 1 ? "h5-regular" : "footnote-regular"} $styleType={styleType}>
-          {answer}
-        </AnswerContent>
-      )}
+      <AnswerContent 
+        $isOpen={isOpen}
+        className={
+          isMobile 
+            ? ("footnote-regular") 
+            : (styleType === 1 ? "h5-regular" : "footnote-regular")
+        } 
+        $styleType={styleType}
+      >
+        {answer}
+      </AnswerContent>
     </Container>
   );
 };
@@ -42,7 +65,7 @@ export default DropDown3;
 
 const Container = styled.div`
   position: relative;
-  width: ${(props) => (props.$styleType === 1 ? '75%' : '45%')};
+  width: 100%;
   background: ${(props) => {
     if (props.$styleType === 1) {
       return props.$isOpen ? 'var(--green-99)' : 'var(--common-100)';
@@ -57,7 +80,11 @@ const Container = styled.div`
   }};
   border-radius: ${(props) => (props.$styleType === 1 ? '1rem' : '0.5rem')};
   overflow: hidden;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease, border-radius 0.2s ease;
+
+  @media (max-width: 799px) {
+    border-radius: ${(props) => (props.$styleType === 1 ? '0.75rem' : '0.2rem')};
+  }
 `;
 
 const SelectButton = styled.button`
@@ -74,6 +101,11 @@ const SelectButton = styled.button`
   background: transparent;
   border:none;
   cursor: pointer;
+  transition: padding 0.2s ease;
+
+  @media (max-width: 799px) {
+    padding: ${(props) => (props.$styleType === 1 ? '1rem 1.25rem' : '0.5rem 0.88rem')};
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -103,9 +135,23 @@ const ArrowButton = styled.div`
 `;
 
 const AnswerContent = styled.div`
-  padding: ${(props) => (props.$styleType === 1 ? '0 2.5rem 2rem 2.5rem' : '0 1.5rem 1rem 1.5rem')};
+  padding: ${(props) => {
+    if (!props.$isOpen) return '0';
+    return props.$styleType === 1 ? '0 2.5rem 2rem 2.5rem' : '0 1.75rem 0.75rem 1.75rem';
+  }};
   background: transparent;
   text-align: left;
   color: var(--neutral-50);
   white-space: pre-line;
+  transition: padding 0.2s ease, max-height 0.3s ease, opacity 0.2s ease;
+  max-height: ${(props) => (props.$isOpen ? '1000px' : '0')};
+  opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+  overflow: hidden;
+
+  @media (max-width: 799px) {
+    padding: ${(props) => {
+      if (!props.$isOpen) return '0';
+      return props.$styleType === 1 ? '0 1.25rem 1rem 1.25rem' : '0 0.88rem 0.5rem 0.88rem';
+    }};
+  }
 `;
