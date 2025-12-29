@@ -143,7 +143,7 @@ const AnswerContent = styled.div`
   text-align: left;
   color: var(--neutral-50);
   white-space: pre-line;
-  transition: padding 0.2s ease, max-height 0.3s ease, opacity 0.2s ease;
+  transition: padding 0.2s ease, max-height 0.2s ease, opacity 0.2s ease;
   max-height: ${(props) => (props.$isOpen ? '1000px' : '0')};
   opacity: ${(props) => (props.$isOpen ? '1' : '0')};
   overflow: hidden;
