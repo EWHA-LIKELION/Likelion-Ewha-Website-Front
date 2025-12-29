@@ -53,6 +53,7 @@ const CardWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
+  flex-shrink: 0;
   gap: 1rem;
 
   background: var(--static-white);
