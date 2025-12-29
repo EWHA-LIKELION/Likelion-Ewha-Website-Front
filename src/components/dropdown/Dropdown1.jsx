@@ -173,11 +173,16 @@ const ArrowButton = styled.div`
   padding: 1.5rem 1.2rem;
   background: var(--neutral-20);
   cursor: pointer;
+  transition: all 0.2s ease;
 
   svg {
     transform: ${(props) =>
       props.$isOpen ? "rotate(180deg)" : "rotate(0deg)"};
     transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    filter: brightness(0.97);
   }
 
   @media (max-width: 799px) {
@@ -221,12 +226,17 @@ const OptionItem = styled.li`
   white-space: nowrap;
   text-align: center;
   cursor: pointer;
+  background: var(--static-white);
   color: var(--neutral-30);
+
+  &:hover {
+    filter: brightness(0.97);
+  }
 
   ${(props) =>
     props.$isSelected &&
     `
-    background: var(--cool-neutral-98);
+    background: var(--cool-neutral-97);
   `}
 
   &:not(:last-child) {
