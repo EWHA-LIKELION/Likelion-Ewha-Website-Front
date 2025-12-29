@@ -4,6 +4,7 @@ import styled from "styled-components";
 const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false, disabled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -15,6 +16,15 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 799);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleSelect = (option) => {
@@ -31,7 +41,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
         $isOpen={isOpen}
         $error={error}
         $disabled={disabled}
-        className="h5-regular"
+        className={isMobile ? "footnote-regular" : "h5-regular"}
       >
         <TextWrapper>
           <SelectedText>
@@ -52,7 +62,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
               key={index}
               onClick={() => handleSelect(option)}
               $isSelected={selectedValue === option}
-              className="h5-regular"
+              className={isMobile ? "footnote-regular" : "h5-regular"}
             >
               {option}
             </OptionItem>
@@ -122,6 +132,13 @@ const ArrowButton = styled.div`
     display: block;
     transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
     transition: transform 0.2s ease;
+  }
+
+  @media (max-width: 799px) {
+    svg {
+      width: 0.72919rem;
+      height: 0.36456rem;
+    }
   }
 `;
 
