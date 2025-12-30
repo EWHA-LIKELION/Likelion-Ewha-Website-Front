@@ -24,6 +24,14 @@ const CardWrapper = styled.div`
   height: 15rem;
   border-radius: 1rem;
   overflow: hidden;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    width: 7.5rem;
+    height: 7.5rem;
+    border-radius: 0.70331rem;
+  }
 `;
 
 const CardImage = styled.img`

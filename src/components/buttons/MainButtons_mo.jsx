@@ -113,7 +113,7 @@ const DefaultButton = styled(BaseButton)`
     width: 12.34375rem;
     height: 2rem;
     padding: 0.5625rem 1.125rem;
-    background-color: #cfcfcf;
+    background-color: #474747;
     color: #ffffff;
     border: none;
     gap: 0.25rem;

@@ -7,11 +7,10 @@ const ProjectCard1 = ({
   project="프로젝트명",
   description="프로젝트 설명",
   tags=[],
-  imageSrc = DEFAULT_IMAGE, 
-  styleType = 1
+  imageSrc = DEFAULT_IMAGE
 }) => {
   return (
-    <CardWrapper $styleType={styleType}>
+    <CardWrapper>
       <CardImage 
         src={imageSrc} 
         alt="project image"
@@ -20,11 +19,11 @@ const ProjectCard1 = ({
         }}
       />
       <CardText>
-        <Project $styleType={styleType} className="h4-bold">{project}</Project>
+        <Project className="h4-bold">{project}</Project>
         <Description className="body-regular">{description}</Description>
         <TagWrapper>
           {tags.map((tag, index) => (
-            <Tag key={index} className="caption-regular">#{tag}</Tag>
+            <Tag key={index} className="footnote-regular">#{tag}</Tag>
           ))}
         </TagWrapper>
       </CardText>
@@ -44,12 +43,21 @@ const CardWrapper = styled.div`
   overflow: hidden;
   gap: 1rem;
 
-  background: ${(props) => (props.$styleType === 1 ? 'var(--cool-neutral-98)' : 'var(--static-white)')};
+  background: var(--cool-neutral-98);
   border-radius: 1.25rem;
-  border: ${(props) => (props.$styleType === 1 ? 'none' : '1px solid var(--neutral-95)')};
+
+  transition: all 0.2s ease;
 
   @media (max-width: 1129px) {
-    width: ${(props) => (props.$styleType === 1 ? '100%' : '19.375rem')};
+    width: 100%;
+  }
+
+  @media (max-width: 799px) {
+    width: 100%;
+    min-width: 18rem;
+    height: 17.125rem;
+    gap: 1rem;
+    border-radius: 0.75rem;
   }
 `;
 
@@ -57,19 +65,43 @@ const CardImage = styled.img`
   width: 100%;
   height: 12.5rem;
   object-fit: cover;
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    height: 10rem;
+  }10rem;
+  }
 `;
 
 const CardText = styled.div`
   width: 100%;
-  padding: 0 1.25rem;
+  padding: 0 1.25rem 1.38rem 1.25rem;
   text-align: left;
+  
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    padding: 0 0.88rem 1rem 0.88rem;
+  }
 `;
 
 const Project = styled.div`
   color: var(--neutral-20);
-  font-family: ${(props) => (props.$styleType === 1 ? 'Pretendard, sans-serif' : '"Cafe24 PRO Slim", sans-serif')};
-  font-size: ${(props) => (props.$styleType === 1 ? '1.25rem' : '1.5rem')};
-  margin-bottom: ${(props) => (props.$styleType === 1 ? '0.38rem' : '0.5rem')};
+  font-family: Pretendard, sans-serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.38rem;
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
 `;
 
 const Description = styled.div`
@@ -81,12 +113,20 @@ const Description = styled.div`
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    -webkit-line-clamp: 1;
+    margin-bottom: 0.5rem;
+  }
 `;
 
 const TagWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  margin-top: auto;
 `;
 
 const Tag = styled.span`
