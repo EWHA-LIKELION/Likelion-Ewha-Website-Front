@@ -11,5 +11,8 @@
 
 
 ## ✅ 체크 리스트
-- [] main 브랜치 pull 완료
-- [] Assignees 설정
+- [ ] main 브랜치 pull 완료
+- [ ] Reviewers 설정
+- [ ] Assignees 설정
+- [ ] Labels 설정
+- [ ] Milestone 설정
