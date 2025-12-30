@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 
-const SegmentBar = ({ items = [], styleType = 1, onSelect, style }) => {
+const SegmentBar = ({ items = [], styleType = 1, onSelect, style, className }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
 
@@ -23,7 +23,7 @@ const SegmentBar = ({ items = [], styleType = 1, onSelect, style }) => {
   };
 
   return (
-    <Wrapper style={style} $styleType={styleType}>
+    <Wrapper className={className} style={style} $styleType={styleType}>
       {items.map((item, index) => (
         <Button
           key={index}
@@ -64,8 +64,14 @@ const Button = styled.button`
     }
   }};
 
-  @media (max-width:799px){
-    padding: 0.75rem 1.5rem;
+  @media (max-width:799px) {
+    padding: ${(props) => {
+      if (props.$styleType === 1) {
+        return "0.75rem 1.5rem";
+      } else {
+        return "0.5rem 0.88rem";
+      }
+    }};
   }
 
   {/*font-weight 미리 렌더링해서 클릭했을때 width 변화 없도록*/}
