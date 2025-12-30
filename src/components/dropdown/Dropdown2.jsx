@@ -4,6 +4,7 @@ import styled from "styled-components";
 const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false, disabled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -15,6 +16,15 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 799);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   const handleSelect = (option) => {
@@ -31,7 +41,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
         $isOpen={isOpen}
         $error={error}
         $disabled={disabled}
-        className="h5-regular"
+        className={isMobile ? "footnote-regular" : "h5-regular"}
       >
         <TextWrapper>
           <SelectedText>
@@ -45,20 +55,18 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
         </ArrowButton>
       </SelectButton>
       
-      {isOpen && (
-        <OptionsList>
-          {options.map((option, index) => (
-            <OptionItem
-              key={index}
-              onClick={() => handleSelect(option)}
-              $isSelected={selectedValue === option}
-              className="h5-regular"
-            >
-              {option}
-            </OptionItem>
-          ))}
-        </OptionsList>
-      )}
+      <OptionsList $isOpen={isOpen}>
+        {options.map((option, index) => (
+          <OptionItem
+            key={index}
+            onClick={() => handleSelect(option)}
+            $isSelected={selectedValue === option}
+            className={isMobile ? "footnote-regular" : "h5-regular"}
+          >
+            {option}
+          </OptionItem>
+        ))}
+      </OptionsList>
     </Container>
   );
 };
@@ -80,6 +88,11 @@ const SelectButton = styled.button`
   border-radius: 0.25rem;
   border: 1px solid ${(props) => (props.$error ? 'var(--primary-sub)' : 'var(--neutral-95)')};
   cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'default')};
+  transition: padding 0.2s ease;
+
+  @media (max-width: 799px) {
+    padding: 0.38rem 0.5rem;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -91,7 +104,13 @@ const SelectedText = styled.span`
   width: 4.5rem;
   display: block;
   text-align: left;
+  white-space: nowrap;
   color: var(--neutral-30);
+  transition: width 0.2s ease;
+
+  @media (max-width: 799px) {
+    width: auto;
+  }
 `;
 
 const ArrowButton = styled.div`
@@ -112,6 +131,13 @@ const ArrowButton = styled.div`
     transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
     transition: transform 0.2s ease;
   }
+
+  @media (max-width: 799px) {
+    svg {
+      width: 0.72919rem;
+      height: 0.36456rem;
+    }
+  }
 `;
 
 const OptionsList = styled.ul`
@@ -120,7 +146,7 @@ const OptionsList = styled.ul`
   margin-top: 0.5rem;
   left: 0;
   right: 0;
-  max-height: 17.25rem;
+  max-height: 10.2rem;
   overflow-y: auto;
   background: var(--common-100);
   border-radius: 0.25rem;
@@ -128,6 +154,15 @@ const OptionsList = styled.ul`
   list-style: none;
   padding: 0;
   z-index: 1000;
+  
+  visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
+  opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+  pointer-events: ${(props) => (props.$isOpen ? 'auto' : 'none')};
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  @media (max-width: 799px) {
+    max-height: 9.3rem;
+  }
 `;
 
 const OptionItem = styled.li`
@@ -135,6 +170,7 @@ const OptionItem = styled.li`
   background: var(--common-100);
   color: var(--neutral-20);
   white-space: nowrap;
+  text-align: center;
 
   cursor: pointer;
   transition: all 0.2s ease;
@@ -151,5 +187,9 @@ const OptionItem = styled.li`
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--neutral-95);
+  }
+
+  @media (max-width: 799px) {
+    padding: 0.38rem 0.5rem;
   }
 `;
