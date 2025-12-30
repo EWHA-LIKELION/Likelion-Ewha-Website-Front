@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const DEFAULT_IMAGE = "/icons/defaultImg.svg";
 
-const LionCard = ({ 
+const MemberCard = ({ 
   name = "이름", 
   part = "파트명", 
   position = "직책", 
@@ -11,6 +11,17 @@ const LionCard = ({
   imageSrc = DEFAULT_IMAGE, 
   showPosition = false 
 }) => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 799);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <CardWrapper>
       <CardImage 
@@ -21,8 +32,8 @@ const LionCard = ({
         }}
       />
       <div>
-        <Name className="h4-bold">{name}</Name>
-        <PartPosition className="h5-regular">
+        <Name className={isMobile ? "h5-bold" : "h4-bold"}>{name}</Name>
+        <PartPosition className={isMobile ? "body-regular" : "h5-regular"}>
           <p>{part}</p>
           {showPosition && (
             <>
@@ -31,13 +42,13 @@ const LionCard = ({
             </>
           )}
         </PartPosition>
-        <Department className="body-regular">{department}</Department>
+        <Department className={isMobile ? "footnote-regular" : "body-regular"}>{department}</Department>
       </div>
     </CardWrapper>
   );
 };
 
-export default LionCard;
+export default MemberCard;
 
 const CardWrapper = styled.div`
   display: flex;
@@ -47,6 +58,7 @@ const CardWrapper = styled.div`
   align-items: center;
   overflow: hidden;
   gap: 1.5rem;
+  transition: all 0.2s ease;
 
   border-radius: 1.25rem;
   background: var(--cool-neutral-98);
@@ -55,17 +67,35 @@ const CardWrapper = styled.div`
     width: 100%;
     min-width: 19.375rem;
   }
+
+  @media (max-width: 799px) {
+    gap: 1rem;
+    height: 16.375rem;
+    min-width: 12.5rem;
+    border-radius: 0.625rem;
+  }
 `;
 
 const CardImage = styled.img`
   width: 100%;
   height: 12.5rem;
   object-fit: cover;
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    height: 8.75rem;
+  }
 `;
 
 const Name = styled.div`
   color: var(--neutral-20);
   margin-bottom: 0.38rem;
+  text-align: center;
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    margin-bottom: 0.25rem;
+  }
 `;
 
 const PartPosition = styled.div`
@@ -75,6 +105,11 @@ const PartPosition = styled.div`
   gap: 0.5rem;
   margin-bottom: 1.12rem;
   color: var(--neutral-30);
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const Line = styled.div`
@@ -83,4 +118,5 @@ const Line = styled.div`
 
 const Department = styled.div`
   color: var(--neutral-70);
+  text-align: center;
 `;
