@@ -14,6 +14,17 @@ function Project() {
     const [category, setCategory] = useState('전체'); //project segmentbar
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 800);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     /* 예시 데이터 */
     const projects = Array.from({ length: 20 }, (_, i) => ({
         id: i + 1,
@@ -54,11 +65,20 @@ function Project() {
 
             {/*프로젝트 종류 및 기수 필터*/}
             <ListContainer>
-                <SegmentBar
-                    items={['전체', '해커톤', '졸업 프로젝트', '대동제 사이트']}
-                    styleType={1}
-                    onSelect={(index, item) => setCategory(item)}
-                />
+                {!isMobile ? (
+                    <SegmentBar
+                        items={['전체', '해커톤', '졸업 프로젝트', '대동제 사이트']}
+                        styleType={1}
+                        onSelect={(index, item) => setCategory(item)}
+                    />
+                ) : (
+                    <DropDown1
+                        options={['전체', '해커톤', '졸업 프로젝트', '대동제 사이트']}
+                        defaultValue={category}
+                        onSelect={(value) => setCategory(value)}
+                    />
+                )}
+                
                 <DropDown1
                     options={['전체', '13기', '12기', '11기', '10기']}
                     defaultValue={'전체'}

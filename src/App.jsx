@@ -3,6 +3,7 @@ import Layout from "./layouts/layout.jsx";
 import Home from "./pages/Home.jsx";
 import Project from './pages/project/Project.jsx';
 import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
+import People from './pages/people/People.jsx';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         {/* Public pages */}
         <Route path="project" element={<Project />} />
         <Route path="project/detail" element={<ProjectDetail />} />
-        <Route path="people" element={<div>PEOPLE</div>} />
+        <Route path="people" element={<People />} />
         <Route path="recruit" element={<div>RECRUIT</div>} />
 
         {/* Sidebar (Admin) pages */}
