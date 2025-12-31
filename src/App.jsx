@@ -21,7 +21,7 @@ function App() {
         <Route path="application" element={<div>APPLICATION</div>} />
 
         {/* apply pages */}
-        <Route path="/apply/test" element={<Apply2/>} />
+        <Route path="apply/test" element={<Apply2/>} />
       </Route>
     </Routes>
   );
