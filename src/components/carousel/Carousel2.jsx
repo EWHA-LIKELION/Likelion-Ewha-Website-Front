@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import { projects as projectsData } from "@/data";
 import ProjectCard2 from "../card/ProjectCard2";
 
 /* ===== 설정값 ===== */
-const CLONE_COUNT = 2;
+const CLONE_COUNT = 4;
 
 // PC/모바일 설정값
 const PC_VALUES = {
@@ -27,6 +27,7 @@ const MOBILE_VALUES = {
 
 const Carousel2 = () => {
   const [current, setCurrent] = useState(CLONE_COUNT);
+  const currentRef = useRef(CLONE_COUNT);
   const [transition, setTransition] = useState(true);
   const [needRecover, setNeedRecover] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
@@ -56,22 +57,33 @@ const Carousel2 = () => {
   const handlePrev = () => setCurrent((p) => p - 1);
   const handleNext = () => setCurrent((p) => p + 1);
 
+  // current가 바뀔 때마다 currentRef 동기화
+  useEffect(() => {
+    currentRef.current = current;
+  }, [current]);
+
   const handleTransitionEnd = (e) => {
     if (e.target !== e.currentTarget) return;
     if (e.propertyName !== "transform") return;
 
+
+    // 항상 최신 current 값 사용
+    const cur = currentRef.current;
+
     // 왼쪽 복제 → 실제 마지막
-    if (current === CLONE_COUNT - 1) {
+    if (cur <= CLONE_COUNT - 1) {
       setTransition(false);
       setNeedRecover(true);
       setCurrent(realLength + CLONE_COUNT - 1);
+      currentRef.current = realLength + CLONE_COUNT - 1;
     }
 
     // 오른쪽 복제 → 실제 첫 번째
-    if (current === realLength + CLONE_COUNT) {
+    if (cur >= realLength + CLONE_COUNT) {
       setTransition(false);
       setNeedRecover(true);
       setCurrent(CLONE_COUNT);
+      currentRef.current = CLONE_COUNT;
     }
   };
 
@@ -101,6 +113,7 @@ const Carousel2 = () => {
           $itemWidth={ITEM_WIDTH}
           $itemGap={ITEM_GAP}
           $centerGapIllusion={CENTER_GAP_ILLUSION}
+          onTransitionEnd={handleTransitionEnd}
         >
           {items.map((item, idx) => {
             const isCenter = idx === current;
