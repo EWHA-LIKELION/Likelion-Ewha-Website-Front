@@ -57,7 +57,13 @@ function ProjectDetail() {
                     </Member>
 
                     <MoreContent>
-                        <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
+                        <MoreLabel>
+                            <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
+                            <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center' }}>
+                                목록으로
+                                <img className="rightarrow" src='/icons/rightPagination.svg' />
+                            </p>
+                        </MoreLabel>
 
                         {/*프로젝트*/}
                         <ProjectGrid>
@@ -125,7 +131,7 @@ const Container = styled.div`
 `
 
 const Project = styled.div`
-    width: 971px;
+    max-width: 971px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -225,6 +231,39 @@ const MoreContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+`
+
+const MoreLabel = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+    }
+
+    .rightarrow {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+    }
+
+    @media (max-width: 799px) {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 24px;
+
+        .rightarrow {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+        }
+    }
 `
 
 const ProjectGrid = styled.div`

@@ -225,23 +225,28 @@ const Count = styled.p`
 `
 
 const ProjectGrid = styled.div`
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
-    /* 380px 미만: 1줄 */
+    /*  1줄 */
     @media (max-width: 379px) {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    /* 380px ~ 649px: 2줄 */
-    @media (min-width: 380px) and (max-width: 970px) {
+    /*  2줄 */
+    @media (min-width: 380px) and (max-width: 799px) {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
 
-    /* 650px 이상: 3줄 */
+    @media (min-width: 800px) and (max-width: 970px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 3줄 */
     @media (min-width: 971px) {
         grid-template-columns: repeat(3, 1fr);
     }
