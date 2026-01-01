@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
 import CloverIcon from "../../../public/icons/clover.svg";
@@ -207,6 +207,15 @@ const EndSection = () => {
 };
 
 export default EndSection;
+
+const rotate = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 
 const SectionWrapper = styled.section`
   width: 100%;
@@ -484,6 +493,7 @@ const LogoWrapper = styled.div`
       width: 6.54481rem;
       height: 7.03531rem;
       object-fit: contain;
+      animation: ${rotate} 10s linear infinite;
     }
     .green-text {
       color: #6ede65;
