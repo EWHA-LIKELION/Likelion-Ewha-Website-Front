@@ -1,4 +1,4 @@
-import React, { useId, useState } from 'react';
+import React, { useId, useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 
 /* -------------------------------------------------------------------------- */
@@ -21,10 +21,28 @@ function Input({
   value,
   onChange,
   width,
+  textareaHeight,
+  autoResize=false, //textarea 전용
 }) {
   const [isFocused, setIsFocused] = useState(false);
   const inputId = useId();
   const hasValue = value !== undefined && value !== '';
+  const textareaRef = useRef(null);
+
+  //autoResize
+  const resizeTextarea = () => {
+    if (!textareaRef.current) return;
+
+    textareaRef.current.style.height = 'auto';
+    textareaRef.current.style.height =
+      `${textareaRef.current.scrollHeight}px`;
+  };
+
+  useEffect(() => {
+    if (multiline && autoResize) {
+      resizeTextarea();
+    }
+  }, [value, multiline, autoResize]);
 
   /** input 상태 */
   const inputState = error
@@ -54,13 +72,19 @@ function Input({
 
         {multiline ? (
           <StyledTextArea
+            ref={textareaRef}
             id={inputId}
             placeholder={placeholder}
             value={value}
-            onChange={onChange}
+            onChange={(e) => {
+              onChange?.(e);
+              if (autoResize) resizeTextarea();
+            }}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
-          />
+            $height={textareaHeight}
+            $autoResize={autoResize}
+  />
         ) : (
           <StyledInput
             id={inputId}
@@ -248,7 +272,9 @@ const StyledInput = styled.input`
 const StyledTextArea = styled.textarea`
   ${baseInputStyle}
   resize: none;
-  height: 266px;
+
+  height: ${({ $autoResize, $height }) =>
+    $autoResize ? 'auto' : $height || '266px'};
 `;
 
 /* -------------------------------- Icon -------------------------------- */
