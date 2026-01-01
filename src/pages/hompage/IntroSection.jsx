@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import styled, { keyframes } from "styled-components"; // ✅ keyframes 불러오기
-import orangePattern from "../../public/icons/orange.svg";
-import greenPattern from "../../public/icons/green.svg";
-import Clover1Icon from "../../public/icons/clover1.svg";
+import styled, { keyframes } from "styled-components";
+import orangePattern from "../../../public/icons/orange.svg";
+import greenPattern from "../../../public/icons/green.svg";
+import Clover1Icon from "../../../public/icons/clover1.svg";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
-} from "../components/buttons/MainButtons_pc";
-
+} from "../../components/buttons/MainButtons_pc";
 import {
   RecruitAlarmButtonMobile,
   RecruitInfoButtonMobile,
-} from "../components/buttons/MainButtons_mo";
-import { Modal } from "../components/Modal";
+} from "../../components/buttons/MainButtons_mo";
+import { Modal } from "../../components/Modal";
 
 const IntroSection = () => {
   // --------------------------------------------------------

@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Carousel1 from "../components/carousel/Carousel1";
-import ImageSlider from "../components/carousel/ImageSlider";
-import CloverIcon from "../../public/icons/clover.svg";
-import Clover1Icon from "../../public/icons/clover1.svg";
-import orangePattern from "../../public/icons/orange.svg";
-import greenPattern from "../../public/icons/green.svg";
+import Carousel1 from "../../components/carousel/Carousel1";
+import ImageSlider from "../../components/carousel/ImageSlider";
+import CloverIcon from "../../../public/icons/clover.svg";
+import Clover1Icon from "../../../public/icons/clover1.svg";
+import orangePattern from "../../../public/icons/orange.svg";
+import greenPattern from "../../../public/icons/green.svg";
 
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
-} from "../components/buttons/MainButtons_pc";
+} from "../../components/buttons/MainButtons_pc";
 
 import {
   RecruitAlarmButtonMobile,
   RecruitInfoButtonMobile,
-} from "../components/buttons/MainButtons_mo";
+} from "../../components/buttons/MainButtons_mo";
 
-import { Modal } from "../components/Modal";
+import { Modal } from "../../components/Modal";
 
 const EndSection = () => {
   // --------------------------------------------------------

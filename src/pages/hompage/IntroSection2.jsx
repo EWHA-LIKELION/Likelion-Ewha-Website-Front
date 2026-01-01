@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import cloverIcon from "../../public/icons/clover.svg";
+import cloverIcon from "../../../public/icons/clover.svg";
 
 const IntroSection2 = () => {
   return (
