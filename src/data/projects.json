@@ -15,7 +15,7 @@
         "frontend": ["김예원", "김채연", "송유선"],
         "backend": ["김민솔", "박민서", "유지민", "이라령"]
       },
-      "thumbnail": "",
+      "thumbnail": "/images/projects/thumbnail/1.jpg",
       "detailImages": []
     },
     {
@@ -136,7 +136,7 @@
         "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
         "backend": ["허채린", "심예원", "이다빈"]
       },
-      "thumbnail": "",
+      "thumbnail": "/images/projects/thumbnail/9.jpg",
       "detailImages": []
     },
     {
