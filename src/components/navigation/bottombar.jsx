@@ -27,7 +27,7 @@ const BottomBar = () => {
 
           <SocialRow>
             <SocialLink href="https://www.instagram.com/likelion_ewha/">
-              <img src="/icons/instagram.svg" alt="Instagram" />
+              <img src="/icons/Instagram.svg" alt="Instagram" />
             </SocialLink>
             <SocialLink href="https://github.com/EWHA-LIKELION">
               <img src="/icons/github.svg" alt="GitHub" />
