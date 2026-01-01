@@ -7,7 +7,7 @@ const ProjectCard2 = ({
   project="프로젝트명",
   description="프로젝트 설명",
   tags=[],
-  imageSrc = DEFAULT_IMAGE
+  imageSrc = DEFAULT_IMAGE,
 }) => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
 
@@ -60,13 +60,15 @@ const CardWrapper = styled.div`
   border-radius: 1.25rem;
   border: 1px solid var(--neutral-95);
 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 9.9875rem;
-    height: 11.332rem;
-    gap: 0.5rem;
-    border-radius: 0.625rem;
+    width: 8.75rem;
+    height: 9.9375rem;
+    gap: 0.375rem;
+    border-radius: 0.5625rem;
   }
 `;
 
@@ -78,7 +80,7 @@ const CardImage = styled.img`
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    height: 6.40225rem;
+    height: 5.73213rem;
   }
 `;
 
@@ -94,7 +96,7 @@ const CardText = styled.div`
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    padding: 0 0.57rem 0.66rem 0.57rem;
+    padding: 0 0.57rem 0.55rem 0.57rem;
   }
 `;
 
@@ -124,15 +126,19 @@ const Description = styled.div`
 `;
 
 const TagWrapper = styled.div`
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.5rem;
   margin-top: auto;
+  overflow-x: hidden;
+  white-space: nowrap;
 
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    margin-top: 0.75rem;
+    margin-top: 0.45856rem;
+    gap: 0.26rem;
   }
 `;
 

@@ -1,0 +1,385 @@
+{
+  "projects": [
+    {
+      "id": "project-01",
+      "generation": "13기",
+      "category": "대동제",
+      "title": "2025 대동제",
+      "description": "이화여대 멋쟁이사자처럼은 매년 해방이화 축제준비위원회와 협업하여 대동제 통합 안내 웹사이트를 제작하고 있습니다. 올봄, 자유와 해방의 이름 아래 펼쳐지는특별한 대동제, 2025 리베르테! 답답했던 일상에서 벗어나마음껏 웃고, 즐기고, 뛰어놀 수 있는 시간. 이화의 캠퍼스가 꿈같은 놀이공원으로 변신합니다. 곳곳에 펼쳐진 공연과 생동감 넘치는 컨텐츠,다채로운 부스들을 즐겨보세요! 모든 규칙과 틀에서 벗어나진짜 '나'로 돌아가는 순간, 리베르테,자유를 향한이화의 가장 찬란한 축제를 시작합니다!",
+      "urls": {
+        "service": "https://13th-ewha-festival-front.vercel.app/",
+        "github": "https://github.com/EWHA-LIKELION"
+      },
+      "team": {
+        "pmdesign": ["김가을", "유하은"],
+        "frontend": ["김예원", "김채연", "송유선"],
+        "backend": ["김민솔", "박민서", "유지민", "이라령"]
+      },
+      "thumbnail": "/images/projects/thumbnail/1.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-02",
+      "generation": "13기",
+      "category": "중앙아이디어톤",
+      "title": "Dormitree",
+      "description": "‘만족스러운 공동생활을 위한 지름길, Dormitree’ 룸메이트 때문에 힘든 날, 서로 조금씩만 더 배려해보면 어떨까 생각해본 적 있나요? 우리는 그 아쉬움에서 출발했어요. Dormitree와 함께라면 공동생활을 즐겁게 만들고, 나의 일상을 온전히 지킬 수 있어요.",
+      "urls": { "service": "", "github": "" },
+      "team": {
+        "pmdesign": ["김수민", "김지후", "박서영", "송나영", "이도윤", "이은서"],
+        "frontend": [],
+        "backend": []
+      },
+      "thumbnail": "/images/projects/thumbnail/2.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-03",
+      "generation": "13기",
+      "category": "중앙해커톤",
+      "title": "모이소",
+      "description": "‘✨ 모이면 열린다, 우리가 바라는 가게 모이소 ✨’ 모이소는 동네를 가장 잘 아는 주민의 제안을 창업자가 수락하고, 크라우드 펀딩을 통해 실제 창업까지 이어질 수 있도록 돕는 주민 X 창업자 코크리에이션 서비스입니다. 이곳에서는 주민과 창업자가 아이템 수요에 대해 자유롭게 소통할 수 있고, 금전적 부담을 덜어주는 크라우드 펀딩과 풍성한 리워드, 그리고 창업자에게 꼭 맞는 아이템 추천까지 경험할 수 있습니다. 우리 동네에 꼭 필요한 가게, 이제 모이소에서 함께 만들어봐요!",
+      "urls": { "service": "https://moiso.netlify.app", "github": "https://github.com/SunbrightCreators" },
+      "team": {
+        "pmdesign": ["이도윤", "이은서"],
+        "frontend": ["김민혜", "김성주"],
+        "backend": ["김연우", "성혜린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/3.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-04",
+      "generation": "13기",
+      "category": "중앙해커톤",
+      "title": "열람:뜰",
+      "description": "‘공공도서관 이용을 더 공정하게, 더 효율적으로! AI 기반 실시간 좌석 정보 서비스, 열람:뜰 📚’ 공공도서관 이용자들은 도서관의 빈 좌석을 사전에 확인할 수 없다는 점과 사석화 현상(짐만 올려두고 장시간 자리를 비움)으로 인해 불편을 겪습니다. 공공도서관 사서 역시 사석화된 좌석을 일일이 확인하고 관리해야 하는 어려움을 겪습니다. 이는 개인의 불편을 넘어 공공 자원의 효율성을 떨어뜨리고, 좌석 회전율을 저해하며, 결과적으로 도서관이 지향하는 ‘열린 지식 공간’의 취지와 멀어지는 결과를 초래합니다. 이러한 상황을 공공성과 자율성이 침해되는 구조적 문제로 인식하고, AI를 활용한 실시간 좌석 정보 서비스 ‘열람:뜰’을 기획하였습니다. 열람:뜰은 CCTV 영상 AI 분석을 통해 좌석 점유 및 사석화 여부를 실시간으로 판단하고, 이용자에게는 빈 좌석 정보를 제공하며 사서에게는 사석화 이력을 포함한 좌석 로그를 제공합니다. 이를 통해 도서관 이용자는 보다 효율적으로 공정한 환경에서 좌석을 이용할 수 있고, 사서는 불필요한 좌석 관리와 민원 응대를 줄이며 본래의 업무에 집중할 수 있게 됩니다.",
+      "urls": { "service": "https://frontend-ten-steel-15.vercel.app", "github": "https://github.com/LikeLionBAOBOB" },
+      "team": {
+        "pmdesign": ["김수민", "박서영"],
+        "frontend": ["이예영", "최연서"],
+        "backend": ["김가영", "설영은"]
+      },
+      "thumbnail": "/images/projects/thumbnail/4.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-05",
+      "generation": "13기",
+      "category": "중앙해커톤",
+      "title": "온기밥상",
+      "description": "‘🧡한끼에 담긴 우리 동네🧡 독거노인을 위한 지역 기반 식사 돌봄 서비스, 온기밥상🍚🫶🏻’ 온기밥상은 동네 식당의 건강한 한 끼를 주민 배달원을 통해 어르신 댁까지 전해드리는 서비스입니다. 👉 버튼 하나로 주문부터 배달, 안부 확인까지! 👉 사용자의 질환 정보와 기호를 반영해 딱 맞는 음식을 추천해드려요! 👉 외로운 식사 시간은 이제 안녕~ AI 식사벗 ‘밥친구’와 대화해요! 👉 식사 기록은 주간 영양·건강 리포트로 정리되어, 어르신과 가족이 함께 확인할 수 있어요! 온기밥상은 독거노인의 영양 불균형과 정서적 고립, 그리고 외식업 침체라는 서대문구의 두 가지 문제를 동시에 해결하고자 합니다. 식사라는 가장 일상적인 행위를 통해 어르신의 안부를 챙기고, 동시에 지역 경제가 살아나는 선순환 구조를 만듭니다. 식사 배달을 넘어 건강 관리 + 정서 돌봄 + 지역 상생이 되는 경험, 온기밥상이 만들어갑니다.",
+      "urls": { "service": "https://ongibapsang.vercel.app", "github": "https://github.com/Ongibapsang" },
+      "team": {
+        "pmdesign": ["김지후", "송나영"],
+        "frontend": ["서예린", "유진서"],
+        "backend": ["신지민", "황규리"]
+      },
+      "thumbnail": "/images/projects/thumbnail/5.jpg",
+      "detailImages": []
+    },
+
+    {
+      "id": "project-06",
+      "generation": "13기",
+      "category": "신촌SW창업경진대회",
+      "title": "돈글돈글",
+      "description": "돈글돈글은 교환·방문학생 파견비용을 한눈에 관리하는 플랫폼입니다.",
+      "urls": { "service": "https://dongledongle.vercel.app", "github": "https://github.com/2025-DongleDongle" },
+      "team": {
+        "pmdesign": ["김지후", "박서영"],
+        "frontend": ["김민혜", "유진서"],
+        "backend": ["설영은", "황규리"]
+      },
+      "thumbnail": "/images/projects/thumbnail/6.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-07",
+      "generation": "13기",
+      "category": "신촌SW창업경진대회",
+      "title": "STONY",
+      "description": "스토니는 부모의 이야기와 목소리로 아이에게 다가가는 AI 동화 서비스입니다.",
+      "urls": { "service": "https://frontend-puof.vercel.app/", "github": "https://github.com/stonylion" },
+      "team": {
+        "pmdesign": ["송나영", "이은서"],
+        "frontend": ["서예린", "이예영"],
+        "backend": ["김연우", "신지민"]
+      },
+      "thumbnail": "/images/projects/thumbnail/7.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-08",
+      "generation": "13기",
+      "category": "신촌SW창업경진대회",
+      "title": "Nextvibe",
+      "description": "NEXTVIBE는 초등학생을 위한 바이브코딩 기반 컴퓨팅 사고력 학습 플랫폼입니다.",
+      "urls": { "service": "https://nextvibe.codes", "github": "https://github.com/VibeNext" },
+      "team": {
+        "pmdesign": ["김수민", "이도윤"],
+        "frontend": ["김성주", "최연서"],
+        "backend": ["김가영", "성혜린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/8.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-09",
+      "generation": "12기",
+      "category": "대동제",
+      "title": "2024 대동제",
+      "description": "이화여대 멋쟁이사자처럼은 매년 해방이화 축제준비위원회와 협업하여 대동제 통합 안내 웹사이트를 제작하고 있습니다. 🌿LIBER EWHA : 이화, 해방하다🌿 LIBER : 라틴어로 '해방하다, 자유롭다' 우리는 해방이화라는 이름 아래 함께 이화의 역사와 문화를 만들어왔습니다. 이번 138주년 대동제는 해방이라는 이름으로 다시 모여 이화인으로 함께 대동하는 자리를 만들고자 합니다. 이화인 한 명 한 명이 모여 하나의 이화로, 부담과 걱정을 잠시 내려놓은 즐거운 축제로, 기존의 틀에서 벗어나 새로운 대동제로 우리를 해방할 수 있는 대동제, LIBER EWHA를 만들어 나가고자 합니다.",
+      "urls": { "service": "https://12th-ewha-festival-mock.vercel.app/", "github": "https://github.com/EWHA-LIKELION" },
+      "team": {
+        "pmdesign": ["김가영", "김지형"],
+        "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
+        "backend": ["허채린", "심예원", "이다빈"]
+      },
+      "thumbnail": "/images/projects/thumbnail/9.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-10",
+      "generation": "12기",
+      "category": "중앙아이디어톤",
+      "title": "Medi Going",
+      "description": "‘당신이 가는 어디든 함께하는 의료 서비스 도우미, Medi Going’",
+      "urls": { "service": "", "github": "" },
+      "team": {
+        "pmdesign": ["김가을", "김도연", "백지원", "유하은", "장예원", "최예은"],
+        "frontend": [],
+        "backend": []
+      },
+      "thumbnail": "/images/projects/thumbnail/10.jpg",
+      "detailImages": []
+    },
+
+    {
+      "id": "project-11",
+      "generation": "12기",
+      "category": "중앙해커톤",
+      "title": "드링킷",
+      "description": "'즐겁고 건강한 음주목표 달성 서비스’ 음주, 혼자여도, 함께여도 즐겁고 건강하게! 드링킷은 친구와 함께 음주목표를 세우고 즐겁게 목표를 달성할 수 있는 서비스입니다. 사용자는 달별 음주 목표를 잔 단위로 설정하고 목표치까지 얼마나 남았는지 확인할 수 있으며, 친구의 달성률을 확인하고 응원을 보낼 수 있습니다. 취함 정도 테스트는 산수 문제를 통해 취한 정도를 체크하고 정상 간 타이머를 통해서 잦은 음주를 예방할 수 있습니다. 드링킷을 통해 건강한 음주 문화를 만들어봐요!",
+      "urls": { "service": "https://drinkit.vercel.app/", "github": "https://github.com/Drinkit-BingBong" },
+      "team": {
+        "pmdesign": ["백지원", "최예은"],
+        "frontend": ["김예원", "김채연"],
+        "backend": ["유지민", "이라령"]
+      },
+      "thumbnail": "/images/projects/thumbnail/11.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-12",
+      "generation": "12기",
+      "category": "중앙해커톤",
+      "title": "STEW",
+      "description": "'우리 가족, 멀리 있어도 마음은 가까이 stay tewgether, stew' 영혼을 위한 닭고기 수프라는 소설을 아시나요? \"닭고기 스튜에 가족의 애정이 담겨있었다\"라는 소절이 있는데요, 우리 가족이 멀리 떨어져 있더라도 마음만은 가까이 있기를 바라는 마음에서 스튜를 기획하게 되었습니다. 스튜는 가족 간에 부담스럽지 않게, 민망하지 않게 서로를 생각하는 마음을 표현할 수 있고, 가족과 실제로 연락할 수 있도록 독려합니다.",
+      "urls": { "service": "https://stew-s-uxuns-projects.vercel.app/", "github": "https://github.com/soli-ziyo/Stew" },
+      "team": {
+        "pmdesign": ["김가을", "장예원"],
+        "frontend": ["김민서", "송유선"],
+        "backend": ["김민솔", "이정은"]
+      },
+      "thumbnail": "/images/projects/thumbnail/12.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-13",
+      "generation": "12기",
+      "category": "중앙해커톤",
+      "title": "메디캐리어",
+      "description": "'해외 여행 의료 서비스 도우미’ 여행을 가서 아프게 되어 곤란했던 경험이 있나요? 메디캐리어는 해외 여행의 전, 중, 후를 케어해주는 의료 서비스 도우미예요. 어시스트를 통해 의료 시설을 추천 받고, 의료진에게 보여줄 스크립트를 제작하며, 발급 받을 서류 리스트를 확인할 수 있어요. 또한 응급 상황 시 의료 카드를 활용하여 의료 정보를 번역해 의료진에게 제공하며, 검색 기능을 활용하여 의료 시설을 찾을 수 있어요. 당신이 어딜 가든 곁을 지키는 메디캐리어, 꼭 들고 가세요!",
+      "urls": { "service": "https://medi-carrier.vercel.app/", "github": "https://github.com/Medi-Carrier" },
+      "team": {
+        "pmdesign": ["김도연", "유하은"],
+        "frontend": ["남선우"],
+        "backend": ["박민서", "황지은"]
+      },
+      "thumbnail": "/images/projects/thumbnail/13.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-14",
+      "generation": "12기",
+      "category": "졸업프로젝트",
+      "title": "MOY",
+      "description": "'감각적인 연말 결산 서비스를 찾는다면, MoY’ 우리가 한 해 동안 즐긴 문화와 일상 속 순간들을 놓치고 싶지 않다면, MoY와 함께하세요! MoY는 당신의 한 해를 감각적으로 기록하고 공유할 수 있는 특별한 공간입니다. 다채로운 인터랙션과 함께 새로운 연말 결산을 시작해보세요!",
+      "urls": { "service": "https://www.moymoy.site", "github": "https://github.com/12th-EWHA-LIKELION-DEMODAY/FE" },
+      "team": {
+        "pmdesign": ["김가영", "김지형"],
+        "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
+        "backend": ["심예원", "이다빈", "허채린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/14.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-15",
+      "generation": "12기",
+      "category": "졸업프로젝트",
+      "title": "깨비",
+      "description": "'가구 구성원 간 가사 분배 서비스’ “우리집 청소는 항상 나만 하는 것 같아요.” 함께 사는 가구원들과 집안일을 골고루 나누고 싶나요? ‘깨비’는 가구원들과 함께 사용할 수 있는 가사 분배 서비스예요. 캘린더에서 나와 가구원들의 할 일을 등록하면 홈에서 각 유저의 집안일 진행 현황 및 우리집 집안일 분배 현황을 확인할 수 있어요. 귀여운 캐릭터와 함께 집안일 레벨을 올리며 우리집을 깨끗하게 유지해봐요!",
+      "urls": { "service": "https://www.kkaebi.site", "github": "https://github.com/LikeLion-Kkaebi/Front" },
+      "team": {
+        "pmdesign": ["김가을", "김도연", "백지원"],
+        "frontend": ["김민서", "김채연"],
+        "backend": ["이라령", "이정은", "황지은"]
+      },
+      "thumbnail": "/images/projects/thumbnail/15.jpg",
+      "detailImages": []
+    },
+
+    {
+      "id": "project-16",
+      "generation": "12기",
+      "category": "졸업프로젝트",
+      "title": "i want it!",
+      "description": "'네 취향을 담아, 프라이빗 위시리스트’ 친구 생일, 연말, 센스있게 선물하고 싶은데 무엇을 줘야 할지 고민해 보신 적 있으신가요? IWANT IT은 주는 사람과 받는 사람 모두를 행복하게 만들어 주는 프라이빗 위시리스트 서비스입니다. 이젠 원하는 선물을 당당하게 말해봐요. I WANT IT!",
+      "urls": { "service": "https://lwantit.vercel.app", "github": "https://github.com/Likelion-12th-Capstone-team2/Frontend" },
+      "team": {
+        "pmdesign": ["유하은", "장예원", "최예은"],
+        "frontend": ["김예원", "남선우", "송유선"],
+        "backend": ["김민솔", "박민서", "유지민"]
+      },
+      "thumbnail": "/images/projects/thumbnail/16.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-17",
+      "generation": "11기",
+      "category": "대동제",
+      "title": "2023 대동제",
+      "description": "이화여대 멋쟁이사자처럼은 매년 해방이화 축제준비위원회와 협업하여 대동제 통합 안내 웹사이트를 제작하고 있습니다. 이화여자대학교는 국가와 인류사회 발전에 공헌하는여성 리더 양성을 목적으로 건립된 한국 최초의 여학교이자한국 최초의 종합대학입니다. 2023년, 이화여자대학교 개교 137주년을 맞아 대동제 ‘이웃: 이화와 함께 웃다’를 개최합니다. 이웃제는 이화인 간의 화합과 연대, 학생활동의 활성화,사회적 가치를 추구하는 대학 축제 문화 선도의세 가지 목표를 가지고 진행됩니다.이화인 한솥밥, 영산 줄다리기, ‘EWHA’S TURNTABLE’,학생 부스 및 동아리 공연 등다채로운 프로그램이 기획되어 있습니다. 이웃제에서 벗들과 함께 이화의 웃음을만들고, 나누고, 지키며 행복한 시간 보내시길 바랍니다.",
+      "urls": { "service": " https://smilewha2023.swygbro.com/", "github": "https://github.com/EWHA-LIKELION" },
+      "team": {
+        "pmdesign": ["곽은진", "김다은", "박성연", "신다윤"],
+        "frontend": ["정다윤", "김혜빈", "김민주", "정연주", "허윤", "이서진", "이채원"],
+        "backend": ["김도연", "신이수", "조현영", "임채영", "최유미", "김정은", "이나경"]
+      },
+      "thumbnail": "/images/projects/thumbnail/17.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-18",
+      "generation": "11기",
+      "category": "중앙아이디어톤",
+      "title": "MORE GREEN",
+      "description": "‘플로깅 기반 환경정화 어반테크 솔루션 서비스, MORE GREEN’ MORE GREEN은 플로깅과 쓰레기 데이터 활용을 통한 길거리 쓰레기 문제를 해결하기 위한 서비스입니다. 게이미피케이션을 통한 동기부여, 분리배출지도 활용, 데이터로 쓰레기 절감을 유도합니다.",
+      "urls": { "service": "", "github": "" },
+      "team": {
+        "pmdesign": ["김지형", "손예원", "이시은", "이지민", "이채원", "임수민"],
+        "frontend": [],
+        "backend": []
+      },
+      "thumbnail": "/images/projects/thumbnail/18.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-19",
+      "generation": "11기",
+      "category": "중앙해커톤",
+      "title": "Verny",
+      "description": "‘문화 공공서비스 디지털 격차 해소를 위한 미술품 해설 및 문화예술 소개 배리어프리 플랫폼’ 베르니(Verny)는 스크린리더를 사용하는 시각장애인의 접근성을 고려한 미술품 해설 및 문화예술 소개 배리어프리 플랫폼입니다. 미술 탭에서는 고전·현대미술품과, 음성해설문 가이드라인을 따라 작성된 기술(Description) 및 해석을 감상할 수 있고, 커뮤니티 기능을 통해 감상을 확장할 수 있습니다. 문예관광지도 탭에서는 배리어프리 문화예술관광지 정보를 검색하고 확인할 수 있습니다. 서비스 내 모든 텍스트는 스크린리더로 접근이 가능합니다.",
+      "urls": { "service": "https://verny.vercel.app", "github": "https://github.com/2023-Hackathon-Team3" },
+      "team": {
+        "pmdesign": ["이채원"],
+        "frontend": ["김가영", "진규빈"],
+        "backend": ["심예원", "윤서아", "이혜지"]
+      },
+      "thumbnail": "/images/projects/thumbnail/19.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-20",
+      "generation": "11기",
+      "category": "중앙해커톤",
+      "title": "Wallethy",
+      "description": "‘NFT 보안을 기반으로한 국민 의료 정보 통합 관리 서비스’ 우리의 서비스 목표는 스마트폰이나 개인 PC를 통해 사용자에게 모든 의료 정보를 간편하게 통합하고 관리할 수 있는 환경을 제공하는 것입니다. “병원만을 위한 의무기록”을 넘어서 대한민국의 의료 정보 시스템을 혁신적으로 발전시키며, EMR 5단계로의 진화를 이뤄내고자 합니다. 개인 환자들이 자신만의 건강 데이터 저장소를 소유하며, 자신의 정보를 안전하게 보관하고 활용할 수 있는 신뢰할 수 있는 환경을 구축하겠습니다.",
+      "urls": { "service": "https://wallethy.vercel.app", "github": "https://github.com/binys21/11th-Hackerthon-2023" },
+      "team": {
+        "pmdesign": ["김지형", "이시은"],
+        "frontend": ["이다빈", "최지원"],
+        "backend": ["김지은", "이지원"]
+      },
+      "thumbnail": "/images/projects/thumbnail/20.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-21",
+      "generation": "11기",
+      "category": "중앙해커톤",
+      "title": "Bora",
+      "description": "‘세대 갈등을 해소할 수 있는 아티클 기반 각주 콘텐츠 플랫폼’ 디지털 격차는 세대 간의 적극적 소통을 막는 장벽이 되고 있습니다. alpha 및 Z세대는 디지털 리터러시와 문해력 저하를 경험하고 있고, 시니어 세대는 사회적 소외와 단절을 경험하고 있습니다. 이에, '창밖을보라'는 이성적 의사소통이 가능한 양질의 글을 제공하고, 각자의 시선에서 의견을 교류할 수 있는 장을 만들어 세대 간 소통을 활성화 시킵니다. 또한, 디지털 콘텐츠에 대한 접근성이 낮은 시니어 세대를 위해 청각 기반의 서비스도 제공합니다.",
+      "urls": { "service": "https://bora-the-window.vercel.app", "github": "https://github.com/BORA-team1" },
+      "team": {
+        "pmdesign": ["손예원", "이지민"],
+        "frontend": ["변지혜", "유서연"],
+        "backend": ["박나담", "허채린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/21.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-22",
+      "generation": "11기",
+      "category": "졸업프로젝트",
+      "title": "What Do You Sing",
+      "description": "‘당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스’ <왓두유씽?>은 혼자 흥얼거리기 아까웠던 가사를 인용해서 소개할 수 있는 서비스예요. 내가 좋아하는 가사를 나만의 해석을 덧붙여 소개하고, 탐색을 통해 발견한 마음에 드는 가사는 북마크로 저장하거나 이미지를 통해 공유해 보세요. 가사에 대한 감정 표현이나 끊임없이 남길 수 있는 좋아요, 댓글 등을 통해 가사에 대한 생각을 공유하고, 직접 들어보고 싶은 노래 가사는 ‘이 노래 들으러 가기'를 통해 바로 감상할 수 있어요.",
+      "urls": { "service": "https://whatdoyousing.swygbro.com", "github": "https://github.com/WhatDoYouSing" },
+      "team": {
+        "pmdesign": ["이지민", "이채원"],
+        "frontend": ["변지혜", "최지원"],
+        "backend": ["김지은", "박나담", "윤서아"]
+      },
+      "thumbnail": "/images/projects/thumbnail/22.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-23",
+      "generation": "11기",
+      "category": "졸업프로젝트",
+      "title": "Nae-chin-man",
+      "description": "‘내 친구가 알려주는 믿을 만한 숨은 맛집, 내친만지도’ \"내 친구들이 아는 로컬 맛집을 알고 싶어요!\" \"광고물 먹은 투어리스트, 블로거가 아닌! 진짜 여행 장인이 아는 그곳의 명소, 음식점을 알고 싶어요!\" 내친만지도에서는 나만의 지도를 만들고, 지도의 링크를 공유해 친구가 추천해 주는 장소를 공유받을 수 있어요. 지도 위에 친구가 남긴 포스트잇을 통해서는 단순히 어떤 장소가 여행 지역의 핫플인지에 대한 정보를 넘어서서, 어떤 부분들이 좋았고 특히나 만족스러웠던 포인트는 뭐였는지에 대한 \"세세한 내용까지\" 알 수 있답니다!",
+      "urls": { "service": "https://naechinman.swygbro.com", "github": "https://github.com/LikeLion02Graduation" },
+      "team": {
+        "pmdesign": ["손예원", "이시은"],
+        "frontend": ["유서연", "진규빈"],
+        "backend": ["이혜지", "허채린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/23.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-24",
+      "generation": "11기",
+      "category": "졸업프로젝트",
+      "title": "Drag on",
+      "description": "‘2024 목표 드래곤볼 시작 🐲 하나씩 drag - 체크 on ✔️’ Drag-on 은 용의 해 2024년을 맞이하며, 새로운 목표 달성을 응원하고자 하는 마음에서 탄생했습니다🐉 마치 여의주를 모으듯 목표를 하나씩 모아 드래곤볼을 완성해 보세요🔮 목표를 향해 가던 중 넘어져도, drag-on 에서는 괜찮아요! ‘메꾸기’ 기능으로 다시 일어나고, 내 페이스에 맞게 목표를 조정할 수 있어요💪🏻 하루 하루 목표를 모아 나가는 재미에 푹 빠지다보면, 어느새 나의 2024년이 보람지게 완성되어 있을거예요. 🍀",
+      "urls": { "service": "https://drag-on.swygbro.com", "github": "https://github.com/11th-LikeLion-DragOn" },
+      "team": {
+        "pmdesign": ["김지형", "임수민"],
+        "frontend": ["김가영", "이다빈"],
+        "backend": ["심예원", "이지원"]
+      },
+      "thumbnail": "/images/projects/thumbnail/24.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-25",
+      "generation": "10기",
+      "category": "대동제",
+      "title": "2022 대동제",
+      "description": "이화여대 멋쟁이사자처럼은 매년 해방이화 축제준비위원회와 협업하여 대동제 통합 안내 웹사이트를 제작하고 있습니다. 2020년 1월,갑작스러운 코로나 19 확산이 시작되었습니다. ‘잠깐뿐이겠지’라고 생각했던비대면 대학생활은 점점 길어졌고, 2022년 1학기를 다섯번째 비대면(혼합) 학기로 보내게 되었습니다. 2022년 9월, 전면 대면수업이 재개되었고,드디어 오프라인 대동제를 개최할 수 있게 되었습니다. 3일간의 대동제를 통해 다시 한번이화의 초록을써 내려갈 수 있길 바랍니다.",
+      "urls": { "service": "https://rewha.swygbro.com/", "github": "https://github.com/EWHA-LIKELION" },
+      "team": {
+        "pmdesign": ["곽은진", "김다은", "박성연", "신다윤"],
+        "frontend": ["정다윤", "김혜빈", "김민주", "정연주", "허윤", "이서진", "이채원"],
+        "backend": ["김도연", "신이수", "조현영", "임채영", "최유미", "김정은", "이나경"]
+      },
+      "thumbnail": "",
+      "detailImages": []
+    }
+  ]
+}

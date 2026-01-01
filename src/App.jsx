@@ -4,6 +4,7 @@ import Home from "./pages/hompage/Home";
 import Project from './pages/project/Project.jsx';
 import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
 import People from './pages/people/People.jsx';
+import RecruitGuidePage from './pages/RecruitGuidePage/RecruitGuidePage';
 
 function App() {
   return (
@@ -15,8 +16,8 @@ function App() {
         {/* Public pages */}
         <Route path="project" element={<Project />} />
         <Route path="project/detail" element={<ProjectDetail />} />
-        <Route path="people" element={<People />} />
-        <Route path="recruit" element={<div>RECRUIT</div>} />
+        <Route path="people" element={<People />} 
+        <Route path="recruit" element={<RecruitGuidePage />} />
 
         {/* Sidebar (Admin) pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />

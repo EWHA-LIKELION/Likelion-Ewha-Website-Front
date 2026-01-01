@@ -13,6 +13,10 @@ export const ApplyButton = (props) => (
     <PrimaryBlackButton {...props}>지원하기</PrimaryBlackButton>
 );
 
+export const ApplyWhiteButton = (props) => (
+    <PrimaryWhiteButton {...props}>지원하기</PrimaryWhiteButton>
+);
+
 export const DetailLinkButton = (props) => (
     <SecondaryButton {...props}>
         자세한 내용 노션 바로가기
@@ -82,8 +86,9 @@ const PrimaryWhiteButton = styled(BaseButton)`
 const PrimaryBlackButton = styled(BaseButton)`
     background-color: #05DA5B;
     color: #000000;
-
 `;
+
+
 
 /* ===== Secondary ===== */
 const SecondaryButton = styled(BaseButton)`
