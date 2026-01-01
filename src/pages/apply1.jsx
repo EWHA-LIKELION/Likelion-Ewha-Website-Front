@@ -56,6 +56,10 @@ export default function Apply1() {
   const [interviewType, setInterviewType] = useState("");
   const [privacyAgree, setPrivacyAgree] = useState(false);
 
+  const yearOptions = Array.from({ length: 2010 - 1990 + 1 }, (_, i) => 1990 + i);
+  const monthOptions = Array.from({ length: 12 }, (_, i) => i + 1);
+  const dateOptions = Array.from({ length: 31 }, (_, i) => i + 1);
+
 
 //  면접일정 : 이것도 서버에서 받아오는 건지, 아니면 고정된 값(?)인지 여쭤볼 것
 // 일단은 받아오는 형태로 작성해 둠
@@ -109,8 +113,11 @@ export default function Apply1() {
 return (
 <Page>
     <Frame>
+    <TitleWrapper>
+      <PageName>지원서 작성</PageName>
+      <PartName>파트명</PartName>
+    </TitleWrapper>
     <Section>
-
         <SectionTitle>1. 지원자 정보</SectionTitle>
 
         <Card>
@@ -168,30 +175,39 @@ return (
                 <AsteriskMark>*</AsteriskMark>
             </LabelWrapper>
             <DropdownContainer>
-            <Dropdown2
-              value={birthYear}
-              onChange={setBirthYear}
-              required
-              placeholder={"2000년"}
-              error={!isBirthValid && (birthYear || birthMonth || birthDate)}
-              errorMessage="생년월일을 선택하세요."
-            />
-            <Dropdown2
-              value={birthMonth}
-              onChange={setBirthMonth}
-              required
-              placeholder={"12월"}
-            />
-            <Dropdown2
-              value={birthDate}
-              onChange={setBirthDate}
-              required
-              placeholder={"12일"}
-            />
-            <ErrorText $visible={!isBirthValid && (birthYear || birthMonth || birthDate)}>
-              {!isBirthValid && (birthYear || birthMonth || birthDate) ? "생년월일을 선택하세요." : "\u00A0"}
-            </ErrorText>
-          </DropdownContainer>
+              <DropdownWrapper>
+                <Dropdown2
+                  options={yearOptions}
+                  value={birthYear}
+                  onChange={setBirthYear}
+                  onSelect={setBirthYear}
+                  placeholder={"0000년"}
+                  unit="년"
+                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                />
+                <Dropdown2
+                  options={monthOptions}
+                  value={birthMonth}
+                  onChange={setBirthMonth}
+                  onSelect={setBirthMonth}
+                  placeholder={"00월"}
+                  unit=" 월"
+                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                />
+                <Dropdown2
+                  options={dateOptions}
+                  value={birthDate}
+                  onChange={setBirthDate}
+                  onSelect={setBirthDate}
+                  placeholder={"00일"}
+                  unit=" 일"
+                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                />
+              </DropdownWrapper>
+              <ErrorText $visible={!isBirthValid && (birthYear || birthMonth || birthDate)}>
+                {!isBirthValid && (birthYear || birthMonth || birthDate) ? "생년월일을 선택하세요." : "\u00A0"}
+              </ErrorText>
+            </DropdownContainer>
           </ItemContainer>
 
           <ItemContainer>
@@ -199,13 +215,11 @@ return (
                 <LabelText>학과</LabelText>
                 <AsteriskMark>*</AsteriskMark>
             </LabelWrapper>
-            <ExampleContent>복수전공일 경우 본전공/복수전공(혹은 부전공)과 같이 작성해주세요.{'\n'}
-                (예시) 경영학부/컴퓨터공학전공
+            <ExampleContent>복수전공일 경우 본전공/복수전공(혹은 부전공)과 같이 작성해주세요. (예시) 경영학부/컴퓨터공학전공
             </ExampleContent>
             <InputWrapper>
               <Input
                 variant="form" 
-                // label="학과"
                 value={major}
                 onChange={e => setMajor(e.target.value)}
                 required
@@ -231,7 +245,6 @@ return (
                 variant="form" 
                 value={studentId}
                 onChange={e => setStudentId(e.target.value)}
-                required
                 error={!isStudentIdValid && studentId.length > 0}
                 errorMessage="학번을 작성해주세요."
                 placeholder={"학번을 작성해주세요."}
@@ -252,10 +265,8 @@ return (
             <InputWrapper>
               <Input
                 variant="form" 
-                // label="학년" → 피그마랑 값 불일치 문제..
                 value={grade}
                 onChange={e => setGrade(e.target.value)}
-                required
                 error={!isGradeValid && grade.length > 0}
                 errorMessage="학년을 작성해주세요."
                 placeholder={"학년을 작성해주세요."}
@@ -483,18 +494,16 @@ const Page = styled.div`
   display: flex;
   width: 100%;
   min-width: 400px;
-  padding: 0 80px;
   flex-direction: column;
   align-items: center;
-  gap: 44px;
   align-self: stretch;
+    padding: 5rem;
 
   @media (max-width: 799px) {
     min-width: 0;
     padding: 1rem;
   }
 `;
-
 const Frame = styled.div`
   display: flex;
   width: 100%;
@@ -502,12 +511,13 @@ const Frame = styled.div`
   max-width: 971px;
   flex-direction: column;
   align-items: center;
-  gap: 4.5rem;
+  gap: 4rem;
   align-self: stretch;
 `;
 
 const Section = styled.section`
   display: flex;
+  justify-content: center;
   width: 100%;
   max-width: 639px;
   margin: 0 auto;
@@ -525,6 +535,43 @@ const SectionTitle = styled.div`
   line-height: 1.75rem; /* 20% */
   margin-bottom: 1rem;
 `;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  align-items: flex-start;
+  gap: 0.5rem;
+  align-self: stretch;
+    @media (max-width: 799px) {
+    
+    }
+`;
+
+const PageName = styled.div`
+  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+  font-family: "Cafe24 PRO Slim";
+  font-size: 1.875rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 2.625rem;
+    @media (max-width: 799px) {
+
+    }
+`;
+
+const PartName = styled.div`
+  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.75rem;
+    @media (max-width: 799px) {
+
+    }
+`;
+
 
 const Card = styled.div`
   display: flex;
@@ -570,7 +617,7 @@ const LabelText = styled.span`
   line-height: 1.5rem;
 
   align-items: center;
-  margin-bottom : 0.5rem;
+  margin-bottom : 0.25rem;
   
     @media (max-width: 799px) {
         font-size: 0.875rem;
@@ -609,8 +656,7 @@ const AsteriskMark = styled.span`
 const AsteriskText = styled.span`
   display: flex;
   align-items: center;
-  gap: 8px;
-  cursor: pointer;  
+  gap: 0.5rem;
   white-space: nowrap;
 
   color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #FF7B2E));
@@ -636,7 +682,7 @@ const ExampleContent = styled.div`
   align-items: center;
   align-self: stretch;
 
-  margin-bottom : 0.5rem;
+  margin: 0 0.1rem 0.25rem 0.2rem ;
 
   color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
   font-family: Pretendard;
@@ -644,14 +690,30 @@ const ExampleContent = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 1.125rem;
-  white-space: pre-line;
 `;
 
 const DropdownContainer = styled.div`
+  cursor: pointer;  
+  display: flex;  
+  flex-direction: column;
+  margin : 0.25rem 1rem 1.5rem 0;
+
+    @media (max-width: 799px) {
+        margin-bottom: 1rem;
+        max-width: 16.31rem;
+
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.25rem;
+    }
+`;
+
+
+const DropdownWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex: 1 0 0;
-  margin-bottom : 2rem;
 
   color: var(--Atomic-Neutral-30, var(--Neutral-30, #474747));
 
@@ -662,7 +724,6 @@ const DropdownContainer = styled.div`
   line-height: 1.375rem;
 
     @media (max-width: 799px) {
-        margin-bottom: 1.5rem;
         max-width: 16.31rem;
 
         font-size: 0.75rem;
@@ -676,8 +737,7 @@ const ButtonRowPC = styled.div`
   display: flex;
   flex-grow: 1;
   gap: 24px;
-  margin-bottom : 2rem;
-  margin-top: 8px;
+  margin : 0.75rem 0 2rem 0;
 `;
 
 const ButtonRowMobile = styled.div`
