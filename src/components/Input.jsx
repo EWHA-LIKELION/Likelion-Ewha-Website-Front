@@ -186,6 +186,7 @@ const InputBox = styled.div`
       }
       return css`
         border: 1px solid #F4F4F5;
+        width: 395px;
         height: 52px;
         padding: 12px 24px;
         font-size: 16px;
@@ -199,6 +200,7 @@ const InputBox = styled.div`
     if ($variant === 'form') {
       return css`
         border: 1px solid #F4F4F5;
+        width: 535px;
         height: 46px;
         padding: 12px 20px;
           @media (max-width: 799px) { /* 모바일 */
