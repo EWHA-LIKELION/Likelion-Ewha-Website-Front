@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const SegmentBar = ({ items = [], styleType = 1, onSelect }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 799);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleClick = (index) => {
     setActiveIndex(index);
@@ -20,7 +30,12 @@ const SegmentBar = ({ items = [], styleType = 1, onSelect }) => {
           $styleType={styleType}
           $count={items.length}
           onClick={() => handleClick(index)}
-          className={styleType === 1 ? 'h5-regular' : 'body-regular'}
+          className={
+            isMobile 
+              ? 'body-regular' 
+              : (styleType === 1 ? 'h5-regular' : 'body-regular')
+          }
+          data-text={item}
         >
           {item}
         </Button>
@@ -36,16 +51,10 @@ const Wrapper = styled.div`
   width: fit-content;
   background: var(--common-100);
   padding: 0;
-  border: 1px solid ${(props) => {
-    if (props.$styleType === 1) {
-      return "var(--neutral-90)";
-    } else {
-      return "var(--neutral-95)";
-    }
-  }};
 `;
 
 const Button = styled.button`
+  position: relative;
   padding: ${(props) => {
     if (props.$styleType === 1) {
       return "1rem 1.5rem";
@@ -53,8 +62,20 @@ const Button = styled.button`
       return "0.72rem 1.5rem";
     }
   }};
-  
-  border: none;
+
+  @media (max-width:799px){
+    padding: 0.75rem 1.5rem;
+  }
+
+  {/*font-weight 미리 렌더링해서 클릭했을때 width 변화 없도록*/}
+  &::before {
+    content: attr(data-text);
+    font-weight: ${(props) => (props.$styleType === 1 ? "700" : "800")};
+    visibility: hidden;
+    height: 0;
+    display: block;
+    overflow: hidden;
+  }
 
   background: ${(props) => {
     if (props.$styleType === 1) {
@@ -88,8 +109,38 @@ const Button = styled.button`
     filter: brightness(0.9);
   }
 
-  border-right: 1px solid var(--neutral-90);
+  border: 1px solid ${(props) => {
+    if (props.$active) {
+      if (props.$styleType === 1) {
+        return " var(--neutral-20)";
+      } else {
+        return "var(--neutral-40)";
+      }
+    }
+
+    if (props.$styleType === 1) {
+      return "var(--neutral-90)";
+    } else {
+      return "var(--neutral-95)";
+    }
+  }};
+
+  border-right: none;
+  
   &:last-child {
-    border-right: none;
+    border-right: 1px solid ${(props) => {
+    if (props.$active) {
+      if (props.$styleType === 1) {
+        return "var(--neutral-20)";
+      } else {
+        return "var(--neutral-40)";
+      }
+    }
+    if (props.$styleType === 1) {
+      return "var(--neutral-90)";
+    } else {
+      return "var(--neutral-95)";
+    }
+  }};
   }
 `;

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Layout from "./layouts/layout.jsx";
-import Home from "./pages/Home.jsx";
+import "./App.css";
+import Layout from "../src/layouts/layout"; //현재 일반 레이아웃 적용(admin<->일반 구분 로직 추가 필요)
+import Home from "../src/pages/Home";
 
 function App() {
   return (
