@@ -58,6 +58,12 @@ const Container = styled.div`
   margin: 50px auto;
 
   @media (max-width: 799px) {
+    width: 25rem;
+    height: 20.68rem;
+    margin: 20px auto;
+  }
+
+  @media (max-width: 500px) {
     width: 19.97rem;
     height: 20.68rem;
     margin: 20px auto;
@@ -72,7 +78,7 @@ const NavButton = styled.button`
 
   /* 버튼 스타일 초기화 및 배치 */
   border: none;
-  background: white;
+  background: transparent;
   cursor: pointer;
   display: flex;
   justify-content: center;
