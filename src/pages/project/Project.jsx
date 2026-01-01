@@ -155,21 +155,22 @@ const ProjectWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
+    padding: 80px 80px 160px 80px;
+
+    @media (max-width: 799px) { /* 모바일 */
+        padding: 32px 16px 60px 16px;
+        gap: 16px;
+    }
 `
 
 const Contents = styled.div`
     z-index: 1;
     width: 100%;
     max-width: 971px;
-    padding: 80px 80px 160px 80px;
     gap: 20px;
     display: flex;
     flex-direction: column;
-
-    @media (max-width: 799px) { /* 모바일 */
-        padding: 32px 16px 60px 16px;
-        gap: 16px;
-    }
 `
 
 const PageInfo = styled.div`
@@ -228,8 +229,21 @@ const ProjectGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
-    @media (max-width: 799px) {
+    /* 380px 미만: 1줄 */
+    @media (max-width: 379px) {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* 380px ~ 649px: 2줄 */
+    @media (min-width: 380px) and (max-width: 970px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* 650px 이상: 3줄 */
+    @media (min-width: 971px) {
+        grid-template-columns: repeat(3, 1fr);
     }
 `
 

@@ -103,6 +103,12 @@ const PeopleWrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
+    padding: 80px 80px 160px 80px;
+
+    @media (max-width: 799px) {
+        padding: 32px 12px 60px 12px;
+    }
 `
 
 const Container = styled.div`
@@ -110,14 +116,9 @@ const Container = styled.div`
     width: 100%;
     max-width: 971px;
     display: flex;
-    padding: 80px 80px 160px 80px;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-
-    @media (max-width: 799px) {
-        padding: 32px 12px 60px 12px;
-    }
 
     @media (min-width: 800px) {
         p.h5-regular {
@@ -159,8 +160,21 @@ const LionCardGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
-    @media (max-width: 799px) {
+    /* 380px 미만: 1줄 */
+    @media (max-width: 379px) {
         grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* 380px ~ 649px: 2줄 */
+    @media (min-width: 380px) and (max-width: 970px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* 971px 이상: 3줄 */
+    @media (min-width: 971px) {
+        grid-template-columns: repeat(3, 1fr);
     }
 `
 
