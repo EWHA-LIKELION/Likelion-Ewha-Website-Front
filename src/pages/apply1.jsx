@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Input from "../components/Input";
 import Dropdown2 from "../components/dropdown/Dropdown2";
 import Dropdown3 from "../components/dropdown/Dropdown3";
+import api from "../apis/api";
+
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
 import {
   SelectPositiveButton,
@@ -31,6 +33,121 @@ import {
   TimeSelectedMobile
 } from "../components/buttons/TimeButtons_mo";
 
+function ApplicationCodeModal({ isOpen, onClose, onSuccess }) {
+  const [code, setCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [errorMode, setErrorMode] = useState(false); 
+
+  const isCodeValid = code.trim().length > 0;
+
+  const handleOverlayClick = (e) => {
+    if (e.target === e.currentTarget) {
+      handleClose();
+    }
+  };
+
+  const handleClose = () => {
+    setCode("");
+    setErrorMode(false);
+    onClose();
+  };
+
+  const handleConfirm = async () => {
+    if (!isCodeValid || isLoading) return;
+    setIsLoading(true);
+    try {
+      const response = await api.post("/recruitments/application/content/", {
+        application_code: code.trim()
+      });
+      
+      onSuccess?.(response.data);
+      handleClose();
+    } catch (error) {
+      setErrorMode(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  React.useEffect(() => {
+    if (!isOpen) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
+  if (errorMode) {
+    return (
+      <ModalOverlay onClick={handleOverlayClick}>
+        <ModalCard>
+          <ModalErrorContent>
+            <ModalErrorTitle>사용자 정보가 없습니다.</ModalErrorTitle>
+            <ModalErrorDesc>입력하신 코드를 다시 확인해주세요.</ModalErrorDesc>
+          </ModalErrorContent>
+          <ModalConfirmButton onClick={handleClose} $active>
+            닫기
+          </ModalConfirmButton>
+        </ModalCard>
+      </ModalOverlay>
+    );
+  }
+
+  return (
+    <ModalOverlay onClick={handleOverlayClick}>
+      <ModalCard>
+        <ModalContent>
+          <ModalHeader>
+            <ModalTitle>지원 코드 입력</ModalTitle>
+            <ModalCloseBtn onClick={handleClose} aria-label="닫기">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <path d="M1 1L13 13M13 1L1 13" stroke="#B0B0B0" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
+            </ModalCloseBtn>
+          </ModalHeader>
+          <ModalDesc>
+            지원서를 열람하기 위해서<br />
+            지원서 작성시에 발급받은 지원 코드가 필요해요.
+          </ModalDesc>
+        </ModalContent>
+        <ModalInputSection>
+          <ModalInput
+            type="text"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="코드를 입력해주세요."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleConfirm();
+            }}
+          />
+          <ModalButtonWrapper>
+            <ModalConfirmButton
+              onClick={handleConfirm}
+              $active={isCodeValid}
+              disabled={!isCodeValid || isLoading}
+            >
+              {isLoading ? "확인 중..." : "확인"}
+            </ModalConfirmButton>
+            <ModalHelperText>
+              지원 코드를 잊어버리셨나요?{" "}
+              <ModalHelperLink 
+                href="카카오톡 링크 걸어주기(피그마에서 못 찾음..)" 
+                target="_blank" 
+              >
+                카카오톡 문의하기
+              </ModalHelperLink>
+            </ModalHelperText>
+          </ModalButtonWrapper>
+        </ModalInputSection>
+      </ModalCard>
+    </ModalOverlay>
+  );
+}
+
 // `apply1.jsx`
 function useisMO(maxWidth = 799) {
   const [isMO, setisMO] = useState(() => window.innerWidth <= maxWidth);
@@ -44,6 +161,14 @@ function useisMO(maxWidth = 799) {
 
 export default function Apply1() {
   const isMO = useisMO(799);
+  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
+  const [applicationData, setApplicationData] = useState(null);
+
+  const handleCodeModalSuccess = (data) => {
+    setApplicationData(data);
+    // 여기서 data를 활용하면 폼 자동 채우기 같은 거 처리 ㄱㄴ
+    console.log("지원서 데이터:", data);
+  };
 
   const [name, setName] = useState("");
   const [birthYear, setBirthYear] = useState("");
@@ -113,6 +238,15 @@ export default function Apply1() {
 
 return (
 <Page>
+  <ApplicationCodeModal
+    isOpen={isCodeModalOpen}
+    onClose={() => setIsCodeModalOpen(false)}
+    onSuccess={handleCodeModalSuccess}
+  />
+  <CodeLookupButton onClick={() => setIsCodeModalOpen(true)}>
+    모달 테스트용
+  </CodeLookupButton>
+
     <Frame>
     <TitleWrapper>
       <PageName>지원서 작성</PageName>
@@ -573,6 +707,16 @@ const PartName = styled.div`
     }
 `;
 
+const CodeLookupButton = styled.button`
+  position: absolute;
+  top: 7rem;
+  right: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1.5px solid var(--Neutral-60, #6e6e6eff);
+  
+`;
+
 
 const Card = styled.div`
   display: flex;
@@ -587,6 +731,7 @@ const Card = styled.div`
   @media (max-width: 799px) {
     padding: 1.05rem 1rem 1.05rem 1rem ;
     max-width: 550px
+    margin: 0auto;
   }
 `;
 
@@ -890,4 +1035,222 @@ const LongDesc = styled.span`
         font-style: normal;
         line-height: 1.375rem;
     }
+`;
+
+// —————————————————————— 지원 코드 모달 스타일링 ——————————————————————
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+`;
+
+const ModalCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 30rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 2.5rem;
+  gap: 2.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 8px 16px rgba(24, 24, 27, 0.1);
+  box-sizing: border-box;
+
+    @media (max-width: 799px) {
+      min-width: 15rem;
+      padding: 1.5rem;
+      gap: 2rem;
+    }
+`;
+
+const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const ModalTitle = styled.h2`
+  margin: 0;
+  flex: 1;
+  color: #2A2A2A;
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+
+  @media (max-width: 799px) {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+`;
+
+const ModalCloseBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+`;
+
+const ModalDesc = styled.p`
+  margin: 0;
+  color: #737373;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+
+  @media (max-width: 799px) {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
+`;
+
+const ModalInputSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+`;
+
+const ModalInput = styled.input`
+  width: 100%;
+  height: 40px;
+  padding: 9px 20px;
+  background: #F4F4F5;
+  border: none;
+  border-radius: 50px;
+  outline: none;
+  
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  color: #2A2A2A;
+
+  &::placeholder {
+    color: #9B9B9B;
+  }
+
+  &:focus {
+    background: #EFEFEF;
+  }
+
+  @media (max-width: 799px) {
+    height: 36px;
+    padding: 8px 16px;
+    font-size: 0.8125rem;
+  }
+`;
+
+const ModalButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const ModalConfirmButton = styled.button`
+  width: 100%;
+  padding: 10px 40px;
+  border: none;
+  border-radius: 999px;
+  cursor: ${({ $active }) => ($active ? "pointer" : "not-allowed")};
+  background: ${({ $active }) => ($active ? "#05DA5B" : "#9B9B9B")};
+  color: #fff;
+  
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5rem;
+  transition: background 0.2s;
+
+  &:hover:not(:disabled) {
+    background: ${({ $active }) => ($active ? "#04c752" : "#9B9B9B")};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 799px) {
+    padding: 8px 32px;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
+`;
+
+const ModalHelperText = styled.p`
+  margin: 0;
+  text-align: center;
+  color: #9B9B9B;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+`;
+
+const ModalHelperLink = styled.a`
+  color: #9B9B9B;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+
+  &:hover {
+    color: #737373;
+  }
+`;
+
+// 이거는 그 사용자 정보 없다고 나옹는 모달
+const ModalErrorContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: center;
+`;
+
+const ModalErrorTitle = styled.h2`
+  margin: 0;
+  color: #2A2A2A;
+  font-family: Pretendard;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.75rem;
+
+  @media (max-width: 799px) {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+`;
+
+const ModalErrorDesc = styled.p`
+  margin: 0;
+  color: #737373;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+
+  @media (max-width: 799px) {
+    font-size: 0.8125rem;
+    line-height: 1.25rem;
+  }
 `;
