@@ -1,11 +1,11 @@
-import TopBar from "../components/navigation/topbar";
-import BottomBar from "../components/navigation/bottombar"
+import TopBar from "../../components/navigation/topbar";
+import BottomBar from "../../components/navigation/bottombar"
 import RecruitGuideHeroPc from "./RecruitGuideHero_pc";
-import DropDown3 from "../components/dropdown/Dropdown3"
+import DropDown3 from "../../components/dropdown/Dropdown3"
 import {
     ApplyWhiteButton,
     DetailLinkButton,
-} from "../components/buttons/MainButtons_pc";
+} from "../../components/buttons/MainButtons_pc";
 import styled from "styled-components";
 
 
@@ -123,7 +123,7 @@ const RecruitGuidePagePc = () => {
                     <h3>기획 디자인</h3>
                     <span>PM · DESIGN</span>
                     <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight_3.svg" alt="icon" />
+                    <img src="/icons/arrowRight3.svg" alt="icon" />
                     
                 </PartCard>
 
@@ -131,14 +131,14 @@ const RecruitGuidePagePc = () => {
                     <h3>프론트엔드</h3>
                     <span>FRONTEND</span>
                     <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight_3.svg" alt="icon" />
+                    <img src="/icons/arrowRight3.svg" alt="icon" />
                 </PartCard>
 
                 <PartCard>
                     <h3>백엔드</h3>
                     <span>BACKEND</span>
                     <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight_3.svg" alt="icon" />
+                    <img src="/icons/arrowRight3.svg" alt="icon" />
                 </PartCard>
                 </PartCards>
             </PartInner>

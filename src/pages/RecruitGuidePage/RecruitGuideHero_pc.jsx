@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {
     ApplyButton,
     DetailLinkDarkButton,
-} from "../components/buttons/MainButtons_pc";
+} from "../../components/buttons/MainButtons_pc";
 
 const RecruitGuideHeroPc = () => {
     return (

@@ -39,7 +39,7 @@ export const DisabledSubmitButtonMobile = (props) => (
 export const RecruitInfoButtonMobile = (props) => (
     <DefaultButton {...props}>
         <span>14기 모집 안내 바로가기</span>
-        <img src="/icons/arrowRight_2.svg" />
+        <img src="/icons/arrowRight2.svg" />
     </DefaultButton>
 );
 
