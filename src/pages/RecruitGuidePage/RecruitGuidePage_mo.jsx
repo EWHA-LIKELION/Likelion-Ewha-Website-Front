@@ -258,7 +258,6 @@ const Container = styled.div`
 const SectionWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 1.88rem 1rem 1.88rem 1rem;
 `;
 
 
@@ -266,6 +265,7 @@ const SectionWrapper = styled.div`
 
 const ScheduleSectionWrapper = styled.div`
     width: 100%;
+    padding: 1.88rem 1rem 1.88rem 1rem;
 `;
 
 const Section = styled.section`
