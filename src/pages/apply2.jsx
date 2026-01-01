@@ -145,12 +145,9 @@ export default function Apply2() {
     isFilled(q1) &&
     isFilled(q2) &&
     isFilled(q3) &&
-    isFilled(q4) &&
-    hasAnyFile &&
     !over1 &&
     !over2 &&
-    !over3 &&
-    !over4;
+    !over3;
 
   const onClickSubmit = () => {
     if (!canSubmit) return;
