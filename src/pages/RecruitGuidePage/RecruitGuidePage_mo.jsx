@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import TopBar from "../../components/navigation/topbar";
-import BottomBar from "../../components/navigation/bottombar"
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import RecruitGuideHeroMo from "./RecruitGuideHero_mo";
 import {
@@ -11,16 +9,10 @@ import {
 
 
 const RecruitGuidePageMo = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-
 
     return (
         <>
         <Container>
-        {/* 상단 탑바 */}
-        <TopBar onToggleMobileMenu={(isOpen) => setIsMenuOpen(isOpen)} />
-
-        <MainContent $blur={isMenuOpen}>
             {/* 히어로 섹션 */}
             <RecruitGuideHeroMo />
 
@@ -247,11 +239,8 @@ const RecruitGuidePageMo = () => {
                 </SubText>
             </BottomBanner>
             </SectionWrapper>
-        </MainContent>
         </Container>
 
-        {/* 공통 푸터 컴포넌트 */}
-        <BottomBar /> 
     </>
     );
 };
@@ -265,11 +254,6 @@ const Container = styled.div`
   background-color: #ffffff;
 `;
 
-const MainContent = styled.main`
-  width: 100%;
-  transition: filter 0.3s ease;
-  filter: ${(props) => (props.$blur ? "blur(4px)" : "none")};
-`;
 
 const SectionWrapper = styled.div`
     display: flex;
