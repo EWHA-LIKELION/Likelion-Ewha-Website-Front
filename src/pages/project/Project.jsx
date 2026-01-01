@@ -138,6 +138,10 @@ function Project() {
                 </PageBtn>
             </Pagination>
             </Contents>
+
+            <Design1><img src='/icons/designOrange.svg' /></Design1>
+            <Design2><img src='/icons/designGreen.svg' /></Design2>
+            <Design3><img src='/icons/designOrange2.svg' /></Design3>
         </ProjectWrapper>
     )
 };
@@ -146,9 +150,15 @@ export default Project;
 
 const ProjectWrapper = styled.div`
     width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 `
 
 const Contents = styled.div`
+    z-index: 1;
     width: 100%;
     max-width: 971px;
     padding: 80px 80px 160px 80px;
@@ -246,5 +256,71 @@ const PageBtn = styled.button`
     &:disabled {
         opacity: 0.4;
         cursor: default;
+    }
+`
+
+const Design1 = styled.div`
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 230px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        left: 45px;
+        top: 0;
+
+        img {
+            width: 60px;
+        }
+    }
+`
+
+const Design2 = styled.div`
+    position: absolute;
+    top: 323px;
+    right: -40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 224px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        right: -12px;
+        top: 215px;
+
+        img {
+            width: 60px;
+        }
+    }
+`
+
+const Design3 = styled.div`
+    position: absolute;
+    top: 1014px;
+    left: -40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 192px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        left: -12px;
+        top: 485px;
+
+        img {
+            width: 60px;
+        }
     }
 `
