@@ -19,14 +19,14 @@ const Carousel1 = () => {
 
   return (
     <Container>
-      <NavButton onClick={handlePrev} isPrev>
+      <NavButton onClick={handlePrev} $isPrev>
         <img src={PrevIcon} alt="이전" />
       </NavButton>
 
       <CardWrapper>
         {/* DecoCard는 CSS에서 모바일일 때 display: none 처리됨 */}
-        <DecoCard index={2} />
-        <DecoCard index={1} />
+        <DecoCard $index={2} />
+        <DecoCard $index={1} />
 
         <MainCard>
           <ScrollContent>
@@ -90,7 +90,7 @@ const NavButton = styled.button`
   z-index: 10;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-  ${(props) => (props.isPrev ? `left: -25px;` : `right: -25px;`)}
+  ${(props) => (props.$isPrev ? `left: -25px;` : `right: -25px;`)}
   transition: 0.2s;
 
   /* 내부 이미지 꽉 채우기 */
@@ -104,7 +104,7 @@ const NavButton = styled.button`
     height: 1.875rem;
 
     /* 모바일에서는 버튼이 너무 밖으로 나가면 잘리므로 안쪽으로 당김 */
-    ${(props) => (props.isPrev ? `left: -10px;` : `right: -10px;`)}
+    ${(props) => (props.$isPrev ? `left: -10px;` : `right: -10px;`)}
   }
 `;
 
@@ -150,10 +150,10 @@ const ScrollContent = styled.div`
 
 const DecoCard = styled(BaseCard)`
   background-color: #f1f1f1;
-  z-index: ${(props) => (props.index === 2 ? 1 : 2)};
+  z-index: ${(props) => (props.$index === 2 ? 1 : 2)};
 
   transform: ${(props) =>
-    props.index === 1
+    props.$index === 1
       ? "translate(20px, -20px) scale(0.98)"
       : "translate(40px, -40px) scale(0.96)"};
 
