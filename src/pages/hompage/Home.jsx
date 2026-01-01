@@ -3,12 +3,14 @@ import styled from "styled-components";
 import IntroSection from "./IntroSection";
 import IntroSection2 from "./IntroSection2";
 import EndSection from "./EndSection";
+import HomeMid from "./HomeMid";
 
 const Home = () => {
   return (
     <PageContainer>
       <IntroSection />
       <IntroSection2 />
+      <HomeMid/>
       <EndSection />
     </PageContainer>
   );
