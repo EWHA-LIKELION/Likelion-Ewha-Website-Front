@@ -29,6 +29,27 @@ function People() {
                             department='컴퓨터공학과 25'
                             imageScr='../../images/default1.png'
                         />
+                        <MemberCard
+                            name='서예린'
+                            part='프론트엔드'
+                            position='운영진'
+                            department='컴퓨터공학과 25'
+                            imageScr='../../images/default1.png'
+                        />
+                        <MemberCard
+                            name='서예린'
+                            part='프론트엔드'
+                            position='운영진'
+                            department='컴퓨터공학과 25'
+                            imageScr='../../images/default1.png'
+                        />
+                        <MemberCard
+                            name='서예린'
+                            part='프론트엔드'
+                            position='운영진'
+                            department='컴퓨터공학과 25'
+                            imageScr='../../images/default1.png'
+                        />
                     </LionCardGrid>
                 </Lion>
 
@@ -48,9 +69,27 @@ function People() {
                             imageScr='../../images/default1.png'
                             showPosition='false'
                         />
+                        <MemberCard
+                            name='서예린'
+                            part='프론트엔드'
+                            department='컴퓨터공학과 25'
+                            imageScr='../../images/default1.png'
+                            showPosition='false'
+                        />
+                        <MemberCard
+                            name='서예린'
+                            part='프론트엔드'
+                            department='컴퓨터공학과 25'
+                            imageScr='../../images/default1.png'
+                            showPosition='false'
+                        />
                     </LionCardGrid>
                 </Lion>
             </Container>
+
+            <Design1><img src='/icons/designOrange.svg' /></Design1>
+            <Design2><img src='/icons/designGreen.svg' /></Design2>
+            <Design3><img src='/icons/designOrange2.svg' /></Design3>
         </PeopleWrapper>
     )
 };
@@ -58,7 +97,8 @@ function People() {
 export default People;
 
 const PeopleWrapper = styled.div`
-    max-width: 1440px;
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -66,6 +106,7 @@ const PeopleWrapper = styled.div`
 `
 
 const Container = styled.div`
+    z-index: 1;
     width: 100%;
     max-width: 971px;
     display: flex;
@@ -120,5 +161,71 @@ const LionCardGrid = styled.div`
 
     @media (max-width: 799px) {
         grid-template-columns: 1fr;
+    }
+`
+
+const Design1 = styled.div`
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 230px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        left: 45px;
+        top: 0;
+
+        img {
+            width: 60px;
+        }
+    }
+`
+
+const Design2 = styled.div`
+    position: absolute;
+    top: 323px;
+    right: -40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 224px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        right: -12px;
+        top: 215px;
+
+        img {
+            width: 60px;
+        }
+    }
+`
+
+const Design3 = styled.div`
+    position: absolute;
+    top: 1014px;
+    left: -40px;
+    
+    img {
+        aspect-ratio: 230 / 145;
+        width: 192px;
+        height: auto;
+        object-fit: contain;
+    };
+
+    @media (max-width: 799px) {
+        left: -12px;
+        top: 485px;
+
+        img {
+            width: 60px;
+        }
     }
 `
