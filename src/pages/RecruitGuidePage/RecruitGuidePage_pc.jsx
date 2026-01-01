@@ -1,5 +1,3 @@
-import TopBar from "../../components/navigation/topbar";
-import BottomBar from "../../components/navigation/bottombar"
 import RecruitGuideHeroPc from "./RecruitGuideHero_pc";
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import {
@@ -11,9 +9,6 @@ import styled from "styled-components";
 
 const RecruitGuidePagePc = () => {
     return (
-        <>
-        <TopBar />
-
         <PageWrapper>
             {/* Hero */}
             <RecruitGuideHeroPc />
@@ -237,9 +232,6 @@ const RecruitGuidePagePc = () => {
             </FAQSection>
         </PageWrapper>
 
-        {/* 공통 푸터 컴포넌트 */}
-        <BottomBar />
-        </>
     );
 };
 

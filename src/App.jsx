@@ -1,7 +1,10 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
-import Layout from "../src/layouts/layout"; //현재 일반 레이아웃 적용(admin<->일반 구분 로직 추가 필요)
+import Layout from "./layouts/layout.jsx";
 import Home from "./pages/hompage/Home";
+import Project from './pages/project/Project.jsx';
+import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
+import People from './pages/people/People.jsx';
+import RecruitGuidePage from './pages/RecruitGuidePage/RecruitGuidePage';
 
 function App() {
   return (
@@ -11,9 +14,10 @@ function App() {
         <Route index element={<Home />} />
 
         {/* Public pages */}
-        <Route path="project" element={<div>PROJECT</div>} />
-        <Route path="people" element={<div>PEOPLE</div>} />
-        <Route path="recruit" element={<div>RECRUIT</div>} />
+        <Route path="project" element={<Project />} />
+        <Route path="project/detail" element={<ProjectDetail />} />
+        <Route path="people" element={<People />} 
+        <Route path="recruit" element={<RecruitGuidePage />} />
 
         {/* Sidebar (Admin) pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
