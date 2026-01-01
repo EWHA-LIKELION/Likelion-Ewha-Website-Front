@@ -97,7 +97,7 @@ const InnerContainer = styled.div`
   align-items: ${({ $column }) => ($column ? "center" : "flex-start")};
   gap: ${({ $column }) => ($column ? "0" : "2.5rem")};
 
-  @media (max-width: 768px) {
+  @media (max-width: 799px) {
     flex-direction: column; /* 모바일은 무조건 세로 정렬 */
     text-align: center;
     align-items: center;
@@ -143,14 +143,14 @@ const OrangeArea = styled.div`
     }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 799px) {
     .desc-box {
       width: 100%;
       flex: 1;
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 799px) {
     padding: 60px 0;
     .title-box {
       margin-bottom: 20px;
@@ -194,7 +194,7 @@ const GreenArea = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 799px) {
     padding: 60px 0;
   }
 `;
@@ -213,7 +213,7 @@ const StatsGrid = styled.div`
   gap: 20px;
   width: 100%;
 
-  @media (max-width: 768px) {
+  @media (max-width: 799px) {
     /* 2. 모바일: 무조건 2개씩 2줄 (2x2) 유지 */
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -255,18 +255,17 @@ const StatItem = styled.div`
     line-height: 1.875rem; /* PC */
   }
 
-  @media (max-width: 500px) {
-    /* 모바일에서는 패딩을 줄여주는 게 좋습니다 (선택사항) */
+  @media (max-width: 799px) {
     padding: 1.5rem 0;
 
     h3 {
-      font-size: 1.5625rem; /* 주석값 적용 */
-      line-height: 2.25rem; /* 주석값 적용 */
+      font-size: 1.5625rem;
+      line-height: 2.25rem;
     }
 
     p {
-      font-size: 0.875rem; /* 주석값 적용 */
-      line-height: 1.37569rem; /* 주석값 적용 */
+      font-size: 0.875rem;
+      line-height: 1.37569rem;
     }
   }
 `;

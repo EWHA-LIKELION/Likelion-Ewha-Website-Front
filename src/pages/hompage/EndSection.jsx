@@ -251,7 +251,7 @@ const GreenArea = styled.div`
 
   & > div {
     gap: 4rem;
-    @media (max-width: 900px) {
+    @media (max-width: 799px) {
       /* 모바일에서 세로 정렬하되 순서는 order로 제어 */
       flex-direction: column;
       gap: 1.5rem;
@@ -262,7 +262,7 @@ const GreenArea = styled.div`
   /* 1. 캐러셀 */
   .carousel-box {
     flex-shrink: 0;
-    @media (max-width: 900px) {
+    @media (max-width: 799px) {
       order: 2; /* 텍스트(1) 다음 */
       margin-bottom: 0.5rem;
     }
@@ -274,7 +274,7 @@ const GreenArea = styled.div`
     flex-direction: column;
     align-items: flex-start;
 
-    @media (max-width: 900px) {
+    @media (max-width: 799px) {
       order: 1; /* 제일 위로 */
       align-items: center;
     }
@@ -292,7 +292,7 @@ const GreenArea = styled.div`
       font-weight: 700;
       line-height: 2.25rem;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 799px) {
       .title {
         font-size: 2.5rem;
       }
@@ -325,14 +325,14 @@ const MoreButton = styled.button`
 
 /* PC용 버튼 (모바일 숨김) */
 const PcMoreButton = styled(MoreButton)`
-  @media (max-width: 900px) {
+  @media (max-width: 799px) {
     display: none;
   }
 `;
 
 const MobileMoreButtonWrapper = styled.div`
   display: none;
-  @media (max-width: 900px) {
+  @media (max-width: 799px) {
     display: block;
     order: 3; /* 캐러셀(2) 다음 */
     margin-top: 0;
