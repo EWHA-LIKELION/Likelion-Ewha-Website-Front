@@ -141,7 +141,7 @@ export function Modal({
       closeOnEsc={closeOnEsc}
     >
       <Wrap $align={align} $type={type} $isImageOnly={isImageOnly}>
-        {showClose && (
+        {showClose && !isImageOnly && (
           <CloseBtn onClick={onClose} aria-label="닫기" type="button">
             <img src={closeIcon} alt="닫기" />
           </CloseBtn>
@@ -169,7 +169,18 @@ export function Modal({
           <MediaWrap $isImageOnly={isImageOnly} $width={image.width}>
             {showClose && isImageOnly && (
               <CloseOnImage onClick={onClose} aria-label="닫기" type="button">
-                ×
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  fill="none"
+                >
+                  <path
+                    d="M8.53366 25.3307L6.66699 23.4641L14.1337 15.9974L6.66699 8.53073L8.53366 6.66406L16.0003 14.1307L23.467 6.66406L25.3337 8.53073L17.867 15.9974L25.3337 23.4641L23.467 25.3307L16.0003 17.8641L8.53366 25.3307Z"
+                    fill="white"
+                  />
+                </svg>
               </CloseOnImage>
             )}
 
@@ -296,7 +307,6 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
   z-index: 9999;
 `;
 
@@ -310,7 +320,10 @@ const Dialog = styled.div`
     if ($size === "media") return "auto";
     return "29.6875rem"; //기본  ,
   }};
-
+  @media (max-width: 799px) {
+    width: calc(100% - 40px); /* 모바일 좌우 여백 확보 */
+    max-width: 25rem; /* 너무 커지는 것 방지 */
+  }
   /* 기본(일반 모달) */
   background: var(--common-100);
   border-radius: 1rem;
@@ -336,6 +349,11 @@ const CloseBtn = styled.button`
   border: none;
   background: transparent;
   cursor: pointer;
+
+  @media (max-width: 799px) {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
 `;
 
 const Wrap = styled.div`
@@ -344,6 +362,12 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: ${({ $align }) => ($align === "left" ? "flex-start" : "center")};
+
+  /* 모바일 패딩 조정 */
+  @media (max-width: 799px) {
+    padding: ${({ $type, $isImageOnly }) =>
+      $type === "image" && $isImageOnly ? "0" : "2rem 1.5rem"};
+  }
 `;
 
 const Header = styled.div`
@@ -357,12 +381,23 @@ const Header = styled.div`
 const Title = styled.h2`
   margin: 0;
   color: var(--neutral-20);
+
+  word-break: keep-all;
+  word-wrap: break-word;
+
+  padding-right: 2rem;
+
+  @media (max-width: 799px) {
+    font-size: 1.25rem;
+    padding-right: 1.5rem;
+  }
 `;
 
 const Desc = styled.p`
   margin: 0;
   color: var(--neutral-50);
-  white-space: pre-line;
+  word-break: keep-all;
+  line-height: 1.5;
 `;
 
 const Body = styled.div`
@@ -504,35 +539,52 @@ const Note = styled.div`
 
 const MediaWrap = styled.div`
   position: relative;
-  /* width 값이 들어오면 그걸 쓰고, 없으면 기본 피그마상 값으로 설정 */
+  aspect-ratio: 465 / 332;
+
   width: ${({ $width }) => $width || "58.125rem"};
-  max-width: 80vw;
+  max-width: 90vw;
+  max-height: 85vh;
+
+  border-radius: var(--percentage-20, 1.25rem);
+  overflow: visible;
+  background: var(--Neutral-95, #dcdcdc);
+
+  @media (max-width: 768px) {
+    width: calc(100vw - 2rem);
+    max-width: 100%;
+  }
 `;
 
 const MediaImg = styled.img`
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+
+  object-fit: cover;
   display: block;
-  border-radius: 12px; /* 피그마 이미지 라운드 */
-  object-fit: ${({ $fit }) => $fit};
-  background: var(--neutral-99);
+  border-radius: var(--percentage-20, 1.25rem);
 `;
 
 const CloseOnImage = styled.button`
-  position: absolute;
-
-  top: 0;
-  left: calc(100% + 0.5rem);
-
   width: 2rem;
   height: 2rem;
   border: none;
   background: transparent;
   cursor: pointer;
+  z-index: 100;
 
-  font-size: 28px;
-  line-height: 1;
-  color: #fff; /* 오버레이 위라 흰색이 잘 보임 */
+  position: absolute;
+  top: 0;
+
+  right: calc(-2rem - 0.5rem);
+
+  @media (max-width: 768px) {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    right: auto;
+  }
 `;
 
 /* Actions */
@@ -544,7 +596,6 @@ const Actions = styled.div`
   gap: 0.5rem;
   justify-content: center; /* PC 기본 유지 */
 
-  /* ✅ 여기부터 '좁을 때만' */
   @media (max-width: 560px) {
     justify-content: stretch;
   }
