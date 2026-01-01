@@ -33,6 +33,5 @@ const Shell = styled.div`
 const MainArea = styled.main`
   flex: 1;
   background: #fff;
-  padding: 20px;
   width: 100%;
 `;
