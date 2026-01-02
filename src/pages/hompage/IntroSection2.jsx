@@ -108,7 +108,7 @@ const InnerContainer = styled.div`
 /* --- 주황색 영역 --- */
 const OrangeArea = styled.div`
   background: #ffce8a;
-  padding: 80px 0;
+  padding: 3.75rem 5rem;
 
   .title-box {
     flex: 0 0 auto;
@@ -149,6 +149,7 @@ const OrangeArea = styled.div`
     }
   }
   @media (max-width: 799px) {
+    padding: 2rem 1rem;
     .title-box {
       .title {
         font-size: 1.875rem;
@@ -174,7 +175,7 @@ const OrangeArea = styled.div`
 /* --- 연두색 영역 --- */
 const GreenArea = styled.div`
   background: #98fba4;
-  padding: 80px 0 100px;
+  padding: 3.75rem 5rem;
   text-align: center;
 
   .center-title {
@@ -208,6 +209,7 @@ const GreenArea = styled.div`
   }
 
   @media (max-width: 799px) {
+    padding: 2rem 1rem;
     .center-title {
       font-size: 1.875rem;
       line-height: 2.5rem;
@@ -228,7 +230,6 @@ const FlowerIcon = styled.img`
   height: 2.14988rem;
   aspect-ratio: 32/34.4;
   fill: var(--Neutral-20, #2a2a2a);
-  margin-bottom: 10px;
   @media (max-width: 799px) {
     width: 1.25rem;
     height: 1.34369rem;

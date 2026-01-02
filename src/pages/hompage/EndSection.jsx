@@ -249,8 +249,12 @@ const IconBox = styled.div`
 /* --- [1] Green Area --- */
 const GreenArea = styled.div`
   background: #98fba4;
-  padding: 80px 0;
+  padding: 3.75rem 5rem;
   overflow: hidden;
+
+  @media (max-width: 799px) {
+    padding: 2rem 1rem;
+  }
 
   & > div {
     gap: 4rem;
@@ -285,7 +289,6 @@ const GreenArea = styled.div`
       font-family: Bayon;
       font-size: 3rem;
       line-height: 2.875rem;
-      margin-bottom: 0.5rem;
     }
     .subtitle {
       font-family: "Cafe24 PRO Slim";
@@ -351,7 +354,7 @@ const MobileMoreButtonWrapper = styled.div`
 /* --- [2] Orange Area--- */
 const OrangeArea = styled.div`
   background: #ffce8a;
-  padding-top: 80px;
+  padding-top: 5rem;
   padding-bottom: 11rem;
   display: flex;
   flex-direction: column;
@@ -381,7 +384,7 @@ const OrangeArea = styled.div`
   }
 
   @media (max-width: 799px) {
-    padding-top: 60px;
+    padding-top: 2rem;
     padding-bottom: 6rem;
     .news-header {
       padding-left: 0;
