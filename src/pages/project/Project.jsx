@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import SegmentBar from '/src/components/SegmentBar.jsx';
 import DropDown1 from '/src/components/dropdown/Dropdown1';
 import ProjectCard1 from '/src/components/card/ProjectCard1';
+import { projects } from "@/data";
 
 const ITEMS_PER_PAGE = 6; //페이지 당 카드 수
 const PAGE_BUTTON_LIMIT = 4; //페이지 네이션 4개씩
@@ -11,10 +12,19 @@ const PAGE_BUTTON_LIMIT = 4; //페이지 네이션 4개씩
 function Project() {
     const navigate = useNavigate();
 
-    const [category, setCategory] = useState('전체'); //project segmentbar
-    const [currentPage, setCurrentPage] = useState(1);
+    const CATEGORY_MAP = {
+        '전체': null,
+        '해커톤': ['중앙아이디어톤', '중앙해커톤', '신촌SW창업경진대회', '여기톤'],
+        '졸업 프로젝트': ['졸업프로젝트'],
+        '대동제 사이트': ['대동제'],
+    };
 
+    const [category, setCategory] = useState('전체'); //project segmentbar
+    const [generation, setGeneration] = useState('전체');
+    const [currentPage, setCurrentPage] = useState(1);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 800);
+
+    const projectList = projects.projects;
 
     useEffect(() => {
         const handleResize = () => {
@@ -25,17 +35,19 @@ function Project() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    /* 예시 데이터 */
-    const projects = Array.from({ length: 20 }, (_, i) => ({
-        id: i + 1,
-        title: `프로젝트 ${i + 1}`,
-    }));
+    /* 데이터 필터링 */
+    const filteredProjects = projectList.filter(project => {
+        const categoryMatch =
+            category === '전체' || (CATEGORY_MAP[category]?.includes(project.category));
+        const generationMatch =
+            generation === '전체' || project.generation === generation;
+        return categoryMatch && generationMatch;
+    });
 
-    const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentProjects = projects.slice(
-        startIndex,
-        startIndex + ITEMS_PER_PAGE
+    const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+    const currentProjects = filteredProjects.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
     );
 
     /* 페이지네이션 */
@@ -47,11 +59,6 @@ function Project() {
     const handlePageChange = (page) => {
         setCurrentPage(page);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    /*프로젝트 클릭시 상세 페이지로 이동*/
-    const handleDetailPage = () => {
-        navigate('/ProjectDetail');
     };
 
     return (
@@ -69,38 +76,48 @@ function Project() {
                     <SegmentBar
                         items={['전체', '해커톤', '졸업 프로젝트', '대동제 사이트']}
                         styleType={1}
-                        onSelect={(index, item) => setCategory(item)}
+                        onSelect={(i, item) => {
+                            setCategory(item);
+                            setCurrentPage(1);
+                        }}
                     />
                 ) : (
                     <DropDown1
                         options={['전체', '해커톤', '졸업 프로젝트', '대동제 사이트']}
                         defaultValue={category}
-                        onSelect={(value) => setCategory(value)}
+                        onSelect={(value) => {
+                            setCategory(value);
+                            setCurrentPage(1);
+                        }}
                     />
                 )}
                 
                 <DropDown1
                     options={['전체', '13기', '12기', '11기', '10기']}
                     defaultValue={'전체'}
-                    onSelect={(value) => console.log('선택:', value)}
+                    onSelect={(value) => {
+                        setGeneration(value);
+                        setCurrentPage(1);
+                    }}
                 />
             </ListContainer>
 
             {/*기수 선택별 프로젝트 수*/}
-            <Count className='h5-regular'>00개</Count>
+            <Count className='h5-regular'>{filteredProjects.length}개</Count>
 
             {/*프로젝트*/}
             <ProjectGrid>
                 {currentProjects.map((project) => (
                     <div
                         key={project.id}
-                        onClick={() => navigate('/project/detail')}
+                        onClick={() => navigate(`/project/detail/${project.id}`)}
                         style={{ cursor: 'pointer' }}
                     >
                         <ProjectCard1
-                            project="AI 추천 서비스"
-                            description="사용자 상태 기반 맞춤 추천 프로젝트"
-                            tags={['AI', 'React', 'UX']}
+                            project={project.title}
+                            description={project.description}
+                            tags={[project.generation, project.category]}
+                            imageSrc={project.thumbnail || '/images/default1.png'}
                             styleType={1}
                         />
                     </div>
@@ -111,7 +128,7 @@ function Project() {
             <Pagination>
                 <PageBtn
                     disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((p) => p - 1)}
+                    onClick={() => handlePageChange(currentPage - 1)}
                 >
                     <img src='../../icons/leftPagination.svg' />
                 </PageBtn>
@@ -132,7 +149,7 @@ function Project() {
 
                 <PageBtn
                     disabled={currentPage === totalPages}
-                    onClick={() => setCurrentPage((p) => p + 1)}
+                    onClick={() => handlePageChange(currentPage + 1)}
                 >
                     <img src='../../icons/rightPagination.svg' />
                 </PageBtn>

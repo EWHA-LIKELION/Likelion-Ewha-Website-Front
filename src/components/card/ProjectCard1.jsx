@@ -70,7 +70,6 @@ const CardImage = styled.img`
 
   @media (max-width: 799px) {
     height: 10rem;
-  }10rem;
   }
 `;
 
