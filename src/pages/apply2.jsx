@@ -434,7 +434,7 @@ export default function Apply2() {
           showClose={false}
           type="confirm"
           align="center"
-          icon={{ src: "/icons/ellipse5.svg", alt: "" }}
+          icon={{ src: "/icons/ellipse7.svg", alt: "" }}
           title="제출 완료하시겠습니까?"
           description={"지금 제출하시면 더이상 수정할 수 없습니다."}
           actions={[
@@ -452,7 +452,7 @@ export default function Apply2() {
           showClose={false}
           type="result"
           align="center"
-          icon={{ src: "/icons/ellipse5.svg", alt: "" }}
+          icon={{ src: "/icons/ellipse7.svg", alt: "" }}
           title="제출이 완료되었습니다"
           description={
             "이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!\n아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다."
@@ -479,7 +479,7 @@ export default function Apply2() {
         <MoDialogInner $variant="confirm">
           <MoTop>
             <MoIconRow>
-              <MoIcon src="/icons/ellipse5.svg" alt="" />
+              <MoIcon src="/icons/ellipse7.svg" alt="" />
             </MoIconRow>
 
             <MoTextBlock>
@@ -503,7 +503,7 @@ export default function Apply2() {
         <MoDialogInner $variant="result">
           <MoTop>
             <MoIconRow>
-              <MoIcon src="/icons/ellipse5.svg" alt="" />
+              <MoIcon src="/icons/ellipse7.svg" alt="" />
             </MoIconRow>
 
             <MoTextBlock>
