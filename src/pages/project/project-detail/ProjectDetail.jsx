@@ -1,63 +1,87 @@
 import styled from 'styled-components';
 import ProjectCard1 from '/src/components/card/ProjectCard1';
+import { projects } from '@/data';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function ProjectDetail() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const projectList = projects.projects;
+
+    const currentIndex = projectList.findIndex(p => p.id === id);
+    if (currentIndex === -1) return <div>프로젝트를 찾을 수 없습니다.</div>;
+
+    const project = projectList[currentIndex];
+
+    const TOTAL_DISPLAY = 3;
+
+    // 이전/다음 균형 계산
+    let prevCount = Math.floor(TOTAL_DISPLAY / 2);
+    let nextCount = TOTAL_DISPLAY - prevCount;
+
+    // 범위 조정: 시작 또는 끝에 가까우면
+    if (currentIndex < prevCount) {
+        nextCount += prevCount - currentIndex;
+        prevCount = currentIndex;
+    }
+    if (currentIndex + nextCount >= projectList.length) {
+        const overflow = currentIndex + nextCount - (projectList.length - 1);
+        prevCount += overflow;
+        nextCount -= overflow;
+    }
+
+    const prevProjects = projectList.slice(currentIndex - prevCount, currentIndex);
+    const nextProjects = projectList.slice(currentIndex + 1, currentIndex + 1 + nextCount);
+    const moreProjects = [...prevProjects, ...nextProjects];
+
     return (
         <DetailWrapper>
             <Thumbnail>
-                <img src="../../images/default1.png" />
+                <img src={project.thumbnail || '/images/default1.png'} />
             </Thumbnail>
 
             <Container>
                 <Project>
                     <ProjectLabel>
-                        <p className='h3-bold' style={{ color: 'var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A))' }}>프로젝트명</p>
-                        <p className='h5-regular' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>00기 중앙해커톤</p>
+                        <p className='h3-bold' style={{ color: 'var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A))' }}>{project.title}</p>
+                        <p className='h5-regular' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>{project.generation} {project.category}</p>
                     </ProjectLabel>
 
-                    <ProjectContent className="h5-regular" style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. 프로젝트 설명 영역입니다. </ProjectContent>
+                    <ProjectContent className="h5-regular" style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>{project.description}</ProjectContent>
 
                     <ReferContent>
                         <Refer>
                             <p className="h5-bold" style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>URL</p>
-                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>urlurlurlurlurlurlurlurlurlurlurl</p>
+                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>{project.urls.service}</p>
                         </Refer>
 
                         <Refer>
                             <p className="h5-bold" style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>GITHUB</p>
-                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>githubgithubgithubgithubgithub</p>
+                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>{project.urls.github}</p>
                         </Refer>
                     </ReferContent>
 
                     <ProjectImg>
-                        <img src="../../images/default1.png" />
+                        <img src={project.image} />
                     </ProjectImg>
 
                     <Member>
                         <p className="h4-bold" style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>프로젝트 팀원</p>
                         <PartContainer>
-                            <Part>
-                                <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>PM/DESIGN</p>
-                                <PartMember>이름이</PartMember>
-                                <PartMember>이름이</PartMember>
-                            </Part>
-
-                            <Part>
-                                <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>FRONTEND</p>
-                                <PartMember>이름이</PartMember>
-                                <PartMember>이름이</PartMember>
-                            </Part>
-
-                            <Part>
-                                <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>BACKEND</p>
-                                <PartMember>이름이</PartMember>
-                                <PartMember>이름이</PartMember>
-                            </Part>
+                            {Object.entries(project.team).map(([part, members]) => (
+                                <Part key={part}>
+                                    <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>{part.toUpperCase()}</p>
+                                    {members.map(member => (
+                                        <PartMember key={member}>{member}</PartMember>
+                                    ))}
+                                </Part>
+                            ))}
                         </PartContainer>
                     </Member>
 
+                    {/*더 둘러보기*/}
                     <MoreContent>
-                        <MoreLabel>
+                        <MoreLabel onClick={() => navigate('/project')}>
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center' }}>
                                 목록으로
@@ -67,24 +91,21 @@ function ProjectDetail() {
 
                         {/*프로젝트*/}
                         <ProjectGrid>
-                            <ProjectCard1
-                                project="AI 추천 서비스"
-                                description="사용자 상태 기반 맞춤 추천 프로젝트"
-                                tags={['AI', 'React', 'UX']}
-                                styleType={1}
-                            />
-                            <ProjectCard1
-                                project="AI 추천 서비스"
-                                description="사용자 상태 기반 맞춤 추천 프로젝트"
-                                tags={['AI', 'React', 'UX']}
-                                styleType={1}
-                            />
-                            <ProjectCard1
-                                project="AI 추천 서비스"
-                                description="사용자 상태 기반 맞춤 추천 프로젝트"
-                                tags={['AI', 'React', 'UX']}
-                                styleType={1}
-                            />
+                            {moreProjects.map((p) => (
+                                <div
+                                    key={p.id}
+                                    style={{ cursor: 'pointer' }}
+                                    onClick={() => navigate(`/project/detail/${p.id}`)}
+                                >
+                                    <ProjectCard1
+                                        project={p.title}
+                                        description={p.description}
+                                        tags={[p.generation, p.category]}
+                                        imageSrc={p.thumbnail || '/images/default1.png'}
+                                        styleType={1}
+                                    />
+                                </div>
+                        ))}
                         </ProjectGrid>
                     </MoreContent>
                 </Project>
@@ -106,7 +127,6 @@ const DetailWrapper = styled.div`
 
 const Thumbnail = styled.div`
     width: 100%;
-    aspect-ratio: 1440 / 400;
     overflow: hidden;
 
     img {

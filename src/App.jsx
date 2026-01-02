@@ -15,7 +15,7 @@ function App() {
 
         {/* Public pages */}
         <Route path="project" element={<Project />} />
-        <Route path="project/detail" element={<ProjectDetail />} />
+        <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
         <Route path="recruit" element={<RecruitGuidePage />} />
 
