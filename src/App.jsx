@@ -1,7 +1,10 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./layouts/layout.jsx";
-import Home from "./pages/Home.jsx";
+import Home from './pages/hompage/Home.jsx';
 import Apply2 from "./pages/apply2.jsx"
+import Project from './pages/project/Project.jsx';
+import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
+import People from './pages/people/People.jsx';
 
 function App() {
   return (
