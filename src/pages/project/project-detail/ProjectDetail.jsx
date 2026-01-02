@@ -107,7 +107,7 @@ function ProjectDetail() {
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center' }}>
                                 목록으로
-                                <img className="rightarrow" src='/icons/rightPagination.svg' />
+                                <img className="rightarrow" src='/icons/arrowRightProject.svg' />
                             </p>
                         </MoreLabel>
 
@@ -283,6 +283,7 @@ const MoreLabel = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
 
     p {
         display: inline-flex;
@@ -292,19 +293,22 @@ const MoreLabel = styled.div`
     }
 
     .rightarrow {
-        width: 28px;
-        height: 28px;
-        object-fit: contain;
+        width: 8px;
+        height: 16px;
+        display: block;
+        justify-content: center;
+        align-items: center;
     }
 
     @media (max-width: 799px) {
         font-size: 16px;
         font-weight: 500;
         line-height: 24px;
+        gap: 8px;
 
         .rightarrow {
-            width: 24px;
-            height: 24px;
+            width: 7px;
+            height: 14px;
             object-fit: contain;
         }
     }
