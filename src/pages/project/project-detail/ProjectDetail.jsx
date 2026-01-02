@@ -52,12 +52,34 @@ function ProjectDetail() {
                     <ReferContent>
                         <Refer>
                             <p className="h5-bold" style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>URL</p>
-                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>{project.urls.service}</p>
+                            <a
+                                href={project.urls.service}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    textDecoration: 'none',
+                                    color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                <p className="body-regular">{project.urls.service}</p>
+                            </a>
                         </Refer>
 
                         <Refer>
                             <p className="h5-bold" style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>GITHUB</p>
-                            <p className="body-regular" style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))' }}>{project.urls.github}</p>
+                            <a
+                                href={project.urls.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    textDecoration: 'none',
+                                    color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                <p className="body-regular">{project.urls.github}</p>
+                            </a>
                         </Refer>
                     </ReferContent>
 
