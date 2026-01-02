@@ -275,6 +275,7 @@ const MoreContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-top: 60px;
 `
 
 const MoreLabel = styled.div`
