@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./layouts/layout.jsx";
-import Home from './pages/hompage/Home.jsx';
-import Apply2 from "./pages/apply2.jsx"
+import Home from "./pages/home/Home";
 import Project from './pages/project/Project.jsx';
 import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
 import People from './pages/people/People.jsx';
-import RecruitGuidePage from './pages/RecruitGuidePage/RecruitGuidePage_mo.jsx';
+import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
+import Apply2 from "./pages/apply2.jsx"
 
 function App() {
   return (
@@ -20,13 +20,13 @@ function App() {
         <Route path="people" element={<People />} />
         <Route path="recruit" element={<RecruitGuidePage />} />
 
+        {/* apply pages */}
+        <Route path="apply/test" element={<Apply2/>} />
+
         {/* Sidebar (Admin) pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
         <Route path="interview" element={<div>INTERVIEW</div>} />
         <Route path="application" element={<div>APPLICATION</div>} />
-
-        {/* apply pages */}
-        <Route path="apply/test" element={<Apply2/>} />
       </Route>
     </Routes>
   );
