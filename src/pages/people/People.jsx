@@ -166,20 +166,25 @@ const LionCardGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
-    /* 380px 미만: 1줄 */
-    @media (max-width: 379px) {
+    /*  1줄 */
+    @media (min-width: 320px) and (max-width: 349px) {
         grid-template-columns: 1fr;
         gap: 16px;
     }
 
-    /* 380px ~ 649px: 2줄 */
-    @media (min-width: 380px) and (max-width: 970px) {
+    /*  2줄 */
+    @media (min-width: 350px) and (max-width: 519px) {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
     }
 
-    /* 971px 이상: 3줄 */
-    @media (min-width: 971px) {
+    @media (min-width: 520px) and (max-width: 799px) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    /* 3줄 */
+    @media (min-width: 800px) {
         grid-template-columns: repeat(3, 1fr);
     }
 `
