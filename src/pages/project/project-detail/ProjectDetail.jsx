@@ -220,6 +220,7 @@ const ProjectContent = styled.div`
 const ReferContent = styled.div`
     display: flex;
     gap: 40px;
+    flex-wrap: wrap;
 `
 
 const Refer = styled.div`
@@ -250,6 +251,7 @@ const PartContainer = styled.div`
     display: flex;
     flex-direction: row;
     gap: 80px;
+    flex-wrap: wrap;
 `
 const Part = styled.div`
     width: auto;
