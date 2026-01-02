@@ -13,17 +13,20 @@ function People() {
     const [selectedGeneration, setSelectedGeneration] = useState('13기');
     const [selectedPart, setSelectedPart] = useState('전체');
 
-    // 기수 필터
-    const filteredByGeneration = members.members.filter(m => m.generation === selectedGeneration);
+    // 기수 필터 (공통)
+    const filteredByGeneration = members.members.filter(
+        m => m.generation === selectedGeneration
+    );
 
-    // 파트 필터
-    const filteredMembers = selectedPart === '전체'
-        ? filteredByGeneration
-        : filteredByGeneration.filter(m => m.part === selectedPart);
+    // 운영진
+    const managers = filteredByGeneration.filter(
+        m => m.role === '운영진'
+    );
 
-    // 운영진 / 아기사자 분리
-    const managers = filteredMembers.filter(m => m.role === '운영진');
-    const lions = filteredMembers.filter(m => m.role === '아기사자');
+    // 파트 필터 (아기사자만)
+    const lions = filteredByGeneration
+    .filter(m => m.role === '아기사자')
+    .filter(m => selectedPart === '전체' || m.part === selectedPart);
 
     return (
         <PeopleWrapper>
