@@ -13,7 +13,6 @@ const SUBMIT_BOTTOM_GAP = 160;
 
 const isFilled = (v) => v.trim().length > 0;
 
-//코드 생성(임시)
 const makeSubmitCode = () => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   let out = "";
@@ -35,10 +34,8 @@ function useIsMobile(maxWidth = 799) {
     if (mq.addEventListener) mq.addEventListener("change", onChange);
     else mq.addListener(onChange);
 
-    setIsMobile(mq.matches);
-
     return () => {
-      if (mq.removeEventListener) mq.removeEventListener("keydown", onChange);
+      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
       else mq.removeListener(onChange);
     };
   }, [maxWidth]);
@@ -139,15 +136,15 @@ export default function Apply2() {
     bucketSetter((prev) => prev.filter((_, i) => i !== idx));
   };
 
-  const hasAnyFile = precourseFiles.length + portfolioFiles.length >= 1;
-
   const canSubmit =
     isFilled(q1) &&
     isFilled(q2) &&
     isFilled(q3) &&
+    isFilled(q4) &&
     !over1 &&
     !over2 &&
-    !over3;
+    !over3 &&
+    !over4;
 
   const onClickSubmit = () => {
     if (!canSubmit) return;
@@ -377,7 +374,6 @@ export default function Apply2() {
                       <HiddenFileInput ref={precourseRef} type="file" multiple onChange={onPickFiles(setPrecourseFiles)} />
                     </EtcTop>
 
-                    {/* pr 리뷰 수정 반영: 파일 업로드 전에는 리스트를 렌더링하지 않음 */}
                     {precourseFiles.length > 0 && (
                       <FileList>
                         {precourseFiles.map((f, idx) => (
@@ -405,15 +401,9 @@ export default function Apply2() {
                       <AddFileButton type="button" onClick={() => portfolioRef.current?.click()}>
                         파일 추가
                       </AddFileButton>
-                      <HiddenFileInput
-                        ref={portfolioRef}
-                        type="file"
-                        multiple
-                        onChange={onPickFiles(setPortfolioFiles)}
-                      />
+                      <HiddenFileInput ref={portfolioRef} type="file" multiple onChange={onPickFiles(setPortfolioFiles)} />
                     </EtcTop>
 
-                    {/* ✅ 수정: 파일 업로드 전에는 리스트를 렌더링하지 않음 */}
                     {portfolioFiles.length > 0 && (
                       <FileList>
                         {portfolioFiles.map((f, idx) => (
