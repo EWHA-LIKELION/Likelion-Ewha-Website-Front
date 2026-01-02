@@ -234,11 +234,15 @@ const InnerContainer = styled.div`
 `;
 
 const IconBox = styled.div`
-  margin-bottom: 0.5rem;
   img {
     width: 2rem;
     height: 2rem;
     object-fit: contain;
+
+    @media (max-width: 799px) {
+      width: 1.25rem;
+      height: 1.34369rem;
+    }
   }
 `;
 
@@ -251,7 +255,6 @@ const GreenArea = styled.div`
   & > div {
     gap: 4rem;
     @media (max-width: 799px) {
-      /* 모바일에서 세로 정렬하되 순서는 order로 제어 */
       flex-direction: column;
       gap: 1.5rem;
       text-align: center;
@@ -293,10 +296,11 @@ const GreenArea = styled.div`
     }
     @media (max-width: 799px) {
       .title {
-        font-size: 2.5rem;
+        font-size: 1.875rem;
+        line-height: 2.5rem;
       }
       .subtitle {
-        font-size: 1rem; /* 1.5rem -> 1rem 축소 */
+        font-size: 1rem;
         line-height: 1.5rem;
       }
       .subtitle br {
@@ -320,6 +324,12 @@ const MoreButton = styled.button`
   font-weight: 700;
   line-height: 1.75rem;
   cursor: pointer;
+  @media (max-width: 799px) {
+    padding: 0.625rem 1.75rem;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    margin-top: 0;
+  }
 `;
 
 /* PC용 버튼 (모바일 숨김) */
@@ -379,7 +389,8 @@ const OrangeArea = styled.div`
       text-align: center;
 
       .title {
-        font-size: 2.5rem; /* 3rem -> 2.5rem */
+        font-size: 1.875rem;
+        line-height: 2.5rem;
       }
       .subtitle {
         font-size: 1rem; /* 1.5rem -> 1rem */

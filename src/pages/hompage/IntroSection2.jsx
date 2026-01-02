@@ -13,7 +13,7 @@ const IntroSection2 = () => {
             <p className="subtitle">멋쟁이사자처럼 대학</p>
           </div>
 
-          <div className="desc-box">
+          <p className="desc-box">
             멋쟁이사자처럼 대학은 2025년 기준, 전국 53개 대학교에서 13년째
             운영되고 있는
             <b>국내 최대 규모의 연합 IT 동아리</b>입니다. 각 대학의 커리큘럼은
@@ -22,7 +22,7 @@ const IntroSection2 = () => {
             기초부터 체계적으로 배울 수 있습니다. 또한 매년 여름 열리는 중앙
             해커톤을 비롯해 다양한 대학 연합 행사에 참여하며, 협업과 네트워킹의
             기회를 얻고 자신의 아이디어를 직접 실현할 수 있습니다.
-          </div>
+          </p>
         </InnerContainer>
       </OrangeArea>
 
@@ -112,48 +112,61 @@ const OrangeArea = styled.div`
 
   .title-box {
     flex: 0 0 auto;
+
     .title {
       color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
       font-family: Bayon;
       font-size: 3rem;
       font-style: normal;
       font-weight: 400;
-      line-height: 3.61769rem; /* 120.59% */
+      line-height: 3.61769rem;
     }
+
     .subtitle {
       font-family: "Cafe24 PRO Slim";
       font-size: 1.5rem;
       font-style: normal;
       font-weight: 700;
-      line-height: 2.25rem; /* 150% */
+      line-height: 2.25rem;
     }
   }
 
   .desc-box {
+    margin: 0;
     width: 30.6875rem;
     flex: 0 0 auto;
     font-family: Pretendard;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 1.5rem; /* 150% */
+    line-height: 1.5rem;
     word-break: keep-all;
+    -webkit-text-size-adjust: none;
+    text-size-adjust: none;
+
     b {
       font-weight: 700;
     }
   }
-
   @media (max-width: 799px) {
+    .title-box {
+      .title {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+      }
+      .subtitle {
+        font-size: 1rem;
+        line-height: 1.5rem;
+      }
+    }
+
     .desc-box {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
       width: 100%;
       flex: 1;
-    }
-  }
-
-  @media (max-width: 799px) {
-    padding: 60px 0;
-    .title-box {
-      margin-bottom: 20px;
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
     }
   }
 `;
@@ -178,7 +191,7 @@ const GreenArea = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: 2.25rem; /* 150% */
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
   }
   .center-desc {
     max-width: 800px;
@@ -195,7 +208,18 @@ const GreenArea = styled.div`
   }
 
   @media (max-width: 799px) {
-    padding: 60px 0;
+    .center-title {
+      font-size: 1.875rem;
+      line-height: 2.5rem;
+    }
+    .center-subtitle {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+    .center-desc {
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+    }
   }
 `;
 
@@ -205,6 +229,10 @@ const FlowerIcon = styled.img`
   aspect-ratio: 32/34.4;
   fill: var(--Neutral-20, #2a2a2a);
   margin-bottom: 10px;
+  @media (max-width: 799px) {
+    width: 1.25rem;
+    height: 1.34369rem;
+  }
 `;
 
 const StatsGrid = styled.div`
