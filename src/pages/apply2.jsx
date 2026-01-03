@@ -111,6 +111,8 @@ export default function Apply2() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
+  const [submitted, setSubmitted] = useState(null);
+
   const over1 = q1.length > MAX_CHARS;
   const over2 = q2.length > MAX_CHARS;
   const over3 = q3.length > MAX_CHARS;
@@ -158,11 +160,59 @@ export default function Apply2() {
     setConfirmOpen(true);
   };
 
+  const handleCopyCode = async () => {
+    if (!submitCode) return;
+    try {
+      await navigator.clipboard?.writeText(submitCode);
+    } catch (e) {}
+  };
+
+  const buildSubmitted = (code) => {
+    return {
+      code,
+      essays: {
+        q1: q1.trim(),
+        q2: q2.trim(),
+        q3: q3.trim(),
+        q4: q4.trim(),
+        q5: q5.trim(),
+      },
+      files: {
+        precourse: precourseFiles.map((f) => ({ name: f.name })),
+        portfolio: portfolioFiles.map((f) => ({ name: f.name })),
+      },
+      meta: {
+        name: base.name ?? "",
+        phone_number: base.phone_number ?? "",
+        birthday: base.birthday ?? "",
+        department: base.department ?? "",
+        student_number: base.student_number ?? "",
+        grade: base.grade ?? "",
+        part: base.part ?? "",
+        interview_method: base.interview_method ?? "",
+        interview_available_times: base.interview_available_times ?? [],
+      },
+    };
+  };
+
   const onConfirmSubmit = async () => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
     setSubmitError("");
+
+    const baseURL = import.meta.env.VITE_API_BASE_URL;
+
+    if (!baseURL) {
+      const code = makeSubmitCode();
+      setSubmitCode(code);
+      const nextSubmitted = buildSubmitted(code);
+      setSubmitted(nextSubmitted);
+      setConfirmOpen(false);
+      setResultOpen(true);
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const formData = new FormData();
@@ -195,6 +245,9 @@ export default function Apply2() {
       const code = codeFromServer || makeSubmitCode();
 
       setSubmitCode(code);
+      const nextSubmitted = buildSubmitted(code);
+      setSubmitted(nextSubmitted);
+
       setConfirmOpen(false);
       setResultOpen(true);
     } catch (err) {
@@ -497,7 +550,12 @@ export default function Apply2() {
           description={"지금 제출하시면 더이상 수정할 수 없습니다."}
           actions={[
             { label: "취소", variant: "default", onClick: () => setConfirmOpen(false) },
-            { label: isSubmitting ? "제출 중..." : "확인", variant: "primary", closeOnClick: false, onClick: onConfirmSubmit },
+            {
+              label: isSubmitting ? "제출 중..." : "확인",
+              variant: "primary",
+              closeOnClick: false,
+              onClick: onConfirmSubmit,
+            },
           ]}
         />
       )}
@@ -515,7 +573,12 @@ export default function Apply2() {
           description={
             "이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!\n아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다."
           }
-          code={{ label: "", value: submitCode || "지원 코드 영역입니다.", copyable: true }}
+          code={{
+            label: "",
+            value: submitCode || "지원 코드 영역입니다.",
+            copyable: true,
+            onCopy: handleCopyCode,
+          }}
           note={
             <span style={{ display: "block", marginTop: 4, textDecoration: "none" }}>
               * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
@@ -526,7 +589,7 @@ export default function Apply2() {
               label: "지원서 열람하기",
               variant: "default",
               closeOnClick: false,
-              onClick: () => navigate("/apply/view", { state: { code: submitCode } }),
+              onClick: () => navigate("/recruit/apply/preview", { state: { submitted } }),
             },
             { label: "홈으로", variant: "primary", closeOnClick: false, onClick: () => navigate("/") },
           ]}
@@ -579,14 +642,7 @@ export default function Apply2() {
             <MoCodeWrap>
               <MoCodeBox>
                 <MoCodeText>{submitCode || "지원 코드 영역입니다."}</MoCodeText>
-                <MoCopyBtn
-                  type="button"
-                  aria-label="copy"
-                  onClick={() => {
-                    if (!submitCode) return;
-                    navigator.clipboard?.writeText(submitCode);
-                  }}
-                >
+                <MoCopyBtn type="button" aria-label="copy" onClick={handleCopyCode}>
                   <img src="/icons/copyInput.svg" alt="" />
                 </MoCopyBtn>
               </MoCodeBox>
@@ -600,7 +656,7 @@ export default function Apply2() {
               <MoBtn
                 type="button"
                 $variant="ghost"
-                onClick={() => navigate("/apply/view", { state: { code: submitCode } })}
+                onClick={() => navigate("/recruit/apply/preview", { state: { submitted } })}
               >
                 지원서 열람하기
               </MoBtn>

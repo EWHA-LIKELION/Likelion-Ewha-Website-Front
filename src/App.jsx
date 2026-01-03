@@ -5,6 +5,7 @@ import People from "../src/pages/people/People.jsx";
 import Project from "../src/pages/project/Project.jsx";
 import RecruitGuidePage from "../src/pages/RecruitGuidePage/RecruitGuidePage.jsx";
 import Apply2 from "./pages/apply2.jsx";
+import Apply2Review from "./pages/apply2_review.jsx";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
 
         {/* recruit */}
         <Route path="recruit/apply/form" element={<Apply2 />} />
+        <Route path="recruit/apply/preview" element={<Apply2Review />} />
 
         {/* admin (임시) */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
