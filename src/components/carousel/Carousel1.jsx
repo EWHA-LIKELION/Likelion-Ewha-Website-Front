@@ -68,6 +68,12 @@ const Container = styled.div`
     height: 20.68rem;
     margin: 20px auto;
   }
+
+  @media (max-width: 360px) {
+    width: 100%;
+    max-width: 19.97rem; /* 원하면 유지 */
+    height: 22rem;
+  }
 `;
 
 const NavButton = styled.button`

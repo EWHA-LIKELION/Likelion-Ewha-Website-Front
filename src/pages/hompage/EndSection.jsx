@@ -263,6 +263,9 @@ const GreenArea = styled.div`
   @media (max-width: 799px) {
     padding: 2rem 1rem;
   }
+  @media (max-width: 375px) {
+    padding: 2rem 0.5rem; /* 좌우 여백을 1rem -> 0.5rem으로 줄임 */
+  }
 
   & > div {
     gap: 4rem;
@@ -442,14 +445,12 @@ const SliderWrapper = styled.div`
   margin-top: -7.5rem;
   position: relative;
   z-index: 10;
+
   padding-left: max(20px, calc((100% - 1000px) / 2 + 20px));
-  overflow-x: visible;
-  & > div {
-    padding-left: 0 !important;
-  }
+
   @media (max-width: 799px) {
     margin-top: -3.75rem;
-    padding-left: 100px;
+    padding-left: clamp(16px, 20vw, 100px);
   }
 `;
 
