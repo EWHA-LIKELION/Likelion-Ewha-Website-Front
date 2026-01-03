@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { createPortal } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import Input from "../components/Input";
 import { Modal } from "../components/Modal.jsx";
+import { ApplicationsAPI } from "@/apis";
 
 const MAX_CHARS = 500;
 const MIN_TEXTAREA_HEIGHT = 266;
@@ -87,6 +88,8 @@ function MoModal({ open, onClose, children }) {
 
 export default function Apply2() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const base = location.state || {};
   const isMobile = useIsMobile(799);
 
   const [q1, setQ1] = useState("");
@@ -104,6 +107,9 @@ export default function Apply2() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [resultOpen, setResultOpen] = useState(false);
   const [submitCode, setSubmitCode] = useState("");
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const over1 = q1.length > MAX_CHARS;
   const over2 = q2.length > MAX_CHARS;
@@ -147,20 +153,67 @@ export default function Apply2() {
     !over4;
 
   const onClickSubmit = () => {
-    if (!canSubmit) return;
+    if (!canSubmit || isSubmitting) return;
+    setSubmitError("");
     setConfirmOpen(true);
   };
 
   const onConfirmSubmit = async () => {
-    const code = makeSubmitCode();
-    setSubmitCode(code);
-    setConfirmOpen(false);
-    setResultOpen(true);
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const formData = new FormData();
+
+      formData.append("name", base.name ?? "");
+      formData.append("phone_number", base.phone_number ?? "");
+      formData.append("birthday", base.birthday ?? "");
+      formData.append("department", base.department ?? "");
+      formData.append("student_number", base.student_number ?? "");
+      formData.append("grade", base.grade ?? "");
+      formData.append("part", base.part ?? "");
+      formData.append("interview_method", base.interview_method ?? "");
+
+      (base.interview_available_times ?? []).forEach((t) => {
+        formData.append("interview_available_times", t);
+      });
+
+      formData.append("personal_statement_1", q1.trim());
+      formData.append("personal_statement_2", q2.trim());
+      formData.append("personal_statement_3", q3.trim());
+      formData.append("personal_statement_4", q4.trim());
+      formData.append("personal_statement_5", q5.trim());
+
+      precourseFiles.forEach((file) => formData.append("completed_prerequisites", file));
+      portfolioFiles.forEach((file) => formData.append("portfolios", file));
+
+      const data = await ApplicationsAPI.createApplication(formData);
+
+      const codeFromServer = data?.application_code || data?.code || data?.applicationCode || "";
+      const code = codeFromServer || makeSubmitCode();
+
+      setSubmitCode(code);
+      setConfirmOpen(false);
+      setResultOpen(true);
+    } catch (err) {
+      const status = err?.response?.status;
+      if (status === 409) {
+        setSubmitError("이미 제출한 지원서가 있습니다. (409)");
+      } else if (status === 400) {
+        setSubmitError("입력값이 올바르지 않습니다. 필수 항목/글자수/파일을 확인해주세요. (400)");
+      } else {
+        setSubmitError("제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const SubmitBtn = (
-    <SubmitButton type="button" disabled={!canSubmit} onClick={onClickSubmit}>
-      제출하기
+    <SubmitButton type="button" disabled={!canSubmit || isSubmitting} onClick={onClickSubmit}>
+      {isSubmitting ? "제출 중..." : "제출하기"}
     </SubmitButton>
   );
 
@@ -422,7 +475,12 @@ export default function Apply2() {
             </Card>
           </Section>
 
-          <SubmitRow $bottomGap={SUBMIT_BOTTOM_GAP}>{SubmitBtn}</SubmitRow>
+          <SubmitRow $bottomGap={SUBMIT_BOTTOM_GAP}>
+            <SubmitStack>
+              {SubmitBtn}
+              {!!submitError && <SubmitError className="footnote-regular">{submitError}</SubmitError>}
+            </SubmitStack>
+          </SubmitRow>
         </Sections>
       </Frame>
 
@@ -439,7 +497,7 @@ export default function Apply2() {
           description={"지금 제출하시면 더이상 수정할 수 없습니다."}
           actions={[
             { label: "취소", variant: "default", onClick: () => setConfirmOpen(false) },
-            { label: "확인", variant: "primary", closeOnClick: false, onClick: onConfirmSubmit },
+            { label: isSubmitting ? "제출 중..." : "확인", variant: "primary", closeOnClick: false, onClick: onConfirmSubmit },
           ]}
         />
       )}
@@ -485,15 +543,16 @@ export default function Apply2() {
             <MoTextBlock>
               <MoTitle>제출 완료하시겠습니까?</MoTitle>
               <MoDesc>지금 제출하시면 더이상 수정할 수 없습니다.</MoDesc>
+              {!!submitError && <MoError>{submitError}</MoError>}
             </MoTextBlock>
           </MoTop>
 
           <MoActions>
-            <MoBtn type="button" $variant="ghost" onClick={() => setConfirmOpen(false)}>
+            <MoBtn type="button" $variant="ghost" onClick={() => setConfirmOpen(false)} disabled={isSubmitting}>
               취소
             </MoBtn>
-            <MoBtn type="button" $variant="primary" onClick={onConfirmSubmit}>
-              확인
+            <MoBtn type="button" $variant="primary" onClick={onConfirmSubmit} disabled={isSubmitting}>
+              {isSubmitting ? "제출 중..." : "확인"}
             </MoBtn>
           </MoActions>
         </MoDialogInner>
@@ -935,6 +994,20 @@ const SubmitRow = styled.div`
   margin-bottom: ${({ $bottomGap }) => $bottomGap}px;
 `;
 
+const SubmitStack = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+`;
+
+const SubmitError = styled.div`
+  color: var(--orange-60, #ff7b2e);
+  text-align: center;
+  white-space: pre-wrap;
+`;
+
 const SubmitButton = styled.button`
   width: 390px;
   height: 52px;
@@ -1053,6 +1126,19 @@ const MoDesc = styled.div`
   line-height: 22px;
 `;
 
+const MoError = styled.div`
+  width: 100%;
+  color: var(--orange-60, #ff7b2e);
+  text-align: center;
+
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  white-space: pre-wrap;
+`;
+
 const MoBottom = styled.div`
   display: flex;
   flex-direction: column;
@@ -1165,4 +1251,9 @@ const MoBtn = styled.button`
   line-height: 22px;
 
   white-space: nowrap;
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
 `;
