@@ -174,7 +174,7 @@ const Container = styled.div`
     gap: 40px;
 
     @media (max-width: 799px) {
-        padding: 24px 20px;
+        padding: 24px 16px;
     }
 `
 

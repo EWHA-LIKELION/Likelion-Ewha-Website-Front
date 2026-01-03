@@ -121,7 +121,7 @@ const PeopleWrapper = styled.div`
     padding: 80px 80px 160px 80px;
 
     @media (max-width: 799px) {
-        padding: 32px 12px 60px 12px;
+        padding: 32px 16px 60px 16px;
     }
 `
 
