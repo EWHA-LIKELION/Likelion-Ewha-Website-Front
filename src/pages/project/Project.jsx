@@ -252,7 +252,7 @@ const ProjectGrid = styled.div`
     gap: 20px;
 
     /*  1줄 */
-    @media (min-width: 320px) and (max-width: 349px) {
+    @media (max-width: 349px) {
         grid-template-columns: 1fr;
         gap: 16px;
     }
