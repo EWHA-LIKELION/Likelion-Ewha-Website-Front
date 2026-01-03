@@ -61,12 +61,14 @@ const IntroSection = () => {
           {/* 로고 영역 */}
           <LogoWrapper>
             <div className="big-title">
-              <span>LIKELI</span>
-              {/* 회전하는 클로버 아이콘 */}
-              <img src={Clover1Icon} alt="logo-icon" className="flower-o" />
-              <span>
-                N <span className="green-text">EWHA</span>
-              </span>
+              <div className="top-row">
+                <span>LIKELI</span>
+                <img src={Clover1Icon} alt="logo-icon" className="flower-o" />
+                <span>N</span>
+              </div>
+
+              {/* 아랫줄 EWHA */}
+              <span className="green-text">EWHA</span>
             </div>
           </LogoWrapper>
 
@@ -240,7 +242,6 @@ const SubText = styled.p`
     line-height: normal;
   }
 `;
-
 const LogoWrapper = styled.div`
   width: auto;
   max-width: 100%;
@@ -251,41 +252,52 @@ const LogoWrapper = styled.div`
     font-size: 9.704rem;
     color: #1a1a1a;
 
+    /* 기본(PC): 가로 정렬 */
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 0.2em; /* 윗줄 뭉치와 EWHA 사이 간격 */
 
-    flex-wrap: nowrap;
-    white-space: nowrap;
-    gap: 0;
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    /* 클로버 아이콘 스타일 */
     .flower-o {
       width: 6.54481rem;
       height: 7.03531rem;
       margin: 0 5px;
       object-fit: contain;
-
       animation: ${rotate} 10s linear infinite;
     }
 
     .green-text {
       color: #6ede65;
-      margin-left: 0.2em;
     }
   }
-
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     .big-title {
-      font-size: 13vw;
+      flex-direction: column;
+      gap: 0;
+
+      line-height: 1.1;
+
       .flower-o {
         width: 0.7em;
         height: 0.75em;
       }
     }
   }
-`;
 
+  @media (max-width: 799px) {
+    .big-title {
+      flex-direction: column;
+      font-size: 13vw;
+    }
+  }
+`;
 const PcButtonArea = styled.div`
   display: block;
   margin-top: 3rem;

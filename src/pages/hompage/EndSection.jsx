@@ -115,11 +115,15 @@ const EndSection = () => {
         <FooterContent>
           <LogoWrapper>
             <div className="big-title">
-              <span>GRW</span>
-              <img src={Clover1Icon} alt="flower" className="flower-o" />
-              <span>
-                L TO <span className="green-text">WORLD!</span>
-              </span>
+              {/* 1. 윗줄 그룹 (GRW + 꽃 + L TO) */}
+              <div className="top-row">
+                <span>GRW</span>
+                <img src={Clover1Icon} alt="flower" className="flower-o" />
+                <span>L TO</span>
+              </div>
+
+              {/* 2. 아랫줄 (WORLD!) */}
+              <span className="green-text">WORLD!</span>
             </div>
           </LogoWrapper>
 
@@ -513,7 +517,6 @@ const FooterContent = styled.div`
   text-align: center;
   width: 100%;
 `;
-
 const LogoWrapper = styled.div`
   width: auto;
   max-width: 100%;
@@ -525,25 +528,51 @@ const LogoWrapper = styled.div`
     color: #1a1a1a;
 
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 0.3em;
 
     flex-wrap: nowrap;
     white-space: nowrap;
+
+    /* [1] 윗줄 그룹 (GRW + 꽃 + L TO) */
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
 
     .flower-o {
       width: 6.54481rem;
       height: 7.03531rem;
       object-fit: contain;
       animation: ${rotate} 10s linear infinite;
+      margin: 0 5px;
     }
+
     .green-text {
       color: #6ede65;
     }
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     .big-title {
+      flex-direction: column;
+      gap: 0;
+      line-height: 1.1;
+
+      .flower-o {
+        width: 0.7em;
+        height: 0.75em;
+      }
+    }
+  }
+
+  @media (max-width: 799px) {
+    .big-title {
+      flex-direction: column;
       font-size: 13vw;
       .flower-o {
         width: 0.7em;
