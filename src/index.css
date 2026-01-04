@@ -333,7 +333,9 @@ body {
 }
 /* .Primitive: Colors */
 :root {
+  --blue-30: #0648aa;
   --blue-50: #1869e2;
+  --blue-70: #acdeff;
   --common-0: #000000;
   --common-100: #ffffff;
   --cool-neutral-10: #171719;
