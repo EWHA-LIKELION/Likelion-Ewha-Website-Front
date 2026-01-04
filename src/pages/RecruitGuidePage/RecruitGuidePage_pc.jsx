@@ -23,7 +23,7 @@ const RecruitGuidePagePc = () => {
                 </ScheduleTitle>
 
                 <ScheduleCards>
-                <ScheduleCard variant={1}>
+                <ScheduleCard $variant={1}>
                     <Step>01</Step>
                     <CardTitle>서류 접수</CardTitle>
                     <CardDesc>
@@ -32,19 +32,19 @@ const RecruitGuidePagePc = () => {
                     </CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={2}>
+                <ScheduleCard $variant={2}>
                     <Step>02</Step>
                     <CardTitle>1차 결과 발표</CardTitle>
                     <CardDesc>0000년 00월 00일</CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={3}>
+                <ScheduleCard $variant={3}>
                     <Step>03</Step>
                     <CardTitle>면접</CardTitle>
                     <CardDesc>0000년 00월 00일 ~ 00일</CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={4}>
+                <ScheduleCard $variant={4}>
                     <Step>04</Step>
                     <CardTitle>최종 결과 발표</CardTitle>
                     <CardDesc>0000년 00월 00일</CardDesc>
@@ -304,10 +304,10 @@ const ScheduleCard = styled.div`
     max-width: 14.25rem;
     padding: 1.25rem 2rem 1.5rem 2rem;
     border-radius: 1.25rem;
-    background: ${({ variant }) =>
-        variant === 2 ? "#FEE6C6" : 
-        variant === 3 ? "#FFD49C" : 
-        variant === 4 ? "#FFC06E" : "#FEF4E6"};
+    background: ${({ $variant }) =>
+        $variant === 2 ? "#FEE6C6" : 
+        $variant === 3 ? "#FFD49C" : 
+        $variant === 4 ? "#FFC06E" : "#FEF4E6"};
 `;
 
 const Step = styled.span`
