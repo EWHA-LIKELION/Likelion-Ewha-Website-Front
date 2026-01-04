@@ -14,13 +14,6 @@ const SUBMIT_BOTTOM_GAP = 160;
 
 const isFilled = (v) => v.trim().length > 0;
 
-const makeSubmitCode = () => {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let out = "";
-  for (let i = 0; i < 8; i++) out += chars[Math.floor(Math.random() * chars.length)];
-  return out;
-};
-
 function useIsMobile(maxWidth = 799) {
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -89,7 +82,7 @@ function MoModal({ open, onClose, children }) {
 export default function Apply2() {
   const navigate = useNavigate();
   const location = useLocation();
-  const base = location.state || {};
+  const base = location.state || {}; // Step에서 넘어온 인적/선택 정보
   const isMobile = useIsMobile(799);
 
   const [q1, setQ1] = useState("");
@@ -106,12 +99,12 @@ export default function Apply2() {
 
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [resultOpen, setResultOpen] = useState(false);
-  const [submitCode, setSubmitCode] = useState("");
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  const [submitted, setSubmitted] = useState(null);
+  // 제출 성공 후 서버가 내려준 코드
+  const [applicationCode, setApplicationCode] = useState("");
 
   const over1 = q1.length > MAX_CHARS;
   const over2 = q2.length > MAX_CHARS;
@@ -143,7 +136,6 @@ export default function Apply2() {
   const removeFileAt = (bucketSetter, idx) => {
     bucketSetter((prev) => prev.filter((_, i) => i !== idx));
   };
-
   const canSubmit =
     isFilled(q1) &&
     isFilled(q2) &&
@@ -161,58 +153,23 @@ export default function Apply2() {
   };
 
   const handleCopyCode = async () => {
-    if (!submitCode) return;
+    if (!applicationCode) return;
     try {
-      await navigator.clipboard?.writeText(submitCode);
+      await navigator.clipboard?.writeText(applicationCode);
     } catch (e) {}
-  };
-
-  const buildSubmitted = (code) => {
-    return {
-      code,
-      essays: {
-        q1: q1.trim(),
-        q2: q2.trim(),
-        q3: q3.trim(),
-        q4: q4.trim(),
-        q5: q5.trim(),
-      },
-      files: {
-        precourse: precourseFiles.map((f) => ({ name: f.name })),
-        portfolio: portfolioFiles.map((f) => ({ name: f.name })),
-      },
-      meta: {
-        name: base.name ?? "",
-        phone_number: base.phone_number ?? "",
-        birthday: base.birthday ?? "",
-        department: base.department ?? "",
-        student_number: base.student_number ?? "",
-        grade: base.grade ?? "",
-        part: base.part ?? "",
-        interview_method: base.interview_method ?? "",
-        interview_available_times: base.interview_available_times ?? [],
-      },
-    };
   };
 
   const onConfirmSubmit = async () => {
     if (isSubmitting) return;
 
-    setIsSubmitting(true);
-    setSubmitError("");
-
     const baseURL = import.meta.env.VITE_API_BASE_URL;
-
     if (!baseURL) {
-      const code = makeSubmitCode();
-      setSubmitCode(code);
-      const nextSubmitted = buildSubmitted(code);
-      setSubmitted(nextSubmitted);
-      setConfirmOpen(false);
-      setResultOpen(true);
-      setIsSubmitting(false);
+      setSubmitError("API 주소(VITE_API_BASE_URL)가 설정되지 않았습니다. .env / Vercel 환경변수를 확인해주세요.");
       return;
     }
+
+    setIsSubmitting(true);
+    setSubmitError("");
 
     try {
       const formData = new FormData();
@@ -223,8 +180,8 @@ export default function Apply2() {
       formData.append("department", base.department ?? "");
       formData.append("student_number", base.student_number ?? "");
       formData.append("grade", base.grade ?? "");
-      formData.append("part", base.part ?? "");
       formData.append("interview_method", base.interview_method ?? "");
+      formData.append("part", base.part ?? "");
 
       (base.interview_available_times ?? []).forEach((t) => {
         formData.append("interview_available_times", t);
@@ -236,26 +193,26 @@ export default function Apply2() {
       formData.append("personal_statement_4", q4.trim());
       formData.append("personal_statement_5", q5.trim());
 
+      // 파일(옵션): 있으면 보내고 없으면 안 보냄
       precourseFiles.forEach((file) => formData.append("completed_prerequisites", file));
       portfolioFiles.forEach((file) => formData.append("portfolios", file));
 
+      // 제출
       const data = await ApplicationsAPI.createApplication(formData);
+      const codeFromServer =
+        data?.application_code || data?.applicationCode || data?.code || "";
 
-      const codeFromServer = data?.application_code || data?.code || data?.applicationCode || "";
-      const code = codeFromServer || makeSubmitCode();
-
-      setSubmitCode(code);
-      const nextSubmitted = buildSubmitted(code);
-      setSubmitted(nextSubmitted);
+      setApplicationCode(codeFromServer);
 
       setConfirmOpen(false);
       setResultOpen(true);
     } catch (err) {
       const status = err?.response?.status;
+
       if (status === 409) {
         setSubmitError("이미 제출한 지원서가 있습니다. (409)");
       } else if (status === 400) {
-        setSubmitError("입력값이 올바르지 않습니다. 필수 항목/글자수/파일을 확인해주세요. (400)");
+        setSubmitError("입력값이 올바르지 않습니다. 필수 항목/글자수/선택지를 확인해주세요. (400)");
       } else {
         setSubmitError("제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
       }
@@ -537,6 +494,7 @@ export default function Apply2() {
         </Sections>
       </Frame>
 
+      {/* PC Confirm */}
       {!isMobile && (
         <Modal
           open={confirmOpen}
@@ -560,6 +518,7 @@ export default function Apply2() {
         />
       )}
 
+      {/* PC Result */}
       {!isMobile && (
         <Modal
           open={resultOpen}
@@ -571,31 +530,39 @@ export default function Apply2() {
           icon={{ src: "/icons/ellipse7.svg", alt: "" }}
           title="제출이 완료되었습니다"
           description={
-            "이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!\n아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다."
+            applicationCode
+              ? "이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!\n아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다."
+              : "제출은 완료되었습니다.\n다만 서버 응답에 지원 코드(application_code)가 포함되어 있지 않아, 현재 화면에서 코드를 표시할 수 없습니다.\n운영진/백엔드에게 응답 스펙을 확인해주세요."
           }
           code={{
             label: "",
-            value: submitCode || "지원 코드 영역입니다.",
-            copyable: true,
+            value: applicationCode || "지원 코드가 응답되지 않았습니다.",
+            copyable: !!applicationCode,
             onCopy: handleCopyCode,
           }}
           note={
-            <span style={{ display: "block", marginTop: 4, textDecoration: "none" }}>
-              * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
-            </span>
+            applicationCode ? (
+              <span style={{ display: "block", marginTop: 4, textDecoration: "none" }}>
+                * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
+              </span>
+            ) : null
           }
           actions={[
             {
               label: "지원서 열람하기",
               variant: "default",
               closeOnClick: false,
-              onClick: () => navigate("/recruit/apply/preview", { state: { submitted } }),
+              onClick: () =>
+                navigate("/recruit/apply/preview", {
+                  state: { application_code: applicationCode },
+                }),
             },
             { label: "홈으로", variant: "primary", closeOnClick: false, onClick: () => navigate("/") },
           ]}
         />
       )}
 
+      {/* MO Confirm */}
       <MoModal open={isMobile && confirmOpen} onClose={() => setConfirmOpen(false)}>
         <MoDialogInner $variant="confirm">
           <MoTop>
@@ -621,6 +588,7 @@ export default function Apply2() {
         </MoDialogInner>
       </MoModal>
 
+      {/* MO Result */}
       <MoModal open={isMobile && resultOpen} onClose={() => setResultOpen(false)}>
         <MoDialogInner $variant="result">
           <MoTop>
@@ -631,9 +599,21 @@ export default function Apply2() {
             <MoTextBlock>
               <MoTitle>제출 완료되었습니다.</MoTitle>
               <MoDesc>
-                이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!
-                <br />
-                아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다.
+                {applicationCode ? (
+                  <>
+                    이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!
+                    <br />
+                    아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다.
+                  </>
+                ) : (
+                  <>
+                    제출은 완료되었습니다.
+                    <br />
+                    다만 서버 응답에 지원 코드가 포함되어 있지 않아
+                    <br />
+                    이 화면에서 코드를 표시할 수 없습니다.
+                  </>
+                )}
               </MoDesc>
             </MoTextBlock>
           </MoTop>
@@ -641,22 +621,30 @@ export default function Apply2() {
           <MoBottom>
             <MoCodeWrap>
               <MoCodeBox>
-                <MoCodeText>{submitCode || "지원 코드 영역입니다."}</MoCodeText>
-                <MoCopyBtn type="button" aria-label="copy" onClick={handleCopyCode}>
+                <MoCodeText>{applicationCode || "지원 코드가 응답되지 않았습니다."}</MoCodeText>
+                <MoCopyBtn
+                  type="button"
+                  aria-label="copy"
+                  onClick={handleCopyCode}
+                  disabled={!applicationCode}
+                  style={{ opacity: applicationCode ? 1 : 0.4, cursor: applicationCode ? "pointer" : "default" }}
+                >
                   <img src="/icons/copyInput.svg" alt="" />
                 </MoCopyBtn>
               </MoCodeBox>
 
-              <MoNote>
-                * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
-              </MoNote>
+              {applicationCode && (
+                <MoNote>
+                  * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
+                </MoNote>
+              )}
             </MoCodeWrap>
 
             <MoActions>
               <MoBtn
                 type="button"
                 $variant="ghost"
-                onClick={() => navigate("/recruit/apply/preview", { state: { submitted } })}
+                onClick={() => navigate("/recruit/apply/preview", { state: { application_code: applicationCode } })}
               >
                 지원서 열람하기
               </MoBtn>
@@ -670,6 +658,7 @@ export default function Apply2() {
     </Page>
   );
 }
+
 
 const Page = styled.div`
   display: flex;
@@ -1293,7 +1282,8 @@ const MoBtn = styled.button`
 
   border-radius: ${({ $variant }) => ($variant === "primary" ? "999px" : "40px")};
   border: ${({ $variant }) => ($variant === "primary" ? "none" : "1.5px solid var(--Neutral-95, #DCDCDC)")};
-  background: ${({ $variant }) => ($variant === "primary" ? "var(--Primary-Main, #05DA5B)" : "var(--Common-100, #FFF)")};
+  background: ${({ $variant }) =>
+    $variant === "primary" ? "var(--Primary-Main, #05DA5B)" : "var(--Common-100, #FFF)"};
 
   cursor: pointer;
 
