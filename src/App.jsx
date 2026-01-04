@@ -19,8 +19,18 @@ function App() {
         <Route path="project" element={<Project />} />
         <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
-        <Route path="recruit" element={<RecruitGuidePage />} />
         <Route path="apply/test" element={<Apply2 />} />
+
+        {/* Recruit pages */}
+        <Route path="recruit">
+          <Route index element={<RecruitGuidePage />} />
+          <Route path="apply">
+            <Route path="part" element={<RecruitPart />} />
+            <Route path="form" element={<div> recruit-apply-form </div>} />
+          </Route>
+          <Route path="preview" element={<div> recruit-preview </div>} />
+          <Route path="result" element={<div> recruit-result </div>} />
+        </Route>
       </Route>
 
       {/* Admin Layout: /admin/* 는 전부 여기로 */}
