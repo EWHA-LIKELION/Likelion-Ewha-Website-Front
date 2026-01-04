@@ -280,7 +280,7 @@ const GreenArea = styled.div`
 
     @media (max-width: 799px) {
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1rem;
       text-align: center;
       align-items: center;
     }
@@ -298,7 +298,6 @@ const GreenArea = styled.div`
 
     @media (max-width: 799px) {
       order: 2; /* 텍스트 아래로 */
-      margin-bottom: 0.5rem;
       width: 100%;
     }
   }
