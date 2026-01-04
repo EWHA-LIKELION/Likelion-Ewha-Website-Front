@@ -5,7 +5,8 @@ import Project from './pages/project/Project.jsx';
 import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
 import People from './pages/people/People.jsx';
 import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
-import Apply2 from "./pages/apply2.jsx"
+import RecruitPart from "./pages/recruit/RecruitPart.jsx";
+import Apply2 from "./pages/apply2.jsx";
 
 function App() {
   return (
@@ -18,7 +19,17 @@ function App() {
         <Route path="project" element={<Project />} />
         <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
-        <Route path="recruit" element={<RecruitGuidePage />} />
+
+        {/* Recruit pages */}
+        <Route path="recruit">
+          <Route index element={<RecruitGuidePage />} />
+          <Route path="apply">
+            <Route path="part" element={<RecruitPart />} />
+            <Route path="form" element={<div> recruit-apply-form </div>} />
+          </Route>
+          <Route path="preview" element={<div> recruit-preview </div>} />
+          <Route path="result" element={<div> recruit-result </div>} />
+      </Route>
 
         {/* apply pages */}
         <Route path="apply/test" element={<Apply2/>} />
