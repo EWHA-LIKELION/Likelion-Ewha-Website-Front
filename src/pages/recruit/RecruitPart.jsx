@@ -195,7 +195,7 @@ const Card = styled.button`
   align-items: flex-start;
   justify-content: space-between;
   align-self: stretch;
-  padding: 1.5rem 2rem;
+  padding: 2rem;
   
   border: none;
   border-radius: 0.75rem;
@@ -232,7 +232,7 @@ const Card = styled.button`
   @media (max-width: 799px) {
     width: 21.75rem;
     height: 9rem;
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem;
   }
 `;
 
