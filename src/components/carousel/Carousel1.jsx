@@ -134,7 +134,7 @@ const MainCard = styled(BaseCard)`
   z-index: 3;
   top: 0;
   left: 0;
-  padding: 2.58rem 2.53rem 2.56rem 2.53rem;
+  padding: 2.58rem 2.51rem 2.56rem 2.51rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -205,7 +205,7 @@ const CardBody = styled.p`
 `;
 
 const CardFooter = styled.div`
-  margin-top: 1.53rem;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
