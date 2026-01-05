@@ -3,7 +3,7 @@ import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
 import CloverIcon from "../../../public/icons/clover.svg";
 import Clover1Icon from "../../../public/icons/clover1.svg";
-import orangePattern from "../../../public/icons/orange.svg";
+import orangePattern from "../../../public/icons/orange1.svg";
 import greenPattern from "../../../public/icons/green.svg";
 
 import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
@@ -275,7 +275,7 @@ const OrangeArea = styled.div`
 
   .news-header {
     width: 100%;
-    padding-left: 100px;
+    padding-left: max(0px, calc((100% - 960px) / 2));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -294,6 +294,11 @@ const OrangeArea = styled.div`
       font-style: normal;
       font-weight: 700;
       line-height: 2.25rem;
+    }
+  }
+  @media (min-width: 800px) and (max-width: 1099px) {
+    .news-header {
+      padding-left: 5rem;
     }
   }
 
@@ -336,7 +341,7 @@ const FooterSection = styled.section`
   position: relative;
   width: 100%;
   background: #fff;
-  overflow: visible;
+  overflow: hidden;
 
   display: flex;
   justify-content: center;
