@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import orangePattern from "../../../public/icons/orange.svg";
 import greenPattern from "../../../public/icons/green.svg";
 import Clover1Icon from "../../../public/icons/clover1.svg";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
+  RecruitCheckButton,
+  RecruitDisabledButton,
 } from "../../components/buttons/MainButtons_pc";
 import {
   RecruitAlarmButtonMobile,
   RecruitInfoButtonMobile,
+  RecruitCheckButtonMobile,
+  RecruitDisabledButtonMobile,
 } from "../../components/buttons/MainButtons_mo";
 import { Modal } from "../../components/Modal";
 
@@ -17,14 +22,16 @@ const IntroSection = () => {
   // --------------------------------------------------------
   // 1. 상태 관리
   // --------------------------------------------------------
-  const isRecruiting = false;
+  const RECRUIT_STATUS = "DEFAULT";
+  const navigate = useNavigate();
 
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
+  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [codeValue, setCodeValue] = useState("");
 
   const goRecruitPage = () => {
-    window.open("https://apply.likelion.org", "_blank");
+    navigate("/recruit");
   };
 
   const openCodeModal = (e) => {
@@ -39,12 +46,98 @@ const IntroSection = () => {
 
   const handleCheckCode = () => {
     if (codeValue.trim() === "") return;
-    alert(`입력한 코드: ${codeValue}\n확인되었습니다! (API 연결 추후에 필요)`);
-    setIsCodeModalOpen(false);
+
+    // 실제 API 연결 전이므로, 테스트를 위해 무조건 '실패'했다고 가정하고 에러 모달을 띄우도록 해두었습니다
+    // 나중에 성공/실패 로직을 넣을 때 이 부분을 수정하세요.
+
+    const isUserFound = false; // 테스트용: 유저를 못 찾았다고 가정
+
+    if (!isUserFound) {
+      setIsCodeModalOpen(false); // 1. 입력 모달 끄기
+      setIsErrorModalOpen(true); // 2. 에러 모달 켜기 (사용자 정보 없음)
+    } else {
+      alert("확인되었습니다!");
+      setIsCodeModalOpen(false);
+    }
   };
 
   const goKakaoChannel = () => {
     window.open("https://pf.kakao.com/_htxexfd", "_blank");
+  };
+
+  const getModalText = () => {
+    switch (RECRUIT_STATUS) {
+      // 합격자 조회 기간 (1차 & 최종 동일)
+      case "FIRST_RESULT":
+      case "FINAL_RESULT":
+        return {
+          title: "지원 코드 입력",
+          description:
+            "합격 여부를 확인하기 위해\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
+        };
+
+      // 그 외 (모집 중 등 - 지원서 열람용)
+      default:
+        return {
+          title: "지원 코드 입력",
+          description:
+            "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
+        };
+    }
+  };
+  const modalContent = getModalText();
+
+  const renderMainButton = (isMobile) => {
+    switch (RECRUIT_STATUS) {
+      // Case 2: 서류 지원 기간
+      case "RECRUITING":
+        return isMobile ? (
+          <RecruitInfoButtonMobile onClick={goRecruitPage} />
+        ) : (
+          <RecruitInfoButton onClick={goRecruitPage} />
+        );
+
+      // Case 3: 서류 심사 기간 (마감됨, 클릭 불가)
+      case "CLOSED":
+        return isMobile ? (
+          <RecruitDisabledButtonMobile />
+        ) : (
+          <RecruitDisabledButton />
+        );
+
+      // Case 4: 1차 합격자 조회
+      case "FIRST_RESULT":
+        return isMobile ? (
+          <RecruitCheckButtonMobile onClick={openCodeModal}>
+            1차 합격자 조회
+          </RecruitCheckButtonMobile>
+        ) : (
+          <RecruitCheckButton onClick={openCodeModal}>
+            1차 합격자 조회
+          </RecruitCheckButton>
+        );
+
+      // Case 5: 최종 합격자 조회
+      case "FINAL_RESULT":
+        return isMobile ? (
+          <RecruitCheckButtonMobile onClick={openCodeModal}>
+            최종 합격자 조회
+          </RecruitCheckButtonMobile>
+        ) : (
+          <RecruitCheckButton onClick={openCodeModal}>
+            최종 합격자 조회
+          </RecruitCheckButton>
+        );
+
+      // Default, Case 1: 모집 전 (알림 신청)
+      case "DEFAULT":
+      default:
+        return isMobile ? (
+          <RecruitAlarmButtonMobile onClick={openAlarmModal} />
+        ) : (
+          <RecruitAlarmButton onClick={openAlarmModal} />
+        );
+    }
   };
 
   return (
@@ -72,24 +165,10 @@ const IntroSection = () => {
             </div>
           </LogoWrapper>
 
-          {/* 버튼 영역 */}
-          <PcButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButton onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButton onClick={openAlarmModal} />
-            )}
-          </PcButtonArea>
+          <PcButtonArea>{renderMainButton(false)}</PcButtonArea>
+          <MobileButtonArea>{renderMainButton(true)}</MobileButtonArea>
 
-          <MobileButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButtonMobile onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButtonMobile onClick={openAlarmModal} />
-            )}
-          </MobileButtonArea>
-
-          {isRecruiting ? (
+          {RECRUIT_STATUS !== "DEFAULT" ? (
             <SubLink href="#" onClick={openCodeModal}>
               지원서를 제출하셨나요? <u>지원서 열람하기</u>
             </SubLink>
@@ -123,10 +202,8 @@ const IntroSection = () => {
         open={isCodeModalOpen}
         onClose={() => setIsCodeModalOpen(false)}
         type="form"
-        title="지원 코드 입력"
-        description={
-          "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요."
-        }
+        title={modalContent.title}
+        description={modalContent.description}
         align="left"
         input={{
           value: codeValue,
@@ -147,6 +224,23 @@ const IntroSection = () => {
           actionText: "카카오톡 문의하기",
           onAction: goKakaoChannel,
         }}
+      />
+      <Modal
+        open={isErrorModalOpen}
+        onClose={() => setIsErrorModalOpen(false)}
+        type="info" // info 타입 사용
+        showClose={false}
+        title="사용자 정보가 없습니다."
+        description="입력하신 코드를 다시 확인해주세요."
+        align="center"
+        actions={[
+          {
+            label: "닫기",
+            variant: "primary",
+            fullWidth: true,
+            onClick: () => setIsErrorModalOpen(false),
+          },
+        ]}
       />
     </>
   );
