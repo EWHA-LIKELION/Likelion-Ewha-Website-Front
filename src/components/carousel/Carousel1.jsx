@@ -110,7 +110,7 @@ const NavButton = styled.button`
     height: 1.875rem;
 
     /* 모바일에서는 버튼이 너무 밖으로 나가면 잘리므로 안쪽으로 당김 */
-    ${(props) => (props.$isPrev ? `left: -10px;` : `right: -10px;`)}
+    ${(props) => (props.$isPrev ? `left: -13px;` : `right: -13px;`)}
   }
 `;
 
@@ -141,6 +141,7 @@ const MainCard = styled(BaseCard)`
 
   @media (max-width: 799px) {
     padding: 0.94rem 1.25rem;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -176,13 +177,15 @@ const CardHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 2.25rem;
+  text-align: left;
   word-break: keep-all;
   white-space: pre-wrap;
 
   @media (max-width: 799px) {
-    font-size: 1.25rem;
-    line-height: 1.8rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
     word-break: break-all;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -192,8 +195,13 @@ const CardBody = styled.p`
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.25rem;
+  text-align: left;
   white-space: pre-wrap;
   word-break: break-all; /* 본문도 안전하게 줄바꿈 */
+
+  @media (max-width: 799px) {
+    line-height: 1.125rem;
+  }
 `;
 
 const CardFooter = styled.div`
@@ -202,19 +210,24 @@ const CardFooter = styled.div`
   flex-direction: column;
   flex-shrink: 0;
 
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-family: Pretendard;
+
   strong {
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
-    font-family: Pretendard;
-    font-size: 0.875rem;
     font-weight: 800;
-    line-height: 1.375rem;
   }
 
   span {
     color: var(--Atomic-Cool-Neutral-40, var(--Cool-Neutral-40, #5a5c63));
-    font-family: Pretendard;
-    font-size: 0.875rem;
     font-weight: 400;
-    line-height: 1.375rem;
+  }
+
+  @media (max-width: 799px) {
+    margin-top: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    text-align: left;
   }
 `;
