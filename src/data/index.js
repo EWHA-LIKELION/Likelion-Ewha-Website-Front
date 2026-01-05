@@ -1,7 +1,7 @@
 import projects from "./projects.json";
 import members from "./members.json";
 import intercollegiates from "./intercollegiates.json";
-import * as curriculums from "./curriculums.js";
+import curriculums from "./curriculums.json";
 
 export {
   projects,
