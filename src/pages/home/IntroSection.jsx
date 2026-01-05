@@ -270,28 +270,28 @@ const Section = styled.section`
   padding: 5rem 18.5625rem;
 
   @media (max-width: 799px) {
-    min-height: unset !important;
+    min-height: 22rem;
     height: auto !important;
     padding: 4.5rem 1rem 4rem 1rem;
-    align-items: flex-start;
+    align-items: center;
     min-width: 0;
   }
 `;
-
 const PatternTop = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 10.00025rem;
-  height: 10.00025rem;
-  left: 7.89888rem;
-  top: -3.38275rem;
 
+  /* RecruitPart 위치 동일 적용 */
+  left: 2.89888rem;
+  top: 0;
+
+  transition: all 0.2s ease;
+
+  /* 기존의 고정 width/height 대신 transform 사용 */
   @media (max-width: 799px) {
-    width: 3.75rem;
-    height: 3.75rem;
-    left: 2.375rem;
-    top: -1.5rem;
+    transform: scale(0.5);
+    transform-origin: left top;
   }
 `;
 
@@ -299,14 +299,15 @@ const PatternBottom = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 14rem;
   right: 0;
-  top: 20.1875rem;
+  top: 17rem;
 
+  transition: all 0.2s ease;
+
+  /* 기존의 고정 width/height 대신 transform 사용 */
   @media (max-width: 799px) {
-    width: 5.25rem;
-    top: 13.25rem;
-    right: 0;
+    transform: scale(0.5);
+    transform-origin: right top;
   }
 `;
 
