@@ -1,7 +1,4 @@
-import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useNavigate } from "react-router-dom";
-
 import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
 import CloverIcon from "../../../public/icons/clover.svg";
@@ -9,144 +6,11 @@ import Clover1Icon from "../../../public/icons/clover1.svg";
 import orangePattern from "../../../public/icons/orange.svg";
 import greenPattern from "../../../public/icons/green.svg";
 
-import {
-  RecruitAlarmButton,
-  RecruitInfoButton,
-  RecruitCheckButton,
-  RecruitDisabledButton,
-} from "../../components/buttons/MainButtons_pc";
-
-import {
-  RecruitAlarmButtonMobile,
-  RecruitInfoButtonMobile,
-  RecruitCheckButtonMobile,
-  RecruitDisabledButtonMobile,
-} from "../../components/buttons/MainButtons_mo";
-
-import { Modal } from "../../components/Modal";
+import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 
 const EndSection = () => {
-  // --------------------------------------------------------
-  // 1. 상태 및 로직 관리 (IntroSection과 동일하게 적용)
-  // --------------------------------------------------------
-  const RECRUIT_STATUS = "DEFAULT"; // 상태값 변경: DEFAULT, RECRUITING, CLOSED, FIRST_RESULT, FINAL_RESULT
-  const navigate = useNavigate();
-
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
-  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
-  const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
-  const [codeValue, setCodeValue] = useState("");
-
-  const goRecruitPage = () => {
-    navigate("/recruit");
-  };
-
-  const openCodeModal = (e) => {
-    e.preventDefault();
-    setCodeValue("");
-    setIsCodeModalOpen(true);
-  };
-
-  const openAlarmModal = () => {
-    setIsAlarmModalOpen(true);
-  };
-
-  const handleCheckCode = () => {
-    if (codeValue.trim() === "") return;
-
-    // 테스트 로직: 실패 가정
-    const isUserFound = false;
-
-    if (!isUserFound) {
-      setIsCodeModalOpen(false);
-      setIsErrorModalOpen(true);
-    } else {
-      alert("확인되었습니다!");
-      setIsCodeModalOpen(false);
-    }
-  };
-
-  const goKakaoChannel = () => {
-    window.open("https://pf.kakao.com/_htxexfd", "_blank");
-  };
-
   const goInstagram = () => {
     window.open("https://www.instagram.com/likelion_ewha/", "_blank");
-  };
-
-  // --------------------------------------------------------
-  // 2. 텍스트 및 버튼 렌더링 헬퍼 함수
-  // --------------------------------------------------------
-  const getModalText = () => {
-    switch (RECRUIT_STATUS) {
-      case "FIRST_RESULT":
-      case "FINAL_RESULT":
-        return {
-          title: "지원 코드 입력",
-          description:
-            "합격 여부를 확인하기 위해\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
-        };
-      default:
-        return {
-          title: "지원 코드 입력",
-          description:
-            "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
-        };
-    }
-  };
-  const modalContent = getModalText();
-
-  const renderFooterButton = (isMobile) => {
-    switch (RECRUIT_STATUS) {
-      // Case 2: 서류 지원 기간
-      case "RECRUITING":
-        return isMobile ? (
-          <RecruitInfoButtonMobile onClick={goRecruitPage} />
-        ) : (
-          <RecruitInfoButton onClick={goRecruitPage} />
-        );
-
-      // Case 3: 서류 심사 기간
-      case "CLOSED":
-        return isMobile ? (
-          <RecruitDisabledButtonMobile />
-        ) : (
-          <RecruitDisabledButton />
-        );
-
-      // Case 4: 1차 합격자 조회
-      case "FIRST_RESULT":
-        return isMobile ? (
-          <RecruitCheckButtonMobile onClick={openCodeModal}>
-            1차 합격자 조회
-          </RecruitCheckButtonMobile>
-        ) : (
-          <RecruitCheckButton onClick={openCodeModal}>
-            1차 합격자 조회
-          </RecruitCheckButton>
-        );
-
-      // Case 5: 최종 합격자 조회
-      case "FINAL_RESULT":
-        return isMobile ? (
-          <RecruitCheckButtonMobile onClick={openCodeModal}>
-            최종 합격자 조회
-          </RecruitCheckButtonMobile>
-        ) : (
-          <RecruitCheckButton onClick={openCodeModal}>
-            최종 합격자 조회
-          </RecruitCheckButton>
-        );
-
-      // Default, Case 1
-      case "DEFAULT":
-      default:
-        return isMobile ? (
-          <RecruitAlarmButtonMobile onClick={openAlarmModal} />
-        ) : (
-          <RecruitAlarmButton onClick={openAlarmModal} />
-        );
-    }
   };
 
   return (
@@ -196,6 +60,8 @@ const EndSection = () => {
       <SliderWrapper>
         <ImageSlider />
       </SliderWrapper>
+
+      {/* === [Part 3] 흰색 영역: Footer === */}
       <FooterSection>
         <PatternTop src={orangePattern} alt="" aria-hidden="true" />
         <PatternBottom src={greenPattern} alt="" aria-hidden="true" />
@@ -212,85 +78,15 @@ const EndSection = () => {
             </div>
           </LogoWrapper>
 
-          <PcButtonArea>{renderFooterButton(false)}</PcButtonArea>
-          <MobileButtonArea>{renderFooterButton(true)}</MobileButtonArea>
+          <PcButtonArea>
+            <RecruitStatusButton isMobile={false} />
+          </PcButtonArea>
 
-          {/* 하단 텍스트 (DEFAULT 여부에 따라 분기) */}
-          {RECRUIT_STATUS !== "DEFAULT" ? (
-            <SubLink href="#" onClick={openCodeModal}>
-              지원서를 제출하셨나요? <u>지원서 열람하기</u>
-            </SubLink>
-          ) : (
-            <EndText>13기 모집이 종료되었습니다.</EndText>
-          )}
+          <MobileButtonArea>
+            <RecruitStatusButton isMobile={true} />
+          </MobileButtonArea>
         </FooterContent>
       </FooterSection>
-
-      {/* === 모달 컴포넌트들 (IntroSection과 동일) === */}
-      <Modal
-        open={isAlarmModalOpen}
-        onClose={() => setIsAlarmModalOpen(false)}
-        type="info"
-        title="14기 모집 사전 알림 등록"
-        description={
-          "이화여대 멋쟁이사자처럼 카카오톡 채널을 통해\n모집이 시작되면 가장 먼저 알려드릴게요."
-        }
-        align="left"
-        actions={[
-          {
-            label: "카카오톡 바로가기",
-            variant: "primary",
-            fullWidth: true,
-            onClick: goKakaoChannel,
-          },
-        ]}
-      />
-
-      <Modal
-        open={isCodeModalOpen}
-        onClose={() => setIsCodeModalOpen(false)}
-        type="form"
-        title={modalContent.title}
-        description={modalContent.description}
-        align="left"
-        input={{
-          value: codeValue,
-          onChange: (e) => setCodeValue(e.target.value),
-          placeholder: "코드를 입력해주세요.",
-        }}
-        actions={[
-          {
-            label: "확인",
-            variant: "primary",
-            fullWidth: true,
-            disabled: codeValue.length === 0,
-            onClick: handleCheckCode,
-          },
-        ]}
-        helper={{
-          text: "지원 코드를 잊어버리셨나요? ",
-          actionText: "카카오톡 문의하기",
-          onAction: goKakaoChannel,
-        }}
-      />
-
-      <Modal
-        open={isErrorModalOpen}
-        onClose={() => setIsErrorModalOpen(false)}
-        type="info"
-        showClose={false}
-        title="사용자 정보가 없습니다."
-        description="입력하신 코드를 다시 확인해주세요."
-        align="center"
-        actions={[
-          {
-            label: "닫기",
-            variant: "primary",
-            fullWidth: true,
-            onClick: () => setIsErrorModalOpen(false),
-          },
-        ]}
-      />
     </SectionWrapper>
   );
 };
@@ -372,7 +168,6 @@ const GreenArea = styled.div`
     }
   }
 
-  /* 1. 캐러셀 박스 */
   .carousel-box {
     flex-shrink: 0;
 
@@ -388,7 +183,6 @@ const GreenArea = styled.div`
     }
   }
 
-  /* 2. 텍스트 박스 */
   .text-box {
     display: flex;
     flex-direction: column;
@@ -435,7 +229,6 @@ const GreenArea = styled.div`
   }
 `;
 
-/* 공통 더보기 버튼 스타일 */
 const MoreButton = styled.button`
   margin-top: 1.5rem;
   padding: 0.875rem 2.25rem;
@@ -553,10 +346,10 @@ const FooterSection = styled.section`
   padding: 5rem 18.5625rem;
 
   @media (max-width: 799px) {
-    min-height: unset !important;
+    min-height: 22rem; /* RecruitPart 스타일 적용 */
     height: auto !important;
     padding: 4.5rem 1rem 4rem 1rem;
-    align-items: flex-start;
+    align-items: center; /* IntroSection과 동일하게 center */
     min-width: 0;
   }
 `;
@@ -565,16 +358,13 @@ const PatternTop = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 10.00025rem;
-  height: 10.00025rem;
-  left: 7.89888rem;
-  top: -3.38275rem;
+  left: 2.89888rem;
+  top: 0;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 3.75rem;
-    height: 3.75rem;
-    left: 2.375rem;
-    top: -1.5rem;
+    transform: scale(0.5);
+    transform-origin: left top;
   }
 `;
 
@@ -582,14 +372,13 @@ const PatternBottom = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 14rem;
   right: 0;
-  top: 20.1875rem;
+  top: 17rem;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 5.25rem;
-    top: 13.25rem;
-    right: 0;
+    transform: scale(0.5);
+    transform-origin: right top;
   }
 `;
 
@@ -689,34 +478,5 @@ const MobileButtonArea = styled.div`
 
   @media (max-width: 799px) {
     display: flex !important;
-  }
-`;
-
-const SubLink = styled.a`
-  color: #888888;
-  font-size: 0.9rem;
-  text-decoration: none;
-  cursor: pointer;
-  u {
-    margin-left: 6px;
-    color: #555;
-    font-weight: 600;
-    text-underline-offset: 3px;
-  }
-  &:hover u {
-    color: #000;
-  }
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const EndText = styled.p`
-  color: #888888;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 0.25rem;
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
   }
 `;
