@@ -16,7 +16,6 @@ const RecruitGuideHeroPc = () => {
 
                     <ButtonGroup>
                         <ApplyButton />
-                        <DetailLinkDarkButton />
                     </ButtonGroup>
 
                     <SubText>

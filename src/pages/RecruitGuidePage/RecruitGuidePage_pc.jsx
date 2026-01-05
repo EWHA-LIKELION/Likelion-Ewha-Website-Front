@@ -5,6 +5,7 @@ import {
     DetailLinkButton,
 } from "../../components/buttons/MainButtons_pc";
 import styled from "styled-components";
+import faq from "../../data/faq.json";
 
 
 const RecruitGuidePagePc = () => {
@@ -51,7 +52,7 @@ const RecruitGuidePagePc = () => {
                 </ScheduleCard>
                 </ScheduleCards>
                 </ScheduleContentWrapper>
-            </ScheduleInner>
+            </ScheduleInner> 
             </ScheduleSection>
 
             {/* 모집 대상 */}
@@ -117,23 +118,29 @@ const RecruitGuidePagePc = () => {
                 <PartCard>
                     <h3>기획 디자인</h3>
                     <span>PM · DESIGN</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper href="#"> 
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                     
                 </PartCard>
 
                 <PartCard>
                     <h3>프론트엔드</h3>
                     <span>FRONTEND</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper href="#"> 
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                 </PartCard>
 
                 <PartCard>
                     <h3>백엔드</h3>
                     <span>BACKEND</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper href="#"> 
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                 </PartCard>
                 </PartCards>
             </PartInner>
@@ -182,38 +189,64 @@ const RecruitGuidePagePc = () => {
                 </ActivityInner>
             </ActivitySection>
 
+            {/* 선수강 강의 안내 */}
+            <PreLectureSection>
+                <PreLectureInner>
+                    <PreLectureTitle>
+                    <img src="/icons/ellipse.svg" alt="icon" />
+                    <h2>선수강 강의 안내</h2>
+                    </PreLectureTitle>
+
+                    <PreLectureNotice>
+                    * 지원 전 강의 수강은 필수가 아니며, 지원서 내에 수강 내역 캡쳐본을 제출할 경우 가산점으로만 활용됩니다.
+                    </PreLectureNotice>
+
+                    <PreLectureList>
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Codecademy: Learn HTML</h3>
+                        <ul>
+                            <li>파트 1. Elements and Structure 중 ‘Lesson: Introduction to HTML’ & ‘Lesson: HTML Document Standards’</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://example.com">사이트 바로가기</a>
+                    </PreLectureItem>
+
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Programmers: 파이썬 입문</h3>
+                        <ul>
+                            <li>파트 1. 시작하기 (파이썬 설치~에디터 설치 제외)</li>
+                            <li>파트 2. 변수와 계산 (REPL, Shell 사용법 제외)</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://example.com">사이트 바로가기</a>
+                    </PreLectureItem>
+                    </PreLectureList>
+                </PreLectureInner>
+            </PreLectureSection>
+
+
             {/* 자주 묻는 질문 */}
             <FAQSection>
                 <FAQInner>
                     <FAQTitleArea>
-                        <img src="/icons/ellipse.svg" alt="icon" />
-                        <h2>자주 묻는 질문들</h2>
+                    <img src="/icons/ellipse4.svg" alt="icon" />
+                    <h2>자주 묻는 질문들</h2>
                     </FAQTitleArea>
 
                     <FAQList>
-                        <DropDown3 
-                            question="개발 경험이 없는데 지원 가능한가요?"
-                            answer={"당연히 가능합니다! 13기 운영진들도 12기 아기사자 시절엔 아무것도 모르는 감자였답니다🥔\n코딩 경험이 전무해도 지원할 수 있지만, 선수강 강의를 들어보시는 것도 추천합니다!"}
-                            styleType={1}
+                    {faq.map((item) => (
+                        <DropDown3
+                        key={item.id}
+                        question={item.question}
+                        answer={item.answer}
+                        styleType={1}
                         />
-                        <DropDown3 
-                            question="면접에서 코딩 능력 시험을 보나요?"
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
-                        <DropDown3 
-                            question="교내 동아리인가요?"
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
-                        <DropDown3 
-                            question="3~4학년 분들도 많이 계신가요? 
-                            비전공자인데 너무 늦은 학년에 지원하는 것은 아닌가 싶어서요."
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
+                    ))}
                     </FAQList>
                 </FAQInner>
+            </FAQSection>
 
                 {/* 하단 지원 유도 섹션 */}
                 <FooterBannerSection>
@@ -229,7 +262,6 @@ const RecruitGuidePagePc = () => {
                         </CheckLinkText>
                     </BannerContent>
                 </FooterBannerSection>
-            </FAQSection>
         </PageWrapper>
 
     );
@@ -290,20 +322,40 @@ const ScheduleTitle = styled.h2`
 `;
 
 const ScheduleCards = styled.div`
-    display: flex;
+    display: grid;
     gap: 1.25rem;
     width: 100%;
-    justify-content: flex-start;
-    flex-wrap: nowrap; 
+    justify-content: center;
+
+    /* 1. 1126px 이상: 4개가 한 줄 */
+    grid-template-columns: repeat(4, 14.25rem);
+
+    /* 2. 870px ~ 1125px: 위 3개, 아래 중간에 1개 */
+    @media (max-width: 1125px) and (min-width: 870px) {
+        grid-template-columns: repeat(3, 14.25rem);
+        
+        & > div:nth-child(4) {
+            grid-column: 2; 
+        }
+    }
+
+    /* 3. 869px 이하: 2x2 */
+    @media (max-width: 869px) {
+        grid-template-columns: repeat(2, 14.25rem);
+        
+        & > div:nth-child(4) {
+            grid-column: auto;
+        }
+    }
 `;
 
 const ScheduleCard = styled.div`
     display: flex;
     flex-direction: column;
-    min-width: 14.25rem;
-    max-width: 14.25rem;
+    width: 14.25rem; 
     padding: 1.25rem 2rem 1.5rem 2rem;
     border-radius: 1.25rem;
+    box-sizing: border-box; 
     background: ${({ $variant }) =>
         $variant === 2 ? "#FEE6C6" : 
         $variant === 3 ? "#FFD49C" : 
@@ -499,10 +551,48 @@ const PartTitle = styled.h2`
         line-height: 3.125rem;
 `;
 
+/* 모집 파트 카드 컨테이너 */
 const PartCards = styled.div`
-    display: flex;
+    display: grid;
     gap: 1.25rem;
-    justify-content: center;
+    width: 100%;
+    
+    justify-content: center; 
+
+    /* 1. 800px ~ 1075px: 카드 크기 고정 및 세로 1줄 */
+    @media (min-width: 800px) and (max-width: 1075px) {
+        grid-template-columns: 19.375rem;
+        & > div {
+        width: 19.375rem;
+        height: 9.5rem;
+        }
+    }
+
+    /* 2. 1076px ~ 1416px: 위 2개 / 아래 1개 가운데 정렬 */
+    @media (min-width: 1076px) {
+        grid-template-columns: repeat(2, 19.375rem);
+        
+        width: fit-content;
+        margin: 0 auto;
+
+        /* 세 번째 카드(백엔드) 처리 */
+        & > div:nth-child(3) {
+        grid-column: span 2;  
+        justify-self: center; 
+        width: 19.375rem;     
+        }
+    }
+
+    /* 3. 1417px 이상: 3개 한 줄 */
+    @media (min-width: 1417px) {
+        grid-template-columns: repeat(3, 19.375rem);
+        width: fit-content;
+
+        & > div:nth-child(3) {
+        grid-column: auto;
+        justify-self: stretch;
+        }
+    }
 `;
 
 const PartCard = styled.div`
@@ -510,28 +600,47 @@ const PartCard = styled.div`
     background: rgba(255, 255, 255, 0.75);
     padding: 1.93rem 0rem 1.93rem 0rem;
     text-align: center;
-    min-width: 18rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+
     h3 {
-        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
-        /* H3/bold */
+        color: #2A2A2A;
         font-family: Pretendard;
         font-size: 1.5rem;
-        font-style: normal;
         font-weight: 700;
-        line-height: 2rem; 
         margin-bottom: 0.12rem; 
     }
 
     span {
         display: block; 
-        color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
+        color: #737373;
         font-family: Pretendard;
         font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.375rem; 
-        margin-bottom: 0.49rem; }
+        margin-bottom: 0.49rem; 
+    }
     
+    a {
+        color: #00BF40;
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }  
+`;
+
+const LinkWrapper = styled.a`
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem;       
+    text-decoration: none;
+    cursor: pointer;
+
     a {
         color: var(--Atomic-Green-50, var(--Green-50, #00BF40));
         font-family: Pretendard;
@@ -539,6 +648,12 @@ const PartCard = styled.div`
         font-style: normal;
         font-weight: 500;
         line-height: 1.5rem; 
+    }
+
+    img {
+        width: 0.625rem;
+        height: 0.58756rem;
+        display: block;
     }
 `;
 
@@ -548,7 +663,7 @@ const ActivitySection = styled.section`
     display: flex;
     justify-content: center;
     background: #ffffff;
-    padding: 5rem 0 7.5rem 0;
+    padding: 5rem 5rem 5rem 5rem;
 `;
 
 const ActivityInner = styled.div`
@@ -557,6 +672,7 @@ const ActivityInner = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    
 `;
 
 const ActivityHeader = styled.div`
@@ -571,7 +687,7 @@ const ActivityTitleArea = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    img { width: 2.5rem; }
+    img { width: 2rem; }
     h2 { font-family: "Cafe24 PRO Slim"; font-size: 2.25rem; font-weight: 700; color: #2a2a2a; }
     p { font-size: 0.875rem; color: #b0b0b0; }
 `;
@@ -640,19 +756,20 @@ const WideActivityBox = styled.div`
     grid-column: span 3;
     background: ${props => props.color};
     border: 1px solid ${props => props.border};
-    padding: 1.25rem;
+    padding: 0.88rem 1.25rem;
     text-align: center;
     border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2A2A2A;
     font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
 `;
 
 const ActivityColumn = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     grid-auto-rows: 1fr;
 `;
 
@@ -677,6 +794,115 @@ const ActivityBox = styled.div`
     font-weight: 400;
     line-height: 1.5rem; /* 150% */
 `;
+
+/* 선수강 강의 안내 */
+const PreLectureSection = styled.section`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    padding: 5rem 5rem 5rem 5rem;
+`;
+
+const PreLectureInner = styled.div`
+    width: 100%;
+    max-width: 60.68rem;
+    display: flex;
+    flex-direction: column;
+`;
+
+const PreLectureTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    h2 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: "Cafe24 PRO Slim";
+        font-size: 2.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 3.125rem;
+    }
+
+    img {
+        width: 2rem;
+        height: 2.14988rem;
+    }
+`;
+
+const PreLectureNotice = styled.p`
+    color: var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B));
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.375rem;
+    margin-bottom: 2rem;
+`;
+
+const PreLectureList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+`;
+
+const PreLectureItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-radius: var(--unit-16, 1rem);
+    border: 1px solid var(--Primary-sub, #FF9B38);
+    background: var(--Orange-95, #FEF4E6);
+    gap: 0.75rem;
+
+  .text {
+    max-width: 70%;
+  }
+
+    h3 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.75rem; 
+
+    }
+
+    ul {
+        padding-left: 1.2rem;
+    }
+
+    li {
+        color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+    }
+
+    .link-btn {
+        width: 12.375rem;
+        padding: 1.125rem 2.25rem;
+        border-radius: 2.5rem;
+        background: var(--Primary-sub, #FF9B38);
+        color: #ffffff;
+        color: var(--Static-White, #FFF);
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.75rem; 
+        text-decoration: none;
+        white-space: nowrap;
+    }
+`;
+
 
 const FooterBannerSection = styled.section`
     width: 100%;
@@ -752,7 +978,7 @@ const FAQSection = styled.section`
     flex-direction: column;
     align-items: center;
     background: #ffffff;
-    padding-bottom: 0;
+    padding: 0rem 5rem 0rem 5rem;
 `;
 
 const FAQInner = styled.div`

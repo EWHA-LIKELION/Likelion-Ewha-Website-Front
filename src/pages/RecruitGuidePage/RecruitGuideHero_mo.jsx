@@ -16,7 +16,6 @@ const RecruitGuideHeroMo = () => {
 
                     <ButtonGroup>
                         <ApplyBlackButtonMobile />
-                        <DetailLinkDarkButtonMobile />
                     </ButtonGroup>
 
                     <SubText>
