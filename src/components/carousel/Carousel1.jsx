@@ -2,20 +2,25 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NexIcon from "../../../public/icons/next.svg";
 import PrevIcon from "../../../public/icons/previous.svg";
-import REVIEW_DATA from "../../data/reviews.json";
+import MEMBERS_DATA from "../../data/members.json";
 
 const Carousel1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 코멘트가 있는 멤버만 필터링
+  const filteredMembers = MEMBERS_DATA.members.filter(
+    (member) => member.shortComment && member.longComment
+  );
+
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? REVIEW_DATA.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? filteredMembers.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === REVIEW_DATA.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === filteredMembers.length - 1 ? 0 : prev + 1));
   };
 
-  const currentData = REVIEW_DATA[currentIndex];
+  const currentData = filteredMembers[currentIndex];
 
   return (
     <Container>
@@ -30,13 +35,13 @@ const Carousel1 = () => {
 
         <MainCard>
           <ScrollContent>
-            <CardHeader>{currentData.title}</CardHeader>
-            <CardBody>{currentData.desc}</CardBody>
+            <CardHeader>{currentData.shortComment}</CardHeader>
+            <CardBody>{currentData.longComment}</CardBody>
           </ScrollContent>
 
           <CardFooter>
             <strong>{currentData.name}</strong>
-            <span>{currentData.role}</span>
+            <span>{currentData.part} | {currentData.position || currentData.role}</span>
           </CardFooter>
         </MainCard>
       </CardWrapper>
