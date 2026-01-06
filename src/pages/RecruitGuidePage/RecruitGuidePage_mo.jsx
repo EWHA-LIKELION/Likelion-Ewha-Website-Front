@@ -327,7 +327,7 @@ const ScheduleGrid = styled.div`
     grid-template-columns: 1fr; 
     gap: 0.75rem;
     width: 100%;
-    max-width: 18.375rem; 
+    max-width: none; 
 
     @media (min-width: 458px) {
         max-width: none; 
@@ -349,8 +349,7 @@ const ScheduleCard = styled.div`
     gap: 0.25rem;
     
     height: 10.25rem;        
-    width: 100%;             
-    max-width: 18.375rem;   
+    width: 100%;           
     box-sizing: border-box;
     margin: 0 auto;
 `;
