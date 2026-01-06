@@ -57,13 +57,12 @@ const STATUS_CONFIG = {
 };
 
 const RecruitResult = () => {
-  const [searchParams] = useSearchParams();
-  const round = searchParams.get('round') || '2';
-  const roundName = round === '1' ? '1차' : '최종';
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+  const round = resultData?.round;
+  const roundName = round === '1' ? '1차' : '최종';
         
   useEffect(() => {
     const handleResize = () => {
@@ -76,7 +75,7 @@ const RecruitResult = () => {
 
   useEffect(() => {
     // TODO: API 연동
-    // fetchResult(round).then(data => {
+    // fetchResult().then(data => {
     //   setResultData(data);
     //   setLoading(false);
     // });
@@ -86,7 +85,7 @@ const RecruitResult = () => {
       setResultData({
         applicantName: '홍길동', // API에서 받아올 지원자 이름
         generation: '14기', // API에서 받아올 기수 정보
-        round: round,
+        round: '1', // API에서 받아올 라운드 정보 ('1' 또는 '2')
         status: 'pending', // 'pass' | 'fail' | 'pending'
         nextStep: {
           title: '면접 일정',
@@ -96,7 +95,7 @@ const RecruitResult = () => {
       });
       setLoading(false);
     }, 500);
-  }, [round]);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
