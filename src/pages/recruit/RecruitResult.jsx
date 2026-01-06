@@ -86,7 +86,7 @@ const RecruitResult = () => {
         applicantName: '홍길동', // API에서 받아올 지원자 이름
         generation: '14기', // API에서 받아올 기수 정보
         round: '1', // API에서 받아올 라운드 정보 ('1' 또는 '2')
-        status: 'pending', // 'pass' | 'fail' | 'pending'
+        status: 'pass', // 'pass' | 'fail' | 'pending'
         nextStep: {
           title: '면접 일정',
           date: '00월 00일 00시',
