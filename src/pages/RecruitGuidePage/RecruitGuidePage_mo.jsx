@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import RecruitGuideHeroMo from "./RecruitGuideHero_mo";
@@ -6,11 +7,110 @@ import faq from "../../data/faq.json";
 
 import {
     ApplyButtonMobile,
+    RecruitAlarmButtonMobile,
+    RecruitDisabledButtonMobile,
+    RecruitCheckButtonMobile,
 } from "../../components/buttons/MainButtons_mo";
+
+import { Modal } from "../../components/Modal";
+
+const getRecruitStatus = (schedule) => {
+    const now = new Date();
+
+    const applicationStart = new Date(schedule.application_start);
+    const applicationEnd = new Date(schedule.application_end);
+    const firstResultStart = new Date(schedule.first_result_start);
+    const firstResultEnd = new Date(schedule.first_result_end);
+    const finalResultStart = new Date(schedule.final_result_start);
+    const finalResultEnd = new Date(schedule.final_result_end);
+
+    if (now < applicationStart) return "BEFORE";
+
+    if (now >= applicationStart && now <= applicationEnd) {
+        return "RECRUITING";
+    }
+
+    if (now > applicationEnd && now < firstResultStart) {
+        return "CLOSED";
+    }
+
+    if (now >= firstResultStart && now <= firstResultEnd) {
+        return "FIRST_RESULT";
+    }
+
+    if (now >= finalResultStart && now <= finalResultEnd) {
+        return "FINAL_RESULT";
+    }
+
+    return "CLOSED";
+};
 
 
 const RecruitGuidePageMo = () => {
     const navigate = useNavigate();
+    const [recruitStatus, setRecruitStatus] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    useEffect(() => {
+    const fetchRecruitSchedule = async () => {
+        try {
+        const res = await fetch("/api/recruit/schedule");
+        const result = await res.json();
+
+        const schedule = result.data.recruitment_schedule;
+
+        const status = getRecruitStatus(schedule);
+        setRecruitStatus(status);
+        } catch (e) {
+        console.error("모집 일정 조회 실패", e);
+        }
+    };
+
+    fetchRecruitSchedule();
+    }, []);
+
+
+
+    const renderRecruitButton = () => {
+        switch (recruitStatus) {
+            // case 1️⃣ 서류 지원 기간
+            case "RECRUITING":
+            return (
+                <ApplyButtonMobile
+                onClick={() => navigate("/recruit/apply/form")}
+                />
+            );
+
+            // case 2️⃣ 모집 마감
+            case "CLOSED":
+            return <RecruitDisabledButtonMobile />;
+
+            // case 3️⃣ 1차 결과 발표
+            case "FIRST_RESULT":
+            return (
+                <RecruitCheckButtonMobile
+                onClick={() => navigate("/recruit/result")}
+                >
+                1차 합격자 조회
+                </RecruitCheckButtonMobile>
+            );
+
+            // case 4️⃣ 최종 결과 발표
+            case "FINAL_RESULT":
+            return (
+                <RecruitCheckButtonMobile
+                onClick={() => navigate("/recruit/result")}
+                >
+                최종 합격자 조회
+                </RecruitCheckButtonMobile>
+            );
+
+            // case 5️⃣ 모집 전 (default)
+            default:
+            return <RecruitAlarmButtonMobile onClick={() => setIsModalOpen(true)}/>;
+        }
+    };
+
 
     return (
         <>
@@ -263,12 +363,30 @@ const RecruitGuidePageMo = () => {
                 <Icon src="/icons/ellipse4.svg" alt="" />
                 <BannerText>빛나는 내일, 이대 멋사와 함께하세요!</BannerText>
                 <ButtonGroup>
-                    <ApplyButtonMobile />
+                    {renderRecruitButton()}
                 </ButtonGroup>
                 <SubText>
                 지원서를 제출하셨나요? <span>지원서 열람하기</span>
                 </SubText>
             </BottomBanner>
+            <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="14기 모집 사전 알림 등록"
+                description="이화여대 멋쟁이사자처럼 카카오톡 채널을 통해 모집이 시작되면 가장 먼저 알려드릴게요."
+                align="center"
+                actions={[
+                    {
+                        label: "카카오톡 바로가기",
+                        variant: "primary",
+                        fullWidth: true,
+                        onClick: () => {
+                            window.open("https://pf.kakao.com/_htxexfd", "_blank"); // 실제 채널 링크 입력
+                        }
+                    }
+                ]}
+            />
+
             </SectionWrapper>
         </Container>
 

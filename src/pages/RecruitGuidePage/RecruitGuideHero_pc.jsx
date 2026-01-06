@@ -1,10 +1,102 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     ApplyButton,
-    DetailLinkDarkButton,
+    RecruitDisabledButton,
+    RecruitCheckButton,
+    RecruitAlarmButton,
 } from "../../components/buttons/MainButtons_pc";
 
+import { Modal } from "../../components/Modal";
+
+const getRecruitStatus = (schedule) => {
+    const now = new Date();
+
+    const applicationStart = new Date(schedule.application_start);
+    const applicationEnd = new Date(schedule.application_end);
+    const firstResultStart = new Date(schedule.first_result_start);
+    const firstResultEnd = new Date(schedule.first_result_end);
+    const finalResultStart = new Date(schedule.final_result_start);
+    const finalResultEnd = new Date(schedule.final_result_end);
+
+    if (now < applicationStart) return "BEFORE";
+
+    if (now >= applicationStart && now <= applicationEnd) {
+        return "RECRUITING";
+    }
+
+    if (now > applicationEnd && now < firstResultStart) {
+        return "CLOSED";
+    }
+
+    if (now >= firstResultStart && now <= firstResultEnd) {
+        return "FIRST_RESULT";
+    }
+
+    if (now >= finalResultStart && now <= finalResultEnd) {
+        return "FINAL_RESULT";
+    }
+
+    return "CLOSED";
+};
+
 const RecruitGuideHeroPc = () => {
+    const navigate = useNavigate();
+    const [recruitStatus, setRecruitStatus] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+        useEffect(() => {
+            const fetchRecruitSchedule = async () => {
+            try {
+                const res = await fetch("/api/recruit/schedule");
+                const result = await res.json();
+    
+                const schedule = result.data.recruitment_schedule;
+                const status = getRecruitStatus(schedule);
+    
+                setRecruitStatus(status);
+            } catch (e) {
+                console.error("모집 일정 조회 실패", e);
+            }
+            };
+    
+            fetchRecruitSchedule();
+        }, []);
+    
+        const renderRecruitButton = () => {
+    
+            switch (recruitStatus) {
+                case "RECRUITING":
+                return (
+                    <ApplyButton
+                    onClick={() => navigate("/recruit/apply/form")}
+                    />
+                );
+    
+                case "CLOSED":
+                return <RecruitDisabledButton />;
+    
+                case "FIRST_RESULT":
+                return (
+                    <RecruitCheckButton onClick={() => navigate("/recruit/result")}>
+                    1차 합격자 조회
+                    </RecruitCheckButton>
+                );
+    
+                case "FINAL_RESULT":
+                return (
+                    <RecruitCheckButton onClick={() => navigate("/recruit/result")}>
+                    최종 합격자 조회
+                    </RecruitCheckButton>
+                );
+    
+                default:
+                return <RecruitAlarmButton onClick={() => setIsModalOpen(true)}/>;
+            }
+            };
+
+
     return (
         <Section>
             <Inner>
@@ -15,7 +107,7 @@ const RecruitGuideHeroPc = () => {
                     </Description>
 
                     <ButtonGroup>
-                        <ApplyButton />
+                        {renderRecruitButton()}
                     </ButtonGroup>
 
                     <SubText>
@@ -24,6 +116,23 @@ const RecruitGuideHeroPc = () => {
 
                 </Content>
             </Inner>
+            <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="14기 모집 사전 알림 등록"
+                description="이화여대 멋쟁이사자처럼 카카오톡 채널을 통해 모집이 시작되면 가장 먼저 알려드릴게요."
+                align="center"
+                actions={[
+                    {
+                        label: "카카오톡 바로가기",
+                        variant: "primary",
+                        fullWidth: true,
+                        onClick: () => {
+                            window.open("https://pf.kakao.com/_htxexfd", "_blank"); // 실제 링크 입력
+                        }
+                    }
+                ]}
+            />
         </Section>
     );
 };
