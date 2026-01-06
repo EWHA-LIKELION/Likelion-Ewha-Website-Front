@@ -162,7 +162,7 @@ const GreenArea = styled.div`
 
     @media (max-width: 799px) {
       flex-direction: column;
-      gap: 1rem;
+      gap: 2rem;
       text-align: center;
       align-items: center;
     }
