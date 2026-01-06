@@ -1,14 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import RecruitGuideHeroPc from "./RecruitGuideHero_pc";
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import {
     ApplyWhiteButton,
-    DetailLinkButton,
 } from "../../components/buttons/MainButtons_pc";
 import styled from "styled-components";
 import faq from "../../data/faq.json";
 
 
 const RecruitGuidePagePc = () => {
+    const navigate = useNavigate();
+
     return (
         <PageWrapper>
             {/* Hero */}
@@ -118,7 +120,7 @@ const RecruitGuidePagePc = () => {
                 <PartCard>
                     <h3>기획 디자인</h3>
                     <span>PM · DESIGN</span>
-                    <LinkWrapper href="#"> 
+                    <LinkWrapper onClick={() => navigate('/?part=pm#curriculum')}> 
                         <a>파트 소개 바로가기</a>
                         <img src="/icons/arrowRight3.svg" alt="icon" />
                     </LinkWrapper>
@@ -128,7 +130,7 @@ const RecruitGuidePagePc = () => {
                 <PartCard>
                     <h3>프론트엔드</h3>
                     <span>FRONTEND</span>
-                    <LinkWrapper href="#"> 
+                    <LinkWrapper onClick={() => navigate('/?part=fe#curriculum')}>
                         <a>파트 소개 바로가기</a>
                         <img src="/icons/arrowRight3.svg" alt="icon" />
                     </LinkWrapper>
@@ -137,7 +139,7 @@ const RecruitGuidePagePc = () => {
                 <PartCard>
                     <h3>백엔드</h3>
                     <span>BACKEND</span>
-                    <LinkWrapper href="#"> 
+                    <LinkWrapper onClick={() => navigate('/?part=be#curriculum')}>
                         <a>파트 소개 바로가기</a>
                         <img src="/icons/arrowRight3.svg" alt="icon" />
                     </LinkWrapper>
@@ -627,7 +629,7 @@ const PartCard = styled.div`
     }  
 `;
 
-const LinkWrapper = styled.a`
+const LinkWrapper = styled.div`
     display: flex;
     align-items: center; 
     gap: 0.5rem;       
