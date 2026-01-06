@@ -56,6 +56,10 @@ export const RecruitDisabledButton = (props) => (
   </RecruitDisabledStyle>
 );
 
+export const HomeButton = (props) => (
+    <PrimaryWhiteButton {...props}>메인으로</PrimaryWhiteButton>
+);
+
 /* =========================
     styled-components
 ========================= */
@@ -78,9 +82,19 @@ const BaseButton = styled.button`
   cursor: pointer;
   text-align: center;
 
+<<<<<<< HEAD
   &:disabled {
     cursor: not-allowed;
   }
+=======
+    &:disabled {
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        filter: brightness(0.97);
+    }
+>>>>>>> 17cd96b (💄 메인 버튼 추가 및 호버 효과 개선)
 `;
 
 /* ===== Primary (white text) ===== */

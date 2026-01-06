@@ -59,6 +59,10 @@ export const RecruitDisabledButtonMobile = (props) => (
   </RecruitDisabledStyle>
 );
 
+export const HomeButtonMobile = (props) => (
+  <PrimaryButton {...props}>메인으로</PrimaryButton>
+);
+
 /* =========================
     styled-components
 ========================= */
@@ -79,6 +83,10 @@ const BaseButton = styled.button`
 
   cursor: pointer;
   white-space: nowrap;
+
+  &:hover {
+    filter: brightness(0.97);
+  }
 `;
 
 /* Primary */
