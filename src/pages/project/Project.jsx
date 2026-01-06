@@ -177,43 +177,43 @@ const ProjectWrapper = styled.div`
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-    padding: 80px 80px 160px 80px;
+    padding: 5rem 5rem 10rem 5rem;
 
-    @media (max-width: 799px) { /* 모바일 */
-        padding: 32px 16px 60px 16px;
-        gap: 16px;
+    @media (max-width: 49.9999rem) { /* 모바일 */
+        padding: 2rem 1rem 3.75rem 1rem;
+        gap: 1rem;
     }
 `
 
 const Contents = styled.div`
     z-index: 1;
     width: 100%;
-    max-width: 971px;
-    gap: 20px;
+    max-width: 60.6875rem;
+    gap: 1.25rem;
     display: flex;
     flex-direction: column;
 `
 
 const PageInfo = styled.div`
-    width: 412px;
+    width: 25.75rem;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.25rem;
 
-    @media (max-width: 412px) {
-        width: 348px;
+    @media (max-width: 25.75rem) {
+        width: 21.75rem;
     }
 `
 
 const PageName = styled.p`
     color: var(--Neutral-20, #2A2A2A);
     font-family: Bayon;
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: 400;
-    line-height: 46px;
+    line-height: 2.875rem;
 
-    @media (max-width: 799px) { /* 모바일 */
-        font-size: 32px;
+    @media (max-width: 49.9999rem) { /* 모바일 */
+        font-size: 2rem;
         line-height: 90%;
     }
 `
@@ -221,11 +221,11 @@ const PageName = styled.p`
 const PageLabel = styled.p`
     color: var(--Neutral-20, #2A2A2A);
 
-    @media (max-width: 799px) { /* 모바일 */
+    @media (max-width: 49.9999rem) { /* 모바일 */
         font-family: Pretendard;
-        font-size: 14px;
+        font-size: 0.875rem;
         font-weight: 400;
-        line-height: 22px;
+        line-height: 1.375rem;
     }
 `
 
@@ -238,10 +238,10 @@ const ListContainer = styled.div`
 const Count = styled.p`
     color: var(--Neutral-70, #9B9B9B);
 
-    @media (max-width: 799px) {
-        font-size: 12px;
+    @media (max-width: 49.9999rem) {
+        font-size: 0.75rem;
         font-weight: 400;
-        line-height: 20px;
+        line-height: 1.25rem;
     }
 `
 
@@ -249,27 +249,27 @@ const ProjectGrid = styled.div`
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 1.25rem;
 
     /*  1줄 */
-    @media (max-width: 349px) {
+    @media (max-width: 21.8125rem) {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 1rem;
     }
 
     /*  2줄 */
-    @media (min-width: 350px) and (max-width: 519px) {
+    @media (min-width: 21.875rem) and (max-width: 32.4375rem) {
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 1rem;
     }
 
-    @media (min-width: 520px) and (max-width: 799px) {
+    @media (min-width: 32.5rem) and (max-width: 49.9999rem) {
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 1rem;
     }
 
     /* 3줄 */
-    @media (min-width: 800px) {
+    @media (min-width: 50rem) {
         grid-template-columns: repeat(3, 1fr);
     }
 `
@@ -277,18 +277,18 @@ const ProjectGrid = styled.div`
 const Pagination = styled.div`
     display: flex;
     justify-content: center;
-    gap: 8px;
-    margin-top: 40px;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
 `
 
 const PageBtn = styled.button`
     display: flex;
-    width: 40px;
-    height: 40px;
+    width: 2.5rem;
+    height: 2.5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     border: none;
     background: ${({ $active }) => ($active ? 'var(--Cool-Neutral-98, #F4F4F5)' : 'transparent')};
     color: ${({ $active }) => ($active ? 'var(--Neutral-20)' : 'var(--Neutral-70, #9B9B9B)')};
@@ -302,66 +302,66 @@ const PageBtn = styled.button`
 
 const Design1 = styled.div`
     position: absolute;
-    top: -20px;
-    left: 40px;
+    top: -1.25rem;
+    left: 2.5rem;
     
     img {
         aspect-ratio: 230 / 145;
-        width: 230px;
+        width: 14.375rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        left: 45px;
+    @media (max-width: 49.9999rem) {
+        left: 2.8125rem;
         top: 0;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `
 
 const Design2 = styled.div`
     position: absolute;
-    top: 323px;
-    right: -40px;
+    top: 20.1875rem;
+    right: -2.5rem;
     
     img {
         aspect-ratio: 230 / 145;
-        width: 224px;
+        width: 14rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        right: -12px;
-        top: 215px;
+    @media (max-width: 49.9999rem) {
+        right: -0.75rem;
+        top: 13.4375rem;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `
 
 const Design3 = styled.div`
     position: absolute;
-    top: 1014px;
-    left: -40px;
-    
+    top: 63.375rem;
+    left: -2.5rem;
+
     img {
         aspect-ratio: 230 / 145;
-        width: 192px;
+        width: 12rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        left: -12px;
-        top: 485px;
+    @media (max-width: 49.9999rem) {
+        left: -0.75rem;
+        top: 30.3125rem;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `

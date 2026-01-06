@@ -89,9 +89,17 @@ function ProjectDetail() {
                         </Refer>
                     </ReferContent>
 
-                    <ProjectImg>
-                        <img src={project.image} />
-                    </ProjectImg>
+                    <ScrollFullWidth>
+                        <ScrollInner>
+                            <ProjectImg>
+                                <ImageScroll>
+                                    {(project.detailImages || [project.detailImages]).map((img, idx) => (
+                                        <img key={idx} src={img} />
+                                    ))}
+                                </ImageScroll>
+                            </ProjectImg>
+                        </ScrollInner>
+                    </ScrollFullWidth>
 
                     <Member>
                         <p className="h4-bold" style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>프로젝트 팀원</p>
@@ -133,7 +141,7 @@ function ProjectDetail() {
                                         styleType={1}
                                     />
                                 </div>
-                        ))}
+                            ))}
                         </ProjectGrid>
                     </MoreContent>
                 </Project>
@@ -158,57 +166,63 @@ const Thumbnail = styled.div`
     overflow: hidden;
 
     img {
+        height: 33.75rem;
         width: 100%;
         object-fit: cover;
         display: block;
+        background: var(--Neutral-95, #DCDCDC);
+    }
+
+    @media (max-width: 49.9999rem) {
+        height: 12.5rem;
     }
 `
 
 const Container = styled.div`
     width: 100%;
     display: flex;
-    padding: 52px 80px 160px 80px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-
-    @media (max-width: 799px) {
-        padding: 24px 16px;
-    }
+    gap: 2.5rem;
 `
 
 const Project = styled.div`
-    max-width: 971px;
+    max-width: 60.6875rem;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 1.25rem;
+    padding: 3.25rem 5rem 10rem 5rem;
+    @media (max-width: 49.9999rem) {
+        padding: 1.5rem 1rem;
+    }
 
-    @media (min-width: 800px) {
+    @media (min-width: 50rem) {
         p.h3-bold {
-            font-size: 24px;
+            font-size: 1.5rem;
         }
 
         p.h5-regular, p.h5-bold, p.body-regular {
-            font-size: 16px;
+            font-size: 1rem;
         }
 
         p.h5-bold {
-            font-size: 20px;
+            font-size: 1.25rem;
         }
     }
 
-    @media (max-width: 799px) {
+    @media (max-width: 49.9999rem) {
         p.h4-bold, p.h5-regular {
-            font-size: 20px;
+            font-size: 1.25rem;
         }
 
         p.footnote-regular {
-            font-size: 12px;
+            font-size: 0.75rem;
         }
 
         p.h5-bold {
-            font-size: 16px;
+            font-size: 0.75rem;
         }
     }
 `
@@ -225,7 +239,7 @@ const ProjectContent = styled.div`
 
 const ReferContent = styled.div`
     display: flex;
-    gap: 40px;
+    gap: 2.5rem;
     flex-wrap: wrap;
 `
 
@@ -235,14 +249,64 @@ const Refer = styled.div`
     flex-direction: column;
 `
 
+const ScrollFullWidth = styled.div`
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+
+    @media (min-width: 60.6875rem) {
+        display: flex;
+        justify-content: center;
+    }
+`
+
+const ScrollInner = styled.div`
+    max-width: 60.6875rem;
+    padding: 0 50rem;
+
+    @media (max-width: 49.9999rem) {
+        padding: 0 1rem;
+    }
+`;
+
 const ProjectImg = styled.div`
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
+`
+
+const ImageScroll = styled.div`
+    width: 100%;
+
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1.25rem;
+
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 
     img {
-        width: 100%;
+        flex: 0 0 auto;
+        width: 18.75rem;
+        height: 31.25rem;
         object-fit: cover;
-        display: block;
+
+        border-radius: 1rem;
+        border: 0.125rem solid var(--Line-Neutral, rgba(112, 115, 124, 0.16));
+
+        box-shadow: 0 0.5rem 1rem 0 rgba(24, 24, 27, 0.10);
+    }
+
+    @media (max-width: 49.9999rem) {
+        gap: 0.5rem;
+
+        img {
+            width: 15.9375rem;
+            height: 25rem;
+            aspect-ratio: 9/16;
+            border-radius: 0.5rem;
+            border: 0.0625rem solid var(--Line-Neutral, rgba(112, 115, 124, 0.16));
+            box-shadow: 0 0.5rem 1rem 0 rgba(24, 24, 27, 0.10);
+        }
     }
 `
 
@@ -250,38 +314,38 @@ const Member = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1rem;
 `
 
 const PartContainer = styled.div`
     display: flex;
     flex-direction: row;
-    gap: 80px;
+    gap: 5rem;
     flex-wrap: wrap;
 `
 const Part = styled.div`
     width: auto;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.375rem;
 `
 
 const PartMember = styled.div`
     color: var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B));
     font-feature-settings: 'liga' off, 'clig' off;
     font-family: "DM Sans";
-    font-size: 13.098px;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 400;
-    line-height: 21.83px;
+    line-height: 1.375rem;
 `
 
 const MoreContent = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 60px;
+    gap: 1.25rem;
+    margin-top: 3.75rem;
 `
 
 const MoreLabel = styled.div`
@@ -290,32 +354,32 @@ const MoreLabel = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 0.625rem;
 
     p {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 0.0375rem;
         cursor: pointer;
     }
 
     .rightarrow {
-        width: 8px;
-        height: 16px;
+        width: 0.5rem;
+        height: 1rem;
         display: block;
         justify-content: center;
         align-items: center;
     }
 
-    @media (max-width: 799px) {
-        font-size: 16px;
+    @media (max-width: 49.9999rem) {
+        font-size: 1rem;
         font-weight: 500;
-        line-height: 24px;
-        gap: 8px;
+        line-height: 1.5rem;
+        gap: 0.5rem;
 
         .rightarrow {
-            width: 7px;
-            height: 14px;
+            width: 0.4375rem;
+            height: 0.875rem;
             object-fit: contain;
         }
     }
@@ -324,10 +388,32 @@ const MoreLabel = styled.div`
 const ProjectGrid = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+    max-width: 60.6875rem;
+    min-width: 0;
 
-    @media (max-width: 799px) {
+    /*  1줄 */
+    @media (max-width: 21.8125rem) {
         grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    /*  2줄 */
+    @media (min-width: 21.875rem) and (max-width: 32.4375rem) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    @media (min-width: 32.5rem) and (max-width: 49.9999rem) {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
+    /* 3줄 */
+    @media (min-width: 50rem) {
+        grid-template-columns: repeat(3, 1fr);
     }
 `
