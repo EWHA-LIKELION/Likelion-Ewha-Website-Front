@@ -29,7 +29,7 @@ function App() {
             <Route path="form" element={<div> recruit-apply-form </div>} />
           </Route>
           <Route path="preview" element={<div> recruit-preview </div>} />
-          <Route path="result" element={<div> recruit-result </div>} />
+          <Route path="result" element={<RecruitResult />} />
         </Route>
       </Route>
 
