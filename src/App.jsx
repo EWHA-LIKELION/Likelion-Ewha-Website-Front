@@ -19,13 +19,16 @@ function App() {
         <Route path="people" element={<People />} />
         <Route path="recruit" element={<RecruitGuidePage />} />
         <Route path="apply/test" element={<Apply2 />} />
+      </Route>
+
+      {/* Admin Layout: /admin/* 는 전부 여기로 */}
+      <Route path="admin" element={<LayoutAdmin />}>
+        {/* 테스트용 기본 화면 */}
+        <Route path="preview" element={<div>ADMIN PREVIEW</div>} />
+        {/* 실제 Admin pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
         <Route path="interview" element={<div>INTERVIEW</div>} />
         <Route path="application" element={<div>APPLICATION</div>} />
-      </Route>
-
-      {/* 테스트용 Admin Layout (Layout 바깥) */}
-      <Route path="admin/preview" element={<LayoutAdmin />}>
       </Route>
     </Routes>
   );
