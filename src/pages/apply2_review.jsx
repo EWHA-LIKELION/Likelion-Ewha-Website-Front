@@ -49,7 +49,7 @@ export default function Apply2Review() {
     setApp(null);
 
     try {
-      const res = await api.post("/recruitments/application/content/", {
+      const res = await api.post("/recruitments/application/my/", {
         application_code: code.trim(),
       });
 

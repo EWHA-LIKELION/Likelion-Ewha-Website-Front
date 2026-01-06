@@ -82,7 +82,7 @@ function MoModal({ open, onClose, children }) {
 export default function Apply2() {
   const navigate = useNavigate();
   const location = useLocation();
-  const base = location.state || {}; // Step에서 넘어온 인적/선택 정보
+  const base = location.state || {};
   const isMobile = useIsMobile(799);
 
   const [q1, setQ1] = useState("");
@@ -103,7 +103,6 @@ export default function Apply2() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
 
-  // 제출 성공 후 서버가 내려준 코드
   const [applicationCode, setApplicationCode] = useState("");
 
   const over1 = q1.length > MAX_CHARS;
@@ -136,6 +135,7 @@ export default function Apply2() {
   const removeFileAt = (bucketSetter, idx) => {
     bucketSetter((prev) => prev.filter((_, i) => i !== idx));
   };
+
   const canSubmit =
     isFilled(q1) &&
     isFilled(q2) &&
@@ -164,7 +164,9 @@ export default function Apply2() {
 
     const baseURL = import.meta.env.VITE_API_BASE_URL;
     if (!baseURL) {
-      setSubmitError("API 주소(VITE_API_BASE_URL)가 설정되지 않았습니다. .env / Vercel 환경변수를 확인해주세요.");
+      setSubmitError(
+        "API 주소(VITE_API_BASE_URL)가 설정되지 않았습니다. .env / Vercel 환경변수를 확인해주세요."
+      );
       return;
     }
 
@@ -191,16 +193,18 @@ export default function Apply2() {
       formData.append("personal_statement_2", q2.trim());
       formData.append("personal_statement_3", q3.trim());
       formData.append("personal_statement_4", q4.trim());
-      formData.append("personal_statement_5", q5.trim());
 
-      // 파일(옵션): 있으면 보내고 없으면 안 보냄
+      // 선택 문항: 빈 값이면 아예 보내지 않음
+      const q5Trim = q5.trim();
+      if (q5Trim.length > 0) {
+        formData.append("personal_statement_5", q5Trim);
+      }
+
       precourseFiles.forEach((file) => formData.append("completed_prerequisites", file));
       portfolioFiles.forEach((file) => formData.append("portfolios", file));
 
-      // 제출
       const data = await ApplicationsAPI.createApplication(formData);
-      const codeFromServer =
-        data?.application_code || data?.applicationCode || data?.code || "";
+      const codeFromServer = data?.application_code || "";
 
       setApplicationCode(codeFromServer);
 
@@ -408,7 +412,12 @@ export default function Apply2() {
 
                   <InputWrap>
                     <InputForceSingle>
-                      <Input variant="form" placeholder="내용을 작성해주세요." value={q5} onChange={onChange(setQ5)} />
+                      <Input
+                        variant="form"
+                        placeholder="내용을 작성해주세요."
+                        value={q5}
+                        onChange={onChange(setQ5)}
+                      />
                     </InputForceSingle>
                   </InputWrap>
                 </EssayItem5>
@@ -434,7 +443,13 @@ export default function Apply2() {
                       <AddFileButton type="button" onClick={() => precourseRef.current?.click()}>
                         파일 추가
                       </AddFileButton>
-                      <HiddenFileInput ref={precourseRef} type="file" multiple onChange={onPickFiles(setPrecourseFiles)} />
+                      <HiddenFileInput
+                        ref={precourseRef}
+                        type="file"
+                        multiple
+                        accept="image/png,image/jpeg,image/jpg,image/gif"
+                        onChange={onPickFiles(setPrecourseFiles)}
+                      />
                     </EtcTop>
 
                     {precourseFiles.length > 0 && (
@@ -464,7 +479,13 @@ export default function Apply2() {
                       <AddFileButton type="button" onClick={() => portfolioRef.current?.click()}>
                         파일 추가
                       </AddFileButton>
-                      <HiddenFileInput ref={portfolioRef} type="file" multiple onChange={onPickFiles(setPortfolioFiles)} />
+                      <HiddenFileInput
+                        ref={portfolioRef}
+                        type="file"
+                        multiple
+                        accept="image/png,image/jpeg,image/jpg,image/gif,application/pdf"
+                        onChange={onPickFiles(setPortfolioFiles)}
+                      />
                     </EtcTop>
 
                     {portfolioFiles.length > 0 && (
@@ -494,7 +515,6 @@ export default function Apply2() {
         </Sections>
       </Frame>
 
-      {/* PC Confirm */}
       {!isMobile && (
         <Modal
           open={confirmOpen}
@@ -518,7 +538,6 @@ export default function Apply2() {
         />
       )}
 
-      {/* PC Result */}
       {!isMobile && (
         <Modal
           open={resultOpen}
@@ -562,7 +581,6 @@ export default function Apply2() {
         />
       )}
 
-      {/* MO Confirm */}
       <MoModal open={isMobile && confirmOpen} onClose={() => setConfirmOpen(false)}>
         <MoDialogInner $variant="confirm">
           <MoTop>
@@ -588,7 +606,6 @@ export default function Apply2() {
         </MoDialogInner>
       </MoModal>
 
-      {/* MO Result */}
       <MoModal open={isMobile && resultOpen} onClose={() => setResultOpen(false)}>
         <MoDialogInner $variant="result">
           <MoTop>
@@ -659,6 +676,7 @@ export default function Apply2() {
   );
 }
 
+/* styles */
 
 const Page = styled.div`
   display: flex;
