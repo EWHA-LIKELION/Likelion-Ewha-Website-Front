@@ -2,11 +2,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 
-/*
-  코드 요약:
-  - MO 패널은 absolute overlay로 변경(본문 미이동 + TopBar와 함께 스크롤)
-*/
-
 const TopBar = ({ onToggleMobileMenu }) => {
   const headerRef = useRef(null);
 
@@ -21,6 +16,11 @@ const TopBar = ({ onToggleMobileMenu }) => {
       onToggleMobileMenu?.(next);
       return next;
     });
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+    onToggleMobileMenu?.(false);
   };
 
   useLayoutEffect(() => {
@@ -86,28 +86,37 @@ const TopBar = ({ onToggleMobileMenu }) => {
         $top={headerH}
         $footerTopAbs={footerTopAbs}
       >
-        <MoBackdrop type="button" aria-label="Close menu" onClick={toggleMenu} />
+        <MoBackdrop type="button" aria-label="Close menu" onClick={closeMenu} />
 
-        <MoPanel aria-label="Mobile menu">
+        <MoPanel aria-label="Mobile menu" $open={isOpen}>
           <MoMenu>
             <MoItem
               to="/project"
               $active={selected === "project"}
-              onClick={() => setSelected("project")}
+              onClick={() => {
+                setSelected("project");
+                closeMenu();
+              }}
             >
               PROJECT
             </MoItem>
             <MoItem
               to="/people"
               $active={selected === "people"}
-              onClick={() => setSelected("people")}
+              onClick={() => {
+                setSelected("people");
+                closeMenu();
+              }}
             >
               PEOPLE
             </MoItem>
             <MoItem
               to="/recruit"
               $active={selected === "recruit"}
-              onClick={() => setSelected("recruit")}
+              onClick={() => {
+                setSelected("recruit");
+                closeMenu();
+              }}
             >
               RECRUIT
             </MoItem>
@@ -141,7 +150,6 @@ const Inner = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  /* PC: 800px 이상 */
   @media (min-width: 800px) {
     width: 1440px;
     min-width: 800px;
@@ -149,7 +157,6 @@ const Inner = styled.div`
     gap: 10px;
   }
 
-  /* MO: 320px ~ 799px */
   @media (max-width: 799px) {
     width: 100%;
     min-width: 320px;
@@ -221,7 +228,7 @@ const MoOverlay = styled.div`
   display: none;
 
   @media (max-width: 799px) {
-    display: ${({ $open }) => ($open ? "block" : "none")};
+    display: block;
     position: absolute;
     left: 0;
     right: 0;
@@ -232,6 +239,9 @@ const MoOverlay = styled.div`
         : `bottom: 0;`}
 
     z-index: 999;
+    opacity: ${({ $open }) => ($open ? 1 : 0)};
+    pointer-events: ${({ $open }) => ($open ? "auto" : "none")};
+    transition: opacity 200ms ease;
   }
 `;
 
@@ -260,6 +270,9 @@ const MoPanel = styled.aside`
   gap: 10px;
 
   background: var(--neutral-15, #1c1c1c);
+  transform: translateX(${({ $open }) => ($open ? "0%" : "100%")});
+  transition: transform 240ms ease;
+  will-change: transform;
 `;
 
 const MoMenu = styled.nav`
