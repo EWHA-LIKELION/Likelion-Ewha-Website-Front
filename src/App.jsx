@@ -6,6 +6,7 @@ import ProjectDetail from "./pages/project/project-detail/ProjectDetail.jsx";
 import People from "./pages/people/People.jsx";
 import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
 import RecruitPart from "./pages/recruit/RecruitPart.jsx";
+import RecruitResult from "./pages/recruit/RecruitResult.jsx";
 import Apply2 from "./pages/apply2.jsx";
 import LayoutAdmin from "./layouts/adminlayout.jsx";
 
@@ -28,7 +29,7 @@ function App() {
             <Route path="form" element={<div> recruit-apply-form </div>} />
           </Route>
           <Route path="preview" element={<div> recruit-preview </div>} />
-          <Route path="result" element={<div> recruit-result </div>} />
+          <Route path="result" element={<RecruitResult />} />
         </Route>
       </Route>
 
