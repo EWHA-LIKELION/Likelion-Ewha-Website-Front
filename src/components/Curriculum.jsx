@@ -20,6 +20,10 @@ const Curriculum = ({ part = "pm" }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    setOpenIndexes([]);
+  }, [part]);
+
   const toggleSession = (index) => {
     setOpenIndexes(prev => 
       prev.includes(index) 
