@@ -1,58 +1,14 @@
-import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
 import CloverIcon from "../../../public/icons/clover.svg";
 import Clover1Icon from "../../../public/icons/clover1.svg";
-import orangePattern from "../../../public/icons/orange.svg";
+import orangePattern from "../../../public/icons/orange1.svg";
 import greenPattern from "../../../public/icons/green.svg";
 
-import {
-  RecruitAlarmButton,
-  RecruitInfoButton,
-} from "../../components/buttons/MainButtons_pc";
-
-import {
-  RecruitAlarmButtonMobile,
-  RecruitInfoButtonMobile,
-} from "../../components/buttons/MainButtons_mo";
-
-import { Modal } from "../../components/Modal";
+import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 
 const EndSection = () => {
-  // --------------------------------------------------------
-  // 1. 상태 관리
-  // --------------------------------------------------------
-  const isRecruiting = false; // false(마감/알림) / true(모집중)
-
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
-  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
-  const [codeValue, setCodeValue] = useState("");
-
-  const goRecruitPage = () => {
-    window.open("https://apply.likelion.org", "_blank");
-  };
-
-  const openCodeModal = (e) => {
-    e.preventDefault();
-    setCodeValue("");
-    setIsCodeModalOpen(true);
-  };
-
-  const openAlarmModal = () => {
-    setIsAlarmModalOpen(true);
-  };
-
-  const handleCheckCode = () => {
-    if (codeValue.trim() === "") return;
-    alert(`입력한 코드: ${codeValue}\n확인되었습니다! (API 연결 추후에 필요)`);
-    setIsCodeModalOpen(false);
-  };
-
-  const goKakaoChannel = () => {
-    window.open("https://pf.kakao.com/_htxexfd", "_blank");
-  };
-
   const goInstagram = () => {
     window.open("https://www.instagram.com/likelion_ewha/", "_blank");
   };
@@ -75,11 +31,9 @@ const EndSection = () => {
               이대 멋사를 수료한 벗들의 <br />
               솔직한 활동 후기
             </p>
-            {/* PC용 더보기 버튼 (모바일에서 숨김) */}
             <PcMoreButton onClick={goInstagram}>더보기</PcMoreButton>
           </div>
 
-          {/* 3. 모바일용 더보기 버튼 (PC:숨김 / MO:맨아래) */}
           <MobileMoreButtonWrapper>
             <MoreButton onClick={goInstagram}>더보기</MoreButton>
           </MobileMoreButtonWrapper>
@@ -115,96 +69,24 @@ const EndSection = () => {
         <FooterContent>
           <LogoWrapper>
             <div className="big-title">
-              {/* 1. 윗줄 그룹 (GRW + 꽃 + L TO) */}
               <div className="top-row">
                 <span>GRW</span>
                 <img src={Clover1Icon} alt="flower" className="flower-o" />
                 <span>L TO</span>
               </div>
-
-              {/* 2. 아랫줄 (WORLD!) */}
               <span className="green-text">WORLD!</span>
             </div>
           </LogoWrapper>
 
-          {/* PC 버튼 */}
           <PcButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButton onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButton onClick={openAlarmModal} />
-            )}
+            <RecruitStatusButton isMobile={false} />
           </PcButtonArea>
 
-          {/* Mobile 버튼 */}
           <MobileButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButtonMobile onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButtonMobile onClick={openAlarmModal} />
-            )}
+            <RecruitStatusButton isMobile={true} />
           </MobileButtonArea>
-
-          {/* 하단 텍스트 */}
-          {isRecruiting ? (
-            <SubLink href="#" onClick={openCodeModal}>
-              지원서를 제출하셨나요? <u>지원서 열람하기</u>
-            </SubLink>
-          ) : (
-            <EndText>13기 모집이 종료되었습니다.</EndText>
-          )}
         </FooterContent>
       </FooterSection>
-
-      {/* 모달 컴포넌트들 */}
-      <Modal
-        open={isAlarmModalOpen}
-        onClose={() => setIsAlarmModalOpen(false)}
-        type="info"
-        title="14기 모집 사전 알림 등록"
-        description={
-          "이화여대 멋쟁이사자처럼 카카오톡 채널을 통해\n모집이 시작되면 가장 먼저 알려드릴게요."
-        }
-        align="left"
-        actions={[
-          {
-            label: "카카오톡 바로가기",
-            variant: "primary",
-            fullWidth: true,
-            onClick: goKakaoChannel,
-          },
-        ]}
-      />
-
-      <Modal
-        open={isCodeModalOpen}
-        onClose={() => setIsCodeModalOpen(false)}
-        type="form"
-        title="지원 코드 입력"
-        description={
-          "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요."
-        }
-        align="left"
-        input={{
-          value: codeValue,
-          onChange: (e) => setCodeValue(e.target.value),
-          placeholder: "코드를 입력해주세요.",
-        }}
-        actions={[
-          {
-            label: "확인",
-            variant: "primary",
-            fullWidth: true,
-            disabled: codeValue.length === 0,
-            onClick: handleCheckCode,
-          },
-        ]}
-        helper={{
-          text: "지원 코드를 잊어버리셨나요? ",
-          actionText: "카카오톡 문의하기",
-          onAction: goKakaoChannel,
-        }}
-      />
     </SectionWrapper>
   );
 };
@@ -264,7 +146,7 @@ const GreenArea = styled.div`
     padding: 2rem 1rem;
   }
   @media (max-width: 375px) {
-    padding: 2rem 0.5rem; /* 좌우 여백을 1rem -> 0.5rem으로 줄임 */
+    padding: 2rem 0.5rem;
   }
 
   & > div {
@@ -280,13 +162,12 @@ const GreenArea = styled.div`
 
     @media (max-width: 799px) {
       flex-direction: column;
-      gap: 1rem;
+      gap: 2rem;
       text-align: center;
       align-items: center;
     }
   }
 
-  /* 1. 캐러셀 박스 */
   .carousel-box {
     flex-shrink: 0;
 
@@ -297,27 +178,26 @@ const GreenArea = styled.div`
     }
 
     @media (max-width: 799px) {
-      order: 2; /* 텍스트 아래로 */
+      order: 2;
       width: 100%;
     }
   }
 
-  /* 2. 텍스트 박스 */
   .text-box {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* PC 기본값: 왼쪽 정렬 */
+    align-items: flex-start;
 
     @media (min-width: 800px) and (max-width: 1019px) {
       width: 100% !important;
-      align-items: flex-start !important; /* 왼쪽 정렬 강제 */
+      align-items: flex-start !important;
       text-align: left;
       padding: 0 !important;
     }
 
     @media (max-width: 799px) {
-      order: 1; /* 캐러셀 위로 */
-      align-items: center; /* 가운데 정렬 */
+      order: 1;
+      align-items: center;
     }
 
     .title {
@@ -343,13 +223,12 @@ const GreenArea = styled.div`
         line-height: 1.5rem;
       }
       .subtitle br {
-        display: none; /* 줄바꿈 제거 */
+        display: none;
       }
     }
   }
 `;
 
-/* 공통 더보기 버튼 스타일 */
 const MoreButton = styled.button`
   margin-top: 1.5rem;
   padding: 0.875rem 2.25rem;
@@ -371,7 +250,6 @@ const MoreButton = styled.button`
   }
 `;
 
-/* PC용 버튼 (모바일 숨김) */
 const PcMoreButton = styled(MoreButton)`
   @media (max-width: 799px) {
     display: none;
@@ -382,7 +260,7 @@ const MobileMoreButtonWrapper = styled.div`
   display: none;
   @media (max-width: 799px) {
     display: block;
-    order: 3; /* 캐러셀(2) 다음 */
+    order: 3;
     margin-top: 0;
   }
 `;
@@ -397,7 +275,7 @@ const OrangeArea = styled.div`
 
   .news-header {
     width: 100%;
-    padding-left: 100px;
+    padding-left: max(0px, calc((100% - 960px) / 2));
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -418,6 +296,11 @@ const OrangeArea = styled.div`
       line-height: 2.25rem;
     }
   }
+  @media (min-width: 800px) and (max-width: 1099px) {
+    .news-header {
+      padding-left: 5rem;
+    }
+  }
 
   @media (max-width: 799px) {
     padding-top: 2rem;
@@ -432,7 +315,7 @@ const OrangeArea = styled.div`
         line-height: 2.5rem;
       }
       .subtitle {
-        font-size: 1rem; /* 1.5rem -> 1rem */
+        font-size: 1rem;
         line-height: 1.5rem;
       }
     }
@@ -458,7 +341,7 @@ const FooterSection = styled.section`
   position: relative;
   width: 100%;
   background: #fff;
-  overflow: visible;
+  overflow: hidden;
 
   display: flex;
   justify-content: center;
@@ -468,10 +351,10 @@ const FooterSection = styled.section`
   padding: 5rem 18.5625rem;
 
   @media (max-width: 799px) {
-    min-height: unset !important;
+    min-height: 22rem; /* RecruitPart 스타일 적용 */
     height: auto !important;
     padding: 4.5rem 1rem 4rem 1rem;
-    align-items: flex-start;
+    align-items: center; /* IntroSection과 동일하게 center */
     min-width: 0;
   }
 `;
@@ -480,16 +363,13 @@ const PatternTop = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 10.00025rem;
-  height: 10.00025rem;
-  left: 7.89888rem;
-  top: -3.38275rem;
+  left: 2.89888rem;
+  top: 0;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 3.75rem;
-    height: 3.75rem;
-    left: 2.375rem;
-    top: -1.5rem;
+    transform: scale(0.5);
+    transform-origin: left top;
   }
 `;
 
@@ -497,14 +377,13 @@ const PatternBottom = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 14rem;
   right: 0;
-  top: 20.1875rem;
+  top: 17rem;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 5.25rem;
-    top: 13.25rem;
-    right: 0;
+    transform: scale(0.5);
+    transform-origin: right top;
   }
 `;
 
@@ -604,34 +483,5 @@ const MobileButtonArea = styled.div`
 
   @media (max-width: 799px) {
     display: flex !important;
-  }
-`;
-
-const SubLink = styled.a`
-  color: #888888;
-  font-size: 0.9rem;
-  text-decoration: none;
-  cursor: pointer;
-  u {
-    margin-left: 6px;
-    color: #555;
-    font-weight: 600;
-    text-underline-offset: 3px;
-  }
-  &:hover u {
-    color: #000;
-  }
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const EndText = styled.p`
-  color: #888888;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 0.25rem;
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
   }
 `;

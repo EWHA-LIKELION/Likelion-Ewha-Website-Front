@@ -47,6 +47,18 @@ export const RecruitAlarmButtonMobile = (props) => (
   <DefaultButton {...props}>14기 모집 알림 받기</DefaultButton>
 );
 
+/* [추가 1] 합격자 조회 버튼 */
+export const RecruitCheckButtonMobile = ({ children, ...props }) => (
+  <DefaultButton {...props}>{children}</DefaultButton>
+);
+
+/* [추가 2] 모집 마감 버튼  */
+export const RecruitDisabledButtonMobile = (props) => (
+  <RecruitDisabledStyle disabled {...props}>
+    14기 지원 마감
+  </RecruitDisabledStyle>
+);
+
 /* =========================
     styled-components
 ========================= */
@@ -125,4 +137,15 @@ const DisabledButton = styled(BaseButton)`
   background-color: #9b9b9b;
   color: #ffffff;
   border: none;
+`;
+
+const RecruitDisabledStyle = styled(BaseButton)`
+  width: 13.75rem; /* DefaultButton과 동일한 너비 */
+  height: 2.625rem;
+  padding: 0.625rem 1.5rem 0.625rem 1.75rem;
+
+  background-color: #9b9b9b;
+  color: #ffffff;
+  border: none;
+  cursor: default;
 `;

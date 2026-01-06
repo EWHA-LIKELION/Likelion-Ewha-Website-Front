@@ -1,158 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { keyframes } from "styled-components";
 import orangePattern from "../../../public/icons/orange.svg";
 import greenPattern from "../../../public/icons/green.svg";
 import Clover1Icon from "../../../public/icons/clover1.svg";
-import {
-  RecruitAlarmButton,
-  RecruitInfoButton,
-} from "../../components/buttons/MainButtons_pc";
-import {
-  RecruitAlarmButtonMobile,
-  RecruitInfoButtonMobile,
-} from "../../components/buttons/MainButtons_mo";
-import { Modal } from "../../components/Modal";
+import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 
 const IntroSection = () => {
-  // --------------------------------------------------------
-  // 1. 상태 관리
-  // --------------------------------------------------------
-  const isRecruiting = false;
-
-  const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
-  const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
-  const [codeValue, setCodeValue] = useState("");
-
-  const goRecruitPage = () => {
-    window.open("https://apply.likelion.org", "_blank");
-  };
-
-  const openCodeModal = (e) => {
-    e.preventDefault();
-    setCodeValue("");
-    setIsCodeModalOpen(true);
-  };
-
-  const openAlarmModal = () => {
-    setIsAlarmModalOpen(true);
-  };
-
-  const handleCheckCode = () => {
-    if (codeValue.trim() === "") return;
-    alert(`입력한 코드: ${codeValue}\n확인되었습니다! (API 연결 추후에 필요)`);
-    setIsCodeModalOpen(false);
-  };
-
-  const goKakaoChannel = () => {
-    window.open("https://pf.kakao.com/_htxexfd", "_blank");
-  };
-
   return (
-    <>
-      <Section>
-        <PatternTop src={orangePattern} alt="" aria-hidden="true" />
-        <PatternBottom src={greenPattern} alt="" aria-hidden="true" />
+    <Section>
+      <PatternTop src={orangePattern} alt="" aria-hidden="true" />
+      <PatternBottom src={greenPattern} alt="" aria-hidden="true" />
 
-        <Content>
-          <SubText>
-            국내 최대 규모의 연합 IT 동아리 멋쟁이사자처럼 X 이화여자대학교
-          </SubText>
+      <Content>
+        <SubText>
+          국내 최대 규모의 연합 IT 동아리 멋쟁이사자처럼 X 이화여자대학교
+        </SubText>
 
-          {/* 로고 영역 */}
-          <LogoWrapper>
-            <div className="big-title">
-              <div className="top-row">
-                <span>LIKELI</span>
-                <img src={Clover1Icon} alt="logo-icon" className="flower-o" />
-                <span>N</span>
-              </div>
-
-              {/* 아랫줄 EWHA */}
-              <span className="green-text">EWHA</span>
+        {/* 로고 영역 */}
+        <LogoWrapper>
+          <div className="big-title">
+            <div className="top-row">
+              <span>LIKELI</span>
+              <img src={Clover1Icon} alt="logo-icon" className="flower-o" />
+              <span>N</span>
             </div>
-          </LogoWrapper>
+            <span className="green-text">EWHA</span>
+          </div>
+        </LogoWrapper>
 
-          {/* 버튼 영역 */}
-          <PcButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButton onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButton onClick={openAlarmModal} />
-            )}
-          </PcButtonArea>
+        {/* [변경] PC 버튼 영역: 통합 컴포넌트 하나만 넣으면 끝! */}
+        <PcButtonArea>
+          <RecruitStatusButton isMobile={false} />
+        </PcButtonArea>
 
-          <MobileButtonArea>
-            {isRecruiting ? (
-              <RecruitInfoButtonMobile onClick={goRecruitPage} />
-            ) : (
-              <RecruitAlarmButtonMobile onClick={openAlarmModal} />
-            )}
-          </MobileButtonArea>
+        {/* [변경] Mobile 버튼 영역: 통합 컴포넌트 하나만 넣으면 끝! */}
+        <MobileButtonArea>
+          <RecruitStatusButton isMobile={true} />
+        </MobileButtonArea>
 
-          {isRecruiting ? (
-            <SubLink href="#" onClick={openCodeModal}>
-              지원서를 제출하셨나요? <u>지원서 열람하기</u>
-            </SubLink>
-          ) : (
-            <EndText>13기 모집이 종료되었습니다.</EndText>
-          )}
-        </Content>
-      </Section>
-
-      {/* 모달 컴포넌트들 */}
-      <Modal
-        open={isAlarmModalOpen}
-        onClose={() => setIsAlarmModalOpen(false)}
-        type="info"
-        title="14기 모집 사전 알림 등록"
-        description={
-          "이화여대 멋쟁이사자처럼 카카오톡 채널을 통해\n모집이 시작되면 가장 먼저 알려드릴게요."
-        }
-        align="left"
-        actions={[
-          {
-            label: "카카오톡 바로가기",
-            variant: "primary",
-            fullWidth: true,
-            onClick: goKakaoChannel,
-          },
-        ]}
-      />
-
-      <Modal
-        open={isCodeModalOpen}
-        onClose={() => setIsCodeModalOpen(false)}
-        type="form"
-        title="지원 코드 입력"
-        description={
-          "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요."
-        }
-        align="left"
-        input={{
-          value: codeValue,
-          onChange: (e) => setCodeValue(e.target.value),
-          placeholder: "코드를 입력해주세요.",
-        }}
-        actions={[
-          {
-            label: "확인",
-            variant: "primary",
-            fullWidth: true,
-            disabled: codeValue.length === 0,
-            onClick: handleCheckCode,
-          },
-        ]}
-        helper={{
-          text: "지원 코드를 잊어버리셨나요? ",
-          actionText: "카카오톡 문의하기",
-          onAction: goKakaoChannel,
-        }}
-      />
-    </>
+        {/* 하단 텍스트(지원서 열람 등)와 모달(Modal)들도 
+            RecruitStatusButton 안에 다 들어있어서 여기엔 필요 없습니다. */}
+      </Content>
+    </Section>
   );
 };
 
 export default IntroSection;
+
+/* --- 스타일 컴포넌트 (기존 유지) --- */
 
 const rotate = keyframes`
   from {
@@ -176,10 +71,10 @@ const Section = styled.section`
   padding: 5rem 18.5625rem;
 
   @media (max-width: 799px) {
-    min-height: unset !important;
+    min-height: 22rem;
     height: auto !important;
     padding: 4.5rem 1rem 4rem 1rem;
-    align-items: flex-start;
+    align-items: center;
     min-width: 0;
   }
 `;
@@ -188,16 +83,13 @@ const PatternTop = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 10.00025rem;
-  height: 10.00025rem;
-  left: 7.89888rem;
-  top: -3.38275rem;
+  left: 2.89888rem;
+  top: 0;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 3.75rem;
-    height: 3.75rem;
-    left: 2.375rem;
-    top: -1.5rem;
+    transform: scale(0.5);
+    transform-origin: left top;
   }
 `;
 
@@ -205,14 +97,13 @@ const PatternBottom = styled.img`
   position: absolute;
   z-index: 0;
   display: block;
-  width: 14rem;
   right: 0;
-  top: 20.1875rem;
+  top: 17rem;
+  transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    width: 5.25rem;
-    top: 13.25rem;
-    right: 0;
+    transform: scale(0.5);
+    transform-origin: right top;
   }
 `;
 
@@ -242,6 +133,7 @@ const SubText = styled.p`
     line-height: normal;
   }
 `;
+
 const LogoWrapper = styled.div`
   width: auto;
   max-width: 100%;
@@ -252,7 +144,6 @@ const LogoWrapper = styled.div`
     font-size: 9.704rem;
     color: #1a1a1a;
 
-    /* 기본(PC): 가로 정렬 */
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -281,7 +172,6 @@ const LogoWrapper = styled.div`
     .big-title {
       flex-direction: column;
       gap: 0;
-
       line-height: 1.1;
 
       .flower-o {
@@ -299,6 +189,7 @@ const LogoWrapper = styled.div`
     }
   }
 `;
+
 const PcButtonArea = styled.div`
   display: block;
   margin-top: 3rem;
@@ -318,34 +209,5 @@ const MobileButtonArea = styled.div`
 
   @media (max-width: 799px) {
     display: flex !important;
-  }
-`;
-
-const SubLink = styled.a`
-  color: #888888;
-  font-size: 0.9rem;
-  text-decoration: none;
-  cursor: pointer;
-  u {
-    margin-left: 6px;
-    color: #555;
-    font-weight: 600;
-    text-underline-offset: 3px;
-  }
-  &:hover u {
-    color: #000;
-  }
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
-  }
-`;
-
-const EndText = styled.p`
-  color: #888888;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-top: 0.25rem;
-  @media (max-width: 799px) {
-    font-size: 0.8rem;
   }
 `;

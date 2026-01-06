@@ -53,7 +53,7 @@ const IntroSection2 = () => {
             </StatItem>
             <StatItem>
               <h3>
-                26<span>+</span>
+                50<span>+</span>
               </h3>
               <p>프로젝트 수</p>
             </StatItem>
