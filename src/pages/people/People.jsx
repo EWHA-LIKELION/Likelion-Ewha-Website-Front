@@ -27,6 +27,7 @@ function People() {
     const lions = filteredByGeneration
     .filter(m => m.role === '아기사자')
     .filter(m => selectedPart === '전체' || m.part === selectedPart);
+    
 
     return (
         <PeopleWrapper>
@@ -56,7 +57,7 @@ function People() {
                                     key={m.id}
                                     name={m.name}
                                     part={m.part}
-                                    position={m.role}
+                                    position={m.position || m.role}
                                     department={m.department}
                                     imageSrc={m.photo || '/images/default1.png'}
                                     showPosition
