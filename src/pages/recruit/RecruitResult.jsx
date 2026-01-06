@@ -25,8 +25,8 @@ const STATUS_CONFIG = {
             안녕하세요, {applicantName}님.<br />
             이화여대 멋쟁이 사자처럼 {generation} 아기사자 모집에<br />
             지원해주셔서 감사합니다.<br /><br />
-            아쉽게도 1차 서류 심사 결과, <HighlightText>최종 선발 대상에는 포함되지<br />
-            않으셨음</HighlightText>을 안내드립니다.<br />
+            아쉽게도 1차 서류 심사 결과, <HighlightText>최종 선발 대상에는<br />
+            포함되지 않으셨음</HighlightText>을 안내드립니다.<br />
             제출해 주신 지원서는 신중하고 꼼꼼하게 검토되었으며,<br />
             그 과정에서 {applicantName}님의 열정과 가능성을 확인할 수 있었습니다.<br /><br />
             멋쟁이사자처럼에 관심을 가져주셔서 감사드리며,<br />
@@ -39,8 +39,8 @@ const STATUS_CONFIG = {
             안녕하세요, {applicantName}님.<br />
             이화여대 멋쟁이 사자처럼 {generation} 아기사자 모집에<br />
             지원해주셔서 감사합니다.<br /><br />
-            아쉽게도 최종 심사 결과, <HighlightText>이번 기수 아기사자로 선발되지<br />
-            않으셨음</HighlightText>을 안내드립니다.<br />
+            아쉽게도 최종 심사 결과, <HighlightText>이번 기수 아기사자로<br />
+            선발되지 않으셨음</HighlightText>을 안내드립니다.<br />
             제출해 주신 지원서는 신중하고 꼼꼼하게 검토되었으며,<br />
             그 과정에서 {applicantName}님의 열정과 가능성을 확인할 수 있었습니다.<br /><br />
             멋쟁이사자처럼에 관심을 가져주셔서 감사드리며,<br />
@@ -63,6 +63,16 @@ const RecruitResult = () => {
   const [resultData, setResultData] = useState(null);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+        
+  useEffect(() => {
+    const handleResize = () => {
+    setIsMobile(window.innerWidth <= 799);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     // TODO: API 연동
@@ -77,7 +87,7 @@ const RecruitResult = () => {
         applicantName: '홍길동', // API에서 받아올 지원자 이름
         generation: '14기', // API에서 받아올 기수 정보
         round: round,
-        status: 'pass', // 'pass' | 'fail' | 'pending'
+        status: 'pending', // 'pass' | 'fail' | 'pending'
         nextStep: {
           title: '면접 일정',
           date: '00월 00일 00시',
@@ -95,7 +105,7 @@ const RecruitResult = () => {
   if (loading) {
     return (
       <Wrapper>
-        <LoadingWrapper>
+        <LoadingWrapper className='body-regular'>
           <LoadingSpinner />
           <p>결과를 불러오는 중입니다...</p>
         </LoadingWrapper>
@@ -109,8 +119,8 @@ const RecruitResult = () => {
     <Wrapper>
       <ResultCard $status={resultData.status}>
         <ResultWrapper>
-          <ResultTitle className='point-kor-h2'>{typeof config.title === 'function' ? config.title(roundName, resultData.applicantName) : config.title}</ResultTitle>
-          <ResultMessage className='h5-medium'>{config.getMessage(roundName, resultData.applicantName, resultData.generation)}</ResultMessage>
+          <ResultTitle className={isMobile ? "point-kor-h4" : 'point-kor-h2'}>{typeof config.title === 'function' ? config.title(roundName, resultData.applicantName) : config.title}</ResultTitle>
+          <ResultMessage className={isMobile ? "body-regular" : 'h5-medium'}>{config.getMessage(roundName, resultData.applicantName, resultData.generation)}</ResultMessage>
         </ResultWrapper>
 
         {resultData.status === 'pass' && round === '1' && resultData.nextStep && (
@@ -152,8 +162,12 @@ const Wrapper = styled.div`
 
   background: var(--static-white);
 
+  transition: all 0.2s ease;
+
   @media (max-width: 799px) {
     min-height: calc(100vh - 4rem);
+    padding: 0 1rem;
+    gap: 3.12rem;
   }
 `;
 
@@ -167,6 +181,15 @@ const ResultCard = styled.div`
 
   border-radius: 1.25rem;
   border: 2px solid var(--cool-neutral-95, #DBDCDF);
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    width: 100%;
+    padding: 1.8125rem 1.6875rem;
+    border-radius: 1rem;
+    gap: 2.56rem;
+  }
 `;
 
 const ResultWrapper = styled.div`
@@ -180,14 +203,15 @@ const ResultTitle = styled.h2`
   color: var(--primary-sub);
   text-align: center;
 
-  @media (max-width: 799px) {
-  }
+  transition: all 0.2s ease;
 `;
 
 const ResultMessage = styled.p`
   color: var(--neutral-20);
   text-align: center;
   white-space: pre-wrap;
+
+  transition: all 0.2s ease;
 `;
 
 const NextStepBox = styled.div`
@@ -200,6 +224,13 @@ const NextStepBox = styled.div`
 
   border-radius: 1.25rem;
   background: var(--green-95);
+
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    padding: 1rem 3rem;
+    border-radius: 1rem;
+  }
 `;
 
 const NextStepTitle = styled.h3`
@@ -230,12 +261,10 @@ const LoadingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  padding: 80px 20px;
+  gap: 1rem;
 
   p {
-    font-size: 16px;
-    color: #666;
+    color: var(--neutral-40);
   }
 `;
 
