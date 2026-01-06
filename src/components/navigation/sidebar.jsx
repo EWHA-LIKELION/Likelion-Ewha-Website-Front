@@ -2,6 +2,10 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const Sidebar = () => {
+  const handleLogout = () => {
+    console.log("logout");
+  };
+
   return (
     <Wrapper aria-label="Sidebar">
       <Content>
@@ -63,7 +67,7 @@ const Sidebar = () => {
 
         <BottomBlock>
           <Divider />
-          <LogoutRow>
+          <LogoutRow type="button" onClick={handleLogout} aria-label="로그아웃">
             <img src="/icons/logout.svg" alt="" />
             <LogoutText>로그아웃</LogoutText>
           </LogoutRow>
@@ -75,11 +79,10 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-
 const Wrapper = styled.aside`
   display: inline-flex;
-  height: 100%;
-  padding: 40px 32px;
+  height: 100dvh;
+  padding: 40px 32px 80px 32px; 
   flex-direction: column;
   align-items: center;
   background: var(--neutral-15, #1c1c1c);
@@ -90,6 +93,8 @@ const Content = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 40px;
+  height: 100%;
+  width: 100%;
 `;
 
 const TopBlock = styled.div`
@@ -131,11 +136,11 @@ const MenuItem = styled(NavLink)`
     width: auto;
     height: auto;
   }
-
 `;
 
 const MenuText = styled.span`
-  color: ${({ $active }) => ($active ? "#00FF67" : "var(--neutral-95, #DCDCDC)")};
+  color: ${({ $active }) =>
+    $active ? "#00FF67" : "var(--neutral-95, #DCDCDC)"};
   font-family: Cafe24 PRO Slim, sans-serif;
   font-size: 20px;
   font-style: normal;
@@ -149,6 +154,8 @@ const BottomBlock = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+
+  margin-top: auto;
 `;
 
 const Divider = styled.div`
@@ -158,12 +165,16 @@ const Divider = styled.div`
   background: var(--neutral-40, #5c5c5c);
 `;
 
-const LogoutRow = styled.div`
+const LogoutRow = styled.button`
   display: flex;
   padding: 0 80px 0 1.989px;
   align-items: center;
   gap: 16.137px;
   align-self: stretch;
+
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 `;
 
 const LogoutText = styled.span`
