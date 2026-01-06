@@ -15,7 +15,7 @@ const Sidebar = () => {
           </Logo>
 
           <MenuGroup>
-            <MenuItem to="/applicant" end>
+            <MenuItem to="applicant" end>
               {({ isActive }) => (
                 <>
                   <img
@@ -31,7 +31,7 @@ const Sidebar = () => {
               )}
             </MenuItem>
 
-            <MenuItem to="/interview">
+            <MenuItem to="interview">
               {({ isActive }) => (
                 <>
                   <img
@@ -47,7 +47,7 @@ const Sidebar = () => {
               )}
             </MenuItem>
 
-            <MenuItem to="/application">
+            <MenuItem to="application">
               {({ isActive }) => (
                 <>
                   <img
@@ -82,7 +82,7 @@ export default Sidebar;
 const Wrapper = styled.aside`
   display: inline-flex;
   height: 100dvh;
-  padding: 40px 32px 80px 32px; 
+  padding: 40px 32px 80px 32px;
   flex-direction: column;
   align-items: center;
   background: var(--neutral-15, #1c1c1c);
