@@ -102,7 +102,12 @@ const NavButton = styled.button`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   ${(props) => (props.$isPrev ? `left: -25px;` : `right: -25px;`)}
-  transition: 0.2s;
+
+  transition: all 0.2s ease;
+
+  &:hover{
+    filter: brightness(0.9);
+  }
 
   /* 내부 이미지 꽉 채우기 */
   img {
