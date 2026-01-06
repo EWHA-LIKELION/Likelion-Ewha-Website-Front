@@ -6,7 +6,6 @@ import ProjectDetail from "./pages/project/project-detail/ProjectDetail.jsx";
 import People from "./pages/people/People.jsx";
 import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
 import Apply2 from "./pages/apply2.jsx";
-import AdminPreview from "./pages/AdminPreview.jsx";
 import LayoutAdmin from "./layouts/adminlayout.jsx";
 
 function App() {
@@ -26,8 +25,7 @@ function App() {
       </Route>
 
       {/* 테스트용 Admin Layout (Layout 바깥) */}
-      <Route path="admin-preview" element={<LayoutAdmin />}>
-        <Route index element={<AdminPreview />} />
+      <Route path="admin/preview" element={<LayoutAdmin />}>
       </Route>
     </Routes>
   );
