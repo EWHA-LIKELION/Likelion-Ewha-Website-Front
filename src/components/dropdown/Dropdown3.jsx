@@ -35,13 +35,25 @@ const DropDown3 = ({ question, answer, styleType = 1 }) => {
         </TextWrapper>
         <ArrowButton $isOpen={isOpen} $styleType={styleType}>
           {styleType === 1 ? (
-            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
-              <path d="M0.707031 0.707031L12.3737 12.3737L24.0404 0.707027" stroke={isOpen ? 'var(--primary-main)' : 'var(--neutral-70)'} strokeWidth="2" strokeLinejoin="round"/>
-            </svg>
+            isMobile ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                <path d="M0.530334 0.530273L6.53033 6.53027L12.5303 0.530273" stroke={isOpen ? 'var(--primary-main)' : 'var(--neutral-70)'} strokeWidth="1.5" strokeLinejoin="round"/>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
+                <path d="M0.707031 0.707031L12.3737 12.3737L24.0404 0.707027" stroke={isOpen ? 'var(--primary-main)' : 'var(--neutral-70)'} strokeWidth="2" strokeLinejoin="round"/>
+              </svg>
+            )
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none">
-              <path d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
-            </svg>
+            isMobile ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
+                <path d="M0.530334 0.530273L6.36367 6.36361L12.197 0.530273" stroke="#9B9B9B" strokeWidth="1.5" strokeLinejoin="round"/>
+              </svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none">
+                <path d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
+              </svg>
+            )
           )}
         </ArrowButton>
       </SelectButton>
