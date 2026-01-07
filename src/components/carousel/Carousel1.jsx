@@ -2,20 +2,25 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NexIcon from "../../../public/icons/next.svg";
 import PrevIcon from "../../../public/icons/previous.svg";
-import REVIEW_DATA from "../../data/reviews.json";
+import MEMBERS_DATA from "../../data/members.json";
 
 const Carousel1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 코멘트가 있는 멤버만 필터링
+  const filteredMembers = MEMBERS_DATA.members.filter(
+    (member) => member.shortComment && member.longComment
+  );
+
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? REVIEW_DATA.length - 1 : prev - 1));
+    setCurrentIndex((prev) => (prev === 0 ? filteredMembers.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev === REVIEW_DATA.length - 1 ? 0 : prev + 1));
+    setCurrentIndex((prev) => (prev === filteredMembers.length - 1 ? 0 : prev + 1));
   };
 
-  const currentData = REVIEW_DATA[currentIndex];
+  const currentData = filteredMembers[currentIndex];
 
   return (
     <Container>
@@ -30,13 +35,13 @@ const Carousel1 = () => {
 
         <MainCard>
           <ScrollContent>
-            <CardHeader>{currentData.title}</CardHeader>
-            <CardBody>{currentData.desc}</CardBody>
+            <CardHeader>{currentData.shortComment}</CardHeader>
+            <CardBody>{currentData.longComment}</CardBody>
           </ScrollContent>
 
           <CardFooter>
             <strong>{currentData.name}</strong>
-            <span>{currentData.role}</span>
+            <span>{currentData.part} | {currentData.position || currentData.role}</span>
           </CardFooter>
         </MainCard>
       </CardWrapper>
@@ -60,13 +65,19 @@ const Container = styled.div`
   @media (max-width: 799px) {
     width: 25rem;
     height: 20.68rem;
-    margin: 20px auto;
+    margin: 0 auto;
   }
 
   @media (max-width: 500px) {
     width: 19.97rem;
     height: 20.68rem;
-    margin: 20px auto;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 360px) {
+    width: 100%;
+    max-width: 19.97rem; /* 원하면 유지 */
+    height: 22rem;
   }
 `;
 
@@ -91,7 +102,12 @@ const NavButton = styled.button`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
   ${(props) => (props.$isPrev ? `left: -25px;` : `right: -25px;`)}
-  transition: 0.2s;
+
+  transition: all 0.2s ease;
+
+  &:hover{
+    filter: brightness(0.9);
+  }
 
   /* 내부 이미지 꽉 채우기 */
   img {
@@ -104,7 +120,7 @@ const NavButton = styled.button`
     height: 1.875rem;
 
     /* 모바일에서는 버튼이 너무 밖으로 나가면 잘리므로 안쪽으로 당김 */
-    ${(props) => (props.$isPrev ? `left: -10px;` : `right: -10px;`)}
+    ${(props) => (props.$isPrev ? `left: -13px;` : `right: -13px;`)}
   }
 `;
 
@@ -128,13 +144,14 @@ const MainCard = styled(BaseCard)`
   z-index: 3;
   top: 0;
   left: 0;
-  padding: 2.58rem 2.53rem 2.56rem 2.53rem;
+  padding: 2.58rem 2.51rem 2.56rem 2.51rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
   @media (max-width: 799px) {
     padding: 0.94rem 1.25rem;
+    border-radius: 0.5rem;
   }
 `;
 
@@ -170,13 +187,15 @@ const CardHeader = styled.h2`
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 2.25rem;
+  text-align: left;
   word-break: keep-all;
   white-space: pre-wrap;
 
   @media (max-width: 799px) {
-    font-size: 1.25rem;
-    line-height: 1.8rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
     word-break: break-all;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -186,29 +205,39 @@ const CardBody = styled.p`
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.25rem;
+  text-align: left;
   white-space: pre-wrap;
   word-break: break-all; /* 본문도 안전하게 줄바꿈 */
+
+  @media (max-width: 799px) {
+    line-height: 1.125rem;
+  }
 `;
 
 const CardFooter = styled.div`
-  margin-top: 1.53rem;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
 
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-family: Pretendard;
+
   strong {
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
-    font-family: Pretendard;
-    font-size: 0.875rem;
     font-weight: 800;
-    line-height: 1.375rem;
   }
 
   span {
     color: var(--Atomic-Cool-Neutral-40, var(--Cool-Neutral-40, #5a5c63));
-    font-family: Pretendard;
-    font-size: 0.875rem;
     font-weight: 400;
-    line-height: 1.375rem;
+  }
+
+  @media (max-width: 799px) {
+    margin-top: 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    text-align: left;
   }
 `;

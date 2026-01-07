@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import SegmentBar from "@/components/SegmentBar";
 import Curriculum from "@/components/Curriculum";
@@ -8,6 +8,8 @@ import Carousel2 from "@/components/carousel/Carousel2";
 import { intercollegiates } from "@/data";
 
 const HomeMid = () => {
+  const [searchParams] = useSearchParams();
+  
   // part: 'pm', 'fe', 'be' 중 하나
   const [part, setPart] = useState('pm');
   // SegmentBar 인덱스와 part 매핑
@@ -28,6 +30,13 @@ const HomeMid = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const partParam = searchParams.get('part');
+    if (partParam && partMap.includes(partParam)) {
+      setPart(partParam);
+    }
+  }, [searchParams]);
+
   const navigate = useNavigate();
 
   const handleProjectMore = () => {
@@ -36,7 +45,7 @@ const HomeMid = () => {
 
   return (
     <Wrapper>
-      <Section className="curriculum">
+      <Section className="curriculum" id="curriculum">
         <img src="/icons/logoIcon.svg" className="logo-icon"/>
         <Title className="point-eng-h2">curriculum</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>처음부터 차근 차근, 기초부터 심화까지</SubTitle>
@@ -45,6 +54,7 @@ const HomeMid = () => {
           items={['기획•디자인', '프론트엔드', '백엔드']}
           styleType={2}
           onSelect={handleSelect}
+          selected={partMap.indexOf(part)}
         />
         <Curriculum part={part}/>
       </Section>

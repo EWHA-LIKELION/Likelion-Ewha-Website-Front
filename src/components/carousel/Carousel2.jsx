@@ -19,9 +19,9 @@ const PC_VALUES = {
 const MOBILE_VALUES = {
   ITEM_WIDTH: 8.75,
   ITEM_GAP: 0.5,
-  CENTER_SCALE: 1.08,
-  FOCUS_SCALE: 1.03,
-  CENTER_GAP_ILLUSION: 0.7,
+  CENTER_SCALE: 1.15,
+  FOCUS_SCALE: 1.04,
+  CENTER_GAP_ILLUSION: 1.5,
   ARROW_GAP: -0.05,
 };
 /* ================= */

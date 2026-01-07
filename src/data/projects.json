@@ -16,7 +16,13 @@
         "backend": ["김민솔", "박민서", "유지민", "이라령"]
       },
       "thumbnail": "/images/projects/thumbnail/1.jpg",
-      "detailImages": []
+      "detailImages": [
+        "/images/projects/detailImages/1-1.png",
+        "/images/projects/detailImages/1-2.png",
+        "/images/projects/detailImages/1-3.png",
+        "/images/projects/detailImages/1-4.png",
+        "/images/projects/detailImages/1-5.png"
+      ]
     },
     {
       "id": "project-02",
@@ -46,7 +52,16 @@
         "backend": ["김연우", "성혜린"]
       },
       "thumbnail": "/images/projects/thumbnail/3.jpg",
-      "detailImages": []
+      "detailImages": [
+        "/images/projects/detailImages/3-1.png",
+        "/images/projects/detailImages/3-2.png",
+        "/images/projects/detailImages/3-3.png",
+        "/images/projects/detailImages/3-4.png",
+        "/images/projects/detailImages/3-5.png",
+        "/images/projects/detailImages/3-6.png",
+        "/images/projects/detailImages/3-7.png",
+        "/images/projects/detailImages/3-8.png"
+      ]
     },
     {
       "id": "project-04",
@@ -61,7 +76,17 @@
         "backend": ["김가영", "설영은"]
       },
       "thumbnail": "/images/projects/thumbnail/4.jpg",
-      "detailImages": []
+      "detailImages": [
+        "/images/projects/detailImages/4-1.jpg",
+        "/images/projects/detailImages/4-2.jpg",
+        "/images/projects/detailImages/4-3.jpg",
+        "/images/projects/detailImages/4-4.jpg",
+        "/images/projects/detailImages/4-5.jpg",
+        "/images/projects/detailImages/4-6.jpg",
+        "/images/projects/detailImages/4-7.jpg",
+        "/images/projects/detailImages/4-8.jpg",
+        "/images/projects/detailImages/4-9.jpg"
+      ]
     },
     {
       "id": "project-05",
@@ -76,7 +101,18 @@
         "backend": ["신지민", "황규리"]
       },
       "thumbnail": "/images/projects/thumbnail/5.jpg",
-      "detailImages": []
+      "detailImages": [
+        "/images/projects/detailImages/5-1.png",
+        "/images/projects/detailImages/5-2.png",
+        "/images/projects/detailImages/5-3.png",
+        "/images/projects/detailImages/5-4.png",
+        "/images/projects/detailImages/5-5.png",
+        "/images/projects/detailImages/5-6.png",
+        "/images/projects/detailImages/5-7.png",
+        "/images/projects/detailImages/5-8.png",
+        "/images/projects/detailImages/5-9.png",
+        "/images/projects/detailImages/5-10.png"
+      ]
     },
 
     {
@@ -126,6 +162,21 @@
     },
     {
       "id": "project-09",
+      "generation": "13기",
+      "category": "졸업프로젝트",
+      "title": "이대 멋사 공식 사이트",
+      "description": "13기 아기사자 전원이 함께 참여하여 기획부터 디자인, 개발까지 전 과정을 직접 만들어낸 ‘이화여대 멋쟁이사자처럼 공식 웹사이트’입니다. 본 사이트에서는 멋쟁이사자처럼과 이화여대 멋사의 소개를 비롯해 전 기수 구성원, 프로젝트, 활동 후기와 사진 등 이대 멋사의 기록과 이야기를 한눈에 만나볼 수 있습니다. 이 프로젝트는 13기의 마지막 활동이자, 함께한 성장의 마무리를 담고 있습니다.",
+      "urls": { "service": "https://likelion.ewha.university/", "github": "https://github.com/EWHA-LIKELION" },
+      "team": {
+        "pmdesign": ["김수민", "김지후", "박서영", "송나영", "이도윤", "이은서"],
+        "frontend": ["김민혜", "김성주", "서예린", "유진서", "이예영", "최연서"],
+        "backend": ["김가영", "김연우", "설영은", "성혜린", "신지민", "황규리"]
+      },
+      "thumbnail": "/images/projects/thumbnail/9.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-10",
       "generation": "12기",
       "category": "대동제",
       "title": "2024 대동제",
@@ -136,11 +187,16 @@
         "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
         "backend": ["허채린", "심예원", "이다빈"]
       },
-      "thumbnail": "/images/projects/thumbnail/9.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/10.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/10-1.jpg",
+        "/images/projects/detailImages/10-2.png",
+        "/images/projects/detailImages/10-3.png",
+        "/images/projects/detailImages/10-4.png"
+      ]
     },
     {
-      "id": "project-10",
+      "id": "project-11",
       "generation": "12기",
       "category": "중앙아이디어톤",
       "title": "Medi Going",
@@ -151,12 +207,12 @@
         "frontend": [],
         "backend": []
       },
-      "thumbnail": "/images/projects/thumbnail/10.jpg",
+      "thumbnail": "/images/projects/thumbnail/11.jpg",
       "detailImages": []
     },
 
     {
-      "id": "project-11",
+      "id": "project-12",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "드링킷",
@@ -167,11 +223,17 @@
         "frontend": ["김예원", "김채연"],
         "backend": ["유지민", "이라령"]
       },
-      "thumbnail": "/images/projects/thumbnail/11.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/12.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/12-1.png",
+        "/images/projects/detailImages/12-2.png",
+        "/images/projects/detailImages/12-3.png",
+        "/images/projects/detailImages/12-4.png",
+        "/images/projects/detailImages/12-5.png"
+      ]
     },
     {
-      "id": "project-12",
+      "id": "project-13",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "STEW",
@@ -182,11 +244,15 @@
         "frontend": ["김민서", "송유선"],
         "backend": ["김민솔", "이정은"]
       },
-      "thumbnail": "/images/projects/thumbnail/12.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/13.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/13-1.png",
+        "/images/projects/detailImages/13-2.png",
+        "/images/projects/detailImages/13-3.png"
+      ]
     },
     {
-      "id": "project-13",
+      "id": "project-14",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "메디캐리어",
@@ -197,11 +263,20 @@
         "frontend": ["남선우"],
         "backend": ["박민서", "황지은"]
       },
-      "thumbnail": "/images/projects/thumbnail/13.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/14.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/14-1.png",
+        "/images/projects/detailImages/14-2.png",
+        "/images/projects/detailImages/14-3.png",
+        "/images/projects/detailImages/14-4.png",
+        "/images/projects/detailImages/14-5.png",
+        "/images/projects/detailImages/14-6.png",
+        "/images/projects/detailImages/14-7.png",
+        "/images/projects/detailImages/14-8.png"
+      ]
     },
     {
-      "id": "project-14",
+      "id": "project-15",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "MOY",
@@ -212,11 +287,17 @@
         "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
         "backend": ["심예원", "이다빈", "허채린"]
       },
-      "thumbnail": "/images/projects/thumbnail/14.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/15.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/15-1.png",
+        "/images/projects/detailImages/15-2.png",
+        "/images/projects/detailImages/15-3.png",
+        "/images/projects/detailImages/15-4.png",
+        "/images/projects/detailImages/15-5.png"
+      ]
     },
     {
-      "id": "project-15",
+      "id": "project-16",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "깨비",
@@ -227,12 +308,18 @@
         "frontend": ["김민서", "김채연"],
         "backend": ["이라령", "이정은", "황지은"]
       },
-      "thumbnail": "/images/projects/thumbnail/15.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/16.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/16-1.png",
+        "/images/projects/detailImages/16-2.png",
+        "/images/projects/detailImages/16-3.png",
+        "/images/projects/detailImages/16-4.png",
+        "/images/projects/detailImages/16-5.png"
+      ]
     },
 
     {
-      "id": "project-16",
+      "id": "project-17",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "i want it!",
@@ -243,11 +330,15 @@
         "frontend": ["김예원", "남선우", "송유선"],
         "backend": ["김민솔", "박민서", "유지민"]
       },
-      "thumbnail": "/images/projects/thumbnail/16.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/17.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/17-1.png",
+        "/images/projects/detailImages/17-2.png",
+        "/images/projects/detailImages/17-3.png"
+      ]
     },
     {
-      "id": "project-17",
+      "id": "project-18",
       "generation": "11기",
       "category": "대동제",
       "title": "2023 대동제",
@@ -258,11 +349,16 @@
         "frontend": ["정다윤", "김혜빈", "김민주", "정연주", "허윤", "이서진", "이채원"],
         "backend": ["김도연", "신이수", "조현영", "임채영", "최유미", "김정은", "이나경"]
       },
-      "thumbnail": "/images/projects/thumbnail/17.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/18.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/18-1.png",
+        "/images/projects/detailImages/18-2.png",
+        "/images/projects/detailImages/18-3.png",
+        "/images/projects/detailImages/18-4.png"
+      ]
     },
     {
-      "id": "project-18",
+      "id": "project-19",
       "generation": "11기",
       "category": "중앙아이디어톤",
       "title": "MORE GREEN",
@@ -273,11 +369,11 @@
         "frontend": [],
         "backend": []
       },
-      "thumbnail": "/images/projects/thumbnail/18.jpg",
+      "thumbnail": "/images/projects/thumbnail/19.jpg",
       "detailImages": []
     },
     {
-      "id": "project-19",
+      "id": "project-20",
       "generation": "11기",
       "category": "중앙해커톤",
       "title": "Verny",
@@ -288,11 +384,15 @@
         "frontend": ["김가영", "진규빈"],
         "backend": ["심예원", "윤서아", "이혜지"]
       },
-      "thumbnail": "/images/projects/thumbnail/19.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/20.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/20-1.png",
+        "/images/projects/detailImages/20-2.png",
+        "/images/projects/detailImages/20-3.png"
+      ]
     },
     {
-      "id": "project-20",
+      "id": "project-21",
       "generation": "11기",
       "category": "중앙해커톤",
       "title": "Wallethy",
@@ -303,11 +403,15 @@
         "frontend": ["이다빈", "최지원"],
         "backend": ["김지은", "이지원"]
       },
-      "thumbnail": "/images/projects/thumbnail/20.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/21.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/21-1.png",
+        "/images/projects/detailImages/21-2.png",
+        "/images/projects/detailImages/21-3.png"
+      ]
     },
     {
-      "id": "project-21",
+      "id": "project-22",
       "generation": "11기",
       "category": "중앙해커톤",
       "title": "Bora",
@@ -318,11 +422,15 @@
         "frontend": ["변지혜", "유서연"],
         "backend": ["박나담", "허채린"]
       },
-      "thumbnail": "/images/projects/thumbnail/21.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/22.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/22-1.png",
+        "/images/projects/detailImages/22-2.png",
+        "/images/projects/detailImages/22-3.png"
+      ]
     },
     {
-      "id": "project-22",
+      "id": "project-23",
       "generation": "11기",
       "category": "졸업프로젝트",
       "title": "What Do You Sing",
@@ -333,11 +441,15 @@
         "frontend": ["변지혜", "최지원"],
         "backend": ["김지은", "박나담", "윤서아"]
       },
-      "thumbnail": "/images/projects/thumbnail/22.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/23.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/23-1.png",
+        "/images/projects/detailImages/23-2.png",
+        "/images/projects/detailImages/23-3.png"
+      ]
     },
     {
-      "id": "project-23",
+      "id": "project-24",
       "generation": "11기",
       "category": "졸업프로젝트",
       "title": "Nae-chin-man",
@@ -348,11 +460,15 @@
         "frontend": ["유서연", "진규빈"],
         "backend": ["이혜지", "허채린"]
       },
-      "thumbnail": "/images/projects/thumbnail/23.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/24.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/24-1.png",
+        "/images/projects/detailImages/24-2.png",
+        "/images/projects/detailImages/24-3.png"
+      ]
     },
     {
-      "id": "project-24",
+      "id": "project-25",
       "generation": "11기",
       "category": "졸업프로젝트",
       "title": "Drag on",
@@ -363,11 +479,16 @@
         "frontend": ["김가영", "이다빈"],
         "backend": ["심예원", "이지원"]
       },
-      "thumbnail": "/images/projects/thumbnail/24.jpg",
-      "detailImages": []
+      "thumbnail": "/images/projects/thumbnail/25.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/25-1.png",
+        "/images/projects/detailImages/25-2.png",
+        "/images/projects/detailImages/25-3.png",
+        "/images/projects/detailImages/25-4.png"
+      ]
     },
     {
-      "id": "project-25",
+      "id": "project-26",
       "generation": "10기",
       "category": "대동제",
       "title": "2022 대동제",
@@ -379,7 +500,12 @@
         "backend": ["김도연", "신이수", "조현영", "임채영", "최유미", "김정은", "이나경"]
       },
       "thumbnail": "",
-      "detailImages": []
+      "detailImages": [
+        "/images/projects/detailImages/26-1.png",
+        "/images/projects/detailImages/26-2.png",
+        "/images/projects/detailImages/26-3.png",
+        "/images/projects/detailImages/26-4.png"
+      ]
     }
   ]
 }
