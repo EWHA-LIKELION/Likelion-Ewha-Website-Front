@@ -20,6 +20,7 @@ html {
   overflow-x: hidden;
   width: 100%;
   position: relative;
+  overflow-y: overlay;
 }
 
 body {
@@ -30,6 +31,33 @@ body {
   font-family:"Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 스크롤바 스타일링 - 오버레이 형태 */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(155, 155, 155, 0.5);
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(155, 155, 155, 0.8);
+  background-clip: content-box;
+}
+
+/* Firefox 스크롤바 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
 }
 
 /* ————————————— 타이포 ————————————— */
