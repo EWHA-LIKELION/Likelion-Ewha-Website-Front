@@ -161,7 +161,7 @@ function useisMO(maxWidth = 799) {
 }
 
 const PART_OPTIONS = [
-  { value: "PM_DESIGN", label: "PM/디자인" },
+  { value: "PM_DESIGN", label: "기획•디자인" },
   { value: "FRONTEND", label: "프론트엔드" },
   { value: "BACKEND", label: "백엔드" }
 ];
@@ -311,7 +311,7 @@ return (
     <Frame>
     <TitleWrapper>
       <PageName>지원서 작성</PageName>
-      <PartName>{PART_OPTIONS.find(p => p.value === part)?.label || "파트를 선택해주세요"}</PartName>
+      <PartName>{PART_OPTIONS.find(p => p.value === part)?.label}</PartName>
     </TitleWrapper>
     <Section>
         <SectionTitle>1. 지원자 정보</SectionTitle>
