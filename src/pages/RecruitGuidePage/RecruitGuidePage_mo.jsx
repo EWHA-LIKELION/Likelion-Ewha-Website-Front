@@ -1,14 +1,116 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import RecruitGuideHeroMo from "./RecruitGuideHero_mo";
+import faq from "../../data/faq.json";
+
 import {
     ApplyButtonMobile,
-    DetailLinkButtonMobile,
+    RecruitAlarmButtonMobile,
+    RecruitDisabledButtonMobile,
+    RecruitCheckButtonMobile,
 } from "../../components/buttons/MainButtons_mo";
+
+import { Modal } from "../../components/Modal";
+
+const getRecruitStatus = (schedule) => {
+    const now = new Date();
+
+    const applicationStart = new Date(schedule.application_start);
+    const applicationEnd = new Date(schedule.application_end);
+    const firstResultStart = new Date(schedule.first_result_start);
+    const firstResultEnd = new Date(schedule.first_result_end);
+    const finalResultStart = new Date(schedule.final_result_start);
+    const finalResultEnd = new Date(schedule.final_result_end);
+
+    if (now < applicationStart) return "BEFORE";
+
+    if (now >= applicationStart && now <= applicationEnd) {
+        return "RECRUITING";
+    }
+
+    if (now > applicationEnd && now < firstResultStart) {
+        return "CLOSED";
+    }
+
+    if (now >= firstResultStart && now <= firstResultEnd) {
+        return "FIRST_RESULT";
+    }
+
+    if (now >= finalResultStart && now <= finalResultEnd) {
+        return "FINAL_RESULT";
+    }
+
+    return "CLOSED";
+};
 
 
 const RecruitGuidePageMo = () => {
+    const navigate = useNavigate();
+    const [recruitStatus, setRecruitStatus] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    
+    useEffect(() => {
+    const fetchRecruitSchedule = async () => {
+        try {
+        const res = await fetch("/api/recruit/schedule");
+        const result = await res.json();
+
+        const schedule = result.data.recruitment_schedule;
+
+        const status = getRecruitStatus(schedule);
+        setRecruitStatus(status);
+        } catch (e) {
+        console.error("모집 일정 조회 실패", e);
+        }
+    };
+
+    fetchRecruitSchedule();
+    }, []);
+
+
+
+    const renderRecruitButton = () => {
+        switch (recruitStatus) {
+            // case 1️⃣ 서류 지원 기간
+            case "RECRUITING":
+            return (
+                <ApplyButtonMobile
+                onClick={() => navigate("/recruit/apply/form")}
+                />
+            );
+
+            // case 2️⃣ 모집 마감
+            case "CLOSED":
+            return <RecruitDisabledButtonMobile />;
+
+            // case 3️⃣ 1차 결과 발표
+            case "FIRST_RESULT":
+            return (
+                <RecruitCheckButtonMobile
+                onClick={() => navigate("/recruit/result")}
+                >
+                1차 합격자 조회
+                </RecruitCheckButtonMobile>
+            );
+
+            // case 4️⃣ 최종 결과 발표
+            case "FINAL_RESULT":
+            return (
+                <RecruitCheckButtonMobile
+                onClick={() => navigate("/recruit/result")}
+                >
+                최종 합격자 조회
+                </RecruitCheckButtonMobile>
+            );
+
+            // case 5️⃣ 모집 전 (default)
+            default:
+            return <RecruitAlarmButtonMobile onClick={() => setIsModalOpen(true)}/>;
+        }
+    };
+
 
     return (
         <>
@@ -22,29 +124,31 @@ const RecruitGuidePageMo = () => {
             <ScheduleSectionWrapper>
                 <Section>
                     <SectionInner>
-                        <Icon src="/icons/ellipse4.svg" alt="" />
-                        <SectionTitle>모집 일정</SectionTitle>
+                        <ScheduleTitleArea>
+                            <Icon src="/icons/ellipse4.svg" alt="" />
+                            <SectionTitle>모집 일정</SectionTitle>
+                        </ScheduleTitleArea>
 
                         <ScheduleGrid>
-                            <ScheduleCard color="#FEF6E7">
+                            <ScheduleCard $color="#FEF6E7">
                                 <Num>01</Num>
                                 <Name>서류 접수</Name>
                                 <Date>0000년 00월 00일 ~ 00일<br/>(제출 마감일 23시 59분까지 제출)</Date>
                             </ScheduleCard>
 
-                            <ScheduleCard color="#FDEFD6">
+                            <ScheduleCard $color="#FDEFD6">
                                 <Num>02</Num>
                                 <Name>1차 결과 발표</Name>
                                 <Date>0000년 00월 00일</Date>
                             </ScheduleCard>
 
-                            <ScheduleCard color="#FBD9A6">
+                            <ScheduleCard $color="#FBD9A6">
                                 <Num>03</Num>
                                 <Name>면접</Name>
                                 <Date>0000년 00월 00일 ~ 00일</Date>
                             </ScheduleCard>
 
-                            <ScheduleCard color="#F7BC72">
+                            <ScheduleCard $color="#F7BC72">
                                 <Num>04</Num>
                                 <Name>최종 결과 발표</Name>
                                 <Date>0000년 00월 00일</Date>
@@ -68,10 +172,7 @@ const RecruitGuidePageMo = () => {
                             </TargetMainDesc>
 
                             <TargetSubDesc>
-                                *지원 시 선수강 강의를 수강 완료한 화면 캡쳐본을 제출할 경우 가산점이 <br/>부여됩니다.
-                                <LinkButton href="https://notion" target="_blank">
-                                    자세한 내용 노션 바로가기
-                                </LinkButton>
+                                *지원 시 선수강 강의를 수강 완료한 화면 캡쳐본을 제출할 경우 가산점이 부여됩니다.
                             </TargetSubDesc>
                         </CenteredArea>
 
@@ -126,23 +227,29 @@ const RecruitGuidePageMo = () => {
                     <PartCard>
                         <h3>기획 디자인</h3>
                         <span>PM · DESIGN</span>
-                        <a>파트 소개 바로가기  </a>
-                        <img src="/icons/arrowRight5.svg" alt="icon" />
+                        <LinkWrapper onClick={() => navigate('/?part=pm#curriculum')}>
+                            <a>파트 소개 바로가기</a>
+                            <img src="/icons/arrowRight5.svg" alt="icon" />
+                        </LinkWrapper>
                         
                     </PartCard>
 
                     <PartCard>
                         <h3>프론트엔드</h3>
                         <span>FRONTEND</span>
-                        <a>파트 소개 바로가기  </a>
-                        <img src="/icons/arrowRight5.svg" alt="icon" />
+                        <LinkWrapper onClick={() => navigate('/?part=fe#curriculum')}>
+                            <a>파트 소개 바로가기</a>
+                            <img src="/icons/arrowRight5.svg" alt="icon" />
+                        </LinkWrapper>
                     </PartCard>
 
                     <PartCard>
                         <h3>백엔드</h3>
                         <span>BACKEND</span>
-                        <a>파트 소개 바로가기  </a>
-                        <img src="/icons/arrowRight5.svg" alt="icon" />
+                        <LinkWrapper onClick={() => navigate('/?part=be#curriculum')}>
+                            <a>파트 소개 바로가기</a>
+                            <img src="/icons/arrowRight5.svg" alt="icon" />
+                        </LinkWrapper>
                     </PartCard>
                     </PartCards>
                 </PartInner>
@@ -191,6 +298,44 @@ const RecruitGuidePageMo = () => {
                 </ActivityInner>
             </ActivitySection>
 
+            {/* 선수강 강의 안내 */}
+            <PreLectureSection>
+                <PreLectureInner>
+                    <PreLectureTitle>
+                    <img src="/icons/ellipse.svg" alt="icon" />
+                    <h2>선수강 강의 안내</h2>
+                    </PreLectureTitle>
+
+                    <PreLectureNotice>
+                    * 지원 전 강의 수강은 필수가 아니며, 지원서 내에 수강 내역 캡쳐본을<br/>제출할 경우 가산점으로만 활용됩니다.
+                    </PreLectureNotice>
+
+                    <PreLectureList>
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Codecademy: Learn HTML</h3>
+                        <ul>
+                            <li>파트 1. Elements and Structure 중<br/>‘Lesson: Introduction to HTML’ & ‘Lesson: HTML Document Standards’</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://www.codecademy.com/learn/learn-html">사이트 바로가기</a>
+                    </PreLectureItem>
+
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Programmers: 파이썬 입문</h3>
+                        <ul>
+                            <li>파트 1. 시작하기 (파이썬 설치~에디터 설치 제외)</li>
+                            <li>파트 2. 변수와 계산 (REPL, Shell 사용법 제외)</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://school.programmers.co.kr/learn/courses/2">사이트 바로가기</a>
+                    </PreLectureItem>
+                    </PreLectureList>
+                </PreLectureInner>
+            </PreLectureSection>
+
+
 
             {/* 자주 묻는 질문들 */}
             <FAQSection>
@@ -201,29 +346,18 @@ const RecruitGuidePageMo = () => {
                     </FAQTitleArea>
 
                     <FAQList>
-                    <DropDown3 
-                        question="개발 경험이 없는데 지원 가능한가요?"
-                        answer={"당연히 가능합니다! 13기 운영진들도 12기 아기사자 시절엔 아무것도 모르는 감자였답니다🥔\n코딩 경험이 전무해도 지원할 수 있지만, 선수강 강의를 들어보시는 것도 추천합니다!"}
+                    {faq.map((item) => (
+                        <DropDown3
+                        key={item.id}
+                        question={item.question}
+                        answer={item.answer}
                         styleType={1}
-                    />
-                    <DropDown3 
-                        question="면접에서 코딩 능력 시험을 보나요?"
-                        answer="답변 입력하기"
-                        styleType={1}
-                    />
-                    <DropDown3 
-                        question="교내 동아리인가요?"
-                        answer="답변 입력하기"
-                        styleType={1}
-                    />
-                    <DropDown3 
-                        question="3~4학년 분들도 많이 계신가요? 비전공자인데 너무 늦은 학년에 지원하는 것은 아닌가 싶어서요."
-                        answer="답변 입력하기"
-                        styleType={1}
-                    />
+                        />
+                    ))}
                     </FAQList>
                 </FAQInner>
             </FAQSection>
+
 
 
             {/* 하단 지원하기 배너 */}
@@ -231,13 +365,30 @@ const RecruitGuidePageMo = () => {
                 <Icon src="/icons/ellipse4.svg" alt="" />
                 <BannerText>빛나는 내일, 이대 멋사와 함께하세요!</BannerText>
                 <ButtonGroup>
-                    <ApplyButtonMobile />
-                    <DetailLinkButtonMobile />
+                    {renderRecruitButton()}
                 </ButtonGroup>
                 <SubText>
                 지원서를 제출하셨나요? <span>지원서 열람하기</span>
                 </SubText>
             </BottomBanner>
+            <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="14기 모집 사전 알림 등록"
+                description="이화여대 멋쟁이사자처럼 카카오톡 채널을 통해 모집이 시작되면 가장 먼저 알려드릴게요."
+                align="center"
+                actions={[
+                    {
+                        label: "카카오톡 바로가기",
+                        variant: "primary",
+                        fullWidth: true,
+                        onClick: () => {
+                            window.open("https://pf.kakao.com/_htxexfd", "_blank"); // 실제 채널 링크 입력
+                        }
+                    }
+                ]}
+            />
+
             </SectionWrapper>
         </Container>
 
@@ -250,8 +401,8 @@ export default RecruitGuidePageMo;
 // --- 스타일 정의 ---
 
 const Container = styled.div`
-  width: 100%;
-  background-color: #ffffff;
+    width: 100%;
+    background-color: #ffffff;
 `;
 
 
@@ -277,11 +428,10 @@ const Section = styled.section`
 
 const SectionInner = styled.div`
     width: 100%;
-    max-width: 21rem;
+    max-width: 800px; 
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    align-items: center; /* 내부 요소들을 중앙으로 (아이콘, 타이틀 등) */
+    align-items: center;
     margin: 0 auto;
 `;
 
@@ -291,22 +441,46 @@ const Icon = styled.img`
     margin-bottom: 0.5rem;
 `;
 
-const ScheduleGrid = styled.div`
+const ScheduleTitleArea = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: flex-start; 
+    margin-bottom: 1rem;
+`;
+
+
+
+const ScheduleGrid = styled.div`
+    display: grid;
+    grid-template-columns: 1fr; 
     gap: 0.75rem;
     width: 100%;
+    max-width: none; 
+
+    @media (min-width: 458px) {
+        max-width: none; 
+        grid-template-columns: repeat(2, minmax(0, 18.375rem));
+        justify-content: center;
+    }
+
+    @media (min-width: 801px) {
+        grid-template-columns: repeat(4, minmax(0, 18.375rem));
+    }
 `;
 
 const ScheduleCard = styled.div`
-    background-color: ${(props) => props.color};
+    background-color: ${({ $color }) => $color};
     border-radius: 1rem;
-    padding: 0.75rem 0rem 0.75rem 1rem;
+    padding: 1.5rem 1.25rem; 
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
-    height: 10.25rem;
-    min-width: 12.96875rem;
+    
+    height: 10.25rem;        
+    width: 100%;           
+    box-sizing: border-box;
+    margin: 0 auto;
 `;
 
 const Num = styled.span`
@@ -396,23 +570,10 @@ const TargetSubDesc = styled.p`
     line-height: 1.125rem; 
     margin-bottom: 1.5rem; 
     width: 100%;
+    margin-top: 0.5rem;
 
 `;
 
-const LinkButton = styled.a` /* 자세한 내용 노션 바로가기 부분 */
-    display: inline-block; 
-    margin-top: 0.25rem;
-    color: #9B9B9B;
-    font-weight: 700;
-    text-decoration: underline;
-    margin-left: 0.3rem; 
-    cursor: pointer;  
-    transition: color 0.2s ease;
-
-    &:active {
-        opacity: 0.7;        /* 클릭하는 순간 살짝 투명하게 */
-    }
-`;
 
 const TargetGrid = styled.div`
     display: flex;
@@ -475,7 +636,7 @@ const PartTitle = styled.h2`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.4rem;
     img { width: 1.25rem; }
 
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
@@ -487,19 +648,63 @@ const PartTitle = styled.h2`
     margin-bottom: 1.25rem;
 `;
 
-const PartCards = styled.div`
+const LinkWrapper = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+    align-items: center; 
+    gap: 0.25rem;      
+    cursor: pointer;
+
+    img {
+        width: 0.53188rem;
+        height: 0.5rem;
+    }
+
 `;
 
+
+const PartCards = styled.div`
+    display: grid;
+    grid-template-columns: 1fr; 
+    gap: 0.75rem;
+    justify-items: center; 
+    width: 100%;
+    margin: 0 auto;
+
+    @media (min-width: 525px) {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 31rem; 
+
+        & > *:nth-child(3) {
+        grid-column: span 2; 
+        justify-self: center; 
+        }
+    }
+
+    @media (min-width: 1076px) {
+        grid-template-columns: repeat(3, 1fr);
+        max-width: 47rem; 
+        
+        & > *:nth-child(3) {
+        grid-column: auto;
+        }
+    }
+`;
+
+
+
 const PartCard = styled.div`
-    border-radius: var(--unit-12, 0.75rem);
+    width: 15rem;
+    height: 7rem;
+    
+    border-radius: 0.75rem;
     background: rgba(255, 255, 255, 0.75);
-    padding: 1rem 0rem 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;     
     text-align: center;
-    min-width: 15rem;
+    box-sizing: border-box;
+    padding: 1rem;
 
     h3 {
         color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
@@ -548,6 +753,7 @@ const ActivityInner = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const ActivityHeader = styled.div`
@@ -629,7 +835,7 @@ const TermHeader = styled.div`
     font-family: Pretendard;
     font-size: 0.875rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: 1.375rem; 
 `;
 
@@ -675,6 +881,152 @@ const ActivityBox = styled.div`
 `;
 
 
+/* 선수강 강의 안내 */
+const PreLectureSection = styled.section`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    padding: 2.5rem 1rem 1.88rem 1rem;
+`;
+
+const PreLectureInner = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const PreLectureTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.47rem;
+    margin-bottom: 0.47rem;
+
+    h2 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: "Cafe24 PRO Slim";
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 2.25rem; 
+    }
+
+    img {
+        width: 1.25rem;
+        height: 1.34369rem;
+    }
+`;
+
+const PreLectureNotice = styled.p`
+    color: var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B));
+    font-family: Pretendard;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; 
+    margin-bottom: 1.21rem;
+`;
+
+const PreLectureList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+`;
+
+const PreLectureItem = styled.div`
+    display: flex;
+    flex-direction: column; 
+    align-items: stretch;
+    gap: 1.25rem;
+
+    padding: 1rem 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--Primary-sub, #FF9B38);
+    background: var(--Orange-95, #FEF4E6);
+
+
+
+    h3 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.375rem; 
+        margin-bottom: 0.19rem;
+    }
+
+    ul {
+        padding-left: 1.2rem;
+    }
+
+    li {
+        color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
+        font-family: Pretendard;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.125rem; 
+    }
+
+    .link-btn {
+        all: unset;
+        box-sizing: border-box;
+        cursor: pointer;
+        width: 100%;              
+        display: flex;
+        height: 2.625rem;
+        min-width: 15rem;
+        padding: 0.625rem 1.75rem;
+        justify-content: center;
+        align-items: center;
+        flex: 1 0 0;
+        border-radius: 1.25rem;
+        background: var(--Primary-sub, #FF9B38);
+        color: var(--Static-White, #FFF);
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.375rem; /* 157.143% */
+    }
+
+    @media (min-width: 34.875rem) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+
+        .link-btn {
+            all: unset;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            width: 16rem;          
+            height: 2.625rem;      
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 1.75rem;
+            border-radius: 1.25rem;
+            background: var(--Primary-sub, #FF9B38);
+
+            color: #fff;
+            font-family: Pretendard;
+            font-size: 0.875rem;
+            font-weight: 700;
+            white-space: nowrap;
+
+            flex: none;           
+        }
+
+    }
+`;
+
+
 
 /* 자주 묻는 질문들 */
 const FAQSection = styled.section`
@@ -707,6 +1059,11 @@ const FAQTitleArea = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: 2.25rem; 
+    }
+
+    img{
+        width: 1.25rem;
+        height: 1.34369rem;
     }
 `;
 
@@ -775,6 +1132,3 @@ const SubText = styled.p`
         cursor: pointer;
     }
 `;
-
-
-
