@@ -20,6 +20,7 @@ html {
   overflow-x: hidden;
   width: 100%;
   position: relative;
+  /* overflow-y: overlay; */
 }
 
 body {
@@ -30,6 +31,17 @@ body {
   font-family:"Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 스크롤바 완전히 숨기기 */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox, IE, Edge 스크롤바 숨기기 */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* ————————————— 타이포 ————————————— */

@@ -97,6 +97,12 @@ const Project = styled.div`
 
   transition: all 0.2s ease;
 
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   @media (max-width: 799px) {
     font-size: 1.25rem;
     margin-bottom: 0.25rem;
