@@ -94,17 +94,17 @@ function ProjectDetail() {
 
                     {/*상세 이미지 데이터 없는 경우 비활성화*/}
                     {hasDetailImages && (
-                        <ScrollFullWidth>
-                            <ScrollInner>
-                                <ProjectImg>
-                                    <ImageScroll>
-                                        {project.detailImages.map((img, idx) => (
-                                            <img key={idx} src={img} />
-                                        ))}
-                                    </ImageScroll>
-                                </ProjectImg>
-                            </ScrollInner>
-                        </ScrollFullWidth>
+                        <ScrollInner>
+                            <ProjectImg>
+                                <ImageScroll>
+                                    {project.detailImages.map((img, idx) => (
+                                        <ImgCard key={idx}>
+                                            <img src={img} />
+                                        </ImgCard>
+                                    ))}
+                                </ImageScroll>
+                            </ProjectImg>
+                        </ScrollInner>
                     )}
 
                     <Member>
@@ -191,14 +191,17 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
+    box-sizing: border-box;
 
     padding: 3.25rem 5rem 10rem 5rem;
+
     @media (max-width: 49.9999rem) {
         padding: 1.5rem 1rem;
     }
 `
 
 const Project = styled.div`
+    width: 100%;
     max-width: 60.6875rem;
     min-width: 0;
     display: flex;
@@ -269,37 +272,24 @@ const Refer = styled.div`
     flex-direction: column;
 `
 
-const ScrollFullWidth = styled.div`
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-
-    @media (min-width: 60.6875rem) {
-        display: flex;
-        justify-content: center;
-    }
-`
-
 const ScrollInner = styled.div`
-    max-width: 60.6875rem;
+    width: 100%;
     margin: 0 auto;
+    box-sizing: border-box;
 
-    @media (min-width: 50rem) and (max-width: 70.6875rem) {
-        width: calc(100vw - 10rem);
+    @media (min-width: 70.625rem) {
+        max-width: 60.6875rem;
     }
 
-    @media (max-width: 49.9999rem) {
-        padding: 0 1rem;
-    }
 `;
 
 const ProjectImg = styled.div`
     width: 100%;
-    overflow-x: hidden;
 `
 
 const ImageScroll = styled.div`
-    margin: 3.75rem 0;
-    width: 100%;
+    margin: 3.75rem -1rem;
+    padding: 1rem 1rem;
 
     display: flex;
     flex-wrap: nowrap;
@@ -309,29 +299,33 @@ const ImageScroll = styled.div`
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
 
+    @media (max-width: 49.9999rem) {
+        margin: 1.25rem -1rem;
+        padding: 1rem 1rem;
+        gap: 0.5rem;
+    }
+`
+
+const ImgCard = styled.div`
     img {
-        flex: 0 0 auto;
         width: 18.75rem;
         height: 31.25rem;
-        object-fit: cover;
 
         border-radius: 1rem;
         border: 0.125rem solid var(--Line-Neutral, rgba(112, 115, 124, 0.16));
-
+        background: lightgray;
         box-shadow: 0 0.5rem 1rem 0 rgba(24, 24, 27, 0.10);
+
+        overflow: hidden;
     }
 
     @media (max-width: 49.9999rem) {
-        margin: 1.25rem 0;
-        gap: 0.5rem;
-
         img {
             width: 15.9375rem;
             height: 25rem;
             aspect-ratio: 9/16;
             border-radius: 0.5rem;
             border: 0.0625rem solid var(--Line-Neutral, rgba(112, 115, 124, 0.16));
-            box-shadow: 0 0.5rem 1rem 0 rgba(24, 24, 27, 0.10);
         }
     }
 `
