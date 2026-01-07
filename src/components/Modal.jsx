@@ -602,8 +602,8 @@ const CloseOnImage = styled.button`
   @media (max-width: 768px) {
     position: fixed;
     top: 20px;
-    left: 20px;
-    right: auto;
+    right: 20px;
+    left: auto;
   }
 `;
 
