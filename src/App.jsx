@@ -6,6 +6,7 @@ import ProjectDetail from './pages/project/project-detail/ProjectDetail.jsx';
 import People from './pages/people/People.jsx';
 import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
 import Apply2 from "./pages/apply2.jsx"
+import Apply1 from "./pages/apply1.jsx";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
         <Route path="recruit" element={<RecruitGuidePage />} />
 
         {/* apply pages */}
-        <Route path="apply/test" element={<Apply2/>} />
+        <Route path="recruit/apply/form1" element={<Apply1/>} />
+        <Route path="recruit/apply/form2" element={<Apply2/>} />
 
         {/* Sidebar (Admin) pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../components/Input";
 import Dropdown2 from "../components/dropdown/Dropdown2";
 import Dropdown3 from "../components/dropdown/Dropdown3";
-import api from "../apis/api";
 
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
 import {
@@ -33,7 +33,7 @@ import {
   TimeSelectedMobile
 } from "../components/buttons/TimeButtons_mo";
 
-function ApplicationCodeModal({ isOpen, onClose, onSuccess }) {
+function ApplicationCodeModal({ isOpen, onClose, navigate }) {
   const [code, setCode] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMode, setErrorMode] = useState(false); 
@@ -56,12 +56,13 @@ function ApplicationCodeModal({ isOpen, onClose, onSuccess }) {
     if (!isCodeValid || isLoading) return;
     setIsLoading(true);
     try {
-      const response = await api.post("/recruitments/application/content/", {
+      await api.post("/recruitments/application/my/", {
         application_code: code.trim()
       });
       
-      onSuccess?.(response.data);
+      // 성공 시 열람 페이지(논의 필요할 듯)로 이동하고 지원 코드는 state로 전달
       handleClose();
+      navigate("/recruit/preview1", { state: { applicationCode: code.trim() } });
     } catch (error) {
       setErrorMode(true);
     } finally {
@@ -135,7 +136,7 @@ function ApplicationCodeModal({ isOpen, onClose, onSuccess }) {
             <ModalHelperText>
               지원 코드를 잊어버리셨나요?{" "}
               <ModalHelperLink 
-                href="카카오톡 링크 걸어주기(피그마에서 못 찾음..)" 
+                href="https://pf.kakao.com/_htxexfd" 
                 target="_blank" 
               >
                 카카오톡 문의하기
@@ -159,39 +160,88 @@ function useisMO(maxWidth = 799) {
   return isMO;
 }
 
+const PART_OPTIONS = [
+  { value: "PM_DESIGN", label: "PM/디자인" },
+  { value: "FRONTEND", label: "프론트엔드" },
+  { value: "BACKEND", label: "백엔드" }
+];
+
+function formatBirthday(year, month, day) {
+  if (!year || !month || !day) return null;
+  const mm = String(month).padStart(2, '0');
+  const dd = String(day).padStart(2, '0');
+  return `${year}-${mm}-${dd}`;
+}
+
+function convertTo24Hour(time, isPM) {
+  const [hourStr, minuteStr] = time.split(':');
+  let hour = parseInt(hourStr, 10);
+  const minute = minuteStr || '00';
+  
+  if (isPM) {
+    if (hour !== 12) {// 오후
+      hour += 12;
+    }
+  } else {
+    if (hour === 12) {// 오전
+      hour = 0;
+    }
+  }
+  
+  return `${String(hour).padStart(2, '0')}:${minute}`;
+}
+
+function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
+  const result = [];
+  
+  for (const dateInfo of interviewDates) {
+    const { date, am, pm } = dateInfo;
+    const selectedTimes = interviewAvailableTimes[date] || [];
+    
+    for (const time of selectedTimes) {
+      const isPM = pm.includes(time);
+      const time24 = convertTo24Hour(time, isPM);
+      const isoString = `${date}T${time24}:00+09:00`;
+      result.push(isoString);
+    }
+  }
+  
+  return result;
+}
+
 export default function Apply1() {
   const isMO = useisMO(799);
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
-  const [applicationData, setApplicationData] = useState(null);
 
-  const handleCodeModalSuccess = (data) => {
-    setApplicationData(data);
-    // 여기서 data를 활용하면 폼 자동 채우기 같은 거 처리 ㄱㄴ
-    console.log("지원서 데이터:", data);
-  };
+  const part = location.state?.part || "";
+
+  useEffect(() => {
+    if (!part) {
+      navigate("/recruit/apply/part", { replace: true });
+    }
+  }, [part, navigate]);
 
   const [name, setName] = useState("");
   const [birthYear, setBirthYear] = useState("");
   const [birthMonth, setBirthMonth] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [phone, setPhone] = useState("");
-  const [major, setMajor] = useState("");
-  const [studentId, setStudentId] = useState("");
+  const [birthDay, setBirthDay] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [department, setDepartment] = useState("");
+  const [studentNumber, setStudentNumber] = useState("");
   const [grade, setGrade] = useState("");
-  const [interviewType, setInterviewType] = useState("");
+  const [interviewMethod, setInterviewMethod] = useState("");
   const [privacyAgree, setPrivacyAgree] = useState(false);
 
   const yearOptions = Array.from({ length: 2010 - 1990 + 1 }, (_, i) => 1990 + i);
   const monthOptions = Array.from({ length: 12 }, (_, i) => i + 1);
   const dateOptions = Array.from({ length: 31 }, (_, i) => i + 1);
 
-
-//  면접일정 : 이것도 서버에서 받아오는 건지, 아니면 고정된 값(?)인지 여쭤볼 것
-// 일단은 받아오는 형태로 작성해 둠
   const INTERVIEW_DATES = [
     {
-      date: "2025-12-29",
-      label: "12월 29일",
+      date: "2026-03-06",
+      label: "3월 6일",
       am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
       pm: [
         "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30",
@@ -200,22 +250,32 @@ export default function Apply1() {
       ]
     },
     {
-      date: "2025-12-30",
-      label: "12월 30일",
+      date: "2026-03-07",
+      label: "3월 7일",
       am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
       pm: [
         "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30",
-        "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "19:00", "19:30",
-        "20:00", "20:30", "21:00", "21:30"
+        "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30",
+        "8:00", "8:30", "9:00", "9:30"
+      ]
+    },
+    {
+      date: "2026-03-08",
+      label: "3월 8일",
+      am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
+      pm: [
+        "12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30",
+        "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30",
+        "8:00", "8:30", "9:00", "9:30"
       ]
     }
   ];
 
-  const [selectedTimes, setSelectedTimes] = useState({});
+  const [interviewAvailableTimes, setInterviewAvailableTimes] = useState({});
   const [videoAgree, setVideoAgree] = useState(false);
 
   function toggleTime(date, time) {
-    setSelectedTimes(prev => {
+    setInterviewAvailableTimes(prev => {
       const arr = prev[date] || [];
       if (arr.includes(time)) {
         return { ...prev, [date]: arr.filter(t => t !== time) };
@@ -224,16 +284,17 @@ export default function Apply1() {
     });
   }
 
+  const isPartValid = !!part;
   const isNameValid = name.trim().length > 0;
-  const isBirthValid = birthYear && birthMonth && birthDate;
-  const isMajorValid = major.trim().length > 0;
-  const isStudentIdValid = studentId.trim().length > 0;
+  const isBirthValid = birthYear && birthMonth && birthDay;
+  const isDepartmentValid = department.trim().length > 0;
+  const isStudentNumberValid = studentNumber.trim().length > 0;
   const isGradeValid = grade.trim().length > 0;
-  const isPhoneValid = /^01[0]-\d{4}-\d{4}$/.test(phone);
+  const isPhoneNumberValid = /^01[0]-\d{4}-\d{4}$/.test(phoneNumber);
 // 일단 010-XXXX-XXXX 형식으로만 검사하도록 했는데 설마...,, 외국인 번호나 뭐 다른 번호 같은 것도 고려해야 하는지...,,?
-  const isInterviewTypeValid = !!interviewType;
+  const isInterviewMethodValid = !!interviewMethod;
   const isPrivacyValid = !!privacyAgree;
-  const isTimeValid = Object.values(selectedTimes).some(arr => Array.isArray(arr) && arr.length > 0);
+  const isTimeValid = Object.values(interviewAvailableTimes).some(arr => Array.isArray(arr) && arr.length > 0);
   const isVideoValid = !!videoAgree;
 
 return (
@@ -241,7 +302,7 @@ return (
   <ApplicationCodeModal
     isOpen={isCodeModalOpen}
     onClose={() => setIsCodeModalOpen(false)}
-    onSuccess={handleCodeModalSuccess}
+    navigate={navigate}
   />
   <CodeLookupButton onClick={() => setIsCodeModalOpen(true)}>
     모달 테스트용
@@ -250,7 +311,7 @@ return (
     <Frame>
     <TitleWrapper>
       <PageName>지원서 작성</PageName>
-      <PartName>파트명</PartName>
+      <PartName>{PART_OPTIONS.find(p => p.value === part)?.label || "파트를 선택해주세요"}</PartName>
     </TitleWrapper>
     <Section>
         <SectionTitle>1. 지원자 정보</SectionTitle>
@@ -290,16 +351,16 @@ return (
               <Input
                 variant="form" 
                 // label="전화번호"
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
+                value={phoneNumber}
+                onChange={e => setPhoneNumber(e.target.value)}
                 required
-                error={!isPhoneValid && phone.length > 0}
+                error={!isPhoneNumberValid && phoneNumber.length > 0}
                 errorMessage="전화번호를 작성해주세요."
                 placeholder={"전화번호를 작성해주세요."}
-                $state={!isPhoneValid && phone.length > 0 ? 'error' : phone.length > 0 ? 'focused' : 'default'}
+                $state={!isPhoneNumberValid && phoneNumber.length > 0 ? 'error' : phoneNumber.length > 0 ? 'focused' : 'default'}
               />
-              <ErrorText $visible={!isPhoneValid && phone.length > 0}>
-                {!isPhoneValid && phone.length > 0 ? "전화번호를 작성해주세요." : "\u00A0"}
+              <ErrorText $visible={!isPhoneNumberValid && phoneNumber.length > 0}>
+                {!isPhoneNumberValid && phoneNumber.length > 0 ? "전화번호를 작성해주세요." : "\u00A0"}
               </ErrorText>
               </InputWrapper>
           </ItemContainer>
@@ -318,7 +379,7 @@ return (
                   onSelect={setBirthYear}
                   placeholder={"0000년"}
                   unit="년"
-                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                  error={!isBirthValid && (birthYear || birthMonth || birthDay)}
                 />
                 <Dropdown2
                   options={monthOptions}
@@ -327,20 +388,20 @@ return (
                   onSelect={setBirthMonth}
                   placeholder={"00월"}
                   unit=" 월"
-                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                  error={!isBirthValid && (birthYear || birthMonth || birthDay)}
                 />
                 <Dropdown2
                   options={dateOptions}
-                  value={birthDate}
-                  onChange={setBirthDate}
-                  onSelect={setBirthDate}
+                  value={birthDay}
+                  onChange={setBirthDay}
+                  onSelect={setBirthDay}
                   placeholder={"00일"}
                   unit=" 일"
-                  error={!isBirthValid && (birthYear || birthMonth || birthDate)}
+                  error={!isBirthValid && (birthYear || birthMonth || birthDay)}
                 />
               </DropdownWrapper>
-              <ErrorText $visible={!isBirthValid && (birthYear || birthMonth || birthDate)}>
-                {!isBirthValid && (birthYear || birthMonth || birthDate) ? "생년월일을 선택하세요." : "\u00A0"}
+              <ErrorText $visible={!isBirthValid && (birthYear || birthMonth || birthDay)}>
+                {!isBirthValid && (birthYear || birthMonth || birthDay) ? "생년월일을 선택하세요." : "\u00A0"}
               </ErrorText>
             </DropdownContainer>
           </ItemContainer>
@@ -355,16 +416,16 @@ return (
             <InputWrapper>
               <Input
                 variant="form" 
-                value={major}
-                onChange={e => setMajor(e.target.value)}
+                value={department}
+                onChange={e => setDepartment(e.target.value)}
                 required
-                error={!isMajorValid && major.length > 0}
+                error={!isDepartmentValid && department.length > 0}
                 errorMessage="학과를 작성해주세요."
                 placeholder={"학과를 작성해주세요."}
-                $state={!isMajorValid && major.length > 0 ? 'error' : major.length > 0 ? 'focused' : 'default'}
+                $state={!isDepartmentValid && department.length > 0 ? 'error' : department.length > 0 ? 'focused' : 'default'}
               />
-              <ErrorText $visible={!isMajorValid && major.length > 0}>
-                {!isMajorValid && major.length > 0 ? "학과를 작성해주세요." : "\u00A0"}
+              <ErrorText $visible={!isDepartmentValid && department.length > 0}>
+                {!isDepartmentValid && department.length > 0 ? "학과를 작성해주세요." : "\u00A0"}
               </ErrorText>
               </InputWrapper>
           </ItemContainer>
@@ -378,15 +439,15 @@ return (
             <InputWrapper>
               <Input
                 variant="form" 
-                value={studentId}
-                onChange={e => setStudentId(e.target.value)}
-                error={!isStudentIdValid && studentId.length > 0}
+                value={studentNumber}
+                onChange={e => setStudentNumber(e.target.value)}
+                error={!isStudentNumberValid && studentNumber.length > 0}
                 errorMessage="학번을 작성해주세요."
                 placeholder={"학번을 작성해주세요."}
-                $state={!isStudentIdValid && studentId.length > 0 ? 'error' : studentId.length > 0 ? 'focused' : 'default'}
+                $state={!isStudentNumberValid && studentNumber.length > 0 ? 'error' : studentNumber.length > 0 ? 'focused' : 'default'}
               />
-              <ErrorText $visible={!isStudentIdValid && studentId.length > 0}>
-                {!isStudentIdValid && studentId.length > 0 ? "학번을 작성해주세요." : "\u00A0"}
+              <ErrorText $visible={!isStudentNumberValid && studentNumber.length > 0}>
+                {!isStudentNumberValid && studentNumber.length > 0 ? "학번을 작성해주세요." : "\u00A0"}
               </ErrorText>
             </InputWrapper>
           </ItemContainer>
@@ -421,33 +482,33 @@ return (
             <ExampleContent>2차 면접은 0/0~0/0 오프라인, 0/0 온라인으로 진행되며, 오프라인 면접 장소는 이화여자대학교 학생문화관입니다. 지원자 분이 가진 열정과 역량을 더욱 잘 파악할 수 있도록 최대한 오프라인으로 참여하시는 것을 권장합니다. 다만 개인 사정으로 인해 대면으로 학교에 방문하기 어려운 분에 한하여 온라인으로 참여하실 수 있습니다.</ExampleContent>
               {isMO ? (
             <ButtonRowMobile>
-                  {interviewType === "대면" ? (
-                    <SelectPositiveButtonMobile onClick={() => setInterviewType("대면")} />
+                  {interviewMethod === "OFFLINE" ? (
+                    <SelectPositiveButtonMobile onClick={() => setInterviewMethod("OFFLINE")} />
                   ) : (
-                    <UnselectPositiveButtonMobile onClick={() => setInterviewType("대면")} />
+                    <UnselectPositiveButtonMobile onClick={() => setInterviewMethod("OFFLINE")} />
                   )}
-                  {interviewType === "비대면" ? (
-                    <SelectNegativeButtonMobile onClick={() => setInterviewType("비대면")} />
+                  {interviewMethod === "ONLINE" ? (
+                    <SelectNegativeButtonMobile onClick={() => setInterviewMethod("ONLINE")} />
                   ) : (
-                    <UnselectNegativeButtonMobile onClick={() => setInterviewType("비대면")} />
+                    <UnselectNegativeButtonMobile onClick={() => setInterviewMethod("ONLINE")} />
                   )}
             </ButtonRowMobile>
               ) : (
             <ButtonRowPC>
-                  {interviewType === "대면" ? (
-                    <SelectPositiveButton onClick={() => setInterviewType("대면")} />
+                  {interviewMethod === "OFFLINE" ? (
+                    <SelectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
                   ) : (
-                    <UnselectPositiveButton onClick={() => setInterviewType("대면")} />
+                    <UnselectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
                   )}
-                  {interviewType === "비대면" ? (
-                    <SelectNegativeButton onClick={() => setInterviewType("비대면")} />
+                  {interviewMethod === "ONLINE" ? (
+                    <SelectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
                   ) : (
-                    <UnselectNegativeButton onClick={() => setInterviewType("비대면")} />
+                    <UnselectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
                   )}
             </ButtonRowPC>
               )}
-              <ErrorText $visible={!isInterviewTypeValid && interviewType !== ""}>
-                {!isInterviewTypeValid && interviewType !== "" ? "면접 참여 방식을 선택해주세요." : "\u00A0"}
+              <ErrorText $visible={!isInterviewMethodValid && interviewMethod !== ""}>
+                {!isInterviewMethodValid && interviewMethod !== "" ? "면접 참여 방식을 선택해주세요." : "\u00A0"}
               </ErrorText>
           </ItemContainer>
 
@@ -513,7 +574,7 @@ return (
                       <TimeLabel>오전</TimeLabel>
                       <TimeRow>
                         {am.map(time => {
-                          const selected = (selectedTimes[date] || []).includes(time);
+                          const selected = (interviewAvailableTimes[date] || []).includes(time);
                           if (isMO) {
                             return (
                               <span
@@ -549,7 +610,7 @@ return (
                       <TimeLabel>오후</TimeLabel>
                       <TimeRow>
                         {pm.map(time => {
-                          const selected = (selectedTimes[date] || []).includes(time);
+                          const selected = (interviewAvailableTimes[date] || []).includes(time);
                           if (isMO) {
                             return (
                               <span
