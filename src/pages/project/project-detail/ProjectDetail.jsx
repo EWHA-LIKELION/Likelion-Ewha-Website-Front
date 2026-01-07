@@ -249,6 +249,10 @@ const ProjectLabel = styled.div`
 
 const ProjectContent = styled.div`
     width: 100%;
+
+    @media (max-width: 49.9999rem) {
+        margin-top: -12px;
+    }
 `
 
 const ReferContent = styled.div`
