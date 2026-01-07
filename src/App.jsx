@@ -9,6 +9,7 @@ import RecruitPart from "./pages/recruit/RecruitPart.jsx";
 import RecruitResult from "./pages/recruit/RecruitResult.jsx";
 import Apply2 from "./pages/apply2.jsx";
 import LayoutAdmin from "./layouts/adminlayout.jsx";
+import Apply2Review from "./pages/apply2_review.jsx";
 
 function App() {
   return (
@@ -20,7 +21,9 @@ function App() {
         <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
         <Route path="recruit" element={<RecruitGuidePage />} />
-        <Route path="apply/test" element={<Apply2 />} />
+        {/* recruit */}
+        <Route path="recruit/apply" element={<Apply2 />} />
+        <Route path="recruit/apply/preview" element={<Apply2Review />} />
       </Route>
 
       {/* Admin Layout: /admin/* 는 전부 여기로 */}

@@ -1,13 +1,15 @@
-import api from "../api";
+import { api } from "@/apis";
 
-/**
- * 지원서 제출
- * POST /recruitments/application/
- *
- * @param {FormData} formData multipart/form-data (파일 포함)
- * @returns response.data
- */
 export const createApplication = async (formData) => {
-  const response = await api.post("/recruitments/application/", formData);
+  const response = await api.post("/recruitments/application/", formData, {
+    headers: { "Content-Type": undefined },
+  });
+  return response.data;
+};
+
+export const getMyApplication = async (application_code) => {
+  const response = await api.post("/recruitments/application/my/", {
+    application_code,
+  });
   return response.data;
 };
