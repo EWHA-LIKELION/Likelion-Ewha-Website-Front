@@ -106,7 +106,7 @@ function ProjectDetail() {
                         <PartContainer>
                             {Object.entries(project.team).map(([part, members]) => (
                                 <Part key={part}>
-                                    <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>{part.toUpperCase()}</p>
+                                    <p className='h5-bold' style={{ color: 'var(--Atomic-Neutral-50, var(--Neutral-50, #737373))' }}>{part.replace('pmdesign', 'PM/DESIGN').toUpperCase()}</p>
                                     {members.map(member => (
                                         <PartMember key={member}>{member}</PartMember>
                                     ))}
@@ -119,7 +119,7 @@ function ProjectDetail() {
                     <MoreContent>
                         <MoreLabel onClick={() => navigate('/project')}>
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
-                            <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center' }}>
+                            <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center', display: 'flex', gap: '5px' }}>
                                 목록으로
                                 <img className="rightarrow" src='/icons/arrowRightProject.svg' />
                             </p>
@@ -204,25 +204,32 @@ const Project = styled.div`
             font-size: 1.5rem;
         }
 
-        p.h5-regular, p.h5-bold, p.body-regular {
+        p.h4-bold {
+            font-size: 1.25rem;
+        }
+
+        p.h5-regular, p.h5-bold {
             font-size: 1rem;
         }
 
-        p.h5-bold {
-            font-size: 1.25rem;
+        p.body-regular {
+            font-size: 0.875rem;
         }
     }
 
     @media (max-width: 49.9999rem) {
-        p.h4-bold, p.h5-regular {
+        p.h3-bold {
             font-size: 1.25rem;
         }
 
-        p.footnote-regular {
-            font-size: 0.75rem;
+        p.h4-bold {
+            font-size: 1rem;
+        }
+        p.h5-regular, p.h5-bold {
+            font-size: 0.875rem;
         }
 
-        p.h5-bold {
+        p.footnote-regular, p.body-regular {
             font-size: 0.75rem;
         }
     }
@@ -240,8 +247,10 @@ const ProjectContent = styled.div`
 
 const ReferContent = styled.div`
     display: flex;
-    gap: 2.5rem;
     flex-wrap: wrap;
+
+    column-gap: 2.5rem;
+    row-gap: 0.5rem;
 `
 
 const Refer = styled.div`
@@ -279,6 +288,7 @@ const ProjectImg = styled.div`
 `
 
 const ImageScroll = styled.div`
+    margin: 3.75rem 0;
     width: 100%;
 
     display: flex;
@@ -302,6 +312,7 @@ const ImageScroll = styled.div`
     }
 
     @media (max-width: 49.9999rem) {
+        margin: 1.25rem 0;
         gap: 0.5rem;
 
         img {
@@ -343,6 +354,10 @@ const PartMember = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: 1.375rem;
+
+    @media (max-width: 49.9999rem) {
+        font-size: 0.875rem;
+    }
 `
 
 const MoreContent = styled.div`
@@ -351,6 +366,10 @@ const MoreContent = styled.div`
     flex-direction: column;
     gap: 1.25rem;
     margin-top: 3.75rem;
+
+    @media (max-width: 49.9999rem) {
+        margin-top: 1.25rem;
+    }
 `
 
 const MoreLabel = styled.div`

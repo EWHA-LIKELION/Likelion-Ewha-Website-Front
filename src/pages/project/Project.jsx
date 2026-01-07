@@ -192,6 +192,22 @@ const Contents = styled.div`
     gap: 1.25rem;
     display: flex;
     flex-direction: column;
+
+    @media (min-width: 50rem) {
+        p.h5-regular, p.h5-bold {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 49.9999rem) {
+        p.h5-regular {
+            font-size: 0.875rem;
+        }
+
+        p.h5-bold {
+            font-size: 1rem;
+        }
+    }
 `
 
 const PageInfo = styled.div`
