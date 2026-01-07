@@ -112,7 +112,7 @@ const Title = styled.div`
 `;
 
 const SubTitle = styled.div`
-  color: var(--neutral-50);
+  color: var(--neutral-20);
   margin-bottom: 5rem;
 
   transition: all 0.2s ease;
