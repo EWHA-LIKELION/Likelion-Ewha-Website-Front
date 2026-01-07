@@ -162,6 +162,21 @@
     },
     {
       "id": "project-09",
+      "generation": "13기",
+      "category": "졸업프로젝트",
+      "title": "이대 멋사 공식 사이트",
+      "description": "13기 아기사자 전원이 함께 참여하여 기획부터 디자인, 개발까지 전 과정을 직접 만들어낸 ‘이화여대 멋쟁이사자처럼 공식 웹사이트’입니다. 본 사이트에서는 멋쟁이사자처럼과 이화여대 멋사의 소개를 비롯해 전 기수 구성원, 프로젝트, 활동 후기와 사진 등 이대 멋사의 기록과 이야기를 한눈에 만나볼 수 있습니다. 이 프로젝트는 13기의 마지막 활동이자, 함께한 성장의 마무리를 담고 있습니다.",
+      "urls": { "service": "https://likelion.ewha.university/", "github": "https://github.com/EWHA-LIKELION" },
+      "team": {
+        "pmdesign": ["김수민", "김지후", "박서영", "송나영", "이도윤", "이은서"],
+        "frontend": ["김민혜", "김성주", "서예린", "유진서", "이예영", "최연서"],
+        "backend": ["김가영", "김연우", "설영은", "성혜린", "신지민", "황규리"]
+      },
+      "thumbnail": "/images/projects/thumbnail/9.jpg",
+      "detailImages": []
+    },
+    {
+      "id": "project-10",
       "generation": "12기",
       "category": "대동제",
       "title": "2024 대동제",
@@ -172,16 +187,16 @@
         "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
         "backend": ["허채린", "심예원", "이다빈"]
       },
-      "thumbnail": "/images/projects/thumbnail/9.jpg",
+      "thumbnail": "/images/projects/thumbnail/10.jpg",
       "detailImages": [
-        "/images/projects/detailImages/9-1.jpg",
-        "/images/projects/detailImages/9-2.png",
-        "/images/projects/detailImages/9-3.png",
-        "/images/projects/detailImages/9-4.png"
+        "/images/projects/detailImages/10-1.jpg",
+        "/images/projects/detailImages/10-2.png",
+        "/images/projects/detailImages/10-3.png",
+        "/images/projects/detailImages/10-4.png"
       ]
     },
     {
-      "id": "project-10",
+      "id": "project-11",
       "generation": "12기",
       "category": "중앙아이디어톤",
       "title": "Medi Going",
@@ -192,12 +207,12 @@
         "frontend": [],
         "backend": []
       },
-      "thumbnail": "/images/projects/thumbnail/10.jpg",
+      "thumbnail": "/images/projects/thumbnail/11.jpg",
       "detailImages": []
     },
 
     {
-      "id": "project-11",
+      "id": "project-12",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "드링킷",
@@ -208,17 +223,17 @@
         "frontend": ["김예원", "김채연"],
         "backend": ["유지민", "이라령"]
       },
-      "thumbnail": "/images/projects/thumbnail/11.jpg",
+      "thumbnail": "/images/projects/thumbnail/12.jpg",
       "detailImages": [
-        "/images/projects/detailImages/11-1.png",
-        "/images/projects/detailImages/11-2.png",
-        "/images/projects/detailImages/11-3.png",
-        "/images/projects/detailImages/11-4.png",
-        "/images/projects/detailImages/11-5.png"
+        "/images/projects/detailImages/12-1.png",
+        "/images/projects/detailImages/12-2.png",
+        "/images/projects/detailImages/12-3.png",
+        "/images/projects/detailImages/12-4.png",
+        "/images/projects/detailImages/12-5.png"
       ]
     },
     {
-      "id": "project-12",
+      "id": "project-13",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "STEW",
@@ -229,15 +244,15 @@
         "frontend": ["김민서", "송유선"],
         "backend": ["김민솔", "이정은"]
       },
-      "thumbnail": "/images/projects/thumbnail/12.jpg",
+      "thumbnail": "/images/projects/thumbnail/13.jpg",
       "detailImages": [
-        "/images/projects/detailImages/12-1.png",
-        "/images/projects/detailImages/12-2.png",
-        "/images/projects/detailImages/12-3.png"
+        "/images/projects/detailImages/13-1.png",
+        "/images/projects/detailImages/13-2.png",
+        "/images/projects/detailImages/13-3.png"
       ]
     },
     {
-      "id": "project-13",
+      "id": "project-14",
       "generation": "12기",
       "category": "중앙해커톤",
       "title": "메디캐리어",
@@ -248,20 +263,20 @@
         "frontend": ["남선우"],
         "backend": ["박민서", "황지은"]
       },
-      "thumbnail": "/images/projects/thumbnail/13.jpg",
+      "thumbnail": "/images/projects/thumbnail/14.jpg",
       "detailImages": [
-        "/images/projects/detailImages/13-1.png",
-        "/images/projects/detailImages/13-2.png",
-        "/images/projects/detailImages/13-3.png",
-        "/images/projects/detailImages/13-4.png",
-        "/images/projects/detailImages/13-5.png",
-        "/images/projects/detailImages/13-6.png",
-        "/images/projects/detailImages/13-7.png",
-        "/images/projects/detailImages/13-8.png"
+        "/images/projects/detailImages/14-1.png",
+        "/images/projects/detailImages/14-2.png",
+        "/images/projects/detailImages/14-3.png",
+        "/images/projects/detailImages/14-4.png",
+        "/images/projects/detailImages/14-5.png",
+        "/images/projects/detailImages/14-6.png",
+        "/images/projects/detailImages/14-7.png",
+        "/images/projects/detailImages/14-8.png"
       ]
     },
     {
-      "id": "project-14",
+      "id": "project-15",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "MOY",
@@ -272,17 +287,17 @@
         "frontend": ["변지혜", "유서연", "진규빈", "최지원"],
         "backend": ["심예원", "이다빈", "허채린"]
       },
-      "thumbnail": "/images/projects/thumbnail/14.jpg",
+      "thumbnail": "/images/projects/thumbnail/15.jpg",
       "detailImages": [
-        "/images/projects/detailImages/14-1.png",
-        "/images/projects/detailImages/14-2.png",
-        "/images/projects/detailImages/14-3.png",
-        "/images/projects/detailImages/14-4.png",
-        "/images/projects/detailImages/14-5.png"
+        "/images/projects/detailImages/15-1.png",
+        "/images/projects/detailImages/15-2.png",
+        "/images/projects/detailImages/15-3.png",
+        "/images/projects/detailImages/15-4.png",
+        "/images/projects/detailImages/15-5.png"
       ]
     },
     {
-      "id": "project-15",
+      "id": "project-16",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "깨비",
@@ -293,18 +308,18 @@
         "frontend": ["김민서", "김채연"],
         "backend": ["이라령", "이정은", "황지은"]
       },
-      "thumbnail": "/images/projects/thumbnail/15.jpg",
+      "thumbnail": "/images/projects/thumbnail/16.jpg",
       "detailImages": [
-        "/images/projects/detailImages/15-1.png",
-        "/images/projects/detailImages/15-2.png",
-        "/images/projects/detailImages/15-3.png",
-        "/images/projects/detailImages/15-4.png",
-        "/images/projects/detailImages/15-5.png"
+        "/images/projects/detailImages/16-1.png",
+        "/images/projects/detailImages/16-2.png",
+        "/images/projects/detailImages/16-3.png",
+        "/images/projects/detailImages/16-4.png",
+        "/images/projects/detailImages/16-5.png"
       ]
     },
 
     {
-      "id": "project-16",
+      "id": "project-17",
       "generation": "12기",
       "category": "졸업프로젝트",
       "title": "i want it!",
@@ -315,15 +330,15 @@
         "frontend": ["김예원", "남선우", "송유선"],
         "backend": ["김민솔", "박민서", "유지민"]
       },
-      "thumbnail": "/images/projects/thumbnail/16.jpg",
+      "thumbnail": "/images/projects/thumbnail/17.jpg",
       "detailImages": [
-        "/images/projects/detailImages/16-1.png",
-        "/images/projects/detailImages/16-2.png",
-        "/images/projects/detailImages/16-3.png"
+        "/images/projects/detailImages/17-1.png",
+        "/images/projects/detailImages/17-2.png",
+        "/images/projects/detailImages/17-3.png"
       ]
     },
     {
-      "id": "project-17",
+      "id": "project-18",
       "generation": "11기",
       "category": "대동제",
       "title": "2023 대동제",
@@ -334,16 +349,16 @@
         "frontend": ["정다윤", "김혜빈", "김민주", "정연주", "허윤", "이서진", "이채원"],
         "backend": ["김도연", "신이수", "조현영", "임채영", "최유미", "김정은", "이나경"]
       },
-      "thumbnail": "/images/projects/thumbnail/17.jpg",
+      "thumbnail": "/images/projects/thumbnail/18.jpg",
       "detailImages": [
-        "/images/projects/detailImages/17-1.png",
-        "/images/projects/detailImages/17-2.png",
-        "/images/projects/detailImages/17-3.png",
-        "/images/projects/detailImages/17-4.png"
+        "/images/projects/detailImages/18-1.png",
+        "/images/projects/detailImages/18-2.png",
+        "/images/projects/detailImages/18-3.png",
+        "/images/projects/detailImages/18-4.png"
       ]
     },
     {
-      "id": "project-18",
+      "id": "project-19",
       "generation": "11기",
       "category": "중앙아이디어톤",
       "title": "MORE GREEN",
@@ -354,11 +369,11 @@
         "frontend": [],
         "backend": []
       },
-      "thumbnail": "/images/projects/thumbnail/18.jpg",
+      "thumbnail": "/images/projects/thumbnail/19.jpg",
       "detailImages": []
     },
     {
-      "id": "project-19",
+      "id": "project-20",
       "generation": "11기",
       "category": "중앙해커톤",
       "title": "Verny",
@@ -368,25 +383,6 @@
         "pmdesign": ["이채원"],
         "frontend": ["김가영", "진규빈"],
         "backend": ["심예원", "윤서아", "이혜지"]
-      },
-      "thumbnail": "/images/projects/thumbnail/19.jpg",
-      "detailImages": [
-        "/images/projects/detailImages/19-1.png",
-        "/images/projects/detailImages/19-2.png",
-        "/images/projects/detailImages/19-3.png"
-      ]
-    },
-    {
-      "id": "project-20",
-      "generation": "11기",
-      "category": "중앙해커톤",
-      "title": "Wallethy",
-      "description": "‘NFT 보안을 기반으로한 국민 의료 정보 통합 관리 서비스’ 우리의 서비스 목표는 스마트폰이나 개인 PC를 통해 사용자에게 모든 의료 정보를 간편하게 통합하고 관리할 수 있는 환경을 제공하는 것입니다. “병원만을 위한 의무기록”을 넘어서 대한민국의 의료 정보 시스템을 혁신적으로 발전시키며, EMR 5단계로의 진화를 이뤄내고자 합니다. 개인 환자들이 자신만의 건강 데이터 저장소를 소유하며, 자신의 정보를 안전하게 보관하고 활용할 수 있는 신뢰할 수 있는 환경을 구축하겠습니다.",
-      "urls": { "service": "https://wallethy.vercel.app", "github": "https://github.com/binys21/11th-Hackerthon-2023" },
-      "team": {
-        "pmdesign": ["김지형", "이시은"],
-        "frontend": ["이다빈", "최지원"],
-        "backend": ["김지은", "이지원"]
       },
       "thumbnail": "/images/projects/thumbnail/20.jpg",
       "detailImages": [
@@ -399,6 +395,25 @@
       "id": "project-21",
       "generation": "11기",
       "category": "중앙해커톤",
+      "title": "Wallethy",
+      "description": "‘NFT 보안을 기반으로한 국민 의료 정보 통합 관리 서비스’ 우리의 서비스 목표는 스마트폰이나 개인 PC를 통해 사용자에게 모든 의료 정보를 간편하게 통합하고 관리할 수 있는 환경을 제공하는 것입니다. “병원만을 위한 의무기록”을 넘어서 대한민국의 의료 정보 시스템을 혁신적으로 발전시키며, EMR 5단계로의 진화를 이뤄내고자 합니다. 개인 환자들이 자신만의 건강 데이터 저장소를 소유하며, 자신의 정보를 안전하게 보관하고 활용할 수 있는 신뢰할 수 있는 환경을 구축하겠습니다.",
+      "urls": { "service": "https://wallethy.vercel.app", "github": "https://github.com/binys21/11th-Hackerthon-2023" },
+      "team": {
+        "pmdesign": ["김지형", "이시은"],
+        "frontend": ["이다빈", "최지원"],
+        "backend": ["김지은", "이지원"]
+      },
+      "thumbnail": "/images/projects/thumbnail/21.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/21-1.png",
+        "/images/projects/detailImages/21-2.png",
+        "/images/projects/detailImages/21-3.png"
+      ]
+    },
+    {
+      "id": "project-22",
+      "generation": "11기",
+      "category": "중앙해커톤",
       "title": "Bora",
       "description": "‘세대 갈등을 해소할 수 있는 아티클 기반 각주 콘텐츠 플랫폼’ 디지털 격차는 세대 간의 적극적 소통을 막는 장벽이 되고 있습니다. alpha 및 Z세대는 디지털 리터러시와 문해력 저하를 경험하고 있고, 시니어 세대는 사회적 소외와 단절을 경험하고 있습니다. 이에, '창밖을보라'는 이성적 의사소통이 가능한 양질의 글을 제공하고, 각자의 시선에서 의견을 교류할 수 있는 장을 만들어 세대 간 소통을 활성화 시킵니다. 또한, 디지털 콘텐츠에 대한 접근성이 낮은 시니어 세대를 위해 청각 기반의 서비스도 제공합니다.",
       "urls": { "service": "https://bora-the-window.vercel.app", "github": "https://github.com/BORA-team1" },
@@ -406,25 +421,6 @@
         "pmdesign": ["손예원", "이지민"],
         "frontend": ["변지혜", "유서연"],
         "backend": ["박나담", "허채린"]
-      },
-      "thumbnail": "/images/projects/thumbnail/21.jpg",
-      "detailImages": [
-        "/images/projects/detailImages/20-1.png",
-        "/images/projects/detailImages/20-2.png",
-        "/images/projects/detailImages/20-3.png"
-      ]
-    },
-    {
-      "id": "project-22",
-      "generation": "11기",
-      "category": "졸업프로젝트",
-      "title": "What Do You Sing",
-      "description": "‘당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스’ <왓두유씽?>은 혼자 흥얼거리기 아까웠던 가사를 인용해서 소개할 수 있는 서비스예요. 내가 좋아하는 가사를 나만의 해석을 덧붙여 소개하고, 탐색을 통해 발견한 마음에 드는 가사는 북마크로 저장하거나 이미지를 통해 공유해 보세요. 가사에 대한 감정 표현이나 끊임없이 남길 수 있는 좋아요, 댓글 등을 통해 가사에 대한 생각을 공유하고, 직접 들어보고 싶은 노래 가사는 ‘이 노래 들으러 가기'를 통해 바로 감상할 수 있어요.",
-      "urls": { "service": "https://whatdoyousing.swygbro.com", "github": "https://github.com/WhatDoYouSing" },
-      "team": {
-        "pmdesign": ["이지민", "이채원"],
-        "frontend": ["변지혜", "최지원"],
-        "backend": ["김지은", "박나담", "윤서아"]
       },
       "thumbnail": "/images/projects/thumbnail/22.jpg",
       "detailImages": [
@@ -437,13 +433,13 @@
       "id": "project-23",
       "generation": "11기",
       "category": "졸업프로젝트",
-      "title": "Nae-chin-man",
-      "description": "‘내 친구가 알려주는 믿을 만한 숨은 맛집, 내친만지도’ \"내 친구들이 아는 로컬 맛집을 알고 싶어요!\" \"광고물 먹은 투어리스트, 블로거가 아닌! 진짜 여행 장인이 아는 그곳의 명소, 음식점을 알고 싶어요!\" 내친만지도에서는 나만의 지도를 만들고, 지도의 링크를 공유해 친구가 추천해 주는 장소를 공유받을 수 있어요. 지도 위에 친구가 남긴 포스트잇을 통해서는 단순히 어떤 장소가 여행 지역의 핫플인지에 대한 정보를 넘어서서, 어떤 부분들이 좋았고 특히나 만족스러웠던 포인트는 뭐였는지에 대한 \"세세한 내용까지\" 알 수 있답니다!",
-      "urls": { "service": "https://naechinman.swygbro.com", "github": "https://github.com/LikeLion02Graduation" },
+      "title": "What Do You Sing",
+      "description": "‘당신은 지금 어떤 이야기를 노래하나요? 나만의 해석을 덧붙인 가사 탐색 서비스’ <왓두유씽?>은 혼자 흥얼거리기 아까웠던 가사를 인용해서 소개할 수 있는 서비스예요. 내가 좋아하는 가사를 나만의 해석을 덧붙여 소개하고, 탐색을 통해 발견한 마음에 드는 가사는 북마크로 저장하거나 이미지를 통해 공유해 보세요. 가사에 대한 감정 표현이나 끊임없이 남길 수 있는 좋아요, 댓글 등을 통해 가사에 대한 생각을 공유하고, 직접 들어보고 싶은 노래 가사는 ‘이 노래 들으러 가기'를 통해 바로 감상할 수 있어요.",
+      "urls": { "service": "https://whatdoyousing.swygbro.com", "github": "https://github.com/WhatDoYouSing" },
       "team": {
-        "pmdesign": ["손예원", "이시은"],
-        "frontend": ["유서연", "진규빈"],
-        "backend": ["이혜지", "허채린"]
+        "pmdesign": ["이지민", "이채원"],
+        "frontend": ["변지혜", "최지원"],
+        "backend": ["김지은", "박나담", "윤서아"]
       },
       "thumbnail": "/images/projects/thumbnail/23.jpg",
       "detailImages": [
@@ -456,6 +452,25 @@
       "id": "project-24",
       "generation": "11기",
       "category": "졸업프로젝트",
+      "title": "Nae-chin-man",
+      "description": "‘내 친구가 알려주는 믿을 만한 숨은 맛집, 내친만지도’ \"내 친구들이 아는 로컬 맛집을 알고 싶어요!\" \"광고물 먹은 투어리스트, 블로거가 아닌! 진짜 여행 장인이 아는 그곳의 명소, 음식점을 알고 싶어요!\" 내친만지도에서는 나만의 지도를 만들고, 지도의 링크를 공유해 친구가 추천해 주는 장소를 공유받을 수 있어요. 지도 위에 친구가 남긴 포스트잇을 통해서는 단순히 어떤 장소가 여행 지역의 핫플인지에 대한 정보를 넘어서서, 어떤 부분들이 좋았고 특히나 만족스러웠던 포인트는 뭐였는지에 대한 \"세세한 내용까지\" 알 수 있답니다!",
+      "urls": { "service": "https://naechinman.swygbro.com", "github": "https://github.com/LikeLion02Graduation" },
+      "team": {
+        "pmdesign": ["손예원", "이시은"],
+        "frontend": ["유서연", "진규빈"],
+        "backend": ["이혜지", "허채린"]
+      },
+      "thumbnail": "/images/projects/thumbnail/24.jpg",
+      "detailImages": [
+        "/images/projects/detailImages/24-1.png",
+        "/images/projects/detailImages/24-2.png",
+        "/images/projects/detailImages/24-3.png"
+      ]
+    },
+    {
+      "id": "project-25",
+      "generation": "11기",
+      "category": "졸업프로젝트",
       "title": "Drag on",
       "description": "‘2024 목표 드래곤볼 시작 🐲 하나씩 drag - 체크 on ✔️’ Drag-on 은 용의 해 2024년을 맞이하며, 새로운 목표 달성을 응원하고자 하는 마음에서 탄생했습니다🐉 마치 여의주를 모으듯 목표를 하나씩 모아 드래곤볼을 완성해 보세요🔮 목표를 향해 가던 중 넘어져도, drag-on 에서는 괜찮아요! ‘메꾸기’ 기능으로 다시 일어나고, 내 페이스에 맞게 목표를 조정할 수 있어요💪🏻 하루 하루 목표를 모아 나가는 재미에 푹 빠지다보면, 어느새 나의 2024년이 보람지게 완성되어 있을거예요. 🍀",
       "urls": { "service": "https://drag-on.swygbro.com", "github": "https://github.com/11th-LikeLion-DragOn" },
@@ -464,16 +479,16 @@
         "frontend": ["김가영", "이다빈"],
         "backend": ["심예원", "이지원"]
       },
-      "thumbnail": "/images/projects/thumbnail/24.jpg",
+      "thumbnail": "/images/projects/thumbnail/25.jpg",
       "detailImages": [
-        "/images/projects/detailImages/24-1.png",
-        "/images/projects/detailImages/24-2.png",
-        "/images/projects/detailImages/24-3.png",
-        "/images/projects/detailImages/24-4.png"
+        "/images/projects/detailImages/25-1.png",
+        "/images/projects/detailImages/25-2.png",
+        "/images/projects/detailImages/25-3.png",
+        "/images/projects/detailImages/25-4.png"
       ]
     },
     {
-      "id": "project-25",
+      "id": "project-26",
       "generation": "10기",
       "category": "대동제",
       "title": "2022 대동제",
@@ -486,10 +501,10 @@
       },
       "thumbnail": "",
       "detailImages": [
-        "/images/projects/detailImages/25-1.png",
-        "/images/projects/detailImages/25-2.png",
-        "/images/projects/detailImages/25-3.png",
-        "/images/projects/detailImages/25-4.png"
+        "/images/projects/detailImages/26-1.png",
+        "/images/projects/detailImages/26-2.png",
+        "/images/projects/detailImages/26-3.png",
+        "/images/projects/detailImages/26-4.png"
       ]
     }
   ]
