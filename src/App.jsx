@@ -8,34 +8,26 @@ import RecruitGuidePage from "./pages/RecruitGuidePage/RecruitGuidePage";
 import RecruitPart from "./pages/recruit/RecruitPart.jsx";
 import RecruitResult from "./pages/recruit/RecruitResult.jsx";
 import Apply2 from "./pages/apply2.jsx";
+import LayoutAdmin from "./layouts/adminlayout.jsx";
 
 function App() {
   return (
     <Routes>
+      {/* Public Layout */}
       <Route element={<Layout />}>
-        {/* Home */}
         <Route index element={<Home />} />
-
-        {/* Public pages */}
         <Route path="project" element={<Project />} />
         <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
-
-        {/* Recruit pages */}
-        <Route path="recruit">
-          <Route index element={<RecruitGuidePage />} />
-          <Route path="apply">
-            <Route path="part" element={<RecruitPart />} />
-            <Route path="form" element={<div> recruit-apply-form </div>} />
-          </Route>
-          <Route path="preview" element={<div> recruit-preview </div>} />
-          <Route path="result" element={<RecruitResult />} />
+        <Route path="recruit" element={<RecruitGuidePage />} />
+        <Route path="apply/test" element={<Apply2 />} />
       </Route>
 
-        {/* apply pages */}
-        <Route path="apply/test" element={<Apply2 />} />
-
-        {/* Sidebar (Admin) pages */}
+      {/* Admin Layout: /admin/* 는 전부 여기로 */}
+      <Route path="admin" element={<LayoutAdmin />}>
+        {/* 테스트용 기본 화면 */}
+        <Route path="preview" element={<div>ADMIN PREVIEW</div>} />
+        {/* 실제 Admin pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
         <Route path="interview" element={<div>INTERVIEW</div>} />
         <Route path="application" element={<div>APPLICATION</div>} />
