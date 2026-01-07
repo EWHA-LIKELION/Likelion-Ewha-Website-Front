@@ -188,24 +188,27 @@ const MoMenuButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     width: 28px;
     height: 28px;
     flex-shrink: 0;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
   }
 
   img {
     display: block;
     width: 28px;
     height: 28px;
+    filter: none;
   }
 
-  &:hover img {
-    filter: brightness(0) saturate(100%) invert(66%) sepia(86%)
-      saturate(428%) hue-rotate(87deg) brightness(106%) contrast(102%);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover img {
+      filter: brightness(0) saturate(100%) invert(87%) sepia(18%)
+        saturate(1036%) hue-rotate(72deg) brightness(103%) contrast(96%);
+    }
   }
 `;
+
 
 const MoOverlay = styled.div`
   display: none;
