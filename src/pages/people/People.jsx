@@ -135,12 +135,22 @@ const Container = styled.div`
     gap: 1.25rem;
 
     @media (min-width: 50rem) {
+        p.h3-bold {
+            font-size: 1.5rem;
+        }
+
         p.h5-regular {
             font-size: 1rem;
         }
+    }
 
+    @media (max-width: 49.9999rem) {
         p.h3-bold {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        p.h5-regular {
+            font-size: 0.875rem;
         }
     }
 `
