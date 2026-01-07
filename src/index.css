@@ -20,7 +20,7 @@ html {
   overflow-x: hidden;
   width: 100%;
   position: relative;
-  overflow-y: overlay;
+  /* overflow-y: overlay; */
 }
 
 body {
@@ -33,31 +33,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* 스크롤바 스타일링 - 오버레이 형태 */
+/* 스크롤바 완전히 숨기기 */
 ::-webkit-scrollbar {
-  width: 10px;
+  display: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(155, 155, 155, 0.5);
-  border-radius: 5px;
-  border: 2px solid transparent;
-  background-clip: content-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(155, 155, 155, 0.8);
-  background-clip: content-box;
-}
-
-/* Firefox 스크롤바 */
+/* Firefox, IE, Edge 스크롤바 숨기기 */
 * {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* ————————————— 타이포 ————————————— */
