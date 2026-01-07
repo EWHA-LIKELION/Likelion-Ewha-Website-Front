@@ -1,0 +1,55 @@
+{
+  "pmCurriculum": {
+    "title": "기획•디자인",
+    "subTitle": "PM•Designer",
+    "description": "사용자 경험을 중심으로 서비스의 방향을 기획하고, 감각적인 디자인과 프로토타입으로 아이디어를 실현합니다.",
+    "color1": "#98FBA4",
+    "color2": "var(--primary-main)",
+    "sessions": [
+      { "sesstioinNum": "공통", "sessionTitle": "HTML & CSS 기초", "sessionDescription:": "웹 페이지의 구조와 스타일링을 이해하고 간단한 화면을 구현합니다." },
+      { "sesstioinNum": "공통", "sessionTitle": "Git & Figma 기초", "sessionDescription:": "협업을 위한 버전 관리와 UI 설계를 위한 디자인 툴 활용법을 익힙니다." },
+      { "sesstioinNum": "1st", "sessionTitle": "HTML & CSS 심화", "sessionDescription:": "flex와 grid 학습을 통해 기획·디자인의 구현 가능성을 이해합니다." },
+      { "sesstioinNum": "2nd", "sessionTitle": "Figma 기초·심화", "sessionDescription:": "UX/UI 디자인의 기초가 되는 툴 Figma의 오토레이아웃, 컴포넌트, 베리언트, 베리어블에 대해 실습합니다." },
+      { "sesstioinNum": "3rd", "sessionTitle": "프로토타이핑", "sessionDescription:": "프로토타입을 직접 구현하며, 팀과 더 빠르고 정확하게 소통하는 방법을 이해합니다." },
+      { "sesstioinNum": "4th", "sessionTitle": "서비스 UI·UX 기획", "sessionDescription:": "다양한 디자인 방법론과 비즈니스 모델을 적용해 설득력 있는 기획을 경험합니다." },
+      { "sesstioinNum": "5th", "sessionTitle": "UI 디자인", "sessionDescription:": "디자인 시스템을 통해 일관된 디자인을 구축합니다." },
+      { "sesstioinNum": "6th", "sessionTitle": "데이터 분석 및 관리", "sessionDescription:": "사용자 경험을 파악하고, 더 나은 의사결정을 할 수 있도록 돕는 Data-Driven UX를 경험합니다." }
+    ]
+  },
+  "feCurriculum": {
+    "title": "프론트엔드",
+    "subTitle": "Frontend Developer",
+    "description": "사용자가 마주하는 화면을 구현하고, 서비스와의 상호작용을 통해 아이디어를 현실로 만듭니다.",
+    "color1": "#FFCE8A",
+    "color2": "var(--primary-sub)",
+    "sessions": [
+      { "sesstioinNum": "공통", "sessionTitle": "HTML & CSS 기초", "sessionDescription:": "웹 페이지의 구조와 스타일링을 이해하고 간단한 화면을 구현합니다." },
+      { "sesstioinNum": "공통", "sessionTitle": "Git & Figma 기초", "sessionDescription:": "협업을 위한 버전 관리와 UI 설계를 위한 디자인 툴 활용법을 익힙니다." },
+      { "sesstioinNum": "1st", "sessionTitle": "HTML & CSS 심화", "sessionDescription:": "flex와 grid, 반응형 웹을 활용하여 다양한 해상도에서도 일관된 사용자 경험을 제공하는 화면을 구현합니다." },
+      { "sesstioinNum": "2nd", "sessionTitle": "Javascript 기초", "sessionDescription:": "변수, 함수, 조건문, 반복문 등 핵심 문법을 학습하고 DOM 조작과 이벤트 처리를 통해 동적인 웹 페이지를 만듭니다." },
+      { "sesstioinNum": "3rd", "sessionTitle": "Javascript 심화", "sessionDescription:": "비동기 처리와 모듈화 개념을 익혀 복잡한 로직을 효율적으로 관리하고, 실습을 통해 데이터 중심의 인터랙션을 구현합니다." },
+      { "sesstioinNum": "4th", "sessionTitle": "React Hooks", "sessionDescription:": "컴포넌트 기반 구조를 이해하고 useState, useEffect 등 주요 훅을 활용해 상태 중심의 인터랙티브한 화면을 구축합니다." },
+      { "sesstioinNum": "5th", "sessionTitle": "REST API & axios", "sessionDescription:": "서버와의 데이터 통신을 통해 실시간으로 정보가 반영되는 화면을 구현하며, CRUD 기능을 직접 구현해봅니다." },
+      { "sesstioinNum": "6th", "sessionTitle": "Social Login", "sessionDescription:": "OAuth 기반의 SNS 로그인 기능을 구현하며, 사용자 인증 및 권한 관리의 흐름을 이해합니다." },
+      { "sesstioinNum": "7th", "sessionTitle": "Tanstack-query", "sessionDescription:": "서버 상태를 효율적으로 관리하고 데이터 캐싱·자동 갱신을 통해 성능과 사용자 경험을 모두 향상시킵니다." }
+    ]
+  },
+  "beCurriculum": {
+    "title": "백엔드",
+    "subTitle": "Backend Developer",
+    "description": "서비스의 기반이 되는 로직과 데이터를 설계하고, 안정적인 시스템 운영을 책임집니다.",
+    "color1": "#ACDEFF",
+    "color2": "#43B4FF",
+    "sessions": [
+      { "sesstioinNum": "공통", "sessionTitle": "HTML & CSS 기초", "sessionDescription:": "웹 페이지의 구조와 스타일링을 이해하고 간단한 화면을 구현합니다." },
+      { "sesstioinNum": "공통", "sessionTitle": "Git & Figma 기초", "sessionDescription:": "협업을 위한 버전 관리와 UI 설계를 위한 디자인 툴 활용법을 익힙니다." },
+      { "sesstioinNum": "1st", "sessionTitle": "Django 기초", "sessionDescription:": "Django 프로젝트/앱 구조를 익히고 URL·View·Template을 연결하여 기본 웹 페이지를 구현합니다." },
+      { "sesstioinNum": "2nd", "sessionTitle": "Blog", "sessionDescription:": "모델·폼을 활용해 CRUD 기능이 포함된 블로그 서비스를 개발합니다." },
+      { "sesstioinNum": "3rd", "sessionTitle": "1:n & m:n", "sessionDescription:": "사용자-게시글, 게시글-태그 등 관계형 데이터 구조를 설계하고 ForeignKey·ManyToManyField를 적용합니다." },
+      { "sesstioinNum": "4th", "sessionTitle": "static & media", "sessionDescription:": "정적 파일(css/js)과 사용자 업로드 이미지(media)를 서버에서 관리하는 방법을 구현합니다." },
+      { "sesstioinNum": "5th", "sessionTitle": "유저인증과 확장", "sessionDescription:": "Django 내장 인증을 적용해 로그인/회원가입/권한 관리 기능을 만들고 커스텀 유저 모델 확장을 경험합니다." },
+      { "sesstioinNum": "6th", "sessionTitle": "DRF", "sessionDescription:": "DRF로 API 엔드포인트를 구현하고 Serializer·ViewSet을 통해 RESTful 백엔드를 구축합니다." },
+      { "sesstioinNum": "7th", "sessionTitle": "AWS", "sessionDescription:": "AWS EC2·S3를 사용해 Django 프로젝트를 배포합니다." }
+    ]
+  }
+}

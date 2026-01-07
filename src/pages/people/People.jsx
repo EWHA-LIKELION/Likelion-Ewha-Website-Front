@@ -27,6 +27,7 @@ function People() {
     const lions = filteredByGeneration
     .filter(m => m.role === '아기사자')
     .filter(m => selectedPart === '전체' || m.part === selectedPart);
+    
 
     return (
         <PeopleWrapper>
@@ -56,7 +57,7 @@ function People() {
                                     key={m.id}
                                     name={m.name}
                                     part={m.part}
-                                    position={m.role}
+                                    position={m.position || m.role}
                                     department={m.department}
                                     imageSrc={m.photo || '/images/default1.png'}
                                     showPosition
@@ -117,29 +118,39 @@ const PeopleWrapper = styled.div`
     justify-content: center;
     align-items: center;
     overflow-x: hidden;
-    padding: 80px 80px 160px 80px;
+    padding: 5rem 5rem 10rem 5rem;
 
-    @media (max-width: 799px) {
-        padding: 32px 12px 60px 12px;
+    @media (max-width: 49.9999rem) {
+        padding: 2rem 1rem 3.75rem 1rem;
     }
 `
 
 const Container = styled.div`
     z-index: 1;
     width: 100%;
-    max-width: 971px;
+    max-width: 60.6875rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
 
-    @media (min-width: 800px) {
-        p.h5-regular {
-            font-size: 16px;
+    @media (min-width: 50rem) {
+        p.h3-bold {
+            font-size: 1.5rem;
         }
 
+        p.h5-regular {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 49.9999rem) {
         p.h3-bold {
-            font-size: 24px;
+            font-size: 1.25rem;
+        }
+
+        p.h5-regular {
+            font-size: 0.875rem;
         }
     }
 `
@@ -151,12 +162,12 @@ const PeopleInfo = styled.div`
 const PeopleLabel = styled.p`
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
     font-family: Bayon;
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: 400;
-    line-height: 46px;
+    line-height: 2.875rem;
 
-    @media (max-width: 799px) {
-        font-size: 32px;
+    @media (max-width: 49.9999rem) {
+        font-size: 2rem;
         line-height: 90%;
     }
 `
@@ -171,93 +182,93 @@ const Lion = styled.div`
 const LionCardGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 1.25rem;
 
     /*  1줄 */
-    @media (min-width: 320px) and (max-width: 349px) {
+    @media (max-width: 21.8125rem) {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 1rem;
     }
 
     /*  2줄 */
-    @media (min-width: 350px) and (max-width: 519px) {
+    @media (min-width: 21.875rem) and (max-width: 32.4375rem) {
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 1rem;
     }
 
-    @media (min-width: 520px) and (max-width: 799px) {
+    @media (min-width: 32.5rem) and (max-width: 49.9999rem) {
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 1rem;
     }
 
     /* 3줄 */
-    @media (min-width: 800px) {
+    @media (min-width: 50rem) {
         grid-template-columns: repeat(3, 1fr);
     }
 `
 
 const Design1 = styled.div`
     position: absolute;
-    top: -20px;
-    left: 40px;
+    top: -1.25rem;
+    left: 2.5rem;
     
     img {
         aspect-ratio: 230 / 145;
-        width: 230px;
+        width: 14.375rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        left: 45px;
+    @media (max-width: 49.9999rem) {
+        left: 2.8125rem;
         top: 0;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `
 
 const Design2 = styled.div`
     position: absolute;
-    top: 323px;
-    right: -40px;
+    top: 20.1875rem;
+    right: -2.5rem;
     
     img {
         aspect-ratio: 230 / 145;
-        width: 224px;
+        width: 14rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        right: -12px;
-        top: 215px;
+    @media (max-width: 49.9999rem) {
+        right: -0.75rem;
+        top: 13.4375rem;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `
 
 const Design3 = styled.div`
     position: absolute;
-    top: 1014px;
-    left: -40px;
+    top: 63.375rem;
+    left: -42.5rem;
     
     img {
         aspect-ratio: 230 / 145;
-        width: 192px;
+        width: 12rem;
         height: auto;
         object-fit: contain;
     };
 
-    @media (max-width: 799px) {
-        left: -12px;
-        top: 485px;
+    @media (max-width: 49.9999rem) {
+        left: -0.75rem;
+        top: 30.3125rem;
 
         img {
-            width: 60px;
+            width: 3.75rem;
         }
     }
 `

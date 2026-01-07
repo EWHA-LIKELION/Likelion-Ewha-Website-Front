@@ -53,7 +53,7 @@ const IntroSection2 = () => {
             </StatItem>
             <StatItem>
               <h3>
-                26<span>+</span>
+                50<span>+</span>
               </h3>
               <p>프로젝트 수</p>
             </StatItem>
@@ -88,12 +88,12 @@ const InnerContainer = styled.div`
   width: 100%;
   max-width: 1200px; /* PC 최대 너비 */
   margin: 0 auto;
-  padding: 0 8rem;
+  padding: ${({ $column }) => ($column ? "0 2rem" : "0 8rem")};
   display: flex;
 
   /* props.$column이 있으면 세로 정렬(연두색), 없으면 가로 정렬(주황색) */
   flex-direction: ${({ $column }) => ($column ? "column" : "row")};
-  justify-content: ${({ $column }) => ($column ? "center" : "center")};
+  justify-content: center; /* 무조건 중앙 정렬 */
   align-items: ${({ $column }) => ($column ? "center" : "flex-start")};
   gap: ${({ $column }) => ($column ? "0" : "2.5rem")};
 
@@ -175,8 +175,11 @@ const OrangeArea = styled.div`
 /* --- 연두색 영역 --- */
 const GreenArea = styled.div`
   background: #98fba4;
-  padding: 3.75rem 5rem;
+  padding: 3.75rem 3rem;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .center-title {
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
@@ -269,6 +272,7 @@ const StatItem = styled.div`
     font-weight: 700;
     line-height: 3.125rem; /* PC */
     margin-bottom: 0.5rem; /* 간격 추가 */
+    white-space: nowrap;
 
     span {
       color: var(--Atomic-Neutral-80, var(--Neutral-80, #b0b0b0));

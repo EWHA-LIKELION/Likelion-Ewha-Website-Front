@@ -1,13 +1,106 @@
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import RecruitGuideHeroPc from "./RecruitGuideHero_pc";
 import DropDown3 from "../../components/dropdown/Dropdown3"
 import {
     ApplyWhiteButton,
-    DetailLinkButton,
+    RecruitDisabledButton,
+    RecruitCheckButton,
+    RecruitAlarmButton,
 } from "../../components/buttons/MainButtons_pc";
+
 import styled from "styled-components";
+import faq from "../../data/faq.json";
+import { Modal } from "../../components/Modal";
+
+const getRecruitStatus = (schedule) => {
+    const now = new Date();
+
+    const applicationStart = new Date(schedule.application_start);
+    const applicationEnd = new Date(schedule.application_end);
+    const firstResultStart = new Date(schedule.first_result_start);
+    const firstResultEnd = new Date(schedule.first_result_end);
+    const finalResultStart = new Date(schedule.final_result_start);
+    const finalResultEnd = new Date(schedule.final_result_end);
+
+    if (now < applicationStart) return "BEFORE";
+
+    if (now >= applicationStart && now <= applicationEnd) {
+        return "RECRUITING";
+    }
+
+    if (now > applicationEnd && now < firstResultStart) {
+        return "CLOSED";
+    }
+
+    if (now >= firstResultStart && now <= firstResultEnd) {
+        return "FIRST_RESULT";
+    }
+
+    if (now >= finalResultStart && now <= finalResultEnd) {
+        return "FINAL_RESULT";
+    }
+
+    return "CLOSED";
+};
 
 
 const RecruitGuidePagePc = () => {
+    const navigate = useNavigate();
+    const [recruitStatus, setRecruitStatus] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        const fetchRecruitSchedule = async () => {
+        try {
+            const res = await fetch("/api/recruit/schedule");
+            const result = await res.json();
+
+            const schedule = result.data.recruitment_schedule;
+            const status = getRecruitStatus(schedule);
+
+            setRecruitStatus(status);
+        } catch (e) {
+            console.error("모집 일정 조회 실패", e);
+        }
+        };
+
+        fetchRecruitSchedule();
+    }, []);
+
+    const renderRecruitButton = () => {
+
+        switch (recruitStatus) {
+            case "RECRUITING":
+            return (
+                <ApplyWhiteButton
+                onClick={() => navigate("/recruit/apply/form")}
+                />
+            );
+
+            case "CLOSED":
+            return <RecruitDisabledButton />;
+
+            case "FIRST_RESULT":
+            return (
+                <RecruitCheckButton onClick={() => navigate("/recruit/result")}>
+                1차 합격자 조회
+                </RecruitCheckButton>
+            );
+
+            case "FINAL_RESULT":
+            return (
+                <RecruitCheckButton onClick={() => navigate("/recruit/result")}>
+                최종 합격자 조회
+                </RecruitCheckButton>
+            );
+
+            default:
+            return <RecruitAlarmButton onClick={() => setIsModalOpen(true)}/>;
+        }
+        };
+
+
     return (
         <PageWrapper>
             {/* Hero */}
@@ -23,7 +116,7 @@ const RecruitGuidePagePc = () => {
                 </ScheduleTitle>
 
                 <ScheduleCards>
-                <ScheduleCard variant={1}>
+                <ScheduleCard $variant={1}>
                     <Step>01</Step>
                     <CardTitle>서류 접수</CardTitle>
                     <CardDesc>
@@ -32,26 +125,26 @@ const RecruitGuidePagePc = () => {
                     </CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={2}>
+                <ScheduleCard $variant={2}>
                     <Step>02</Step>
                     <CardTitle>1차 결과 발표</CardTitle>
                     <CardDesc>0000년 00월 00일</CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={3}>
+                <ScheduleCard $variant={3}>
                     <Step>03</Step>
                     <CardTitle>면접</CardTitle>
                     <CardDesc>0000년 00월 00일 ~ 00일</CardDesc>
                 </ScheduleCard>
 
-                <ScheduleCard variant={4}>
+                <ScheduleCard $variant={4}>
                     <Step>04</Step>
                     <CardTitle>최종 결과 발표</CardTitle>
                     <CardDesc>0000년 00월 00일</CardDesc>
                 </ScheduleCard>
                 </ScheduleCards>
                 </ScheduleContentWrapper>
-            </ScheduleInner>
+            </ScheduleInner> 
             </ScheduleSection>
 
             {/* 모집 대상 */}
@@ -67,7 +160,6 @@ const RecruitGuidePagePc = () => {
                     </TargetMainDesc>
                     <TargetSubDesc>
                         *지원 시 선수강 강의를 수강 완료한 화면 캡쳐본을 제출할 경우 가산점이 부여됩니다. 
-                        <a href="#">자세한 내용 노션 바로가기</a>
                     </TargetSubDesc>
 
                     <TargetGrid>
@@ -82,7 +174,7 @@ const RecruitGuidePagePc = () => {
 
                         <TargetItem>
                             <h3>1학기 활동</h3>
-                            <p>아래의 요건을 모두 충족하여 1년 활동을 완료할 경우 수료<br/>증이발급됩니다.</p>
+                            <p>아래의 요건을 모두 충족하여 1년 활동을 완료할 경우 수료<br/>증이 발급됩니다.</p>
                             <span className="highlight-notice">
                                 4월 말~5월 중 진행되는 아이디어톤 필수 참여<br/>
                                 8월 중 오프라인으로 무박 2일간 진행되는 중앙 해커톤 필수 참여
@@ -117,23 +209,29 @@ const RecruitGuidePagePc = () => {
                 <PartCard>
                     <h3>기획 디자인</h3>
                     <span>PM · DESIGN</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper onClick={() => navigate('/?part=pm#curriculum')}> 
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                     
                 </PartCard>
 
                 <PartCard>
                     <h3>프론트엔드</h3>
                     <span>FRONTEND</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper onClick={() => navigate('/?part=fe#curriculum')}>
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                 </PartCard>
 
                 <PartCard>
                     <h3>백엔드</h3>
                     <span>BACKEND</span>
-                    <a>파트 소개 바로가기  </a>
-                    <img src="/icons/arrowRight3.svg" alt="icon" />
+                    <LinkWrapper onClick={() => navigate('/?part=be#curriculum')}>
+                        <a>파트 소개 바로가기</a>
+                        <img src="/icons/arrowRight3.svg" alt="icon" />
+                    </LinkWrapper>
                 </PartCard>
                 </PartCards>
             </PartInner>
@@ -182,38 +280,64 @@ const RecruitGuidePagePc = () => {
                 </ActivityInner>
             </ActivitySection>
 
+            {/* 선수강 강의 안내 */}
+            <PreLectureSection>
+                <PreLectureInner>
+                    <PreLectureTitle>
+                    <img src="/icons/ellipse.svg" alt="icon" />
+                    <h2>선수강 강의 안내</h2>
+                    </PreLectureTitle>
+
+                    <PreLectureNotice>
+                    * 지원 전 강의 수강은 필수가 아니며, 지원서 내에 수강 내역 캡쳐본을 제출할 경우 가산점으로만 활용됩니다.
+                    </PreLectureNotice>
+
+                    <PreLectureList>
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Codecademy: Learn HTML</h3>
+                        <ul>
+                            <li>파트 1. Elements and Structure 중 ‘Lesson: Introduction to HTML’ & ‘Lesson: HTML Document Standards’</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://www.codecademy.com/learn/learn-html">사이트 바로가기</a>
+                    </PreLectureItem>
+
+                    <PreLectureItem>
+                        <div className="text">
+                        <h3>Programmers: 파이썬 입문</h3>
+                        <ul>
+                            <li>파트 1. 시작하기 (파이썬 설치~에디터 설치 제외)</li>
+                            <li>파트 2. 변수와 계산 (REPL, Shell 사용법 제외)</li>
+                        </ul>
+                        </div>
+                        <a className="link-btn" href="https://school.programmers.co.kr/learn/courses/2">사이트 바로가기</a>
+                    </PreLectureItem>
+                    </PreLectureList>
+                </PreLectureInner>
+            </PreLectureSection>
+
+
             {/* 자주 묻는 질문 */}
             <FAQSection>
                 <FAQInner>
                     <FAQTitleArea>
-                        <img src="/icons/ellipse.svg" alt="icon" />
-                        <h2>자주 묻는 질문들</h2>
+                    <img src="/icons/ellipse4.svg" alt="icon" />
+                    <h2>자주 묻는 질문들</h2>
                     </FAQTitleArea>
 
                     <FAQList>
-                        <DropDown3 
-                            question="개발 경험이 없는데 지원 가능한가요?"
-                            answer={"당연히 가능합니다! 13기 운영진들도 12기 아기사자 시절엔 아무것도 모르는 감자였답니다🥔\n코딩 경험이 전무해도 지원할 수 있지만, 선수강 강의를 들어보시는 것도 추천합니다!"}
-                            styleType={1}
+                    {faq.map((item) => (
+                        <DropDown3
+                        key={item.id}
+                        question={item.question}
+                        answer={item.answer}
+                        styleType={1}
                         />
-                        <DropDown3 
-                            question="면접에서 코딩 능력 시험을 보나요?"
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
-                        <DropDown3 
-                            question="교내 동아리인가요?"
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
-                        <DropDown3 
-                            question="3~4학년 분들도 많이 계신가요? 
-                            비전공자인데 너무 늦은 학년에 지원하는 것은 아닌가 싶어서요."
-                            answer="답변 입력하기"
-                            styleType={1}
-                        />
+                    ))}
                     </FAQList>
                 </FAQInner>
+            </FAQSection>
 
                 {/* 하단 지원 유도 섹션 */}
                 <FooterBannerSection>
@@ -221,15 +345,30 @@ const RecruitGuidePagePc = () => {
                         <img src="/icons/ellipse.svg" alt="별 아이콘" />
                         <h2>빛나는 내일, 이대 멋사와 함께하세요!</h2>
                         <BannerButtons>
-                            <ApplyWhiteButton/>
-                            <DetailLinkButton/>
+                            {renderRecruitButton()}
                         </BannerButtons>
                         <CheckLinkText>
                             지원서를 제출하셨나요?<span onClick={() => {/* 열람 로직 */}}>지원서 열람하기</span>
                         </CheckLinkText>
                     </BannerContent>
+                    <Modal
+                        open={isModalOpen}
+                        onClose={() => setIsModalOpen(false)}
+                        title="14기 모집 사전 알림 등록"
+                        description="이화여대 멋쟁이사자처럼 카카오톡 채널을 통해 모집이 시작되면 가장 먼저 알려드릴게요."
+                        align="center"
+                        actions={[
+                            {
+                                label: "카카오톡 바로가기",
+                                variant: "primary",
+                                fullWidth: true,
+                                onClick: () => {
+                                    window.open("https://pf.kakao.com/_htxexfd", "_blank"); // 실제 링크 입력
+                                }
+                            }
+                        ]}
+                    />
                 </FooterBannerSection>
-            </FAQSection>
         </PageWrapper>
 
     );
@@ -290,24 +429,42 @@ const ScheduleTitle = styled.h2`
 `;
 
 const ScheduleCards = styled.div`
-    display: flex;
+    display: grid;
     gap: 1.25rem;
     width: 100%;
-    justify-content: flex-start;
-    flex-wrap: nowrap; 
+    justify-content: center;
+
+    grid-template-columns: repeat(4, 14.25rem);
+
+    @media (max-width: 1125px) and (min-width: 870px) {
+        grid-template-columns: repeat(3, 14.25rem);
+        
+        & > div:nth-child(4) {
+            grid-column: 2; 
+        }
+    }
+
+    /* 3. 869px 이하: 2x2 */
+    @media (max-width: 869px) {
+        grid-template-columns: repeat(2, 14.25rem);
+        
+        & > div:nth-child(4) {
+            grid-column: auto;
+        }
+    }
 `;
 
 const ScheduleCard = styled.div`
     display: flex;
     flex-direction: column;
-    min-width: 14.25rem;
-    max-width: 14.25rem;
+    width: 14.25rem; 
     padding: 1.25rem 2rem 1.5rem 2rem;
     border-radius: 1.25rem;
-    background: ${({ variant }) =>
-        variant === 2 ? "#FEE6C6" : 
-        variant === 3 ? "#FFD49C" : 
-        variant === 4 ? "#FFC06E" : "#FEF4E6"};
+    box-sizing: border-box; 
+    background: ${({ $variant }) =>
+        $variant === 2 ? "#FEE6C6" : 
+        $variant === 3 ? "#FFD49C" : 
+        $variant === 4 ? "#FFC06E" : "#FEF4E6"};
 `;
 
 const Step = styled.span`
@@ -392,23 +549,6 @@ const TargetSubDesc = styled.p`
     font-weight: 400;
     line-height: 1.375rem; /* 157.143% */
     margin-bottom: 6.25rem;
-
-    a { 
-        color: var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B));
-
-        /* Body/regular */
-        font-family: Pretendard;
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 1.375rem;
-        text-decoration-line: underline;
-        text-decoration-style: solid;
-        text-decoration-skip-ink: none;
-        text-decoration-thickness: auto;
-        text-underline-offset: auto;
-        text-underline-position: from-font;
-    }
 `;
 
 const TargetGrid = styled.div`
@@ -499,10 +639,44 @@ const PartTitle = styled.h2`
         line-height: 3.125rem;
 `;
 
+/* 모집 파트 카드 컨테이너 */
 const PartCards = styled.div`
-    display: flex;
+    display: grid;
     gap: 1.25rem;
-    justify-content: center;
+    width: 100%;
+    
+    justify-content: center; 
+
+    @media (min-width: 800px) and (max-width: 1075px) {
+        grid-template-columns: 19.375rem;
+        & > div {
+        width: 19.375rem;
+        height: 9.5rem;
+        }
+    }
+
+    @media (min-width: 1076px) {
+        grid-template-columns: repeat(2, 19.375rem);
+        
+        width: fit-content;
+        margin: 0 auto;
+
+        & > div:nth-child(3) {
+        grid-column: span 2;  
+        justify-self: center; 
+        width: 19.375rem;     
+        }
+    }
+
+    @media (min-width: 1417px) {
+        grid-template-columns: repeat(3, 19.375rem);
+        width: fit-content;
+
+        & > div:nth-child(3) {
+        grid-column: auto;
+        justify-self: stretch;
+        }
+    }
 `;
 
 const PartCard = styled.div`
@@ -510,28 +684,47 @@ const PartCard = styled.div`
     background: rgba(255, 255, 255, 0.75);
     padding: 1.93rem 0rem 1.93rem 0rem;
     text-align: center;
-    min-width: 18rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+
     h3 {
-        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
-        /* H3/bold */
+        color: #2A2A2A;
         font-family: Pretendard;
         font-size: 1.5rem;
-        font-style: normal;
         font-weight: 700;
-        line-height: 2rem; 
         margin-bottom: 0.12rem; 
     }
 
     span {
         display: block; 
-        color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
+        color: #737373;
         font-family: Pretendard;
         font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.375rem; 
-        margin-bottom: 0.49rem; }
+        margin-bottom: 0.49rem; 
+    }
     
+    a {
+        color: #00BF40;
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }  
+`;
+
+const LinkWrapper = styled.div`
+    display: flex;
+    align-items: center; 
+    gap: 0.5rem;       
+    text-decoration: none;
+    cursor: pointer;
+
     a {
         color: var(--Atomic-Green-50, var(--Green-50, #00BF40));
         font-family: Pretendard;
@@ -539,6 +732,12 @@ const PartCard = styled.div`
         font-style: normal;
         font-weight: 500;
         line-height: 1.5rem; 
+    }
+
+    img {
+        width: 0.625rem;
+        height: 0.58756rem;
+        display: block;
     }
 `;
 
@@ -548,7 +747,7 @@ const ActivitySection = styled.section`
     display: flex;
     justify-content: center;
     background: #ffffff;
-    padding: 5rem 0 7.5rem 0;
+    padding: 5rem 5rem 5rem 5rem;
 `;
 
 const ActivityInner = styled.div`
@@ -557,6 +756,7 @@ const ActivityInner = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    
 `;
 
 const ActivityHeader = styled.div`
@@ -571,7 +771,7 @@ const ActivityTitleArea = styled.div`
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    img { width: 2.5rem; }
+    img { width: 2rem; }
     h2 { font-family: "Cafe24 PRO Slim"; font-size: 2.25rem; font-weight: 700; color: #2a2a2a; }
     p { font-size: 0.875rem; color: #b0b0b0; }
 `;
@@ -640,19 +840,20 @@ const WideActivityBox = styled.div`
     grid-column: span 3;
     background: ${props => props.color};
     border: 1px solid ${props => props.border};
-    padding: 1.25rem;
+    padding: 0.88rem 1.25rem;
     text-align: center;
     border-radius: 0.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    color: #2A2A2A;
     font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
 `;
 
 const ActivityColumn = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     grid-auto-rows: 1fr;
 `;
 
@@ -677,6 +878,115 @@ const ActivityBox = styled.div`
     font-weight: 400;
     line-height: 1.5rem; /* 150% */
 `;
+
+/* 선수강 강의 안내 */
+const PreLectureSection = styled.section`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    padding: 5rem 5rem 5rem 5rem;
+`;
+
+const PreLectureInner = styled.div`
+    width: 100%;
+    max-width: 60.68rem;
+    display: flex;
+    flex-direction: column;
+`;
+
+const PreLectureTitle = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+
+    h2 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: "Cafe24 PRO Slim";
+        font-size: 2.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 3.125rem;
+    }
+
+    img {
+        width: 2rem;
+        height: 2.14988rem;
+    }
+`;
+
+const PreLectureNotice = styled.p`
+    color: var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B));
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.375rem;
+    margin-bottom: 2rem;
+`;
+
+const PreLectureList = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+`;
+
+const PreLectureItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    border-radius: var(--unit-16, 1rem);
+    border: 1px solid var(--Primary-sub, #FF9B38);
+    background: var(--Orange-95, #FEF4E6);
+    gap: 0.75rem;
+
+  .text {
+    max-width: 70%;
+  }
+
+    h3 {
+        color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.75rem; 
+
+    }
+
+    ul {
+        padding-left: 1.2rem;
+    }
+
+    li {
+        color: var(--Atomic-Neutral-50, var(--Neutral-50, #737373));
+        font-family: Pretendard;
+        font-size: 1rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+    }
+
+    .link-btn {
+        width: 12.375rem;
+        padding: 1.125rem 2.25rem;
+        border-radius: 2.5rem;
+        background: var(--Primary-sub, #FF9B38);
+        color: #ffffff;
+        color: var(--Static-White, #FFF);
+        text-align: center;
+        font-family: Pretendard;
+        font-size: 1.25rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 1.75rem; 
+        text-decoration: none;
+        white-space: nowrap;
+    }
+`;
+
 
 const FooterBannerSection = styled.section`
     width: 100%;
@@ -752,7 +1062,7 @@ const FAQSection = styled.section`
     flex-direction: column;
     align-items: center;
     background: #ffffff;
-    padding-bottom: 0;
+    padding: 0rem 5rem 0rem 5rem;
 `;
 
 const FAQInner = styled.div`

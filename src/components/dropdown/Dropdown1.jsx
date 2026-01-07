@@ -199,7 +199,7 @@ const OptionsList = styled.ul`
   top: 100%;
   left: 0;
 
-  max-height: 14.2rem;
+  max-height: 24.7rem;
   overflow-y: auto;
 
   background: var(--common-100);
@@ -218,7 +218,7 @@ const OptionsList = styled.ul`
   transition: opacity 0.2s ease, visibility 0.2s ease;
 
   @media (max-width: 799px) {
-    max-height: 9.7rem;
+    max-height: 16.9rem;
   }
 `;
 

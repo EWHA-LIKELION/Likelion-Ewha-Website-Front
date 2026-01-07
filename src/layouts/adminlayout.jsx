@@ -21,9 +21,10 @@ const LayoutAdmin = () => {
 export default LayoutAdmin;
 
 const Shell = styled.div`
-  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 const ContentRow = styled.div`
@@ -39,6 +40,7 @@ const DesktopSidebar = styled.aside`
   @media (min-width: 800px) {
     display: flex;
     align-self: stretch;
+    flex: 0 0 auto;
   }
 `;
 
@@ -47,4 +49,6 @@ const MainArea = styled.main`
   background: #fff;
   padding: 20px;
   min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
 `;

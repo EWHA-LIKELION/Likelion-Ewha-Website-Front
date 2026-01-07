@@ -60,24 +60,29 @@ const Footer = styled.footer`
   background: var(--neutral-15, #1c1c1c);
 `;
 
-/* MO 공통 시작점: 좌우 20px 기준선 */
+/* MO 시작점: 좌우 20px 패딩 */
+// PC 시작점: 좌우 80px 패딩
 const Inner = styled.div`
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 1159px;
+  margin: 0 auto;
 
+  /* MO: ~799px */
+  padding: 24px 20px 40px;
+  gap: 17px;
+  align-items: flex-start;
+
+  /* PC: 800px~ */
   @media (min-width: 800px) {
-    max-width: 970px;
-    padding: 40px 0;
-    gap: 32px;
-  }
-
-  @media (max-width: 799px) {
-    padding: 24px 20px 40px;
-    gap: 17px;
-    align-items: flex-start;
+    padding: 40px 80px;
+    gap: 10px;
+    align-items: center;
   }
 `;
+
 
 const TopRow = styled.div`
   display: flex;

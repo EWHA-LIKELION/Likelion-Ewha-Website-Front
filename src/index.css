@@ -16,10 +16,18 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
 body {
-  margin: 0;
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  font-family:"Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -333,7 +341,9 @@ body {
 }
 /* .Primitive: Colors */
 :root {
+  --blue-30: #0648aa;
   --blue-50: #1869e2;
+  --blue-70: #acdeff;
   --common-0: #000000;
   --common-100: #ffffff;
   --cool-neutral-10: #171719;
