@@ -40,6 +40,9 @@ function ProjectDetail() {
     const nextProjects = projectList.slice(currentIndex + 1, currentIndex + 1 + nextCount);
     const moreProjects = [...prevProjects, ...nextProjects];
 
+    const hasDetailImages =
+        Array.isArray(project.detailImages) && project.detailImages.length > 0;
+
     return (
         <DetailWrapper>
             <Thumbnail>
@@ -89,17 +92,20 @@ function ProjectDetail() {
                         </Refer>
                     </ReferContent>
 
-                    <ScrollFullWidth>
-                        <ScrollInner>
-                            <ProjectImg>
-                                <ImageScroll>
-                                    {(project.detailImages || [project.detailImages]).map((img, idx) => (
-                                        <img key={idx} src={img} />
-                                    ))}
-                                </ImageScroll>
-                            </ProjectImg>
-                        </ScrollInner>
-                    </ScrollFullWidth>
+                    {/*상세 이미지 데이터 없는 경우 비활성화*/}
+                    {hasDetailImages && (
+                        <ScrollFullWidth>
+                            <ScrollInner>
+                                <ProjectImg>
+                                    <ImageScroll>
+                                        {project.detailImages.map((img, idx) => (
+                                            <img key={idx} src={img} />
+                                        ))}
+                                    </ImageScroll>
+                                </ProjectImg>
+                            </ScrollInner>
+                        </ScrollFullWidth>
+                    )}
 
                     <Member>
                         <p className="h4-bold" style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>프로젝트 팀원</p>
