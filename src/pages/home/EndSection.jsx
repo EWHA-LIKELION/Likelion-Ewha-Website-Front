@@ -242,6 +242,13 @@ const MoreButton = styled.button`
   font-weight: 700;
   line-height: 1.75rem;
   cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  &:hover{
+    filter: brightness(0.9);
+  }
+
   @media (max-width: 799px) {
     padding: 0.625rem 1.75rem;
     font-size: 0.875rem;
