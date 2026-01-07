@@ -185,6 +185,11 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
+
+    padding: 3.25rem 5rem 10rem 5rem;
+    @media (max-width: 49.9999rem) {
+        padding: 1.5rem 1rem;
+    }
 `
 
 const Project = styled.div`
@@ -193,10 +198,6 @@ const Project = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    padding: 3.25rem 5rem 10rem 5rem;
-    @media (max-width: 49.9999rem) {
-        padding: 1.5rem 1rem;
-    }
 
     @media (min-width: 50rem) {
         p.h3-bold {
@@ -261,7 +262,11 @@ const ScrollFullWidth = styled.div`
 
 const ScrollInner = styled.div`
     max-width: 60.6875rem;
-    padding: 0 50rem;
+    margin: 0 auto;
+
+    @media (min-width: 50rem) and (max-width: 70.6875rem) {
+        width: calc(100vw - 10rem);
+    }
 
     @media (max-width: 49.9999rem) {
         padding: 0 1rem;
@@ -388,12 +393,9 @@ const MoreLabel = styled.div`
 const ProjectGrid = styled.div`
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 18.75rem));
+    justify-content: space-between;
     gap: 1.25rem;
-    flex: 0 0 auto;
-    box-sizing: border-box;
-    max-width: 60.6875rem;
-    min-width: 0;
 
     /*  1줄 */
     @media (max-width: 21.8125rem) {
