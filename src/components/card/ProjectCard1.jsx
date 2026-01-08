@@ -37,7 +37,6 @@ const CardWrapper = styled.div`
   display: flex;
   width: 19.375rem;
   height: 22.125rem;
-  min-width: 19.375rem;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
@@ -49,7 +48,6 @@ const CardWrapper = styled.div`
   transition: all 0.2s ease;
 
   @media (max-width: 1129px) {
-    min-width: 0;
     width: 100%;
   }
 
