@@ -1,38 +1,12 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { keyframes } from "styled-components";
 import { Modal } from "../Modal";
 import IMAGES from "../../data/news.json";
 
 const ImageSlider = () => {
-  const sliderRef = useRef(null);
-  const [isDown, setIsDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const dragDistance = useRef(0);
   const [selectedImg, setSelectedImg] = useState(null);
 
-  const handleMouseDown = (e) => {
-    setIsDown(true);
-    setStartX(e.pageX - sliderRef.current.offsetLeft);
-    setScrollLeft(sliderRef.current.scrollLeft);
-    dragDistance.current = 0;
-  };
-
-  const handleMouseUpOrLeave = () => {
-    setIsDown(false);
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 1.5;
-    sliderRef.current.scrollLeft = scrollLeft - walk;
-    dragDistance.current += Math.abs(walk);
-  };
-
   const handleImageClick = (src) => {
-    if (dragDistance.current > 5) return;
     setSelectedImg(src);
   };
 
@@ -41,22 +15,31 @@ const ImageSlider = () => {
   };
 
   return (
-    <>
-      <SliderContainer
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseUpOrLeave}
-        onMouseUp={handleMouseUpOrLeave}
-        onMouseMove={handleMouseMove}
-        $isDragging={isDown}
-      >
-        {IMAGES.map((item) => (
-          <ImageCard key={item.id} onClick={() => handleImageClick(item.src)}>
+    <Container>
+      {/*
+        첫 번째 그룹: 원본
+        두 번째 그룹: 복제본 (무한 스크롤 연결용)
+      */}
+      <Track>
+        {/* [1] 원본 리스트 */}
+        {IMAGES.map((item, index) => (
+          <ImageCard
+            key={`original-${item.id}-${index}`}
+            onClick={() => handleImageClick(item.src)}
+          >
             <img src={item.src} alt={`slide-${item.id}`} />
           </ImageCard>
         ))}
-      </SliderContainer>
-
+        {IMAGES.map((item, index) => (
+          <ImageCard
+            key={`clone-${item.id}-${index}`}
+            onClick={() => handleImageClick(item.src)}
+            aria-hidden="true"
+          >
+            <img src={item.src} alt={`slide-${item.id}`} />
+          </ImageCard>
+        ))}
+      </Track>
       <Modal
         open={Boolean(selectedImg)}
         onClose={closeModal}
@@ -66,55 +49,61 @@ const ImageSlider = () => {
           alt: "확대 이미지",
         }}
       />
-    </>
+    </Container>
   );
 };
 
 export default ImageSlider;
 
-// --- 스타일 정의 ---
+/* --- 스타일 정의 --- */
 
-const SliderContainer = styled.div`
-  display: flex;
-  gap: 1.25rem;
+const scrollAnimation = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+`;
+
+const Container = styled.div`
   width: 100%;
+  overflow: hidden;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-
   margin-top: -20px;
   margin-bottom: -20px;
+`;
 
-  overflow-x: auto;
+const Track = styled.div`
+  display: flex;
+  width: max-content; /* 자식 요소들을 한 줄로 길게 배치 */
+  gap: 1.25rem; /* 이미지 사이 간격 (기존 gap 유지) */
 
-  /* 드래그 커서 설정 */
-  cursor: ${(props) => (props.$isDragging ? "grabbing" : "grab")};
-
-  scroll-snap-type: ${(props) => (props.$isDragging ? "none" : "x mandatory")};
-  scroll-behavior: ${(props) => (props.$isDragging ? "auto" : "smooth")};
-
-  &::-webkit-scrollbar {
-    display: none;
+  @media (max-width: 799px) {
+    gap: 0.75rem;
   }
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  user-select: none;
+
+  animation: ${scrollAnimation} 30s linear infinite;
+
+  /* 호버 시 멈춤 */
+  &:hover {
+    animation-play-state: paused;
+  }
 `;
 
 const ImageCard = styled.div`
   /* PC 사이즈 */
   width: 15rem;
   height: 15rem;
+  box-shadow: inset 0 0 0 1px #dbdbdb;
 
-  flex-shrink: 0;
+  flex-shrink: 0; /* 크기 줄어들지 않게 고정 */
   border-radius: 1rem;
   overflow: hidden;
-
-  scroll-snap-align: start;
   background: var(--Neutral-95, #dcdcdc);
+  cursor: pointer;
 
-  /* 호버 효과 */
   transition: transform 0.2s;
   &:hover {
     transform: scale(1.02);
@@ -131,6 +120,6 @@ const ImageCard = styled.div`
     height: 100%;
     object-fit: cover;
     display: block;
-    pointer-events: none;
+    pointer-events: none; /* 이미지 자체 드래그 방지 */
   }
 `;

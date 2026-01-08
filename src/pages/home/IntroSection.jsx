@@ -13,7 +13,7 @@ const IntroSection = () => {
 
       <Content>
         <SubText>
-          국내 최대 규모의 연합 IT 동아리 멋쟁이사자처럼 X 이화여자대학교
+          국내 최대 규모의 연합 IT 동아리 멋쟁이사자처럼 X 이화여대
         </SubText>
 
         {/* 로고 영역 */}
@@ -128,9 +128,9 @@ const SubText = styled.p`
   word-break: keep-all;
 
   @media (max-width: 799px) {
-    font-size: 0.625rem;
-    margin-bottom: 12px;
+    font-size: 0.75rem;
     line-height: normal;
+    letter-spacing: 0.0225rem;
   }
 `;
 
@@ -161,6 +161,8 @@ const LogoWrapper = styled.div`
       height: 7.03531rem;
       margin: 0 5px;
       object-fit: contain;
+      position: relative;
+      top: -0.15rem;
       animation: ${rotate} 10s linear infinite;
     }
 
@@ -177,6 +179,8 @@ const LogoWrapper = styled.div`
       .flower-o {
         width: 0.7em;
         height: 0.75em;
+        position: relative;
+        top: -0.15rem;
       }
     }
   }

@@ -204,6 +204,7 @@ const GreenArea = styled.div`
       font-family: Bayon;
       font-size: 3rem;
       line-height: 2.875rem;
+      font-weight: 400;
     }
     .subtitle {
       font-family: "Cafe24 PRO Slim";
@@ -245,7 +246,7 @@ const MoreButton = styled.button`
 
   transition: all 0.2s ease;
 
-  &:hover{
+  &:hover {
     filter: brightness(0.9);
   }
 
@@ -339,7 +340,7 @@ const SliderWrapper = styled.div`
 
   @media (max-width: 799px) {
     margin-top: -3.75rem;
-    padding-left: clamp(16px, 20vw, 100px);
+    padding-left: 0;
   }
 `;
 
@@ -433,6 +434,8 @@ const LogoWrapper = styled.div`
     .flower-o {
       width: 6.54481rem;
       height: 7.03531rem;
+      position: relative;
+      top: -0.15rem;
       object-fit: contain;
       animation: ${rotate} 10s linear infinite;
       margin: 0 5px;
@@ -452,6 +455,8 @@ const LogoWrapper = styled.div`
       .flower-o {
         width: 0.7em;
         height: 0.75em;
+        position: relative;
+        top: -0.15rem;
       }
     }
   }

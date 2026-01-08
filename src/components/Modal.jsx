@@ -10,14 +10,33 @@ import copyIcon from "../../public/images/copy.svg";
 function useLockBodyScroll(locked) {
   useEffect(() => {
     if (!locked) return;
-    const prev = document.body.style.overflow;
+
+    // 1. 현재 스크롤바의 너비 계산 (윈도우 전체 너비 - 실제 문서 너비)
+    const scrollBarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+
+    // 2. 기존 스타일 저장
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevBodyPaddingRight = document.body.style.paddingRight;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+
+    // 3. 스크롤 잠금 적용
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+
+    // 4. 스크롤바가 사라진 공간만큼 padding-right를 줘서 화면 밀림 방지
+    if (scrollBarWidth > 0) {
+      document.body.style.paddingRight = `${scrollBarWidth}px`;
+    }
+
+    // 5. 클린업 (모달 닫힐 때 원상복구)
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevBodyOverflow;
+      document.body.style.paddingRight = prevBodyPaddingRight;
+      document.documentElement.style.overflow = prevHtmlOverflow;
     };
   }, [locked]);
 }
-
 function useEscClose(enabled, onClose) {
   useEffect(() => {
     if (!enabled) return;
@@ -108,7 +127,7 @@ export function Modal({
 
   // actions
   actions = [],
-  closeOnOverlay = true,
+  closeOnOverlay = false,
   closeOnEsc = true,
 }) {
   const align = alignProp ?? (showClose ? "left" : "center");
@@ -583,8 +602,8 @@ const CloseOnImage = styled.button`
   @media (max-width: 768px) {
     position: fixed;
     top: 20px;
-    left: 20px;
-    right: auto;
+    right: 20px;
+    left: auto;
   }
 `;
 
