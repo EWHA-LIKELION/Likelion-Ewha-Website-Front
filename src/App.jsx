@@ -24,6 +24,8 @@ function App() {
         {/* recruit */}
         <Route path="recruit/apply" element={<Apply2 />} />
         <Route path="recruit/apply/preview" element={<Apply2Review />} />
+        <Route path="recruit/part" element={<RecruitPart />} />
+        <Route path="recruit/part/result" element={<RecruitResult />} />
       </Route>
 
       {/* Admin Layout: /admin/* 는 전부 여기로 */}

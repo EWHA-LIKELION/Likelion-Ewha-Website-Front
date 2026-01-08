@@ -183,10 +183,13 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
   };
 
   const handleConfirm = async () => {
+    console.log("token in localStorage =", localStorage.getItem("token"));
+    console.log("baseURL =", api.defaults.baseURL);
+
     if (!isCodeValid || isLoading) return;
     setIsLoading(true);
     try {
-      const response = await api.post("/recruitments/application/my/", {
+      const response = await api.post("/recruitments/application/my", {
         application_code: code.trim(),
       });
       handleClose();
