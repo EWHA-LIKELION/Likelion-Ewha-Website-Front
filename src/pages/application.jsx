@@ -189,7 +189,7 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
         application_code: code.trim(),
       });
       handleClose();
-      navigate("recruitapply/preview", { state: { applicationCode: code.trim() } });
+      navigate("/recruit/apply/preview", { state: { applicationCode: code.trim() } });
     } catch (error) {
       setErrorMode(true);
     } finally {
