@@ -65,13 +65,11 @@ const CardWrapper = styled.div`
 
   @media (max-width: 1129px) {
     width: 100%;
-    min-width: 19.375rem;
   }
 
   @media (max-width: 799px) {
     gap: 1rem;
     height: 16.375rem;
-    min-width: 0;
     border-radius: 0.625rem;
   }
 `;
