@@ -112,7 +112,6 @@ const Topbar = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,6 +166,7 @@ const MenuLink = styled(NavLink)`
   font-weight: 400;
   line-height: 32px;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &.active {
     color: #00ff67;
@@ -199,6 +199,7 @@ const MoMenuButton = styled.button`
     width: 28px;
     height: 28px;
     filter: none;
+    transition: filter 0.2s ease;
   }
 
   @media (hover: hover) and (pointer: fine) {
@@ -208,7 +209,6 @@ const MoMenuButton = styled.button`
     }
   }
 `;
-
 
 const MoOverlay = styled.div`
   display: none;
@@ -223,7 +223,6 @@ const MoOverlay = styled.div`
       $footerTopAbs != null
         ? `bottom: calc(100% - ${$footerTopAbs}px);`
         : `bottom: 0;`}
-
     z-index: 999;
     opacity: ${({ $open }) => ($open ? 1 : 0)};
     pointer-events: ${({ $open }) => ($open ? "auto" : "none")};
@@ -244,17 +243,14 @@ const MoPanel = styled.aside`
   position: absolute;
   top: 0;
   right: 0;
-
   width: 200px;
   min-width: 152px;
   max-width: 391px;
   height: 100%;
-
   padding: 40px 28px;
   display: flex;
   align-items: flex-start;
   gap: 10px;
-
   background: var(--neutral-15, #1c1c1c);
   transform: translateX(${({ $open }) => ($open ? "0%" : "100%")});
   transition: transform 240ms ease;
@@ -276,6 +272,7 @@ const MoItem = styled(NavLink)`
   font-weight: 400;
   line-height: 32px;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &.active {
     color: #00ff67;
