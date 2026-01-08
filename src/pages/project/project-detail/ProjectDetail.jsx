@@ -180,7 +180,9 @@ const Thumbnail = styled.div`
     }
 
     @media (max-width: 49.9999rem) {
-        height: 12.5rem;
+        img {
+            height: 12.5rem;
+        }
     }
 `
 
@@ -288,11 +290,10 @@ const ProjectImg = styled.div`
 `
 
 const ImageScroll = styled.div`
-    margin: 3.75rem -1rem;
-    padding: 1rem 1rem;
+    margin: 2.75rem 0;
+    padding: 1rem;
 
     display: flex;
-    flex-wrap: nowrap;
     gap: 1.25rem;
 
     overflow-x: auto;
@@ -300,18 +301,23 @@ const ImageScroll = styled.div`
     scrollbar-width: none;
 
     @media (max-width: 49.9999rem) {
-        margin: 1.25rem -1rem;
-        padding: 1rem 1rem;
+        margin: 0.25rem 0;
         gap: 0.5rem;
     }
 `
 
 const ImgCard = styled.div`
+    flex: 0 0 auto;
+
+    &:first-child {
+        margin-left: -1rem;
+    }
+
     img {
         width: 18.75rem;
         height: 31.25rem;
-
         border-radius: 1rem;
+    
         border: 0.125rem solid var(--Line-Neutral, rgba(112, 115, 124, 0.16));
         background: lightgray;
         box-shadow: 0 0.5rem 1rem 0 rgba(24, 24, 27, 0.10);

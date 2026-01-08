@@ -48,8 +48,8 @@ function People() {
                 {managers.length > 0 && (
                     <Lion>
                         <p className='h3-bold' style={{ color: '#474747', textAlign: 'center'}}>운영진</p>
-                        <p className='h5-regular' style={{ color: '#737373', fontSize: '16px', marginBottom: '32px'}}>
-                            {selectedGeneration} 운영진입니다.
+                        <p className='h5-regular' style={{ color: '#737373', fontSize: '16px', marginBottom: '32px', marginTop: '4px'}}>
+                            이화여대 멋쟁이사자처럼 {selectedGeneration} 운영진입니다.
                         </p>
                         <LionCardGrid>
                             {managers.map(m => (
@@ -71,20 +71,20 @@ function People() {
                 {lions.length > 0 && (
                     <Lion>
                         <p className='h3-bold' style={{ color: '#474747', textAlign: 'center', marginTop: '40px'}}>아기사자</p>
-                        <p className='h5-regular' style={{ color: '#737373', fontSize: '16px', marginBottom: '24px'}}>
-                            {selectedGeneration} 아기사자입니다.
+                        <p className='h5-regular' style={{ color: '#737373', fontSize: '16px', marginBottom: '24px', marginTop: '4px'}}>
+                            이화여대 멋쟁이사자처럼 {selectedGeneration} {selectedPart} 아기사자입니다.
                         </p>
 
                         {/* 파트 필터 */}
                         <SegmentBar
-                            items={['전체', '기획•디자인', '프론트엔드', '백엔드']}
+                            items={['기획•디자인', '프론트엔드', '백엔드']}
                             styleType={1}
                             onSelect={(index, item) => setSelectedPart(item)}
                         />
 
                         <LionCardGrid style={{ marginTop: '60px'}}>
                             {lions
-                                .filter(m => selectedPart === '전체' || m.part === selectedPart)
+                                .filter(m => selectedPart === '기획•디자인' || m.part === selectedPart)
                                 .map(m => (
                                     <MemberCard
                                         key={m.id}
