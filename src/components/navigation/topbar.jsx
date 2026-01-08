@@ -6,7 +6,6 @@ const TopBar = ({ onToggleMobileMenu }) => {
   const headerRef = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState(null);
   const [headerH, setHeaderH] = useState(0);
   const [footerTopAbs, setFooterTopAbs] = useState(null);
 
@@ -81,43 +80,18 @@ const TopBar = ({ onToggleMobileMenu }) => {
         </Inner>
       </Topbar>
 
-      <MoOverlay
-        $open={isOpen}
-        $top={headerH}
-        $footerTopAbs={footerTopAbs}
-      >
+      <MoOverlay $open={isOpen} $top={headerH} $footerTopAbs={footerTopAbs}>
         <MoBackdrop type="button" aria-label="Close menu" onClick={closeMenu} />
 
         <MoPanel aria-label="Mobile menu" $open={isOpen}>
           <MoMenu>
-            <MoItem
-              to="/project"
-              $active={selected === "project"}
-              onClick={() => {
-                setSelected("project");
-                closeMenu();
-              }}
-            >
+            <MoItem to="/project" onClick={closeMenu}>
               PROJECT
             </MoItem>
-            <MoItem
-              to="/people"
-              $active={selected === "people"}
-              onClick={() => {
-                setSelected("people");
-                closeMenu();
-              }}
-            >
+            <MoItem to="/people" onClick={closeMenu}>
               PEOPLE
             </MoItem>
-            <MoItem
-              to="/recruit"
-              $active={selected === "recruit"}
-              onClick={() => {
-                setSelected("recruit");
-                closeMenu();
-              }}
-            >
+            <MoItem to="/recruit" onClick={closeMenu}>
               RECRUIT
             </MoItem>
           </MoMenu>
@@ -138,7 +112,6 @@ const Topbar = styled.header`
   position: sticky;
   top: 0;
   z-index: 1000;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -193,9 +166,14 @@ const MenuLink = styled(NavLink)`
   font-weight: 400;
   line-height: 32px;
   text-decoration: none;
+  transition: color 0.2s ease;
 
   &.active {
-    color: var(--primary-main, #05da5b);
+    color: #00ff67;
+  }
+
+  &:hover {
+    color: var(--Atomic-Green-90, #98fba4);
   }
 `;
 
@@ -210,17 +188,25 @@ const MoMenuButton = styled.button`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     width: 28px;
     height: 28px;
     flex-shrink: 0;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
   }
 
   img {
     display: block;
     width: 28px;
     height: 28px;
+    filter: none;
+    transition: filter 0.2s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover img {
+      filter: brightness(0) saturate(100%) invert(87%) sepia(18%)
+        saturate(1036%) hue-rotate(72deg) brightness(103%) contrast(96%);
+    }
   }
 `;
 
@@ -237,7 +223,6 @@ const MoOverlay = styled.div`
       $footerTopAbs != null
         ? `bottom: calc(100% - ${$footerTopAbs}px);`
         : `bottom: 0;`}
-
     z-index: 999;
     opacity: ${({ $open }) => ($open ? 1 : 0)};
     pointer-events: ${({ $open }) => ($open ? "auto" : "none")};
@@ -258,17 +243,14 @@ const MoPanel = styled.aside`
   position: absolute;
   top: 0;
   right: 0;
-
   width: 200px;
   min-width: 152px;
   max-width: 391px;
   height: 100%;
-
   padding: 40px 28px;
   display: flex;
   align-items: flex-start;
   gap: 10px;
-
   background: var(--neutral-15, #1c1c1c);
   transform: translateX(${({ $open }) => ($open ? "0%" : "100%")});
   transition: transform 240ms ease;
@@ -283,11 +265,20 @@ const MoMenu = styled.nav`
 `;
 
 const MoItem = styled(NavLink)`
-  color: ${({ $active }) => ($active ? "#00FF67" : "#FFF")};
+  color: #fff;
   text-align: center;
   font-family: "Bayon", sans-serif;
   font-size: 24px;
   font-weight: 400;
   line-height: 32px;
   text-decoration: none;
+  transition: color 0.2s ease;
+
+  &.active {
+    color: #00ff67;
+  }
+
+  &:hover {
+    color: var(--Atomic-Green-90, #98fba4);
+  }
 `;

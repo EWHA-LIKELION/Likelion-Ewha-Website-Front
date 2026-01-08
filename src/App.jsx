@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Layout from "./layouts/layout.jsx";
 import Home from "./pages/home/Home";
 import Project from "./pages/project/Project.jsx";
@@ -19,18 +19,9 @@ function App() {
         <Route path="project" element={<Project />} />
         <Route path="project/detail/:id" element={<ProjectDetail />} />
         <Route path="people" element={<People />} />
-        <Route path="apply/test" element={<Apply2 />} />
-
-        {/* Recruit pages */}
-        <Route path="recruit">
-          <Route index element={<RecruitGuidePage />} />
-          <Route path="apply">
-            <Route path="part" element={<RecruitPart />} />
-            <Route path="form" element={<div> recruit-apply-form </div>} />
-          </Route>
-          <Route path="preview" element={<div> recruit-preview </div>} />
-          <Route path="result" element={<RecruitResult />} />
-        </Route>
+        <Route path="recruit" element={<RecruitGuidePage />} />
+        {/* recruit */}
+        <Route path="recruit/apply" element={<Apply2 />} />
       </Route>
 
       {/* Admin Layout: /admin/* 는 전부 여기로 */}
