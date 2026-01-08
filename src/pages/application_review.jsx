@@ -83,6 +83,11 @@ export default function Apply2Review() {
   const isMobile = useIsMobile(799);
 
   const app = state?.submitted || state?.app || null;
+  useEffect(() => {
+    if (!app) {
+      navigate("/recruit/apply");
+    }
+  }, [app, navigate]);
 
   const partLabel = useMemo(() => {
     const val = app?.part ?? "";
@@ -116,6 +121,9 @@ export default function Apply2Review() {
 
   const isOffline = app?.interview_method === "OFFLINE";
   const isOnline = app?.interview_method === "ONLINE";
+  if (!app) {
+    return null;
+  }
 
   return (
     <Page>

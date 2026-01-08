@@ -185,11 +185,12 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
     if (!isCodeValid || isLoading) return;
     setIsLoading(true);
     try {
-      await api.post("/recruitments/application/my/", {
+      const response = await api.post("/recruitments/application/my/", {
         application_code: code.trim(),
       });
       handleClose();
-      navigate("/recruit/apply/preview", { state: { applicationCode: code.trim() } });
+      // application → application_review 전달 (모달이 여기 구현되어 있어서..)
+      navigate("/recruit/apply/preview", { state: { app: response.data } });
     } catch (error) {
       setErrorMode(true);
     } finally {
