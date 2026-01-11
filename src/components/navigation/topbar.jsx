@@ -12,14 +12,14 @@ const TopBar = ({ onToggleMobileMenu }) => {
   const toggleMenu = () => {
     setIsOpen((prev) => {
       const next = !prev;
-      onToggleMobileMenu?.(next);
+      setTimeout(() => onToggleMobileMenu?.(next), 0);
       return next;
     });
   };
 
   const closeMenu = () => {
     setIsOpen(false);
-    onToggleMobileMenu?.(false);
+    setTimeout(() => onToggleMobileMenu?.(false), 0);
   };
 
   useLayoutEffect(() => {
