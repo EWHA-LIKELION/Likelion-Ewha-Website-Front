@@ -25,10 +25,11 @@ const TopBar = ({ onToggleMobileMenu }) => {
   useLayoutEffect(() => {
     const updateHeader = () => {
       if (!headerRef.current) return;
-      setHeaderH(headerRef.current.offsetHeight);
+      const newHeight = headerRef.current.offsetHeight;
+      setHeaderH(prev => prev !== newHeight ? newHeight : prev);
     };
 
-    updateHeader();
+    queueMicrotask(updateHeader);
     window.addEventListener("resize", updateHeader);
     return () => window.removeEventListener("resize", updateHeader);
   }, []);
@@ -37,16 +38,17 @@ const TopBar = ({ onToggleMobileMenu }) => {
     const updateFooterTop = () => {
       const footer = document.querySelector("footer");
       if (!footer) {
-        setFooterTopAbs(null);
+        setFooterTopAbs((prev) => prev !== null ? null : prev);
         return;
       }
 
       const rect = footer.getBoundingClientRect();
       const absTop = rect.top + window.scrollY;
-      setFooterTopAbs(absTop);
+      setFooterTopAbs((prev) => prev !== absTop ? absTop : prev);
     };
 
-    updateFooterTop();
+    queueMicrotask(updateFooterTop);
+
     window.addEventListener("scroll", updateFooterTop, { passive: true });
     window.addEventListener("resize", updateFooterTop);
     return () => {
