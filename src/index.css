@@ -17,22 +17,20 @@
 }
 
 html {
-  overflow-x: hidden;
-  width: 100%;
+  min-height: 100vh;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  position: relative;
   font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  overflow-x: clip;
+  min-height: 100vh;
 }
 
 /* 스크롤바 완전히 숨기기 (모든 브라우저) */
