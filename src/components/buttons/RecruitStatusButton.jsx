@@ -227,7 +227,7 @@ const RecruitStatusButton = ({ isMobile, pageType = "home", recruitStyle = "1" }
         type="info"
         title="14기 모집 사전 알림 등록"
         description={
-          "이화여대 멋쟁이사자처럼 카카오톡 채널을 친구 추가하시면,\n모집 시작 시 가장 먼저 알려드릴게요."
+          "이화여대 멋쟁이사자처럼 카카오톡 채널을 친구 추가하시면,\n모집 시작 시 바로 알려드릴게요."
         }
         align="left"
         actions={[
