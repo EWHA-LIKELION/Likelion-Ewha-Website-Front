@@ -351,6 +351,18 @@
         {
             "id": 29,
             "generation": "12기",
+            "name": "유서연",
+            "department": "컴퓨터공학과 22",
+            "role": "운영진",
+            "position": "운영진",
+            "part": "프론트엔드",
+            "shortComment": "",
+            "longComment": "",
+            "photo": ""
+        },
+        {
+            "id": 30,
+            "generation": "12기",
             "name": "진규빈",
             "department": "컴퓨터공학과 23",
             "role": "운영진",
@@ -361,7 +373,7 @@
             "photo": ""
         },
         {
-            "id": 30,
+            "id": 31,
             "generation": "12기",
             "name": "최지원",
             "department": "컴퓨터공학과 22",
@@ -373,7 +385,7 @@
             "photo": ""
         },
         {
-            "id": 31,
+            "id": 32,
             "generation": "12기",
             "name": "심예원",
             "department": "독어독문학과 22",
@@ -385,7 +397,7 @@
             "photo": ""
         },
         {
-            "id": 32,
+            "id": 33,
             "generation": "12기",
             "name": "이다빈",
             "department": "컴퓨터공학과 20",
@@ -397,7 +409,7 @@
             "photo": ""
         },
         {
-            "id": 33,
+            "id": 34,
             "generation": "12기",
             "name": "허채린",
             "department": "컴퓨터공학과 21",
@@ -409,7 +421,7 @@
             "photo": ""
         },
         {
-            "id": 34,
+            "id": 35,
             "generation": "11기",
             "name": "이서진",
             "department": "컴퓨터공학전공 21",
@@ -421,7 +433,7 @@
             "photo": ""
         },
         {
-            "id": 35,
+            "id": 36,
             "generation": "11기",
             "name": "허윤",
             "department": "커뮤니케이션미디어학부 21",
@@ -433,7 +445,7 @@
             "photo": ""
         },
         {
-            "id": 36,
+            "id": 37,
             "generation": "11기",
             "name": "정연주",
             "department": "사이버보안전공 20",
@@ -445,7 +457,7 @@
             "photo": ""
         },
         {
-            "id": 37,
+            "id": 38,
             "generation": "11기",
             "name": "이채원",
             "department": "뇌인지과학부 21",
@@ -457,7 +469,7 @@
             "photo": ""
         },
         {
-            "id": 38,
+            "id": 39,
             "generation": "11기",
             "name": "임채영",
             "department": "컴퓨터공학전공 21",
@@ -469,7 +481,7 @@
             "photo": ""
         },
         {
-            "id": 39,
+            "id": 40,
             "generation": "11기",
             "name": "이나경",
             "department": "휴먼기계바이오공학부 22",
@@ -481,7 +493,7 @@
             "photo": ""
         },
         {
-            "id": 40,
+            "id": 41,
             "generation": "11기",
             "name": "최유미",
             "department": "컴퓨터공학전공 21",
@@ -493,7 +505,7 @@
             "photo": ""
         },
         {
-            "id": 41,
+            "id": 42,
             "generation": "10기",
             "name": "김혜빈",
             "department": "사회복지학과 19",
@@ -505,7 +517,7 @@
             "photo": ""
         },
         {
-            "id": 42,
+            "id": 43,
             "generation": "10기",
             "name": "정다윤",
             "department": "컴퓨터공학과 20",
@@ -517,7 +529,7 @@
             "photo": ""
         },
         {
-            "id": 43,
+            "id": 44,
             "generation": "10기",
             "name": "김도연",
             "department": "컴퓨터공학과 20",
