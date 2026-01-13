@@ -71,8 +71,7 @@ const Section = styled.section`
   padding: 5rem 18.5625rem;
 
   @media (max-width: 799px) {
-    min-height: 22rem;
-    height: auto !important;
+    min-height: 0;
     padding: 4.5rem 1rem 4rem 1rem;
     align-items: center;
     min-width: 0;
@@ -205,8 +204,7 @@ const PcButtonArea = styled.div`
 const MobileButtonArea = styled.div`
   display: none;
   width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin-top: 1.5rem;
   justify-content: center;
 
   @media (max-width: 799px) {
