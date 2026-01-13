@@ -196,8 +196,6 @@ const LogoWrapper = styled.div`
 
 const PcButtonArea = styled.div`
   display: block;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
 
   @media (max-width: 799px) {
     display: none !important;
