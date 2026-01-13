@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../components/Input";
-import Dropdown2 from "../components/dropdown/Dropdown2";
-import Dropdown3 from "../components/dropdown/Dropdown3";
+import Input from "../../components/Input";
+import Dropdown2 from "../../components/dropdown/Dropdown2";
+import Dropdown3 from "../../components/dropdown/Dropdown3";
 import { api, ApplicationsAPI } from "@/apis";
 
 import {
@@ -13,20 +13,11 @@ import {
   SelectNegativeButton,
   UnselectPositiveButton,
   UnselectNegativeButton,
-  SelectedRadio as PcSelectedRadio,
-  UnselectedRadio as PcUnselectedRadio,
-} from "../components/buttons/SelectionButtons_pc";
-import {
-  SelectPositiveButtonMobile,
-  SelectNegativeButtonMobile,
-  UnselectPositiveButtonMobile,
-  UnselectNegativeButtonMobile,
-  SelectedRadio as MoSelectedRadio,
-  UnselectedRadio as MoUnselectedRadio,
-} from "../components/buttons/SelectionButtons_mo";
-import { TimeAbled, TimeSelected } from "../components/buttons/TimeButtons_pc";
-import { TimeAbledMobile, TimeSelectedMobile } from "../components/buttons/TimeButtons_mo";
-import { Modal } from "../components/Modal.jsx";
+  SelectedRadio,
+  UnselectedRadio,
+} from "../../components/buttons/SelectionButtons";
+import { TimeAbled, TimeSelected } from "../../components/buttons/TimeButtons";
+import { Modal } from "../../components/Modal.jsx";
 
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
 
@@ -36,16 +27,6 @@ const FILE_LIMIT = 3;
 const SUBMIT_BOTTOM_GAP = 160;
 
 const isFilled = (v) => v.trim().length > 0;
-
-function useisMO(maxWidth = 799) {
-  const [isMO, setisMO] = useState(() => window.innerWidth <= maxWidth);
-  useEffect(() => {
-    const handler = () => setisMO(window.innerWidth <= maxWidth);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, [maxWidth]);
-  return isMO;
-}
 
 function useIsMobile(maxWidth = 799) {
   const [isMobile, setIsMobile] = useState(() => {
@@ -275,7 +256,6 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
 }
 
 export default function ApplyIntegrated() {
-  const isMO = useisMO(799);
   const isMobile = useIsMobile(799);
   const navigate = useNavigate();
   const location = useLocation();
@@ -711,33 +691,18 @@ export default function ApplyIntegrated() {
                     다만 개인 사정으로 인해 대면으로 학교에 방문하기 어려운 분에 한하여 온라인으로 참여하실 수 있습니다.
                   </ExampleContent>
 
-                  {isMO ? (
-                    <ButtonRowMobile>
-                      {interviewMethod === "OFFLINE" ? (
-                        <SelectPositiveButtonMobile onClick={() => setInterviewMethod("OFFLINE")} />
-                      ) : (
-                        <UnselectPositiveButtonMobile onClick={() => setInterviewMethod("OFFLINE")} />
-                      )}
-                      {interviewMethod === "ONLINE" ? (
-                        <SelectNegativeButtonMobile onClick={() => setInterviewMethod("ONLINE")} />
-                      ) : (
-                        <UnselectNegativeButtonMobile onClick={() => setInterviewMethod("ONLINE")} />
-                      )}
-                    </ButtonRowMobile>
-                  ) : (
-                    <ButtonRowPC>
-                      {interviewMethod === "OFFLINE" ? (
-                        <SelectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
-                      ) : (
-                        <UnselectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
-                      )}
-                      {interviewMethod === "ONLINE" ? (
-                        <SelectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
-                      ) : (
-                        <UnselectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
-                      )}
-                    </ButtonRowPC>
-                  )}
+                  <ButtonRowPC>
+                    {interviewMethod === "OFFLINE" ? (
+                      <SelectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
+                    ) : (
+                      <UnselectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
+                    )}
+                    {interviewMethod === "ONLINE" ? (
+                      <SelectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
+                    ) : (
+                      <UnselectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
+                    )}
+                  </ButtonRowPC>
 
                   <ErrorText $visible={!isInterviewMethodValid && interviewMethod !== ""}>
                     {!isInterviewMethodValid && interviewMethod !== "" ? "면접 참여 방식을 선택해주세요." : "\u00A0"}
@@ -759,19 +724,11 @@ export default function ApplyIntegrated() {
                   />
 
                   <RadioRow>
-                    {isMO ? (
-                      <RadioLabel onClick={() => setPrivacyAgree((prev) => !prev)}>
-                        {privacyAgree ? <MoSelectedRadio /> : <MoUnselectedRadio />}
-                        <AsteriskText>(필수)</AsteriskText>
-                        <RadioText>개인정보 수집 및 이용에 동의합니다.</RadioText>
-                      </RadioLabel>
-                    ) : (
-                      <RadioLabel onClick={() => setPrivacyAgree((prev) => !prev)}>
-                        {privacyAgree ? <PcSelectedRadio /> : <PcUnselectedRadio />}
-                        <AsteriskText>(필수)</AsteriskText>
-                        <RadioText>개인정보 수집 및 이용에 동의합니다.</RadioText>
-                      </RadioLabel>
-                    )}
+                    <RadioLabel onClick={() => setPrivacyAgree((prev) => !prev)}>
+                      {privacyAgree ? <SelectedRadio /> : <UnselectedRadio />}
+                      <AsteriskText>(필수)</AsteriskText>
+                      <RadioText>개인정보 수집 및 이용에 동의합니다.</RadioText>
+                    </RadioLabel>
                   </RadioRow>
 
                   <ErrorText $visible={!isPrivacyValid && privacyAgree !== false}>
@@ -807,13 +764,7 @@ export default function ApplyIntegrated() {
                                   style={{ display: "inline-block", cursor: "pointer" }}
                                   onClick={() => toggleTime(date, time, "am")}
                                 >
-                                  {isMO ? (
-                                    selected ? (
-                                      <TimeSelectedMobile time={time} />
-                                    ) : (
-                                      <TimeAbledMobile time={time} />
-                                    )
-                                  ) : selected ? (
+                                  {selected ? (
                                     <TimeSelected time={time} />
                                   ) : (
                                     <TimeAbled time={time} />
@@ -833,13 +784,7 @@ export default function ApplyIntegrated() {
                                   style={{ display: "inline-block", cursor: "pointer" }}
                                   onClick={() => toggleTime(date, time, "pm")}
                                 >
-                                  {isMO ? (
-                                    selected ? (
-                                      <TimeSelectedMobile time={time} />
-                                    ) : (
-                                      <TimeAbledMobile time={time} />
-                                    )
-                                  ) : selected ? (
+                                  {selected ? (
                                     <TimeSelected time={time} />
                                   ) : (
                                     <TimeAbled time={time} />
@@ -868,19 +813,11 @@ export default function ApplyIntegrated() {
                   </ExampleContent>
 
                   <RadioRow>
-                    {isMO ? (
-                      <RadioLabel onClick={() => setVideoAgree((prev) => !prev)}>
-                        {videoAgree ? <MoSelectedRadio /> : <MoUnselectedRadio />}
-                        <AsteriskText>(필수)</AsteriskText>
-                        <RadioText>면접 영상 녹화에 동의합니다.</RadioText>
-                      </RadioLabel>
-                    ) : (
-                      <RadioLabel onClick={() => setVideoAgree((prev) => !prev)}>
-                        {videoAgree ? <PcSelectedRadio /> : <PcUnselectedRadio />}
-                        <AsteriskText>(필수)</AsteriskText>
-                        <RadioText>면접 영상 녹화에 동의합니다.</RadioText>
-                      </RadioLabel>
-                    )}
+                    <RadioLabel onClick={() => setVideoAgree((prev) => !prev)}>
+                      {videoAgree ? <SelectedRadio /> : <UnselectedRadio />}
+                      <AsteriskText>(필수)</AsteriskText>
+                      <RadioText>면접 영상 녹화에 동의합니다.</RadioText>
+                    </RadioLabel>
 
                     <ErrorText $visible={!isVideoValid && videoAgree !== false}>
                       {!isVideoValid && videoAgree !== false ? "면접 영상 녹화에 동의해주세요." : "\u00A0"}
@@ -1168,6 +1105,7 @@ export default function ApplyIntegrated() {
             <SubmitRow $bottomGap={SUBMIT_BOTTOM_GAP}>
               <SubmitStack>
                 <SubmitButton
+                  className="h4-bold"
                   type="button"
                   disabled={!canSubmit || isSubmitting}
                   onClick={onClickSubmit}
@@ -2278,28 +2216,33 @@ const SubmitError = styled.div`
   white-space: pre-wrap;
 `;
 const SubmitButton = styled.button`
-  width: 390px;
-  height: 52px;
+  width: 24.375rem;
+  padding: 1.125rem 2.25rem;
   border: none;
   cursor: pointer;
 
   border-radius: 40px;
-  background: var(--Primary-Main, #05da5b);
-  color: var(--Common-100, #fff);
+  background: var(--primary-main, #05da5b);
+  color: var(--common-100, #fff);
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
+  transition: all 0.2s ease;
+
+  &:not(:disabled):hover {
+  filter: brightness(0.9);
+  }
 
   &:disabled {
-    cursor: default;
-    background: var(--Neutral-95, #dcdcdc);
-    color: var(--Neutral-70, #9b9b9b);
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+    background: var(--neutral-70);
+    color: var(--static-white);
   }
 
   @media (max-width: 799px) {
-    width: 100%;
+    width: 12.5rem;
+    padding: 0.625rem 1.75rem;
+    font-size: 0.875rem;
   }
 `;
 const MoOverlay = styled.div`

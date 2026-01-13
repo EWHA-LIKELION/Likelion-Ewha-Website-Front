@@ -64,6 +64,18 @@ const BaseButton = styled.button`
     line-height: 1.5rem;
 
     cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    &:disabled {
+        cursor: not-allowed;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &:not(:disabled):hover {
+        filter: brightness(0.9);
+    }
 `;
 
 /* 연한 초록 */

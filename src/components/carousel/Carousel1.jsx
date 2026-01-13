@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import NexIcon from "../../../public/icons/next.svg";
 import PrevIcon from "../../../public/icons/previous.svg";
-import MEMBERS_DATA from "../../data/members.json";
+import membersData from "@/data/members.json";
 
 const Carousel1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // 코멘트가 있는 멤버만 필터링
-  const filteredMembers = MEMBERS_DATA.members.filter(
+  const filteredMembers = membersData.members.filter(
     (member) => member.shortComment && member.longComment
   );
 

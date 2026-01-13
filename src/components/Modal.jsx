@@ -339,6 +339,9 @@ const Dialog = styled.div`
     if ($size === "media") return "auto";
     return "29.6875rem"; //기본  ,
   }};
+
+  transition: all 0.2s ease;
+
   @media (max-width: 799px) {
     width: calc(100% - 40px); /* 모바일 좌우 여백 확보 */
     max-width: 25rem; /* 너무 커지는 것 방지 */
@@ -369,6 +372,18 @@ const CloseBtn = styled.button`
   background: transparent;
   cursor: pointer;
 
+  transition: all 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:not(:disabled):hover {
+    filter: brightness(0.9);
+  }
+
   @media (max-width: 799px) {
     top: 1.5rem;
     right: 1.5rem;
@@ -381,6 +396,8 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   align-items: ${({ $align }) => ($align === "left" ? "flex-start" : "center")};
+
+  transition: all 0.2s ease;
 
   /* 모바일 패딩 조정 */
   @media (max-width: 799px) {
@@ -407,6 +424,8 @@ const Title = styled.h2`
   font-size: 1.5rem;
   padding-right: 2rem;
 
+  transition: all 0.2s ease;
+
   @media (max-width: 799px) {
     font-size: 1.25rem;
     padding-right: 1.5rem;
@@ -417,7 +436,13 @@ const Desc = styled.p`
   margin: 0;
   color: var(--neutral-50);
   word-break: keep-all;
-  line-height: 1.5;
+
+  transition: all 0.2s ease;
+  
+  @media (max-width: 799px) {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+  }
 `;
 
 const Body = styled.div`
@@ -457,6 +482,12 @@ const Helper = styled.div`
     color: var(--neutral-50); /* 설명글과 같은 회색 */
     text-decoration: underline; /* 밑줄 추가 */
     font-weight: 700;
+
+    transition: all 0.2s ease;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
   }
 `;
 
@@ -546,6 +577,18 @@ const CopyBtn = styled.button`
   /* 아이콘 크기/색상 */
   font-size: 1.2rem;
   color: var(--neutral-40);
+
+  transition: all 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:not(:disabled):hover {
+    filter: brightness(0.9);
+  }
 `;
 
 const Note = styled.div`
@@ -568,6 +611,8 @@ const MediaWrap = styled.div`
   border-radius: var(--percentage-20, 1.25rem);
   overflow: visible;
   background: var(--Neutral-95, #dcdcdc);
+
+  transition: all 0.2s ease;
 
   @media (max-width: 768px) {
     width: calc(100vw - 2rem);
@@ -599,6 +644,18 @@ const CloseOnImage = styled.button`
 
   right: calc(-2rem - 0.5rem);
 
+  transition: all 0.2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:not(:disabled):hover {
+    filter: brightness(0.9);
+  }
+
   @media (max-width: 768px) {
     position: fixed;
     top: 20px;
@@ -616,6 +673,8 @@ const Actions = styled.div`
   gap: 0.5rem;
   justify-content: center; /* PC 기본 유지 */
 
+  transition: all 0.2s ease;
+
   @media (max-width: 560px) {
     justify-content: stretch;
   }
@@ -629,7 +688,6 @@ const ActionBtn = styled.button`
   white-space: nowrap;
 
   min-width: 11.5rem;
-  height: 3.5rem;
   padding: 0.875rem 2.5rem;
   font-size: 1.25rem;
   line-height: 1.75rem;
@@ -638,16 +696,6 @@ const ActionBtn = styled.button`
   cursor: pointer;
   font-weight: 700;
   flex: ${({ $fullWidth }) => ($fullWidth ? "1" : "0")};
-
-  @media (max-width: 799px) {
-    min-width: 0;
-    flex: 1 1 0;
-    max-width: 100%;
-    padding: 0.625rem 2.5rem; /* 필요하면 유지/조절 */
-    font-size: 1rem;
-    font-weight: 700;
-    line-height: 1.5rem;
-  }
 
   border: 1px solid
     ${({ $variant }) =>
@@ -669,11 +717,29 @@ const ActionBtn = styled.button`
       ? "var(--common-100)"
       : "var(--neutral-40)"};
 
+  transition: all 0.2s ease;
+
+  @media (max-width: 799px) {
+    min-width: 0;
+    flex: 1 1 0;
+    max-width: 100%;
+    padding: 0.625rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5rem;
+  }
+
   &:disabled {
     background: var(--interaction-disabled);
     border-color: var(--interaction-disabled);
     color: var(--common-100);
     cursor: not-allowed;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  &:not(:disabled):hover {
+    filter: brightness(0.9);
   }
 `;
 
@@ -688,6 +754,9 @@ const ActionLink = styled.a`
   cursor: pointer;
   flex: ${({ $fullWidth }) => ($fullWidth ? "1" : "0")};
   text-decoration: none;
+
+  transition: all 0.2s ease;
+
   @media (max-width: 560px) {
     min-width: 0;
     flex: 1 1 0;

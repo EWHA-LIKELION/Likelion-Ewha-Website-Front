@@ -2,19 +2,14 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../components/Input";
+import Input from "../../components/Input";
 
 import {
-  SelectedRadio as PcSelectedRadio,
-  UnselectedRadio as PcUnselectedRadio,
-} from "../components/buttons/SelectionButtons_pc";
-import {
-  SelectedRadio as MoSelectedRadio,
-  UnselectedRadio as MoUnselectedRadio,
-} from "../components/buttons/SelectionButtons_mo";
+  SelectedRadio,
+  UnselectedRadio,
+} from "../../components/buttons/SelectionButtons";
 
-import { TimeSelected } from "../components/buttons/TimeButtons_pc";
-import { TimeSelectedMobile } from "../components/buttons/TimeButtons_mo";
+import { TimeSelected } from "../../components/buttons/TimeButtons";
 
 const MIN_TEXTAREA_HEIGHT = 266;
 const SUBMIT_BOTTOM_GAP = 160;
@@ -24,29 +19,6 @@ const PART_OPTIONS = [
   { value: "FRONTEND", label: "프론트엔드" },
   { value: "BACKEND", label: "백엔드" },
 ];
-
-function useIsMobile(maxWidth = 799) {
-  const [isMobile, setIsMobile] = useState(() => {
-    if (typeof window === "undefined") return false;
-    return window.matchMedia(`(max-width: ${maxWidth}px)`).matches;
-  });
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia(`(max-width: ${maxWidth}px)`);
-    const onChange = (e) => setIsMobile(e.matches);
-
-    if (mq.addEventListener) mq.addEventListener("change", onChange);
-    else mq.addListener(onChange);
-
-    return () => {
-      if (mq.removeEventListener) mq.removeEventListener("change", onChange);
-      else mq.removeListener(onChange);
-    };
-  }, [maxWidth]);
-
-  return isMobile;
-}
 
 const pickNameFromUrl = (url) => {
   if (!url || typeof url !== "string") return "";
@@ -80,7 +52,6 @@ const groupInterviewTimes = (isoList) => {
 export default function Apply2Review() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const isMobile = useIsMobile(799);
 
   const app = state?.submitted || state?.app || null;
   useEffect(() => {
@@ -202,29 +173,14 @@ export default function Apply2Review() {
                   <InfoItemWide>
                     <Label className="body-regular">면접 참여 방식</Label>
                     <RadioRow>
-                      {isMobile ? (
-                        <>
-                          <RadioLabel>
-                            {isOffline ? <MoSelectedRadio /> : <MoUnselectedRadio />}
-                            <RadioText>오프라인</RadioText>
-                          </RadioLabel>
-                          <RadioLabel>
-                            {isOnline ? <MoSelectedRadio /> : <MoUnselectedRadio />}
-                            <RadioText>온라인</RadioText>
-                          </RadioLabel>
-                        </>
-                      ) : (
-                        <>
-                          <RadioLabel>
-                            {isOffline ? <PcSelectedRadio /> : <PcUnselectedRadio />}
-                            <RadioText>오프라인</RadioText>
-                          </RadioLabel>
-                          <RadioLabel>
-                            {isOnline ? <PcSelectedRadio /> : <PcUnselectedRadio />}
-                            <RadioText>온라인</RadioText>
-                          </RadioLabel>
-                        </>
-                      )}
+                      <RadioLabel>
+                        {isOffline ? <SelectedRadio /> : <UnselectedRadio />}
+                        <RadioText>오프라인</RadioText>
+                      </RadioLabel>
+                      <RadioLabel>
+                        {isOnline ? <SelectedRadio /> : <UnselectedRadio />}
+                        <RadioText>온라인</RadioText>
+                      </RadioLabel>
                     </RadioRow>
                   </InfoItemWide>
                 </InfoGrid>
@@ -248,11 +204,7 @@ export default function Apply2Review() {
                           <TimeRow>
                             {times.map((t) => (
                               <span key={`${date}-${t}`} style={{ display: "inline-block" }}>
-                                {isMobile ? (
-                                  <TimeSelectedMobile time={t} />
-                                ) : (
-                                  <TimeSelected time={t} />
-                                )}
+                                <TimeSelected time={t} />
                               </span>
                             ))}
                           </TimeRow>

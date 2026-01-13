@@ -78,13 +78,9 @@ const EndSection = () => {
             </div>
           </LogoWrapper>
 
-          <PcButtonArea>
-            <RecruitStatusButton isMobile={false} />
-          </PcButtonArea>
-
-          <MobileButtonArea>
-            <RecruitStatusButton isMobile={true} />
-          </MobileButtonArea>
+          <ButtonArea>
+            <RecruitStatusButton />
+          </ButtonArea>
         </FooterContent>
       </FooterSection>
     </SectionWrapper>
@@ -476,24 +472,13 @@ const LogoWrapper = styled.div`
   }
 `;
 
-const PcButtonArea = styled.div`
-  display: block;
-  margin-top: 3rem;
-  margin-bottom: 1rem;
-
-  @media (max-width: 799px) {
-    display: none !important;
-  }
-`;
-
-const MobileButtonArea = styled.div`
-  display: none;
-  width: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+const ButtonArea = styled.div`
+  display: flex;
   justify-content: center;
+  width: 100%;
 
   @media (max-width: 799px) {
-    display: flex !important;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
   }
 `;

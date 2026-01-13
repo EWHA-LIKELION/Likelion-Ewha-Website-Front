@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { HomeButton } from '@/components/buttons/MainButtons_pc';
-import { HomeButtonMobile } from '@/components/buttons/MainButtons_mo';
+import { HomeButton } from '@/components/buttons/MainButtons';
 
 // 상태별 설정
 const STATUS_CONFIG = {
@@ -142,9 +141,6 @@ const RecruitResult = () => {
       <HomeButtonWrapper>
         <HomeButton onClick={() => navigate("/")}/>
       </HomeButtonWrapper>
-      <HomeButtonMobileWrapper>
-        <HomeButtonMobile onClick={() => navigate("/")}/>
-      </HomeButtonMobileWrapper>
     </Wrapper>
   );
 };
@@ -286,17 +282,6 @@ const HighlightText = styled.span`
 `;
 
 const HomeButtonWrapper = styled.div`
-  display: block;
-  
-  @media (max-width: 799px) {
-    display: none;
-  }
-`;
-
-const HomeButtonMobileWrapper = styled.div`
-  display: none;
-  
-  @media (max-width: 799px) {
-    display: block;
-  }
+  display: flex;
+  justify-content: center;
 `;
