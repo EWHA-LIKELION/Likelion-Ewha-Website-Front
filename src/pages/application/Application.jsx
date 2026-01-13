@@ -28,16 +28,6 @@ const SUBMIT_BOTTOM_GAP = 160;
 
 const isFilled = (v) => v.trim().length > 0;
 
-function useisMO(maxWidth = 799) {
-  const [isMO, setisMO] = useState(() => window.innerWidth <= maxWidth);
-  useEffect(() => {
-    const handler = () => setisMO(window.innerWidth <= maxWidth);
-    window.addEventListener("resize", handler);
-    return () => window.removeEventListener("resize", handler);
-  }, [maxWidth]);
-  return isMO;
-}
-
 function useIsMobile(maxWidth = 799) {
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window === "undefined") return false;
@@ -266,7 +256,6 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
 }
 
 export default function ApplyIntegrated() {
-  const isMO = useisMO(799);
   const isMobile = useIsMobile(799);
   const navigate = useNavigate();
   const location = useLocation();
