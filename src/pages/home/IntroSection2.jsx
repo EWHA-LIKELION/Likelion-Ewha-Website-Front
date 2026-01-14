@@ -7,37 +7,14 @@ import {
   EWHA_OPERATING_YEARS, 
   STATS 
 } from "../../config/siteConfig";
+import { useIntersectionObserver } from "@/hooks";
 
 const IntroSection2 = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [animatedYears, setAnimatedYears] = useState(0);
   const [animatedProjects, setAnimatedProjects] = useState(0);
   const [animatedGraduates, setAnimatedGraduates] = useState(0);
   const statsRef = useRef(null);
-
-  // Intersection Observer로 화면에 보이는지 감지
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    //요소가 실제로 있을 때 감시 시작
-    if (statsRef.current) {
-      observer.observe(statsRef.current);
-    }
-
-    //감시 종료(cleanup)
-    return () => {
-      if (statsRef.current) {
-        observer.unobserve(statsRef.current);
-      }
-    };
-  }, []);
+  const isVisible = useIntersectionObserver(statsRef);
 
   // 카운트 업 애니메이션
   useEffect(() => {
