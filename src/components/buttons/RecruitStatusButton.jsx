@@ -70,7 +70,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         setRecruitStatus(status);
       } catch (e) {
         console.log("API 조회 실패, default 상태 사용");
-        setRecruitStatus("RECRUITING");
+        setRecruitStatus("BEFORE");
       }
     };
 
