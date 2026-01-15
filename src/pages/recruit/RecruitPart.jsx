@@ -8,7 +8,7 @@ const RecruitPart = () => {
     const isMobile = useIsMobile();
     
     const handleClick = (partValue) => {
-        navigate("/recruit/apply", { state: { part: partValue } });
+        navigate("/recruit/apply/form", { state: { part: partValue } });
     }; 
 
   return (
@@ -197,7 +197,7 @@ const Card = styled.button`
   transition: all 0.2s ease;
 
   &:hover {
-    filter: brightness(0.97);
+    filter: brightness(0.9);
   }
 
   img {

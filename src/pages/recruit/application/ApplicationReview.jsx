@@ -2,14 +2,14 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../../components/Input";
+import Input from "../../../components/Input";
 
 import {
   SelectedRadio,
   UnselectedRadio,
-} from "../../components/buttons/SelectionButtons";
+} from "../../../components/buttons/SelectionButtons";
 
-import { TimeSelected } from "../../components/buttons/TimeButtons";
+import { TimeSelected } from "../../../components/buttons/TimeButtons";
 
 const MIN_TEXTAREA_HEIGHT = 266;
 const SUBMIT_BOTTOM_GAP = 160;

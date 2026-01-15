@@ -3,9 +3,9 @@ import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../../components/Input";
-import Dropdown2 from "../../components/dropdown/Dropdown2";
-import Dropdown3 from "../../components/dropdown/Dropdown3";
+import Input from "../../../components/Input";
+import Dropdown2 from "../../../components/dropdown/Dropdown2";
+import Dropdown3 from "../../../components/dropdown/Dropdown3";
 import { api, ApplicationsAPI } from "@/apis";
 import { useIsMobile } from "@/hooks";
 
@@ -16,9 +16,9 @@ import {
   UnselectNegativeButton,
   SelectedRadio,
   UnselectedRadio,
-} from "../../components/buttons/SelectionButtons";
-import { TimeAbled, TimeSelected } from "../../components/buttons/TimeButtons";
-import { Modal } from "../../components/Modal.jsx";
+} from "../../../components/buttons/SelectionButtons";
+import { TimeAbled, TimeSelected } from "../../../components/buttons/TimeButtons";
+import { Modal } from "../../../components/Modal.jsx";
 
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
 
