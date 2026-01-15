@@ -1,6 +1,6 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import Layout from "./layouts/layout.jsx";
-import LayoutAdmin from "./layouts/adminlayout.jsx";
+import Layout from "./layouts/Layout.jsx";
+import LayoutAdmin from "./layouts/AdminLayout.jsx";
 import Home from "./pages/home/Home";
 import Project from "./pages/project/Project.jsx";
 import ProjectDetail from "./pages/project/ProjectDetail.jsx";

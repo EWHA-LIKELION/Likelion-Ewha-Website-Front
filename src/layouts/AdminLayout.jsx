@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/navigation/sidebar.jsx";
+import Sidebar from "../components/navigation/Sidebar.jsx";
 
 const LayoutAdmin = () => {
   return (
