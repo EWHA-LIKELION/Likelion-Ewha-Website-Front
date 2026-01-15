@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../Modal";
 import { RecruitAPI } from "@/apis";
-import { useGeneration } from "@/hooks";
+import { CURRENT_GENERATION } from "@/config/siteConfig";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
@@ -49,7 +49,6 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   // 1. 상태 및 로직 관리
   // 상태: "BEFORE" | "RECRUITING" | "CLOSED" | "FIRST_RESULT" | "FINAL_RESULT"
   const [recruitStatus, setRecruitStatus] = useState(null);
-  const generation = useGeneration();
 
   const navigate = useNavigate();
 
@@ -71,7 +70,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         setRecruitStatus(status);
       } catch (e) {
         console.log("API 조회 실패, default 상태 사용");
-        setRecruitStatus("BEFORE");
+        setRecruitStatus("RECRUITING");
       }
     };
 
@@ -83,8 +82,8 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
     navigate("/recruit");
   };
 
-  const goApplyForm = () => {
-    navigate("/recruit/apply/form");
+  const goApply = () => {
+    navigate("/recruit/apply");
   };
 
   const goResultPage = () => {
@@ -101,8 +100,12 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
     setIsAlarmModalOpen(true);
   };
 
-  const goKakaoChannel = () => {
+  const goKakaoChannelFriend = () => {
     window.open("https://pf.kakao.com/_htxexfd/friend", "_blank");
+  };
+
+  const goKakaoChannel = () => {
+    window.open("https://pf.kakao.com/_htxexfd", "_blank");
   };
 
   const handleCheckCode = () => {
@@ -140,6 +143,23 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   };
   const modalContent = getModalText();
 
+  // 모집 상태에 따른 description 텍스트
+  const getDescriptionText = () => {
+    switch (recruitStatus) {
+      case "RECRUITING":
+        return `멋쟁이사자처럼 이화여대와 함께할 ${CURRENT_GENERATION}기 아기사자를 모집합니다`;
+      case "CLOSED":
+        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      case "FIRST_RESULT":
+        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      case "FINAL_RESULT":
+        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      case "BEFORE":
+      default:
+        return `${CURRENT_GENERATION}기 아기사자 모집이 마감되었습니다`;
+    }
+  };
+
   // 버튼 렌더링
   const renderButton = () => {
     switch (recruitStatus) {
@@ -148,17 +168,17 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         // recruit 페이지: 지원하기 -> /recruit/apply/form
         if (pageType === "recruit") {
           if (recruitStyle === "1") {
-            return <ApplyButton onClick={goApplyForm} />;
+            return <ApplyButton onClick={goApply} />;
           } else {
-            return <ApplyBlackButton onClick={goApplyForm} />;
+            return <ApplyBlackButton onClick={goApply} />;
           }
         } else {
-          return <RecruitInfoButton generation={generation} onClick={goRecruitPage} />;
+          return <RecruitInfoButton generation={CURRENT_GENERATION} onClick={goRecruitPage} />;
         }
       }
 
       case "CLOSED":
-        return <RecruitDisabledButton generation={generation} />;
+        return <RecruitDisabledButton generation={CURRENT_GENERATION} />;
 
       case "FIRST_RESULT":
       case "FINAL_RESULT": {
@@ -174,12 +194,18 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       }
       case "BEFORE":
       default:
-        return <RecruitAlarmButton generation={generation} onClick={openAlarmModal} />;
+        //아직 CURRENT_GENERATION 값이 갱신 되기 전 띄우는 버튼이기 때문에 +1 처리
+        return <RecruitAlarmButton generation={CURRENT_GENERATION+1} onClick={openAlarmModal} />;
     }
   };
 
   return (
     <Wrapper>
+      {/* recruit 페이지일 때 description 표시 */}
+      {pageType === "recruit" && recruitStyle === "1" && (
+        <Description>{getDescriptionText()}</Description>
+      )}
+
       {/* 1. 버튼 영역 */}
       <ButtonContainer>{renderButton()}</ButtonContainer>
 
@@ -195,7 +221,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         open={isAlarmModalOpen}
         onClose={() => setIsAlarmModalOpen(false)}
         type="info"
-        title={generation ? `${generation}기 모집 사전 알림 등록` : "모집 사전 알림 등록"}
+        title={CURRENT_GENERATION ? `${CURRENT_GENERATION}기 모집 사전 알림 등록` : "모집 사전 알림 등록"}
         description={
           "이화여대 멋쟁이사자처럼 카카오톡 채널을 친구 추가하시면,\n모집 시작 시 바로 알려드릴게요."
         }
@@ -205,7 +231,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
             label: "카카오톡 바로가기",
             variant: "primary",
             fullWidth: true,
-            onClick: goKakaoChannel,
+            onClick: goKakaoChannelFriend,
           },
         ]}
       />
@@ -267,6 +293,23 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+`;
+
+const Description = styled.p`
+  color: var(--Atomic-Cool-Neutral-98, var(--cool-neutral-98, #F4F4F5));
+  text-align: center;
+  font-family: "Cafe24 PRO Slim";
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 2.625rem;
+  margin: 1.5rem 0 5rem 0;
+
+  @media (max-width: 799px) {
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    margin: 0.12rem 0 2rem 0;
+    color: var(--static-white, #FFF);
+  }
 `;
 
 const ButtonContainer = styled.div`
