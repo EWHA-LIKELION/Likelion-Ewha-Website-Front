@@ -47,14 +47,17 @@ const getRecruitStatus = (schedule) => {
 
 const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   // 1. 상태 및 로직 관리
-  // 상태: "BEFORE" | "RECRUITING" | "CLOSED" | "FIRST_RESULT" | "FINAL_RESULT"
-  const [recruitStatus, setRecruitStatus] = useState(null);
+  // 상태: "DEFAULT" | "BEFORE" | "RECRUITING" | "CLOSED" | "FIRST_RESULT" | "FINAL_RESULT"
+  const [recruitStatus, setRecruitStatus] = useState("DEFAULT");
 
   const navigate = useNavigate();
 
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  // "RESULT" | "VIEW"
+  const [codeModalType, setCodeModalType] = useState(null);
+
   const [codeValue, setCodeValue] = useState("");
 
   // API로부터 모집 일정 가져오기
@@ -69,8 +72,8 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
 
         setRecruitStatus(status);
       } catch (e) {
-        console.log("API 조회 실패, default 상태 사용");
-        setRecruitStatus("BEFORE");
+        console.log("default 상태");
+        setRecruitStatus("DEFAULT");
       }
     };
 
@@ -86,13 +89,17 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
     navigate("/recruit/apply");
   };
 
-  const goResultPage = () => {
-    navigate("/recruit/result");
-  };
-
-  const openCodeModal = (e) => {
+  const openResultCodeModal = (e) => {
     e.preventDefault();
     setCodeValue("");
+    setCodeModalType("RESULT");
+    setIsCodeModalOpen(true);
+  };
+
+  const openViewCodeModal = (e) => {
+    e.preventDefault();
+    setCodeValue("");
+    setCodeModalType("VIEW");
     setIsCodeModalOpen(true);
   };
 
@@ -111,37 +118,49 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   const handleCheckCode = () => {
     if (codeValue.trim() === "") return;
 
-    // [테스트 로직] 실패 가정
+    // [테스트 로직] ‼️추후 삭제
     const isUserFound = false;
 
+    // 공통 실패 처리
     if (!isUserFound) {
       setIsCodeModalOpen(false);
       setIsErrorModalOpen(true);
-    } else {
-      alert("확인되었습니다!");
-      setIsCodeModalOpen(false);
+      return;
     }
+
+    // --- 성공 시 분기 ---
+    if (codeModalType === "RESULT") {
+      // 합격 여부 조회 성공
+      alert("합격 여부가 확인되었습니다!");
+      // 👉 나중에: navigate("/recruit/result", { state: { code: codeValue } })
+    }
+
+    if (codeModalType === "VIEW") {
+      // 지원서 열람 성공
+      alert("지원서를 불러왔습니다!");
+      // 👉 나중에: navigate("/recruit/application", { state: { code: codeValue } })
+    }
+
+    setIsCodeModalOpen(false);
   };
 
   // --- 텍스트/버튼 결정 헬퍼 ---
-  const getModalText = () => {
-    switch (recruitStatus) {
-      case "FIRST_RESULT":
-      case "FINAL_RESULT":
-        return {
-          title: "지원 코드 입력",
-          description:
-            "합격 여부를 확인하기 위해\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
-        };
-      default:
-        return {
-          title: "지원 코드 입력",
-          description:
-            "지원서를 열람하기 위해서\n지원서 작성시에 발급받은 지원 코드가 필요해요.",
-        };
+  const getCodeModalText = () => {
+    if (codeModalType === "RESULT") {
+      return {
+        title: "지원 코드 입력",
+        description:
+          "합격 여부를 확인하기 위해\n지원서 작성 시 발급받은 지원 코드가 필요해요.",
+      };
     }
+
+    return {
+      title: "지원 코드 입력",
+      description:
+        "지원서를 열람하기 위해\n지원서 작성 시 발급받은 지원 코드가 필요해요.",
+    };
   };
-  const modalContent = getModalText();
+  const codeModalContent = getCodeModalText();
 
   // 모집 상태에 따른 description 텍스트
   const getDescriptionText = () => {
@@ -155,6 +174,8 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       case "FINAL_RESULT":
         return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
       case "BEFORE":
+        return `${CURRENT_GENERATION - 1}기 아기사자 모집이 마감되었습니다`;
+      case "DEFAULT":
       default:
         return `${CURRENT_GENERATION}기 아기사자 모집이 마감되었습니다`;
     }
@@ -173,7 +194,12 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
             return <ApplyBlackButton onClick={goApply} />;
           }
         } else {
-          return <RecruitInfoButton generation={CURRENT_GENERATION} onClick={goRecruitPage} />;
+          return (
+            <RecruitInfoButton
+              generation={CURRENT_GENERATION}
+              onClick={goRecruitPage}
+            />
+          );
         }
       }
 
@@ -187,15 +213,27 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
             ? "1차 합격자 조회"
             : "최종 합격자 조회";
         return (
-          <RecruitCheckButton onClick={goResultPage}>
+          <RecruitCheckButton onClick={openResultCodeModal}>
             {btnText}
           </RecruitCheckButton>
         );
       }
       case "BEFORE":
+        return (
+          <RecruitAlarmButton
+            generation={CURRENT_GENERATION}
+            onClick={openAlarmModal}
+          />
+        );
+      case "DEFAULT":
       default:
         //아직 CURRENT_GENERATION 값이 갱신 되기 전 띄우는 버튼이기 때문에 +1 처리
-        return <RecruitAlarmButton generation={CURRENT_GENERATION+1} onClick={openAlarmModal} />;
+        return (
+          <RecruitAlarmButton
+            generation={CURRENT_GENERATION + 1}
+            onClick={openAlarmModal}
+          />
+        );
     }
   };
 
@@ -210,8 +248,13 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       <ButtonContainer>{renderButton()}</ButtonContainer>
 
       {/* 2. 하단 텍스트 링크 (상태에 따라 표시) */}
-      {recruitStatus !== "BEFORE" && (
-        <SubLink href="#" onClick={openCodeModal} $pageType={pageType} $recruitStyle={recruitStyle}>
+      {recruitStatus !== "BEFORE" && recruitStatus !== "DEFAULT" && (
+        <SubLink
+          href="#"
+          onClick={openViewCodeModal}
+          $pageType={pageType}
+          $recruitStyle={recruitStyle}
+        >
           지원서를 제출하셨나요? <u>지원서 열람하기</u>
         </SubLink>
       )}
@@ -221,7 +264,11 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         open={isAlarmModalOpen}
         onClose={() => setIsAlarmModalOpen(false)}
         type="info"
-        title={CURRENT_GENERATION ? `${CURRENT_GENERATION}기 모집 사전 알림 등록` : "모집 사전 알림 등록"}
+        title={
+          CURRENT_GENERATION
+            ? `${recruitStatus === "BEFORE" ? CURRENT_GENERATION : CURRENT_GENERATION + 1}기 모집 사전 알림 등록`
+            : "모집 사전 알림 등록"
+        }
         description={
           "이화여대 멋쟁이사자처럼 카카오톡 채널을 친구 추가하시면,\n모집 시작 시 바로 알려드릴게요."
         }
@@ -241,8 +288,8 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         open={isCodeModalOpen}
         onClose={() => setIsCodeModalOpen(false)}
         type="form"
-        title={modalContent.title}
-        description={modalContent.description}
+        title={codeModalContent.title}
+        description={codeModalContent.description}
         align="left"
         input={{
           value: codeValue,
@@ -296,7 +343,7 @@ const Wrapper = styled.div`
 `;
 
 const Description = styled.p`
-  color: var(--Atomic-Cool-Neutral-98, var(--cool-neutral-98, #F4F4F5));
+  color: var(--Atomic-Cool-Neutral-98, var(--cool-neutral-98, #f4f4f5));
   text-align: center;
   font-family: "Cafe24 PRO Slim";
   font-size: 1.875rem;
@@ -308,7 +355,7 @@ const Description = styled.p`
     font-size: 0.875rem;
     line-height: 1.375rem;
     margin: 0.12rem 0 2rem 0;
-    color: var(--static-white, #FFF);
+    color: var(--static-white, #fff);
   }
 `;
 
@@ -327,7 +374,8 @@ const SubLink = styled.a`
     }
     return "var(--neutral-40)";
   }};
-  font-size: ${({ $pageType }) => ($pageType === "recruit" ? "1rem" : "0.9rem")};
+  font-size: ${({ $pageType }) =>
+    $pageType === "recruit" ? "1rem" : "0.9rem"};
   text-decoration: none;
   cursor: pointer;
   font-family: Pretendard;
