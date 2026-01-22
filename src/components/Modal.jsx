@@ -101,7 +101,7 @@ export function BaseModal({
         {children}
       </Dialog>
     </Overlay>,
-    portalEl
+    portalEl,
   );
 }
 
@@ -350,7 +350,9 @@ const Dialog = styled.div`
   background: var(--common-100);
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 0 1px rgba(24, 24, 27, 0.3), 0 8px 16px rgba(24, 24, 27, 0.1);
+  box-shadow:
+    0 0 1px rgba(24, 24, 27, 0.3),
+    0 8px 16px rgba(24, 24, 27, 0.1);
 
   /* image-only(media)면 카드(흰 배경) 제거 */
   &[data-media="true"] {
@@ -436,9 +438,10 @@ const Desc = styled.p`
   margin: 0;
   color: var(--neutral-50);
   word-break: keep-all;
+  white-space: pre-line;
 
   transition: all 0.2s ease;
-  
+
   @media (max-width: 799px) {
     font-size: 0.875rem;
     line-height: 1.375rem;
@@ -702,15 +705,15 @@ const ActionBtn = styled.button`
       $variant === "primary"
         ? "var(--primary-main)"
         : $variant === "danger"
-        ? "var(--red-50)"
-        : "var(--neutral-95)"};
+          ? "var(--red-50)"
+          : "var(--neutral-95)"};
 
   background: ${({ $variant }) =>
     $variant === "primary"
       ? "var(--primary-main)"
       : $variant === "danger"
-      ? "var(--red-50)"
-      : "var(--common-100)"};
+        ? "var(--red-50)"
+        : "var(--common-100)"};
 
   color: ${({ $variant }) =>
     $variant === "primary" || $variant === "danger"
@@ -769,15 +772,15 @@ const ActionLink = styled.a`
       $variant === "primary"
         ? "var(--primary-main)"
         : $variant === "danger"
-        ? "var(--red-50)"
-        : "var(--neutral-95)"};
+          ? "var(--red-50)"
+          : "var(--neutral-95)"};
 
   background: ${({ $variant }) =>
     $variant === "primary"
       ? "var(--primary-main)"
       : $variant === "danger"
-      ? "var(--red-50)"
-      : "var(--common-100)"};
+        ? "var(--red-50)"
+        : "var(--common-100)"};
 
   color: ${({ $variant }) =>
     $variant === "primary" || $variant === "danger"
