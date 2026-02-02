@@ -94,7 +94,7 @@ const RecruitBasicInfo = () => {
 
               <ScheduleCard $variant={4}>
                 <Step>04</Step>
-                <CardTitle>최종 결과 발표</CardTitle>
+                <CardTitle>최종 합격자 발표</CardTitle>
                 <CardDesc>{formatDate(schedule.final_result_start)}</CardDesc>
               </ScheduleCard>
             </ScheduleCards>
