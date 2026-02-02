@@ -493,6 +493,7 @@ const TargetGrid = styled.div`
 
 const TargetItem = styled.div`
   text-align: left;
+  width: 100%;
 
   h3 {
     color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #ff7b2e));
