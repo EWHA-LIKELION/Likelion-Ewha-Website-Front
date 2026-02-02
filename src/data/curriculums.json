@@ -9,40 +9,40 @@
       {
         "sessionNum": "공통",
         "sessionTitle": "웹개발개론 & HTML 기초 & Figma 기초",
-        "sessionDescription": "웹 서비스의 전체 구조를 이해하고, 기획·디자인 협업을 위한 기본 개발·디자인 도구를 익힙니다."
+        "sessionDescription": "웹이 무엇인지 그리고 어떻게 웹을 개발하는지 전체적인 흐름을 살펴보고, 웹 개발 프로젝트 협업을 위한 디자인 도구 Figma 사용법을 익힙니다."
       },
       {
         "sessionNum": "1st",
-        "sessionTitle": "아이디에이션 & 리서치",
-        "sessionDescription": "아이디어 도출 기법과 데스크 리서치, 유저 리서치를 통해 문제를 정의하고 인사이트를 도출합니다."
+        "sessionTitle": "아이디에이션 & 데스크 리서치 & 유저 리서치",
+        "sessionDescription": "데스크 리서치, 유저 리서치를 통해 문제를 정의하고 아이디어를 도출합니다."
       },
       {
         "sessionNum": "2nd",
         "sessionTitle": "IA & 기능명세서",
-        "sessionDescription": "정보구조도(IA)와 기능명세서를 작성하며 서비스 구조를 논리적으로 설계합니다."
+        "sessionDescription": "정보구조도(IA)와 기능명세서를 작성하여 서비스 구조를 구체화합니다."
       },
       {
         "sessionNum": "3rd",
         "sessionTitle": "Figma 심화 & 화면설계서",
-        "sessionDescription": "오토레이아웃과 컴포넌트를 활용해 실제 구현을 고려한 화면설계서를 제작합니다."
+        "sessionDescription": "Auto Layout, Component 등의 Figma 기능을 활용하여 기능 구현을 고려한 화면설계서를 제작합니다."
       },
       {
         "sessionNum": "4th",
-        "sessionTitle": "디자인 시스템 & GUI",
-        "sessionDescription": "디자인 시스템과 컴포넌트 정의서를 기반으로 일관된 UI와 GUI를 구축합니다."
+        "sessionTitle": "디자인 시스템 & 컴포넌트 정의서 & GUI",
+        "sessionDescription": "디자인 시스템과 컴포넌트 정의서를 기반으로 GUI를 디자인합니다."
       },
       {
         "sessionNum": "5th",
-        "sessionTitle": "기획서 작성",
+        "sessionTitle": "기획서",
         "sessionDescription": "서비스 배경, 문제 정의, 해결 방안, 기대 효과를 담은 설득력 있는 기획서를 완성합니다."
       },
       {
         "sessionNum": "6th",
-        "sessionTitle": "프로토타이핑 & 반응형·다크모드",
-        "sessionDescription": "프로토타입을 제작하고, 반응형·다크 모드를 고려한 사용자 경험을 설계합니다."
+        "sessionTitle": "프로토타이핑 & 반응형 & 다크 모드",
+        "sessionDescription": "Figma에서 프로토타이핑, 반응형, 다크 모드를 디자인할 때 효과적으로 활용할 수 있는 기능을 소개합니다."
       }
-    ]
-  },
+]
+},
   "feCurriculum": {
     "title": "프론트엔드",
     "subTitle": "Frontend Developer",
