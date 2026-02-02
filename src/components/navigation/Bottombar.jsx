@@ -35,9 +35,6 @@ const BottomBar = () => {
             <SocialLink href="https://pf.kakao.com/_htxexfd">
               <img src="/icons/kakaotalk.svg" alt="KakaoTalk" />
             </SocialLink>
-            <SocialLink href="https://linktr.ee/likelion.ewha">
-              <img src="/icons/linktree.svg" alt="Linktree" />
-            </SocialLink>
           </SocialRow>
 
           <BottomLine>
@@ -82,7 +79,6 @@ const Inner = styled.div`
     align-items: center;
   }
 `;
-
 
 const TopRow = styled.div`
   display: flex;

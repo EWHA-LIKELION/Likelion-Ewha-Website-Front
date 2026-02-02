@@ -6,8 +6,10 @@
 // ============================================
 // 기본 정보
 // ============================================
-export const DISPLAY_YEAR = 2025; // 표시할 기준 연도 (매년 수정 필요)
+export const DISPLAY_YEAR = 2026; // 표시할 기준 연도 (매년 수정 필요)
 export const CURRENT_GENERATION = DISPLAY_YEAR - 2012; // 현재 모집 기수 자동 계산 (2025년 = 13기)
+export const PREVIOUS_GENERATION = CURRENT_GENERATION - 1; // 이전 기수
+export const NEXT_GENERATION = CURRENT_GENERATION + 1; // 다음 기수
 
 // ============================================
 // 멋쟁이사자처럼 대학 (전국 연합)
@@ -27,14 +29,12 @@ export const STATS = {
 };
 
 // ============================================
-// 직전 기수 정보 (FAQ 등에서 사용)
+// FAQ에서 사용하는 정보
 // ============================================
-export const PREV_GENERATION_INFO = {
-  totalMembers: 17, // 직전 기수 총 인원
-  nonMajorMembers: 11, // 직전 기수 비전공자 수
-  pmDesignMembers: 6, // 직전 기수 기획디자인 파트 인원
-  frontendMembers: 5, // 직전 기수 프론트엔드 파트 인원
-  backendMembers: 6, // 직전 기수 백엔드 파트 인원
+export const FAQ_INFO = {
+  totalUniv: 81, // 올해 멋사 참여 대학 수
+  totalMembers: 18, // 직전 기수 총 인원
+  nonMajorMembers: 8, // 직전 기수 비전공자 수
 };
 
 // ============================================
@@ -43,14 +43,14 @@ export const PREV_GENERATION_INFO = {
 // Default 상태(백엔드 서버 꺼놓음)시 표시할 기본 모집 일정
 // ⚠️ 매년 업데이트 필요
 export const FALLBACK_SCHEDULE = {
-    year: 2025,
-    generation: 13,
-    application_start: "2025-02-22T00:00:00+09:00",
-    application_end: "2025-03-03T23:59:59+09:00",
-    first_result_start: "2025-03-05T00:00:00+09:00",
-    first_result_end: "2025-03-05T23:59:59+09:00",
-    interview_start: "2025-03-06",
-    interview_end: "2025-03-08",
-    final_result_start: "2025-03-10T00:00:00+09:00",
-    final_result_end: "2025-03-10T23:59:59+09:00"
+  year: 2026,
+  generation: 14,
+  application_start: "2026-02-09T00:00:00+09:00",
+  application_end: "2026-02-19T23:59:59+09:00",
+  first_result_start: "2026-02-22T17:00:00+09:00",
+  first_result_end: "2026-02-28T16:59:59+09:00",
+  interview_start: "2026-02-24",
+  interview_end: "2026-02-26",
+  final_result_start: "2026-02-28T17:00:00+09:00",
+  final_result_end: "2026-03-03T18:30:00+09:00",
 };
