@@ -80,7 +80,7 @@ const RecruitBasicInfo = () => {
 
               <ScheduleCard $variant={2}>
                 <Step>02</Step>
-                <CardTitle>1차 결과 발표</CardTitle>
+                <CardTitle>1차 합격자 발표</CardTitle>
                 <CardDesc>{formatDate(schedule.first_result_start)}</CardDesc>
               </ScheduleCard>
 
