@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../Modal";
 import { RecruitAPI } from "@/apis";
-import { CURRENT_GENERATION, NEXT_GENERATION, FALLBACK_SCHEDULE } from "@/config/siteConfig";
+import {
+  CURRENT_GENERATION,
+  NEXT_GENERATION,
+  FALLBACK_SCHEDULE,
+} from "@/config/siteConfig";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
@@ -171,19 +175,22 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   // 모집 상태에 따른 description 텍스트
   const getDescriptionText = () => {
     switch (recruitStatus) {
-      case "RECRUITING":
-        return `이화여자대학교 멋쟁이사자처럼과 함께할 아기사자를 모집합니다`;
-      case "CLOSED":
-        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
-      case "FIRST_RESULT":
-        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
-      case "FINAL_RESULT":
-        return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
-      case "BEFORE":
-        return `${CURRENT_GENERATION - 1}기 아기사자 모집이 마감되었습니다`;
-      case "DEFAULT":
+      // case "RECRUITING":
+      //   return `이화여자대학교 멋쟁이사자처럼과 함께할 아기사자를 모집합니다`;
+      // case "CLOSED":
+      //   return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      // case "FIRST_RESULT":
+      //   return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      // case "FINAL_RESULT":
+      //   return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
+      // case "BEFORE":
+      //   return `${CURRENT_GENERATION - 1}기 아기사자 모집이 마감되었습니다`;
+      // case "DEFAULT":
+      // default:
+      //   return `${CURRENT_GENERATION}기 아기사자 모집이 마감되었습니다`;
+
       default:
-        return `${CURRENT_GENERATION}기 아기사자 모집이 마감되었습니다`;
+        return `이화여자대학교 멋쟁이사자처럼과 함께할 아기사자를 모집합니다`;
     }
   };
 
