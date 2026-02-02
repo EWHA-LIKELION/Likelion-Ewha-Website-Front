@@ -55,9 +55,9 @@ export const getFaqData = () => {
 },
     {
       id: 7,
-      question: "최종 아기사자는 몇 명이 선발되나요?",
-      answer: `선발 인원수는 정해진 사항이 없습니다. 다만 ${prevGeneration}기의 경우 기획디자인 파트 ${prevPmDesignMembers}명/프론트엔드 ${prevFrontendMembers}명/백엔드 ${prevBackendMembers}명으로 구성되었으며 ${generation}기 역시 큰 변화가 없는 선에서 상황에 따라 지난 기수와 동일하거나 더 많은 인원을 선발할 가능성이 있습니다.`,
-    },
+      question: "아기사자는 몇 명을 선발하나요?",
+      answer: "파트별로 6명씩, 총 18명을 선발합니다.",
+},
     {
       id: 8,
       question: `${generation}기 운영진 모집은 진행하지 않나요?`,
