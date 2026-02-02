@@ -60,9 +60,9 @@ export const getFaqData = () => {
 },
     {
       id: 8,
-      question: `${generation}기 운영진 모집은 진행하지 않나요?`,
-      answer: `이번 기수는 아기사자만 모집하고 있습니다.\n${nextGeneration}기 운영진 모집 여부는 ${generation}기 아기사자 내부에서 운영진을 지원하는 인원과 내부 협의 등을 통해 결정될 예정입니다.\n*이대 멋사는 아기사자 안에서 우선적으로 다음 기수의 운영진을 모집합니다.`,
-    },
+      question: `${generation}기 운영진은 모집하지 않나요?`,
+      answer: `${generation}기는 아기사자만 모집합니다.\n${nextGeneration}기 운영진 외부 모집은 ${generation}기 아기사자 중 먼저 운영진을 선발한 후 내부 논의를 거쳐 결정합니다.`,
+},
     {
       id: 9,
       question: "2학기에도 신입부원을 모집하나요?",
