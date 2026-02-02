@@ -131,7 +131,7 @@ const RecruitDetailInfo = () => {
         <FAQInner>
           <FAQTitleArea>
             <img src="/icons/ellipse4.svg" alt="icon" />
-            <h2>자주 묻는 질문들</h2>
+            <h2>자주 묻는 질문</h2>
           </FAQTitleArea>
 
           <FAQList>
