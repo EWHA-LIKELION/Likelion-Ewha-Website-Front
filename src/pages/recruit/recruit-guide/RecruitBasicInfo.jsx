@@ -129,7 +129,7 @@ const RecruitBasicInfo = () => {
             </TargetItem>
 
             <TargetItem>
-              <h3>1학기 활동</h3>
+              <h3>수료 조건</h3>
               <p>다음 조건을 모두 충족해야 아기사자 수료증이 발급됩니다.</p>
               <span className="highlight-notice">
                 * 2026.03.-2026.12. 1년 활동
