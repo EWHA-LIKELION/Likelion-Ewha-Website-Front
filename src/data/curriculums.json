@@ -53,57 +53,57 @@
       {
         "sessionNum": "공통",
         "sessionTitle": "웹개발개론 & HTML 기초 & Figma 기초",
-        "sessionDescription": "웹의 동작 원리와 화면 구조를 이해하고, 디자인 협업을 위한 기초 역량을 다집니다."
+        "sessionDescription": "웹이 무엇인지 그리고 어떻게 웹을 개발하는지 전체적인 흐름을 살펴보고, 웹 개발 프로젝트 협업을 위한 디자인 도구 Figma 사용법을 익힙니다."
+      },
+      {
+        "sessionNum": "공통",
+        "sessionTitle": "Git & GitHub",
+        "sessionDescription": "버전 관리와 협업을 위한 Git, GitHub 사용법을 익힙니다."
       },
       {
         "sessionNum": "1st",
-        "sessionTitle": "Git & GitHub",
-        "sessionDescription": "버전 관리와 협업을 위한 Git/GitHub 사용법을 익힙니다."
-      },
-      {
-        "sessionNum": "2nd",
         "sessionTitle": "HTML & CSS 심화",
         "sessionDescription": "flex와 grid, 반응형 웹을 활용하여 다양한 해상도에서도 일관된 사용자 경험을 제공하는 화면을 구현합니다."
       },
       {
-        "sessionNum": "3rd",
+        "sessionNum": "2nd",
         "sessionTitle": "JavaScript 기초",
         "sessionDescription": "변수, 함수, 조건문, 반복문을 학습하고 기본적인 동적 기능을 구현합니다."
       },
       {
-        "sessionNum": "4th",
+        "sessionNum": "3rd",
         "sessionTitle": "JavaScript 심화",
         "sessionDescription": "비동기 처리와 구조화된 로직을 통해 복잡한 인터랙션을 구현합니다."
       },
       {
-        "sessionNum": "5th",
+        "sessionNum": "4th",
         "sessionTitle": "React 입문",
         "sessionDescription": "Vite 기반 프로젝트 환경을 설정하고 컴포넌트 중심의 마크업을 학습합니다."
       },
       {
-        "sessionNum": "6th",
+        "sessionNum": "5th",
         "sessionTitle": "Hooks & Routing",
-        "sessionDescription": "React Hooks와 라우팅을 활용해 상태 중심의 화면 전환을 구현합니다."
+        "sessionDescription": "지역 상태 관리, 메모이제이션 등 React 심화 개념을 배우고, React-Rounter을 활용하여 효율적인 화면 전환을 구현합니다."
+      },
+      {
+        "sessionNum": "6th",
+        "sessionTitle": "Tailwind CSS",
+        "sessionDescription": "유틸리티 기반 스타일링을 학습하고, 재사용성과 일관성을 고려한 UI 개발을 익힙니다."
       },
       {
         "sessionNum": "7th",
-        "sessionTitle": "Tailwind CSS",
-        "sessionDescription": "유틸리티 기반 스타일링을 학습하고, 재사용성과 일관성을 고려한 UI 개발 방식을 익힙니다."
-      },
-      {
-        "sessionNum": "8th",
         "sessionTitle": "전역 상태 관리",
         "sessionDescription": "Context API, Redux, Zustand를 비교·활용하며 상태 관리 흐름을 이해합니다."
       },
       {
-        "sessionNum": "9th",
+        "sessionNum": "8th",
         "sessionTitle": "API 연동 (Axios)",
-        "sessionDescription": "서버와 통신하며 CRUD 기반의 데이터 중심 화면을 구현합니다."
+        "sessionDescription": "백엔드 서버와 통신하며 CRUD 기반의 데이터 중심 화면을 구현합니다."
       },
       {
-        "sessionNum": "10th",
+        "sessionNum": "9th",
         "sessionTitle": "예외 처리 & 배포",
-        "sessionDescription": "에러 처리와 함께 Vercel, Netlify, GitHub Pages, AWS 환경에서 서비스를 배포합니다."
+        "sessionDescription": "클라이언트 및 서버 예외를 처리하고, Vercel·Netlify·GitHub Pages·AWS로 프론트엔드 서버를 배포합니다."
       }
     ]
   },
