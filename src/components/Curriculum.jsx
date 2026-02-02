@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { curriculums } from "@/data";
+import { useIsMobile } from "@/hooks";
 
 const Curriculum = ({ part = "pm" }) => {
   let curriculum;
@@ -8,74 +9,93 @@ const Curriculum = ({ part = "pm" }) => {
   else if (part === "be") curriculum = curriculums.beCurriculum;
   else curriculum = curriculums.pmCurriculum;
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
+  const isMobile = useIsMobile();
   const [openIndexes, setOpenIndexes] = useState([]);
-    
-  useEffect(() => {
-    const handleResize = () => {
-    setIsMobile(window.innerWidth <= 799);
-    };
-
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     setOpenIndexes([]);
   }, [part]);
 
   const toggleSession = (index) => {
-    setOpenIndexes(prev => 
-      prev.includes(index) 
-        ? prev.filter(i => i !== index) 
-        : [...prev, index]
+    setOpenIndexes((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index],
     );
   };
 
   const { title, subTitle, description, color1, color2, sessions } = curriculum;
-  
+
   return (
     <Grid>
       <PartCard $color1={color1}>
         <Title className={isMobile ? "h5-bold" : "h3-extrabold"}>{title}</Title>
-        <SubTitle className={isMobile ? "footnote-regular" : "h5-regular"}>{subTitle}</SubTitle>
-        <Description className={isMobile ? "footnote-regular" : "h5-medium"}>{description}</Description>
+        <SubTitle className={isMobile ? "footnote-regular" : "h5-regular"}>
+          {subTitle}
+        </SubTitle>
+        <Description className={isMobile ? "footnote-regular" : "h5-medium"}>
+          {description}
+        </Description>
       </PartCard>
       <CurriculumList>
-        {sessions.map(({ sesstioinNum, sessionTitle, "sessionDescription:": sessionDescription }, idx) => {
-          const isOpen = openIndexes.includes(idx);
-          
-          return isMobile ? (
-            <SessionList key={idx}>
-              <SessionNum $color2={color2} className="footnote-extrabold">{sesstioinNum}</SessionNum>
-              <SessionTitle className="footnote-regular">{sessionTitle}</SessionTitle>
-            </SessionList>
-          ) : (
-            <DropdownSession key={idx} $isOpen={isOpen}>
-              <DropdownButton $isOpen={isOpen} onClick={() => toggleSession(idx)}>
-                <SessionContent>
-                  <SessionNum $color2={color2} className="footnote-extrabold">{sesstioinNum}</SessionNum>
-                  <SessionTitle className="h5-regular">{sessionTitle}</SessionTitle>
-                </SessionContent>
-                <ArrowButton $isOpen={isOpen}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none">
-                    <path d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
-                  </svg>
-                </ArrowButton>
-              </DropdownButton>
-              <DescriptionContent $isOpen={isOpen} className="footnote-regular">
-                {sessionDescription}
-              </DescriptionContent>
-            </DropdownSession>
-          );
-        })}
+        {sessions.map(
+          ({ sessionNum, sessionTitle, sessionDescription }, idx) => {
+            const isOpen = openIndexes.includes(idx);
+
+            return isMobile ? (
+              <SessionList key={idx}>
+                <SessionNum $color2={color2} className="footnote-extrabold">
+                  {sessionNum}
+                </SessionNum>
+                <SessionTitle className="footnote-regular">
+                  {sessionTitle}
+                </SessionTitle>
+              </SessionList>
+            ) : (
+              <DropdownSession key={idx} $isOpen={isOpen}>
+                <DropdownButton
+                  $isOpen={isOpen}
+                  onClick={() => toggleSession(idx)}
+                >
+                  <SessionContent>
+                    <SessionNum $color2={color2} className="footnote-extrabold">
+                      {sessionNum}
+                    </SessionNum>
+                    <SessionTitle className="h5-regular">
+                      {sessionTitle}
+                    </SessionTitle>
+                  </SessionContent>
+                  <ArrowButton $isOpen={isOpen}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="10"
+                      viewBox="0 0 18 10"
+                      fill="none"
+                    >
+                      <path
+                        d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031"
+                        stroke="#9B9B9B"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </ArrowButton>
+                </DropdownButton>
+                <DescriptionContent
+                  $isOpen={isOpen}
+                  className="footnote-regular"
+                >
+                  {sessionDescription}
+                </DescriptionContent>
+              </DropdownSession>
+            );
+          },
+        )}
       </CurriculumList>
     </Grid>
   );
-}
+};
 
 export default Curriculum;
-
 
 const Grid = styled.div`
   max-width: 50rem;
@@ -137,14 +157,15 @@ const CurriculumList = styled.div`
   }
 `;
 
-const SessionList = styled.div` /* 모바일 gui에서만 사용 */
+const SessionList = styled.div`
+  /* 모바일 gui에서만 사용 */
   width: 100%;
   display: flex;
   align-items: center;
   padding: 0.5rem 0.62rem;
   gap: 0.5rem;
   white-space: nowrap;
-  
+
   border-radius: 0.25rem;
   border: 1px solid var(--neutral-95);
 `;
@@ -192,7 +213,7 @@ const DropdownSession = styled.div`
 const DropdownButton = styled.button`
   width: 100%;
   padding: 0.75rem 1.25rem;
-  padding-bottom: ${(props) => (props.$isOpen ? '0.5rem' : '0.75rem')};
+  padding-bottom: ${(props) => (props.$isOpen ? "0.5rem" : "0.75rem")};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -215,20 +236,24 @@ const ArrowButton = styled.div`
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  
+
   svg {
     display: block;
-    transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
+    transform: ${(props) =>
+      props.$isOpen ? "rotate(180deg)" : "rotate(0deg)"};
     transition: transform 0.2s ease;
   }
 `;
 
 const DescriptionContent = styled.div`
-  padding: ${(props) => (props.$isOpen ? '0 1.25rem 0.75rem 1.25rem' : '0')};
+  padding: ${(props) => (props.$isOpen ? "0 1.25rem 0.75rem 1.25rem" : "0")};
   color: var(--neutral-50);
   text-align: left;
-  transition: padding 0.2s ease, max-height 0.2s ease, opacity 0.2s ease;
-  max-height: ${(props) => (props.$isOpen ? '1000px' : '0')};
-  opacity: ${(props) => (props.$isOpen ? '1' : '0')};
+  transition:
+    padding 0.2s ease,
+    max-height 0.2s ease,
+    opacity 0.2s ease;
+  max-height: ${(props) => (props.$isOpen ? "1000px" : "0")};
+  opacity: ${(props) => (props.$isOpen ? "1" : "0")};
   overflow: hidden;
 `;
