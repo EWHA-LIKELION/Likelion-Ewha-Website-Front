@@ -100,7 +100,7 @@ export default Curriculum;
 const Grid = styled.div`
   max-width: 50rem;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4.5fr 5fr;
   gap: 1.25rem;
   align-items: start;
 `;
@@ -125,7 +125,6 @@ const PartCard = styled.div`
 const Title = styled.div`
   color: var(--neutral-20);
   margin-bottom: 0.25rem;
-
   white-space: nowrap;
 
   transition: all 0.2s ease;
@@ -164,7 +163,6 @@ const SessionList = styled.div`
   align-items: center;
   padding: 0.5rem 0.62rem;
   gap: 0.5rem;
-  white-space: nowrap;
 
   border-radius: 0.25rem;
   border: 1px solid var(--neutral-95);
@@ -197,6 +195,7 @@ const SessionNum = styled.div`
 
 const SessionTitle = styled.div`
   color: var(--neutral-30);
+  text-align: left;
 
   transition: all 0.2s ease;
 `;
