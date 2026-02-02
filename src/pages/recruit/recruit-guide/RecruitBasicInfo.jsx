@@ -29,49 +29,31 @@ const RecruitBasicInfo = () => {
     fetchRecruitSchedule();
   }, []);
 
-  // 날짜 포맷팅 함수 (2027-01-11T09:00:00+09:00 -> "2027년 01월 11일")
+  // 요일 반환 함수
+  const getDayOfWeek = (date) => {
+    const days = ["일", "월", "화", "수", "목", "금", "토"];
+    return days[date.getDay()];
+  };
+
+  // 날짜 포맷팅 함수 (2027-01-11T09:00:00+09:00 -> "2026.02.09.(월)")
   const formatDate = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
     const day = String(date.getDate()).padStart(2, "0");
-    return `${year}년 ${month}월 ${day}일`;
+    const dayOfWeek = getDayOfWeek(date);
+    return `${year}.${month}.${day}.(${dayOfWeek})`;
   };
 
-  // 날짜만 추출 (2027-01-11 -> "11일")
-  const formatDay = (dateString) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    return `${String(date.getDate()).padStart(2, "0")}일`;
-  };
-
-  // 종료일 포맷팅 (시작일과 월이 같으면 일만, 다르면 월 포함)
-  const formatEndDate = (startDateString, endDateString) => {
-    if (!startDateString || !endDateString) return "";
-    const startDate = new Date(startDateString);
-    const endDate = new Date(endDateString);
-
-    const startMonth = startDate.getMonth();
-    const endMonth = endDate.getMonth();
-
-    const day = String(endDate.getDate()).padStart(2, "0");
-
-    if (startMonth === endMonth) {
-      return `${day}일`;
-    } else {
-      const month = String(endDate.getMonth() + 1).padStart(2, "0");
-      return `${month}월 ${day}일`;
-    }
-  };
-
-  // 시간 포맷팅 (2027-01-18T23:59:59+09:00 -> "23시 59분")
+  // 시간 포맷팅 (2027-01-18T23:59:59+09:00 -> "00:00:00")
   const formatTime = (dateString) => {
     if (!dateString) return "";
     const date = new Date(dateString);
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
-    return `${hours}시 ${minutes}분`;
+    const seconds = String(date.getSeconds()).padStart(2, "0");
+    return `${hours}:${minutes}:${seconds}`;
   };
 
   return (
@@ -90,9 +72,9 @@ const RecruitBasicInfo = () => {
                 <Step>01</Step>
                 <CardTitle>서류 접수</CardTitle>
                 <CardDesc>
-                  {`${formatDate(schedule.application_start)} ~ ${formatEndDate(schedule.application_start, schedule.application_end)}`}
+                  {`${formatDate(schedule.application_start)} ${formatTime(schedule.application_start)}부터`}
                   <br />
-                  (제출 마감일 {formatTime(schedule.application_end)}까지 제출)
+                  {`${formatDate(schedule.application_end)} ${formatTime(schedule.application_end)}까지`}
                 </CardDesc>
               </ScheduleCard>
 
@@ -106,7 +88,7 @@ const RecruitBasicInfo = () => {
                 <Step>03</Step>
                 <CardTitle>면접</CardTitle>
                 <CardDesc>
-                  {`${formatDate(schedule.interview_start)} ~ ${formatEndDate(schedule.interview_start, schedule.interview_end)}`}
+                  {`${formatDate(schedule.interview_start)}-${formatDate(schedule.interview_end)}`}
                 </CardDesc>
               </ScheduleCard>
 
@@ -129,69 +111,49 @@ const RecruitBasicInfo = () => {
           </TargetTitle>
 
           <TargetMainDesc>
-            {`${schedule.year}년도 기준 이화여자대학교 재학생 및 휴학생, 자대 편입생`}
+            이화여자대학교 학부생(재학·휴학·과정수료·졸업유예)
           </TargetMainDesc>
-          <TargetSubDesc>
-            *지원 시 선수강 강의를 수강 완료한 화면 캡쳐본을 제출할 경우
-            가산점이 부여됩니다.
-          </TargetSubDesc>
 
           <TargetGrid>
             <TargetItem>
               <h3>학번 무관! 모든 이화여대 학생</h3>
               <p>
-                {schedule.year}년 기준 모든 이화여자대학교 재학생 및 휴학생,
-                자대
-                <br />
-                편입생은 지원 가능합니다.
+                {schedule.year}년 기준 이화여자대학교 학부
+                재적생(재학·휴학·과정수료·졸업유예)은 모두 지원할 수 있습니다.
+                편입 여부 상관없이 지원 가능합니다.
               </p>
               <span className="small-notice">
-                * 기졸업자({schedule.year}년 2월 졸업 예정자), 타대생은 지원
-                불가
-                <br />* {schedule.year}년 여름 졸업자의 경우 2학기에도 활동을
-                지속한다는 조건
-                <br />
-                하에 지원 가능
+                * 졸업생, 타대생은 지원 불가합니다.
+                <br />* {schedule.year}년 12월까지 학부 재적을 유지해야 합니다.
               </span>
             </TargetItem>
 
             <TargetItem>
               <h3>1학기 활동</h3>
-              <p>
-                아래의 요건을 모두 충족하여 1년 활동을 완료할 경우 수료
-                <br />
-                증이 발급됩니다.
-              </p>
+              <p>다음 조건을 모두 충족해야 아기사자 수료증이 발급됩니다.</p>
               <span className="highlight-notice">
-                4월 말~5월 중 진행되는 아이디어톤 필수 참여
+                * 2026.03.-2026.12. 1년 활동
                 <br />
-                8월 중 오프라인으로 무박 2일간 진행되는 중앙 해커톤 필수 참여
+                * 중앙 아이디어톤(5월) 참여
+                <br />
+                * 중앙 해커톤(7-8월) 참여
+                <br />
+                * 연합/기업 해커톤 1회 이상 참여
+                <br />* 대면 OT 참석
               </span>
-              <span className="small-notice">* 자세한 일정 추후 공지 예정</span>
             </TargetItem>
 
             <TargetItem>
-              <h3>오프라인 세션 참여</h3>
-              <p>
-                매주 화/목 오후 6시 30분에 진행되는 세션에 필수로 참여
-                <br />
-                하실 수 있어야 합니다.
-                <br />
-                따라서 오프라인으로 참여하실 수 있는 인원을 우선적으로
-                <br />
-                모집하고 있습니다.
-              </p>
+              <h3>대면 세션 참여</h3>
+              <p>매주 화·목 18:30-20:30 대면 세션에 필수로 참여해야 합니다.</p>
             </TargetItem>
 
             <TargetItem>
               <h3>활동 비용</h3>
               <p>
-                동아리 물품 구비 및 운영을 위해 최종 합격자는 회비 3만원
-                <br />을 제출하여야합니다.
+                회비는 1년에 3만원이며, 입금 후 그 어떤 사유로도 환불
+                불가능합니다.
               </p>
-              <span className="small-notice">
-                * 인원 수에 따라 조정 가능성 있음
-              </span>
             </TargetItem>
           </TargetGrid>
         </TargetInner>
@@ -397,6 +359,7 @@ const Step = styled.span`
 `;
 
 const CardTitle = styled.h3`
+  margin-bottom: 0.37rem;
   color: #2a2a2a;
   font-family: Pretendard;
   font-size: 1.25rem;
@@ -406,6 +369,7 @@ const CardTitle = styled.h3`
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
+    margin-bottom: 0;
     font-size: 1rem;
     line-height: 1.5rem;
   }
@@ -417,11 +381,13 @@ const CardDesc = styled.p`
   font-size: 0.75rem;
   font-weight: 400;
   line-height: 1.25rem;
+  white-space: nowrap;
 
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
     color: #2a2a2a;
+    white-space: normal;
   }
 `;
 
@@ -487,6 +453,7 @@ const TargetTitle = styled.h2`
 `;
 
 const TargetMainDesc = styled.p`
+  margin-bottom: 6.25rem;
   color: var(--Atomic-Neutral-30, var(--Neutral-30, #474747));
   text-align: center;
   font-family: Pretendard;
@@ -498,29 +465,10 @@ const TargetMainDesc = styled.p`
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
+    margin-bottom: 1.5rem;
     color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
     font-size: 0.875rem;
     line-height: 1.375rem;
-  }
-`;
-
-const TargetSubDesc = styled.p`
-  color: var(--Atomic-Neutral-70, var(--Neutral-70, #9b9b9b));
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.375rem;
-  margin-bottom: 6.25rem;
-
-  transition: all 0.2s ease;
-
-  @media (max-width: 799px) {
-    font-size: 0.75rem;
-    line-height: 1.125rem;
-    margin-bottom: 1.5rem;
-    margin-top: 0.5rem;
   }
 `;
 
