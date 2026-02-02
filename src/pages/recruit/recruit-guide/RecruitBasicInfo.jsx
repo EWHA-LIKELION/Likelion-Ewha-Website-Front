@@ -70,7 +70,7 @@ const RecruitBasicInfo = () => {
             <ScheduleCards>
               <ScheduleCard $variant={1}>
                 <Step>01</Step>
-                <CardTitle>서류 접수</CardTitle>
+                <CardTitle>서류 지원</CardTitle>
                 <CardDesc>
                   {`${formatDate(schedule.application_start)} ${formatTime(schedule.application_start)}부터`}
                   <br />
