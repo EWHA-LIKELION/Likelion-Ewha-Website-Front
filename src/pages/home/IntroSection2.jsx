@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import cloverIcon from "../../../public/icons/clover.svg";
-import { 
-  DISPLAY_YEAR, 
-  OPERATING_YEARS, 
-  EWHA_OPERATING_YEARS, 
-  STATS 
+import {
+  DISPLAY_YEAR,
+  OPERATING_YEARS,
+  EWHA_OPERATING_YEARS,
+  STATS,
+  FAQ_INFO,
 } from "../../config/siteConfig";
 import { useIntersectionObserver } from "@/hooks";
 
@@ -28,7 +29,7 @@ const IntroSection2 = () => {
     const counter = setInterval(() => {
       frame++;
       const progress = frame / totalFrames;
-      
+
       // 작은 숫자는 더 빠르게 (1.5배속), 큰 숫자는 기본 속도
       const fastProgress = Math.min(progress * 1.7, 1); // YEARS용
       const normalProgress = progress; // Projects, Graduates용
@@ -61,8 +62,9 @@ const IntroSection2 = () => {
           </div>
 
           <p className="desc-box">
-            멋쟁이사자처럼 대학은 {DISPLAY_YEAR}년 기준, 전국 53개 대학교에서 {OPERATING_YEARS}년째
-            운영되고 있는
+            멋쟁이사자처럼 대학은 {DISPLAY_YEAR}년 기준, 전국{" "}
+            {FAQ_INFO.totalUniv}개 대학교에서 {OPERATING_YEARS}년째 운영되고
+            있는
             <b> 국내 최대 규모의 연합 IT 동아리</b>입니다. 각 대학의 커리큘럼은
             교내 오프라인 교육 세션과 스터디, LIKELION의 VOD 등으로 구성되어
             있으며, 이를 통해 <b>웹 기획·디자인, 프론트엔드, 백엔드 개발</b>을
@@ -94,25 +96,29 @@ const IntroSection2 = () => {
           <StatsGrid ref={statsRef}>
             <StatItem>
               <h3>
-                {animatedYears}<span>YEARS</span>
+                {animatedYears}
+                <span>YEARS</span>
               </h3>
               <p>이대 멋사가 탄생한지</p>
             </StatItem>
             <StatItem>
               <h3>
-                {animatedProjects}<span>+</span>
+                {animatedProjects}
+                <span>+</span>
               </h3>
               <p>프로젝트 수</p>
             </StatItem>
             <StatItem>
               <h3>
-                {animatedGraduates}<span>+</span>
+                {animatedGraduates}
+                <span>+</span>
               </h3>
               <p>누적 수료 인원</p>
             </StatItem>
             <StatItem>
               <h3>
-                {STATS.recentCompetitionRate}<span>: 1</span>
+                {STATS.recentCompetitionRate}
+                <span>: 1</span>
               </h3>
               <p>최근 경쟁률</p>
             </StatItem>
