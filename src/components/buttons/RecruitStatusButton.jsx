@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../Modal";
 import { RecruitAPI } from "@/apis";
-import { CURRENT_GENERATION, FALLBACK_SCHEDULE } from "@/config/siteConfig";
+import { CURRENT_GENERATION, NEXT_GENERATION, FALLBACK_SCHEDULE } from "@/config/siteConfig";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
@@ -245,7 +245,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         //아직 CURRENT_GENERATION 값이 갱신 되기 전 띄우는 버튼이기 때문에 +1 처리
         return (
           <RecruitAlarmButton
-            generation={CURRENT_GENERATION + 1}
+            generation={NEXT_GENERATION}
             onClick={openAlarmModal}
           />
         );
@@ -299,7 +299,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         type="info"
         title={
           CURRENT_GENERATION
-            ? `${recruitStatus === "BEFORE" ? CURRENT_GENERATION : CURRENT_GENERATION + 1}기 모집 사전 알림 등록`
+            ? `${recruitStatus === "BEFORE" ? CURRENT_GENERATION : NEXT_GENERATION}기 모집 사전 알림 등록`
             : "모집 사전 알림 등록"
         }
         description={

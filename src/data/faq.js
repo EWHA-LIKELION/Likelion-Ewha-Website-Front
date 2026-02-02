@@ -1,22 +1,21 @@
 import {
   DISPLAY_YEAR,
   CURRENT_GENERATION,
+  PREVIOUS_GENERATION,
+  NEXT_GENERATION,
   FAQ_INFO,
 } from "../config/siteConfig";
 
 export const getFaqData = () => {
   const generation = CURRENT_GENERATION;
-  const prevGeneration = CURRENT_GENERATION - 1;
-  const nextGeneration = CURRENT_GENERATION + 1;
+  const prevGeneration = PREVIOUS_GENERATION;
+  const nextGeneration = NEXT_GENERATION;
 
   // 직전 기수 인원 정보
   const {
     totalUniv: totalUniv,
     totalMembers: prevTotalMembers,
     nonMajorMembers: prevNonMajorMembers,
-    pmDesignMembers: prevPmDesignMembers,
-    frontendMembers: prevFrontendMembers,
-    backendMembers: prevBackendMembers,
   } = FAQ_INFO;
 
   return [
@@ -52,23 +51,23 @@ export const getFaqData = () => {
       id: 6,
       question: "세션은 어떻게 진행되나요?",
       answer: `매주 화·목 멋쟁이사자처럼 활동을 위해 시간을 투자하실 수 있는 분을 우대합니다. 기획·디자인 파트는 ECC에서, 프론트엔드 파트와 백엔드 파트는 공학관에서 대면으로 교육 세션을 진행합니다. (토이 프로젝트 세션은 파트별로 논의하여 시간 및 장소를 변경할 수 있으나, 변경될 가능성은 낮습니다.)\n세션 자료는 ${generation}기 운영진이 직접 제작하며, 이론부터 실습, 과제까지 파트별로 잘 학습할 수 있도록 다양한 양질의 자료를 준비하고 있습니다.`,
-},
+    },
     {
       id: 7,
       question: "아기사자는 몇 명을 선발하나요?",
       answer: "파트별로 6명씩, 총 18명을 선발합니다.",
-},
+    },
     {
       id: 8,
       question: `${generation}기 운영진은 모집하지 않나요?`,
       answer: `${generation}기는 아기사자만 모집합니다.\n${nextGeneration}기 운영진 외부 모집은 ${generation}기 아기사자 중 먼저 운영진을 선발한 후 내부 논의를 거쳐 결정합니다.`,
-},
+    },
     {
       id: 9,
       question: "2학기에도 아기사자를 모집하나요?",
       answer:
         "멋쟁이사자처럼은 1년 연속(두 학기 연속) 활동이 원칙이며, 매년 1학기에 아기사자를 모집합니다.",
-},
+    },
     {
       id: 10,
       question: "시험 기간에도 정규 세션에 참여해야 하나요?",

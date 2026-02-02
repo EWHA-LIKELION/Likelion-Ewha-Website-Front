@@ -8,6 +8,8 @@
 // ============================================
 export const DISPLAY_YEAR = 2026; // 표시할 기준 연도 (매년 수정 필요)
 export const CURRENT_GENERATION = DISPLAY_YEAR - 2012; // 현재 모집 기수 자동 계산 (2025년 = 13기)
+export const PREVIOUS_GENERATION = CURRENT_GENERATION - 1; // 이전 기수
+export const NEXT_GENERATION = CURRENT_GENERATION + 1; // 다음 기수
 
 // ============================================
 // 멋쟁이사자처럼 대학 (전국 연합)
@@ -33,9 +35,6 @@ export const FAQ_INFO = {
   totalUniv: 81, // 올해 멋사 참여 대학 수
   totalMembers: 18, // 직전 기수 총 인원
   nonMajorMembers: 8, // 직전 기수 비전공자 수
-  pmDesignMembers: 6, // 직전 기수 기획디자인 파트 인원
-  frontendMembers: 6, // 직전 기수 프론트엔드 파트 인원
-  backendMembers: 6, // 직전 기수 백엔드 파트 인원
 };
 
 // ============================================
