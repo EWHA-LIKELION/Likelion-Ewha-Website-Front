@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { Modal } from "../Modal";
 import { RecruitAPI } from "@/apis";
-import { CURRENT_GENERATION } from "@/config/siteConfig";
+import { CURRENT_GENERATION, FALLBACK_SCHEDULE } from "@/config/siteConfig";
 import {
   RecruitAlarmButton,
   RecruitInfoButton,
@@ -55,6 +55,8 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   const [isAlarmModalOpen, setIsAlarmModalOpen] = useState(false);
   const [isCodeModalOpen, setIsCodeModalOpen] = useState(false);
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
+  //2026 임시 결과 안내 모달
+  const [isResultModalOpen, setIsResultModalOpen] = useState(false);
   // "RESULT" | "VIEW"
   const [codeModalType, setCodeModalType] = useState(null);
 
@@ -72,8 +74,12 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
 
         setRecruitStatus(status);
       } catch (e) {
-        console.log("default 상태");
-        setRecruitStatus("DEFAULT");
+        // console.log("default 상태");
+        // setRecruitStatus("DEFAULT");
+
+        //2026년만 임시로 진행(fallback data로 status 계산)
+        const status = getRecruitStatus(FALLBACK_SCHEDULE);
+        setRecruitStatus(status);
       }
     };
 
@@ -166,7 +172,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
   const getDescriptionText = () => {
     switch (recruitStatus) {
       case "RECRUITING":
-        return `멋쟁이사자처럼 이화여대와 함께할 ${CURRENT_GENERATION}기 아기사자를 모집합니다`;
+        return `이화여자대학교 멋쟁이사자처럼과 함께할 아기사자를 모집합니다`;
       case "CLOSED":
         return `${CURRENT_GENERATION}기 지원이 마감되었습니다`;
       case "FIRST_RESULT":
@@ -187,11 +193,17 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       case "RECRUITING": {
         // home 페이지: 모집 정보 보기 -> /recruit
         // recruit 페이지: 지원하기 -> /recruit/apply/form
+        const goExternalApply = () => {
+          window.open("https://forms.gle/your-form-link", "_blank");
+        };
+
         if (pageType === "recruit") {
           if (recruitStyle === "1") {
-            return <ApplyButton onClick={goApply} />;
+            // return <ApplyButton onClick={goApply} />;
+            return <ApplyButton onClick={goExternalApply} />;
           } else {
-            return <ApplyBlackButton onClick={goApply} />;
+            // return <ApplyBlackButton onClick={goApply} />;
+            return <ApplyBlackButton onClick={goExternalApply} />;
           }
         } else {
           return (
@@ -210,10 +222,13 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       case "FINAL_RESULT": {
         const btnText =
           recruitStatus === "FIRST_RESULT"
-            ? "1차 합격자 조회"
-            : "최종 합격자 조회";
+            ? // ? "1차 합격자 조회"
+              // : "최종 합격자 조회";
+              "1차 합격자 발표"
+            : "최종 합격자 발표";
         return (
-          <RecruitCheckButton onClick={openResultCodeModal}>
+          // <RecruitCheckButton onClick={openResultCodeModal}>
+          <RecruitCheckButton onClick={() => setIsResultModalOpen(true)}>
             {btnText}
           </RecruitCheckButton>
         );
@@ -248,7 +263,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
       <ButtonContainer>{renderButton()}</ButtonContainer>
 
       {/* 2. 하단 텍스트 링크 (상태에 따라 표시) */}
-      {recruitStatus !== "BEFORE" && recruitStatus !== "DEFAULT" && (
+      {/* {recruitStatus !== "BEFORE" && recruitStatus !== "DEFAULT" && (
         <SubLink
           href="#"
           onClick={openViewCodeModal}
@@ -257,7 +272,25 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         >
           지원서를 제출하셨나요? <u>지원서 열람하기</u>
         </SubLink>
-      )}
+      )} */}
+
+      {/* 2026 임시 결과 안내 모달 */}
+      <Modal
+        open={isResultModalOpen}
+        onClose={() => setIsResultModalOpen(false)}
+        type="info"
+        title={`${recruitStatus === "FIRST_RESULT" ? "1차 합격자 발표" : "최종 합격자 발표"}`}
+        description="합격 여부는 문자 메시지를 통해 안내드렸습니다. 메시지를 받지 못하신 경우, 카카오톡 채널로 문의해 주시기 바랍니다."
+        align="left"
+        actions={[
+          {
+            label: "카카오톡 바로가기",
+            variant: "primary",
+            fullWidth: true,
+            onClick: goKakaoChannelFriend,
+          },
+        ]}
+      />
 
       {/* 알림 모달 */}
       <Modal
