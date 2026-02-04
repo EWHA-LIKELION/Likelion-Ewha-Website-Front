@@ -1,13 +1,16 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+/* Pretendard 폰트 - subset 버전으로 최적화 */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Bayon&display=swap");
-/* 맨 윗줄에 추가 */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+
 @font-face {
   font-family: "Cafe24 PRO Slim";
-  src: url("/fonts/Cafe24PROSlimMax.woff2") format("woff2"),
+  src:
+    url("/fonts/Cafe24PROSlimMax.woff2") format("woff2"),
     url("/fonts/Cafe24PROSlimMax.woff") format("woff");
   font-weight: 700;
   font-style: normal;
+  font-display: swap; /* 폰트 로딩 전 시스템 폰트 먼저 표시 */
 }
 
 * {
@@ -23,7 +26,11 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Pretendard", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
