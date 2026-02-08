@@ -201,7 +201,10 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         // home 페이지: 모집 정보 보기 -> /recruit
         // recruit 페이지: 지원하기 -> /recruit/apply/form
         const goExternalApply = () => {
-          window.open("https://forms.gle/your-form-link", "_blank");
+          window.open(
+            "https://docs.google.com/forms/d/e/1FAIpQLSecVR2jeLjkt-QZAORyYJE68Ifogk8ab-e7NLPcCguDtggsmQ/viewform",
+            "_blank",
+          );
         };
 
         if (pageType === "recruit") {
