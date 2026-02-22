@@ -290,7 +290,7 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         onClose={() => setIsResultModalOpen(false)}
         type="info"
         title={`${recruitStatus === "FIRST_RESULT" ? "1차 합격자 발표" : "최종 합격자 발표"}`}
-        description="합격 여부는 카카오톡 채널 메시지 또는 문자 메시지를 통해 안내드렸습니다. 메시지를 받지 못하신 경우, 카카오톡 채널로 문의해 주시기 바랍니다."
+        description="합격 여부는 문자 메시지를 통해 안내드렸습니다. 메시지를 받지 못하신 경우, 카카오톡 채널로 문의해 주시기 바랍니다."
         align="left"
         actions={[
           {
