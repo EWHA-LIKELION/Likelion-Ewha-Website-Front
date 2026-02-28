@@ -51,6 +51,6 @@ export const FALLBACK_SCHEDULE = {
   first_result_end: "2026-02-28T16:59:59+09:00",
   interview_start: "2026-02-24",
   interview_end: "2026-02-26",
-  final_result_start: "2026-02-28T17:00:00+09:00",
+  final_result_start: "2026-02-28T12:00:00+09:00",
   final_result_end: "2026-03-03T18:30:00+09:00",
 };
