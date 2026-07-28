@@ -3,8 +3,8 @@
     "title": "기획•디자인",
     "subTitle": "PM•Designer",
     "description": "사용자 경험을 중심으로 서비스의 방향을 기획하고, 감각적인 디자인과 프로토타입으로 아이디어를 실현합니다.",
-    "color1": "#98FBA4",
-    "color2": "var(--primary-main)",
+    "color1": "var(--yellow-90)",
+    "color2": "var(--yellow-50)",
     "sessions": [
       {
         "sessionNum": "공통",
@@ -41,14 +41,14 @@
         "sessionTitle": "프로토타이핑 & 반응형 & 다크 모드",
         "sessionDescription": "Figma에서 프로토타이핑, 반응형, 다크 모드를 디자인할 때 효과적으로 활용할 수 있는 기능을 소개합니다."
       }
-]
-},
+    ]
+  },
   "feCurriculum": {
     "title": "프론트엔드",
     "subTitle": "Frontend Developer",
     "description": "사용자가 마주하는 화면을 구현하고, 서비스와의 상호작용을 통해 아이디어를 현실로 만듭니다.",
-    "color1": "#FFCE8A",
-    "color2": "var(--primary-sub)",
+    "color1": "var(--blue-90)",
+    "color2": "var(--blue-60)",
     "sessions": [
       {
         "sessionNum": "공통",
@@ -111,8 +111,8 @@
     "title": "백엔드",
     "subTitle": "Backend Developer",
     "description": "서비스의 기반이 되는 로직과 데이터를 설계하고, 안정적인 시스템 운영을 책임집니다.",
-    "color1": "#ACDEFF",
-    "color2": "#43B4FF",
+    "color1": "var(--purple-90)",
+    "color2": "var(--purple-60)",
     "sessions": [
       {
         "sessionNum": "공통",
