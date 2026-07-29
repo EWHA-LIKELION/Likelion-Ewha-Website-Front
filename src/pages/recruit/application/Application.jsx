@@ -10,14 +10,12 @@ import { api, ApplicationsAPI } from "@/apis";
 import { useIsMobile } from "@/hooks";
 
 import {
-  SelectPositiveButton,
-  SelectNegativeButton,
-  UnselectPositiveButton,
-  UnselectNegativeButton,
+  SelectionButton,
   SelectedRadio,
   UnselectedRadio,
 } from "../../../components/buttons/SelectionButtons";
-import { TimeAbled, TimeSelected } from "../../../components/buttons/TimeButtons";
+import { TimeButton } from "../../../components/buttons/TimeButtons";
+import { MainButton } from "../../../components/buttons/MainButtons";
 import { Modal } from "../../../components/Modal.jsx";
 
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
@@ -670,16 +668,22 @@ export default function ApplyIntegrated() {
                   </ExampleContent>
 
                   <ButtonRowPC>
-                    {interviewMethod === "OFFLINE" ? (
-                      <SelectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
-                    ) : (
-                      <UnselectPositiveButton onClick={() => setInterviewMethod("OFFLINE")} />
-                    )}
-                    {interviewMethod === "ONLINE" ? (
-                      <SelectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
-                    ) : (
-                      <UnselectNegativeButton onClick={() => setInterviewMethod("ONLINE")} />
-                    )}
+                    <SelectionButton
+                      variant={
+                        interviewMethod === "OFFLINE" ? "selected" : "unselected"
+                      }
+                      onClick={() => setInterviewMethod("OFFLINE")}
+                    >
+                      대면
+                    </SelectionButton>
+                    <SelectionButton
+                      variant={
+                        interviewMethod === "ONLINE" ? "selected" : "unselected"
+                      }
+                      onClick={() => setInterviewMethod("ONLINE")}
+                    >
+                      비대면
+                    </SelectionButton>
                   </ButtonRowPC>
 
                   <ErrorText $visible={!isInterviewMethodValid && interviewMethod !== ""}>
@@ -742,11 +746,11 @@ export default function ApplyIntegrated() {
                                   style={{ display: "inline-block", cursor: "pointer" }}
                                   onClick={() => toggleTime(date, time, "am")}
                                 >
-                                  {selected ? (
-                                    <TimeSelected time={time} />
-                                  ) : (
-                                    <TimeAbled time={time} />
-                                  )}
+                                  <TimeButton
+                                    variant={selected ? "selected" : "abled"}
+                                  >
+                                    {time}
+                                  </TimeButton>
                                 </span>
                               );
                             })}
@@ -762,11 +766,11 @@ export default function ApplyIntegrated() {
                                   style={{ display: "inline-block", cursor: "pointer" }}
                                   onClick={() => toggleTime(date, time, "pm")}
                                 >
-                                  {selected ? (
-                                    <TimeSelected time={time} />
-                                  ) : (
-                                    <TimeAbled time={time} />
-                                  )}
+                                  <TimeButton
+                                    variant={selected ? "selected" : "abled"}
+                                  >
+                                    {time}
+                                  </TimeButton>
                                 </span>
                               );
                             })}
@@ -1082,14 +1086,13 @@ export default function ApplyIntegrated() {
 
             <SubmitRow $bottomGap={SUBMIT_BOTTOM_GAP}>
               <SubmitStack>
-                <SubmitButton
-                  className="h4-bold"
+                <MainButton
                   type="button"
-                  disabled={!canSubmit || isSubmitting}
+                  variant={canSubmit && !isSubmitting ? "primary" : "disabled"}
                   onClick={onClickSubmit}
                 >
                   {isSubmitting ? "제출 중..." : "제출하기"}
-                </SubmitButton>
+                </MainButton>
                 {!!submitError && <SubmitError className="footnote-regular">{submitError}</SubmitError>}
               </SubmitStack>
             </SubmitRow>
@@ -2192,36 +2195,6 @@ const SubmitError = styled.div`
   color: var(--orange-60, #ff7b2e);
   text-align: center;
   white-space: pre-wrap;
-`;
-const SubmitButton = styled.button`
-  width: 24.375rem;
-  padding: 1.125rem 2.25rem;
-  border: none;
-  cursor: pointer;
-
-  border-radius: 40px;
-  background: var(--primary-main, #05da5b);
-  color: var(--common-100, #fff);
-
-  transition: all 0.2s ease;
-
-  &:not(:disabled):hover {
-  filter: brightness(0.9);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    user-select: none;
-    background: var(--neutral-70);
-    color: var(--static-white);
-  }
-
-  @media (max-width: 799px) {
-    width: 12.5rem;
-    padding: 0.625rem 1.75rem;
-    font-size: 0.875rem;
-  }
 `;
 const MoOverlay = styled.div`
   position: fixed;

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { HomeButton } from "@/components/buttons/MainButtons";
+import { MainButton } from "@/components/buttons/MainButtons";
 import { useIsMobile } from "@/hooks";
 
 // 상태별 설정
@@ -178,7 +178,13 @@ const RecruitResult = () => {
       </ResultCard>
 
       <HomeButtonWrapper>
-        <HomeButton onClick={() => navigate("/")} />
+        <MainButton
+          variant="dark"
+          size="compact"
+          onClick={() => navigate("/")}
+        >
+          메인으로
+        </MainButton>
       </HomeButtonWrapper>
     </Wrapper>
   );

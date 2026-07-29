@@ -5,6 +5,7 @@ import SegmentBar from "@/components/SegmentBar";
 import Curriculum from "@/components/Curriculum";
 import ProjectCard3 from "@/components/card/ProjectCard3";
 import Carousel2 from "@/components/carousel/Carousel2";
+import { MainButton } from "@/components/buttons/MainButtons";
 import { intercollegiates } from "@/data";
 import { useIsMobile } from "@/hooks";
 
@@ -77,12 +78,9 @@ const HomeMid = () => {
           다양한 프로젝트를 확인해보세요!
         </SubTitle>
         <Carousel2 />
-        <Button
-          className={isMobile ? "body-bold" : "h4-bold"}
-          onClick={handleProjectMore}
-        >
+        <MainButton variant="dark" size="auto" onClick={handleProjectMore}>
           프로젝트 더보기
-        </Button>
+        </MainButton>
       </Section>
     </Wrapper>
   );
@@ -166,30 +164,3 @@ const ProjectWrapper = styled.div`
   }
 `;
 
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0.875rem 2.25rem;
-
-  border-radius: 2.5rem;
-  border: none;
-  background: var(--neutral-30, #474747);
-  color: var(--static-white);
-
-  transition: all 0.2s ease;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  transition: all 0.2s ease;
-
-  @media (max-width: 799px) {
-    padding: 0.625rem 1.75rem;
-    border-radius: 1.25rem;
-  }
-`;

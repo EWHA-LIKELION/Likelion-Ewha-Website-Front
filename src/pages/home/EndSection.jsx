@@ -7,6 +7,7 @@ import orangePattern from "../../../public/icons/orange-1.svg";
 import greenPattern from "../../../public/icons/green.svg";
 
 import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
+import { MainButton } from "../../components/buttons/MainButtons";
 
 const EndSection = () => {
   const goInstagram = () => {
@@ -31,11 +32,15 @@ const EndSection = () => {
               이대 멋사를 수료한 벗들의 <br />
               솔직한 활동 후기
             </p>
-            <PcMoreButton onClick={goInstagram}>더보기</PcMoreButton>
+            <PcMoreButton variant="dark" size="auto" onClick={goInstagram}>
+              더보기
+            </PcMoreButton>
           </div>
 
           <MobileMoreButtonWrapper>
-            <MoreButton onClick={goInstagram}>더보기</MoreButton>
+            <MoreButton variant="dark" size="auto" onClick={goInstagram}>
+              더보기
+            </MoreButton>
           </MobileMoreButtonWrapper>
         </InnerContainer>
       </GreenArea>
@@ -226,30 +231,10 @@ const GreenArea = styled.div`
   }
 `;
 
-const MoreButton = styled.button`
+const MoreButton = styled(MainButton)`
   margin-top: 1.5rem;
-  padding: 0.875rem 2.25rem;
-  border-radius: 2.5rem;
-  background: var(--Neutral-30, #474747);
-  color: white;
-  border: none;
-  font-family: Pretendard;
-  font-size: 1.25rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.75rem;
-  cursor: pointer;
-
-  transition: all 0.2s ease;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
 
   @media (max-width: 799px) {
-    padding: 0.625rem 1.75rem;
-    font-size: 0.875rem;
-    line-height: 1.375rem;
     margin-top: 0;
   }
 `;
