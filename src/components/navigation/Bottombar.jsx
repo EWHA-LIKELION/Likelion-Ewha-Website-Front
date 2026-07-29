@@ -10,12 +10,12 @@ const BottomBar = () => {
       <Inner>
         <TopRow>
           <LogoWrap>
-            <img src="/icons/groupbottom.svg" alt="LIKELION EWHA" />
+            <img src="/icons/group-bottom.svg" alt="LIKELION EWHA" />
           </LogoWrap>
 
           <BackToTopButton type="button" onClick={handleBackToTop}>
             <BackToTopText>Back to top</BackToTopText>
-            <BackToTopIcon src="/icons/backtotop.svg" alt="" />
+            <BackToTopIcon src="/icons/back-to-top.svg" alt="" />
           </BackToTopButton>
         </TopRow>
 
@@ -33,7 +33,7 @@ const BottomBar = () => {
               <img src="/icons/github.svg" alt="GitHub" />
             </SocialLink>
             <SocialLink href="https://pf.kakao.com/_htxexfd">
-              <img src="/icons/kakaotalk.svg" alt="KakaoTalk" />
+              <img src="/icons/kakao-talk.svg" alt="KakaoTalk" />
             </SocialLink>
           </SocialRow>
 

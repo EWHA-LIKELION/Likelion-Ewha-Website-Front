@@ -163,7 +163,7 @@ const RecruitBasicInfo = () => {
       <PartSection>
         <PartInner>
           <PartTitle>
-            <img src="/icons/ellipse2.svg" alt="icon" />
+            <img src="/icons/ellipse-2.svg" alt="icon" />
             <span>모집 파트</span>
           </PartTitle>
 
@@ -173,7 +173,7 @@ const RecruitBasicInfo = () => {
               <span>PM · DESIGN</span>
               <LinkWrapper onClick={() => navigate("/?part=pm#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrowRight3.svg" alt="icon" />
+                <img src="/icons/arrow-right-3.svg" alt="icon" />
               </LinkWrapper>
             </PartCard>
 
@@ -182,7 +182,7 @@ const RecruitBasicInfo = () => {
               <span>FRONTEND</span>
               <LinkWrapper onClick={() => navigate("/?part=fe#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrowRight3.svg" alt="icon" />
+                <img src="/icons/arrow-right-3.svg" alt="icon" />
               </LinkWrapper>
             </PartCard>
 
@@ -191,7 +191,7 @@ const RecruitBasicInfo = () => {
               <span>BACKEND</span>
               <LinkWrapper onClick={() => navigate("/?part=be#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrowRight3.svg" alt="icon" />
+                <img src="/icons/arrow-right-3.svg" alt="icon" />
               </LinkWrapper>
             </PartCard>
           </PartCards>

@@ -36,7 +36,7 @@ const HomeMid = () => {
   return (
     <Wrapper>
       <Section className="curriculum" id="curriculum">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src="/icons/logo-icon.svg" className="logo-icon" />
         <Title className="point-eng-h2">curriculum</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           처음부터 차근 차근, 기초부터 심화까지
@@ -51,7 +51,7 @@ const HomeMid = () => {
         <Curriculum part={part} />
       </Section>
       <Section className="events">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src="/icons/logo-icon.svg" className="logo-icon" />
         <Title className="point-eng-h2">intercollegiate events</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           다양한 연합 행사에 참가하여 {isMobile && <br />}
@@ -70,7 +70,7 @@ const HomeMid = () => {
         </ProjectWrapper>
       </Section>
       <Section className="projects">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src="/icons/logo-icon.svg" className="logo-icon" />
         <Title className="point-eng-h2">projects</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           아기사자와 운영진들의 {isMobile && <br />}

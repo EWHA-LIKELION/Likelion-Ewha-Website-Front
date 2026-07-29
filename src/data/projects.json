@@ -17,11 +17,11 @@
       },
       "thumbnail": "/images/projects/thumbnail/1.jpg",
       "detailImages": [
-        "/images/projects/detailImages/1-1.png",
-        "/images/projects/detailImages/1-2.png",
-        "/images/projects/detailImages/1-3.png",
-        "/images/projects/detailImages/1-4.png",
-        "/images/projects/detailImages/1-5.png"
+        "/images/projects/detail-images/1-1.png",
+        "/images/projects/detail-images/1-2.png",
+        "/images/projects/detail-images/1-3.png",
+        "/images/projects/detail-images/1-4.png",
+        "/images/projects/detail-images/1-5.png"
       ]
     },
     {
@@ -53,14 +53,14 @@
       },
       "thumbnail": "/images/projects/thumbnail/3.jpg",
       "detailImages": [
-        "/images/projects/detailImages/3-1.png",
-        "/images/projects/detailImages/3-2.png",
-        "/images/projects/detailImages/3-3.png",
-        "/images/projects/detailImages/3-4.png",
-        "/images/projects/detailImages/3-5.png",
-        "/images/projects/detailImages/3-6.png",
-        "/images/projects/detailImages/3-7.png",
-        "/images/projects/detailImages/3-8.png"
+        "/images/projects/detail-images/3-1.png",
+        "/images/projects/detail-images/3-2.png",
+        "/images/projects/detail-images/3-3.png",
+        "/images/projects/detail-images/3-4.png",
+        "/images/projects/detail-images/3-5.png",
+        "/images/projects/detail-images/3-6.png",
+        "/images/projects/detail-images/3-7.png",
+        "/images/projects/detail-images/3-8.png"
       ]
     },
     {
@@ -77,15 +77,15 @@
       },
       "thumbnail": "/images/projects/thumbnail/4.jpg",
       "detailImages": [
-        "/images/projects/detailImages/4-1.jpg",
-        "/images/projects/detailImages/4-2.jpg",
-        "/images/projects/detailImages/4-3.jpg",
-        "/images/projects/detailImages/4-4.jpg",
-        "/images/projects/detailImages/4-5.jpg",
-        "/images/projects/detailImages/4-6.jpg",
-        "/images/projects/detailImages/4-7.jpg",
-        "/images/projects/detailImages/4-8.jpg",
-        "/images/projects/detailImages/4-9.jpg"
+        "/images/projects/detail-images/4-1.jpg",
+        "/images/projects/detail-images/4-2.jpg",
+        "/images/projects/detail-images/4-3.jpg",
+        "/images/projects/detail-images/4-4.jpg",
+        "/images/projects/detail-images/4-5.jpg",
+        "/images/projects/detail-images/4-6.jpg",
+        "/images/projects/detail-images/4-7.jpg",
+        "/images/projects/detail-images/4-8.jpg",
+        "/images/projects/detail-images/4-9.jpg"
       ]
     },
     {
@@ -102,16 +102,16 @@
       },
       "thumbnail": "/images/projects/thumbnail/5.jpg",
       "detailImages": [
-        "/images/projects/detailImages/5-1.png",
-        "/images/projects/detailImages/5-2.png",
-        "/images/projects/detailImages/5-3.png",
-        "/images/projects/detailImages/5-4.png",
-        "/images/projects/detailImages/5-5.png",
-        "/images/projects/detailImages/5-6.png",
-        "/images/projects/detailImages/5-7.png",
-        "/images/projects/detailImages/5-8.png",
-        "/images/projects/detailImages/5-9.png",
-        "/images/projects/detailImages/5-10.png"
+        "/images/projects/detail-images/5-1.png",
+        "/images/projects/detail-images/5-2.png",
+        "/images/projects/detail-images/5-3.png",
+        "/images/projects/detail-images/5-4.png",
+        "/images/projects/detail-images/5-5.png",
+        "/images/projects/detail-images/5-6.png",
+        "/images/projects/detail-images/5-7.png",
+        "/images/projects/detail-images/5-8.png",
+        "/images/projects/detail-images/5-9.png",
+        "/images/projects/detail-images/5-10.png"
       ]
     },
 
@@ -189,10 +189,10 @@
       },
       "thumbnail": "/images/projects/thumbnail/10.jpg",
       "detailImages": [
-        "/images/projects/detailImages/10-1.jpg",
-        "/images/projects/detailImages/10-2.png",
-        "/images/projects/detailImages/10-3.png",
-        "/images/projects/detailImages/10-4.png"
+        "/images/projects/detail-images/10-1.jpg",
+        "/images/projects/detail-images/10-2.png",
+        "/images/projects/detail-images/10-3.png",
+        "/images/projects/detail-images/10-4.png"
       ]
     },
     {
@@ -225,11 +225,11 @@
       },
       "thumbnail": "/images/projects/thumbnail/12.jpg",
       "detailImages": [
-        "/images/projects/detailImages/12-1.png",
-        "/images/projects/detailImages/12-2.png",
-        "/images/projects/detailImages/12-3.png",
-        "/images/projects/detailImages/12-4.png",
-        "/images/projects/detailImages/12-5.png"
+        "/images/projects/detail-images/12-1.png",
+        "/images/projects/detail-images/12-2.png",
+        "/images/projects/detail-images/12-3.png",
+        "/images/projects/detail-images/12-4.png",
+        "/images/projects/detail-images/12-5.png"
       ]
     },
     {
@@ -246,9 +246,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/13.jpg",
       "detailImages": [
-        "/images/projects/detailImages/13-1.png",
-        "/images/projects/detailImages/13-2.png",
-        "/images/projects/detailImages/13-3.png"
+        "/images/projects/detail-images/13-1.png",
+        "/images/projects/detail-images/13-2.png",
+        "/images/projects/detail-images/13-3.png"
       ]
     },
     {
@@ -265,14 +265,14 @@
       },
       "thumbnail": "/images/projects/thumbnail/14.jpg",
       "detailImages": [
-        "/images/projects/detailImages/14-1.png",
-        "/images/projects/detailImages/14-2.png",
-        "/images/projects/detailImages/14-3.png",
-        "/images/projects/detailImages/14-4.png",
-        "/images/projects/detailImages/14-5.png",
-        "/images/projects/detailImages/14-6.png",
-        "/images/projects/detailImages/14-7.png",
-        "/images/projects/detailImages/14-8.png"
+        "/images/projects/detail-images/14-1.png",
+        "/images/projects/detail-images/14-2.png",
+        "/images/projects/detail-images/14-3.png",
+        "/images/projects/detail-images/14-4.png",
+        "/images/projects/detail-images/14-5.png",
+        "/images/projects/detail-images/14-6.png",
+        "/images/projects/detail-images/14-7.png",
+        "/images/projects/detail-images/14-8.png"
       ]
     },
     {
@@ -289,11 +289,11 @@
       },
       "thumbnail": "/images/projects/thumbnail/15.jpg",
       "detailImages": [
-        "/images/projects/detailImages/15-1.png",
-        "/images/projects/detailImages/15-2.png",
-        "/images/projects/detailImages/15-3.png",
-        "/images/projects/detailImages/15-4.png",
-        "/images/projects/detailImages/15-5.png"
+        "/images/projects/detail-images/15-1.png",
+        "/images/projects/detail-images/15-2.png",
+        "/images/projects/detail-images/15-3.png",
+        "/images/projects/detail-images/15-4.png",
+        "/images/projects/detail-images/15-5.png"
       ]
     },
     {
@@ -310,11 +310,11 @@
       },
       "thumbnail": "/images/projects/thumbnail/16.jpg",
       "detailImages": [
-        "/images/projects/detailImages/16-1.png",
-        "/images/projects/detailImages/16-2.png",
-        "/images/projects/detailImages/16-3.png",
-        "/images/projects/detailImages/16-4.png",
-        "/images/projects/detailImages/16-5.png"
+        "/images/projects/detail-images/16-1.png",
+        "/images/projects/detail-images/16-2.png",
+        "/images/projects/detail-images/16-3.png",
+        "/images/projects/detail-images/16-4.png",
+        "/images/projects/detail-images/16-5.png"
       ]
     },
 
@@ -332,9 +332,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/17.jpg",
       "detailImages": [
-        "/images/projects/detailImages/17-1.png",
-        "/images/projects/detailImages/17-2.png",
-        "/images/projects/detailImages/17-3.png"
+        "/images/projects/detail-images/17-1.png",
+        "/images/projects/detail-images/17-2.png",
+        "/images/projects/detail-images/17-3.png"
       ]
     },
     {
@@ -351,10 +351,10 @@
       },
       "thumbnail": "/images/projects/thumbnail/18.jpg",
       "detailImages": [
-        "/images/projects/detailImages/18-1.png",
-        "/images/projects/detailImages/18-2.png",
-        "/images/projects/detailImages/18-3.png",
-        "/images/projects/detailImages/18-4.png"
+        "/images/projects/detail-images/18-1.png",
+        "/images/projects/detail-images/18-2.png",
+        "/images/projects/detail-images/18-3.png",
+        "/images/projects/detail-images/18-4.png"
       ]
     },
     {
@@ -386,9 +386,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/20.jpg",
       "detailImages": [
-        "/images/projects/detailImages/20-1.png",
-        "/images/projects/detailImages/20-2.png",
-        "/images/projects/detailImages/20-3.png"
+        "/images/projects/detail-images/20-1.png",
+        "/images/projects/detail-images/20-2.png",
+        "/images/projects/detail-images/20-3.png"
       ]
     },
     {
@@ -405,9 +405,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/21.jpg",
       "detailImages": [
-        "/images/projects/detailImages/21-1.png",
-        "/images/projects/detailImages/21-2.png",
-        "/images/projects/detailImages/21-3.png"
+        "/images/projects/detail-images/21-1.png",
+        "/images/projects/detail-images/21-2.png",
+        "/images/projects/detail-images/21-3.png"
       ]
     },
     {
@@ -424,9 +424,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/22.jpg",
       "detailImages": [
-        "/images/projects/detailImages/22-1.png",
-        "/images/projects/detailImages/22-2.png",
-        "/images/projects/detailImages/22-3.png"
+        "/images/projects/detail-images/22-1.png",
+        "/images/projects/detail-images/22-2.png",
+        "/images/projects/detail-images/22-3.png"
       ]
     },
     {
@@ -443,9 +443,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/23.jpg",
       "detailImages": [
-        "/images/projects/detailImages/23-1.png",
-        "/images/projects/detailImages/23-2.png",
-        "/images/projects/detailImages/23-3.png"
+        "/images/projects/detail-images/23-1.png",
+        "/images/projects/detail-images/23-2.png",
+        "/images/projects/detail-images/23-3.png"
       ]
     },
     {
@@ -462,9 +462,9 @@
       },
       "thumbnail": "/images/projects/thumbnail/24.jpg",
       "detailImages": [
-        "/images/projects/detailImages/24-1.png",
-        "/images/projects/detailImages/24-2.png",
-        "/images/projects/detailImages/24-3.png"
+        "/images/projects/detail-images/24-1.png",
+        "/images/projects/detail-images/24-2.png",
+        "/images/projects/detail-images/24-3.png"
       ]
     },
     {
@@ -481,10 +481,10 @@
       },
       "thumbnail": "/images/projects/thumbnail/25.jpg",
       "detailImages": [
-        "/images/projects/detailImages/25-1.png",
-        "/images/projects/detailImages/25-2.png",
-        "/images/projects/detailImages/25-3.png",
-        "/images/projects/detailImages/25-4.png"
+        "/images/projects/detail-images/25-1.png",
+        "/images/projects/detail-images/25-2.png",
+        "/images/projects/detail-images/25-3.png",
+        "/images/projects/detail-images/25-4.png"
       ]
     },
     {
@@ -501,10 +501,10 @@
       },
       "thumbnail": "",
       "detailImages": [
-        "/images/projects/detailImages/26-1.png",
-        "/images/projects/detailImages/26-2.png",
-        "/images/projects/detailImages/26-3.png",
-        "/images/projects/detailImages/26-4.png"
+        "/images/projects/detail-images/26-1.png",
+        "/images/projects/detail-images/26-2.png",
+        "/images/projects/detail-images/26-3.png",
+        "/images/projects/detail-images/26-4.png"
       ]
     }
   ]

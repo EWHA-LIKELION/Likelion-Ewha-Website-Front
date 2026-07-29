@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const DEFAULT_IMAGE = "/icons/defaultImg.svg";
+const DEFAULT_IMAGE = "/icons/default-img.svg";
 
 const ProjectCard2 = ({ 
   project="프로젝트명",

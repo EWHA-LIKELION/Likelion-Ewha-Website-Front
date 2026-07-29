@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import orangePattern from "../../../public/icons/orange.svg";
 import greenPattern from "../../../public/icons/green.svg";
-import Clover1Icon from "../../../public/icons/clover1.svg";
+import Clover1Icon from "../../../public/icons/clover-1.svg";
 import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 
 const IntroSection = () => {

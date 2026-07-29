@@ -62,7 +62,7 @@ const TopBar = ({ onToggleMobileMenu }) => {
       <Topbar>
         <Inner>
           <Logo to="/" aria-label="LIKELION EWHA Home">
-            <img src="/icons/logotop.svg" alt="LIKELION EWHA" />
+            <img src="/icons/logo-top.svg" alt="LIKELION EWHA" />
           </Logo>
 
           <PcNav aria-label="Primary">

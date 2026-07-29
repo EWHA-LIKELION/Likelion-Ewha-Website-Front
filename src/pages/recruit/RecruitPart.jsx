@@ -45,7 +45,7 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruitPartFlower.svg" />
+          <img src="/icons/recruit-part-flower.svg" />
         </Card>
         <Card className="fe" onClick={() => handleClick("FRONTEND")}>
           <PartName>프론트엔드</PartName>
@@ -72,7 +72,7 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruitPartFlower.svg" />
+          <img src="/icons/recruit-part-flower.svg" />
         </Card>
         <Card className="be" onClick={() => handleClick("BACKEND")}>
           <PartName>백엔드</PartName>
@@ -99,12 +99,12 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruitPartFlower.svg" />
+          <img src="/icons/recruit-part-flower.svg" />
         </Card>
       </CardWrapper>
-      <img className="num1" src="/icons/recruitPartBack1.svg" />
-      <img className="num2" src="/icons/recruitPartBack2.svg" />
-      <img className="num3" src="/icons/recruitPartBack3.svg" />
+      <img className="num1" src="/icons/recruit-part-back-1.svg" />
+      <img className="num2" src="/icons/recruit-part-back-2.svg" />
+      <img className="num3" src="/icons/recruit-part-back-3.svg" />
     </Wrapper>
   );
 };

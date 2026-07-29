@@ -46,7 +46,7 @@ function ProjectDetail() {
     return (
         <DetailWrapper>
             <Thumbnail>
-                <img src={project.thumbnail || '/images/default1.png'} />
+                <img src={project.thumbnail || '/images/default-1.png'} />
             </Thumbnail>
 
             <Container>
@@ -127,7 +127,7 @@ function ProjectDetail() {
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-30, var(--Neutral-30, #474747))' }}>더 둘러보기</p>
                             <p className='h4-bold' style={{ color: 'var(--Atomic-Neutral-70, var(--Neutral-70, #9B9B9B))', alignItems: 'center', display: 'flex', gap: '5px' }}>
                                 목록으로
-                                <img className="rightarrow" src='/icons/arrowRightProject.svg' />
+                                <img className="rightarrow" src='/icons/arrow-right-project.svg' />
                             </p>
                         </MoreLabel>
 
@@ -143,7 +143,7 @@ function ProjectDetail() {
                                         project={p.title}
                                         description={p.description}
                                         tags={[p.generation, p.category]}
-                                        imageSrc={p.thumbnail || '/images/default1.png'}
+                                        imageSrc={p.thumbnail || '/images/default-1.png'}
                                         styleType={1}
                                     />
                                 </div>

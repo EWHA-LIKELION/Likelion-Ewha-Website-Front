@@ -99,7 +99,7 @@ function People() {
                     part={m.part}
                     position={m.position || m.role}
                     department={m.department}
-                    imageSrc={m.photo || "/images/default1.png"}
+                    imageSrc={m.photo || "/images/default-1.png"}
                     showPosition
                   />
                 ))}
@@ -152,7 +152,7 @@ function People() {
                       name={m.name}
                       part={m.part}
                       department={m.department}
-                      imageSrc={m.photo || "/images/default1.png"}
+                      imageSrc={m.photo || "/images/default-1.png"}
                       showPosition={false}
                     />
                   ))}
@@ -162,13 +162,13 @@ function People() {
         </Container>
 
         <Design1>
-          <img src="/icons/designOrange.svg" />
+          <img src="/icons/design-orange.svg" />
         </Design1>
         <Design2>
-          <img src="/icons/designGreen.svg" />
+          <img src="/icons/design-green.svg" />
         </Design2>
         <Design3>
-          <img src="/icons/designOrange2.svg" />
+          <img src="/icons/design-orange-2.svg" />
         </Design3>
       </PeopleWrapper>
     </>

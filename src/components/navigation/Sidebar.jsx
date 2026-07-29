@@ -11,7 +11,7 @@ const Sidebar = () => {
       <Content>
         <TopBlock>
           <Logo>
-            <img src="/icons/logoside.svg" alt="LIKELION EWHA" />
+            <img src="/icons/logo-side.svg" alt="LIKELION EWHA" />
           </Logo>
 
           <MenuGroup>
@@ -21,8 +21,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/applyactive.svg"
-                        : "/icons/applyunactive.svg"
+                        ? "/icons/apply-active.svg"
+                        : "/icons/apply-unactive.svg"
                     }
                     alt=""
                   />
@@ -37,8 +37,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/clockactive.svg"
-                        : "/icons/clockunactive.svg"
+                        ? "/icons/clock-active.svg"
+                        : "/icons/clock-unactive.svg"
                     }
                     alt=""
                   />
@@ -53,8 +53,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/cvactive.svg"
-                        : "/icons/cvunactive.svg"
+                        ? "/icons/cv-active.svg"
+                        : "/icons/cv-unactive.svg"
                     }
                     alt=""
                   />
