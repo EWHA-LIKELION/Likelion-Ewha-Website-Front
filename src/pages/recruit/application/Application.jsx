@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { asset } from "@/assets";
+import CloseSmIcon from "@/assets/icons/close-sm.svg?react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -194,9 +195,7 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
           <ModalHeader>
             <ModalTitle>지원 코드 입력</ModalTitle>
             <ModalCloseBtn onClick={handleClose} aria-label="닫기">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 1L13 13M13 1L1 13" stroke="#B0B0B0" strokeWidth="2" strokeLinecap="round" />
-              </svg>
+              <CloseSmIcon />
             </ModalCloseBtn>
           </ModalHeader>
           <ModalDesc>

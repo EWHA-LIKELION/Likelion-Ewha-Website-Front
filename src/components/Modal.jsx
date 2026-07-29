@@ -3,6 +3,7 @@ import { createPortal } from "react-dom";
 import styled from "styled-components";
 import closeIcon from "@/assets/icons/close.svg";
 import copyIcon from "@/assets/icons/copy.svg";
+import CloseWhiteIcon from "@/assets/icons/close-white.svg?react";
 
 /* =========================
    1) Base 
@@ -188,18 +189,7 @@ export function Modal({
           <MediaWrap $isImageOnly={isImageOnly} $width={image.width}>
             {showClose && isImageOnly && (
               <CloseOnImage onClick={onClose} aria-label="닫기" type="button">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                >
-                  <path
-                    d="M8.53366 25.3307L6.66699 23.4641L14.1337 15.9974L6.66699 8.53073L8.53366 6.66406L16.0003 14.1307L23.467 6.66406L25.3337 8.53073L17.867 15.9974L25.3337 23.4641L23.467 25.3307L16.0003 17.8641L8.53366 25.3307Z"
-                    fill="white"
-                  />
-                </svg>
+                <CloseWhiteIcon />
               </CloseOnImage>
             )}
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { asset } from "@/assets";
+import ArrowRightSm from "@/assets/icons/arrow-right-sm.svg?react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks";
@@ -25,26 +26,7 @@ const RecruitPart = () => {
           <PartName>기획•디자인</PartName>
           <Apply className="h5-bold pm">
             <p>지원서 작성하기</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M8.35938 2.35938L14 7.99995L8.35938 13.6405"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13.9999 8L2 8"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ArrowRightSm />
           </Apply>
           <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
@@ -52,26 +34,7 @@ const RecruitPart = () => {
           <PartName>프론트엔드</PartName>
           <Apply className="h5-bold fe">
             <p>지원서 작성하기</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M8.35938 2.35938L14 7.99995L8.35938 13.6405"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13.9999 8L2 8"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ArrowRightSm />
           </Apply>
           <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
@@ -79,26 +42,7 @@ const RecruitPart = () => {
           <PartName>백엔드</PartName>
           <Apply className="h5-bold be">
             <p>지원서 작성하기</p>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-              fill="none"
-            >
-              <path
-                d="M8.35938 2.35938L14 7.99995L8.35938 13.6405"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13.9999 8L2 8"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinejoin="round"
-              />
-            </svg>
+            <ArrowRightSm />
           </Apply>
           <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>

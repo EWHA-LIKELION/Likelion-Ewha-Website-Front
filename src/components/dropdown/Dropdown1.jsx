@@ -5,6 +5,7 @@ import React, {
   useLayoutEffect,
 } from "react";
 import styled from "styled-components";
+import ChevronDown from "@/assets/icons/chevron-down.svg?react";
 
 const DropDown1 = ({
   options = [],
@@ -101,20 +102,7 @@ const DropDown1 = ({
           onClick={() => setIsOpen(!isOpen)}
           $isOpen={isOpen}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="18"
-            height="10"
-            viewBox="0 0 18 10"
-            fill="none"
-          >
-            <path
-              d="M0.707092 0.707031L8.87376 8.8737L17.0404 0.707031"
-              stroke="white"
-              strokeWidth="2"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronDown stroke="white" />
         </ArrowButton>
       </SelectButton>
 

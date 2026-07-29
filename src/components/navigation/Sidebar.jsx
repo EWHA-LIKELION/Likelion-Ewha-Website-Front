@@ -1,6 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { asset } from "@/assets";
 import styled from "styled-components";
+import ApplyIcon from "@/assets/icons/apply.svg?react";
+import ClockIcon from "@/assets/icons/clock.svg?react";
+import CvIcon from "@/assets/icons/cv.svg?react";
+
+const ACTIVE_COLOR = "#00FF67";
+const INACTIVE_COLOR = "#DCDCDC";
 
 const Sidebar = () => {
   const handleLogout = () => {
@@ -19,13 +25,9 @@ const Sidebar = () => {
             <MenuItem to="applicant" end>
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? asset("/icons/apply-active.svg")
-                        : asset("/icons/apply-unactive.svg")
-                    }
-                    alt=""
+                  <ApplyIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>지원자 관리</MenuText>
                 </>
@@ -35,13 +37,9 @@ const Sidebar = () => {
             <MenuItem to="interview">
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? asset("/icons/clock-active.svg")
-                        : asset("/icons/clock-unactive.svg")
-                    }
-                    alt=""
+                  <ClockIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>면접 관리</MenuText>
                 </>
@@ -51,13 +49,9 @@ const Sidebar = () => {
             <MenuItem to="application">
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? asset("/icons/cv-active.svg")
-                        : asset("/icons/cv-unactive.svg")
-                    }
-                    alt=""
+                  <CvIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>지원서 관리</MenuText>
                 </>
@@ -132,7 +126,7 @@ const MenuItem = styled(NavLink)`
   align-self: stretch;
   text-decoration: none;
 
-  img {
+  svg {
     display: block;
     width: auto;
     height: auto;
