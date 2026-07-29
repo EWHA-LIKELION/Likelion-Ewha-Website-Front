@@ -27,13 +27,17 @@ export const DisabledSubmitButton = (props) => (
 /* Default */
 export const RecruitInfoButton = ({ generation, ...props }) => (
   <DefaultButton {...props}>
-    <span>{generation ? `${generation}기 모집 안내 바로가기` : "모집 안내 바로가기"}</span>
-    <ArrowIcon src="/icons/arrowRight.svg" />
+    <span>
+      {generation ? `${generation}기 모집 안내 바로가기` : "모집 안내 바로가기"}
+    </span>
+    <ArrowIcon src="/icons/arrow-right.svg" />
   </DefaultButton>
 );
 
 export const RecruitAlarmButton = ({ generation, ...props }) => (
-  <DefaultButton {...props}>{generation ? `${generation}기 모집 알림 받기` : "모집 알림 받기"}</DefaultButton>
+  <DefaultButton {...props}>
+    {generation ? `${generation}기 모집 알림 받기` : "모집 알림 받기"}
+  </DefaultButton>
 );
 
 /* Recruit Check Button */
@@ -49,7 +53,7 @@ export const RecruitDisabledButton = ({ generation, ...props }) => (
 );
 
 export const HomeButton = (props) => (
-  <PrimaryButton {...props}>메인으로</PrimaryButton>
+  <HomeButtonStyle {...props}>메인으로</HomeButtonStyle>
 );
 
 /* =========================
@@ -135,6 +139,15 @@ const DefaultButton = styled(BaseButton)`
   }
 `;
 
+/* ===== Home (Default 스타일 + PC 너비만 조정) ===== */
+const HomeButtonStyle = styled(DefaultButton)`
+  width: 12.5rem;
+
+  @media (max-width: 799px) {
+    width: 7.5rem;
+  }
+`;
+
 const RecruitDisabledStyle = styled(BaseButton)`
   background-color: #a9a9a9;
   color: #ffffff;
@@ -149,6 +162,6 @@ const RecruitDisabledStyle = styled(BaseButton)`
 
 const ArrowIcon = styled.img`
   @media (max-width: 799px) {
-    content: url('/icons/arrowRight2.svg');
+    content: url("/icons/arrow-right-2.svg");
   }
 `;
