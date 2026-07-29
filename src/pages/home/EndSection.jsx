@@ -1,10 +1,10 @@
 import styled, { keyframes } from "styled-components";
 import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
-import CloverIcon from "../../../public/icons/clover.svg";
-import Clover1Icon from "../../../public/icons/clover-1.svg";
-import orangePattern from "../../../public/icons/orange-1.svg";
-import greenPattern from "../../../public/icons/green.svg";
+import CloverIcon from "@/assets/icons/clover.svg";
+import Clover1Icon from "@/assets/icons/clover-1.svg";
+import orangePattern from "@/assets/icons/orange-1.svg";
+import greenPattern from "@/assets/icons/green.svg";
 
 import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 import { MainButton } from "../../components/buttons/MainButtons";

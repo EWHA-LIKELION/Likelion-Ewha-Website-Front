@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import NexIcon from "../../../public/icons/next.svg";
-import PrevIcon from "../../../public/icons/previous.svg";
-import membersData from "@/data/members.json";
+import NexIcon from "@/assets/icons/next.svg";
+import PrevIcon from "@/assets/icons/previous.svg";
+import { members as membersData } from "@/data";
 
 const Carousel1 = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

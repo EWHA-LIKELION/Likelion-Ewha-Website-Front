@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { asset } from "@/assets";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -1036,7 +1037,7 @@ export default function ApplyIntegrated() {
                             <FileRow key={`pre-${idx}`}>
                               <FileName className="body-regular">{f.name}</FileName>
                               <TrashButton type="button" onClick={() => removeFileAt(setPrecourseFiles, idx)}>
-                                <img src="/icons/trash.svg" alt="" />
+                                <img src={asset("/icons/trash.svg")} alt="" />
                               </TrashButton>
                             </FileRow>
                           ))}
@@ -1072,7 +1073,7 @@ export default function ApplyIntegrated() {
                             <FileRow key={`port-${idx}`}>
                               <FileName className="body-regular">{f.name}</FileName>
                               <TrashButton type="button" onClick={() => removeFileAt(setPortfolioFiles, idx)}>
-                                <img src="/icons/trash.svg" alt="" />
+                                <img src={asset("/icons/trash.svg")} alt="" />
                               </TrashButton>
                             </FileRow>
                           ))}
@@ -1107,7 +1108,7 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="confirm"
             align="center"
-            icon={{ src: "/icons/ellipse-7.svg", alt: "" }}
+            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
             title="제출 완료하시겠습니까?"
             description={"지금 제출하시면 더이상 수정할 수 없습니다."}
             actions={[
@@ -1130,7 +1131,7 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="result"
             align="center"
-            icon={{ src: "/icons/ellipse-7.svg", alt: "" }}
+            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
             title="제출이 완료되었습니다"
             description={
               applicationCode
@@ -1169,7 +1170,7 @@ export default function ApplyIntegrated() {
           <MoDialogInner $variant="confirm">
             <MoTop>
               <MoIconRow>
-                <MoIcon src="/icons/ellipse-7.svg" alt="" />
+                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
               </MoIconRow>
 
               <MoTextBlock>
@@ -1194,7 +1195,7 @@ export default function ApplyIntegrated() {
           <MoDialogInner $variant="result">
             <MoTop>
               <MoIconRow>
-                <MoIcon src="/icons/ellipse-7.svg" alt="" />
+                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
               </MoIconRow>
 
               <MoTextBlock>
@@ -1233,7 +1234,7 @@ export default function ApplyIntegrated() {
                       cursor: applicationCode ? "pointer" : "default",
                     }}
                   >
-                    <img src="/icons/copy-input.svg" alt="" />
+                    <img src={asset("/icons/copy-input.svg")} alt="" />
                   </MoCopyBtn>
                 </MoCodeBox>
 

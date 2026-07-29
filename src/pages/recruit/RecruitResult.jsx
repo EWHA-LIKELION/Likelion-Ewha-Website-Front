@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { asset } from "@/assets";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { MainButton } from "@/components/buttons/MainButtons";
@@ -200,13 +201,13 @@ const Wrapper = styled.div`
   justify-content: center;
   gap: 3.75rem;
 
-  background: url("/images/recruit/recruit-result-pc.png") center / cover
+  background: url(${asset("/images/recruit/recruit-result-pc.png")}) center / cover
     no-repeat;
 
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    background: url("/images/recruit/recruit-result-mo.png") center / cover
+    background: url(${asset("/images/recruit/recruit-result-mo.png")}) center / cover
       no-repeat;
     min-height: calc(100vh - 4rem);
     padding: 0 1rem;

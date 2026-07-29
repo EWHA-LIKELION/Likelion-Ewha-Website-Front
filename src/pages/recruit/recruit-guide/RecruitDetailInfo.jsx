@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { asset } from "@/assets";
 import DropDown3 from "../../../components/dropdown/Dropdown3";
 import RecruitStatusButton from "../../../components/buttons/RecruitStatusButton";
 import { MainButton } from "../../../components/buttons/MainButtons";
@@ -14,7 +15,7 @@ const RecruitDetailInfo = () => {
         <ActivityInner>
           <ActivityHeader>
             <ActivityTitleArea>
-              <img src="/icons/ellipse.svg" alt="icon" />
+              <img src={asset("/icons/ellipse.svg")} alt="icon" />
               <h2>활동 계획</h2>
               <p>* 활동 계획은 변경될 수 있습니다.</p>
             </ActivityTitleArea>
@@ -76,7 +77,7 @@ const RecruitDetailInfo = () => {
       <PreLectureSection>
         <PreLectureInner>
           <PreLectureTitle>
-            <img src="/icons/ellipse.svg" alt="icon" />
+            <img src={asset("/icons/ellipse.svg")} alt="icon" />
             <h2>선수강 강의 안내</h2>
           </PreLectureTitle>
 
@@ -125,7 +126,7 @@ const RecruitDetailInfo = () => {
       <FAQSection>
         <FAQInner>
           <FAQTitleArea>
-            <img src="/icons/ellipse-4.svg" alt="icon" />
+            <img src={asset("/icons/ellipse-4.svg")} alt="icon" />
             <h2>자주 묻는 질문</h2>
           </FAQTitleArea>
 
@@ -145,7 +146,7 @@ const RecruitDetailInfo = () => {
       {/* 하단 지원 유도 섹션 */}
       <FooterBannerSection>
         <BannerContent>
-          <img src="/icons/ellipse.svg" alt="별 아이콘" />
+          <img src={asset("/icons/ellipse.svg")} alt="별 아이콘" />
           <h2>빛나는 내일, 이대 멋사와 함께하세요!</h2>
           <BannerButtons>
             <RecruitStatusButton pageType="recruit" recruitStyle="2" />

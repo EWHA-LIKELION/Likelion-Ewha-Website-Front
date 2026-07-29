@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import cloverIcon from "../../../public/icons/clover.svg";
+import cloverIcon from "@/assets/icons/clover.svg";
 import {
   OPERATING_YEARS,
   EWHA_OPERATING_YEARS,

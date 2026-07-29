@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { asset } from "@/assets";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks";
@@ -45,7 +46,7 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruit-part-flower.svg" />
+          <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
         <Card className="fe" onClick={() => handleClick("FRONTEND")}>
           <PartName>프론트엔드</PartName>
@@ -72,7 +73,7 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruit-part-flower.svg" />
+          <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
         <Card className="be" onClick={() => handleClick("BACKEND")}>
           <PartName>백엔드</PartName>
@@ -99,12 +100,12 @@ const RecruitPart = () => {
               />
             </svg>
           </Apply>
-          <img src="/icons/recruit-part-flower.svg" />
+          <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
       </CardWrapper>
-      <img className="num1" src="/icons/recruit-part-back-1.svg" />
-      <img className="num2" src="/icons/recruit-part-back-2.svg" />
-      <img className="num3" src="/icons/recruit-part-back-3.svg" />
+      <img className="num1" src={asset("/icons/recruit-part-back-1.svg")} />
+      <img className="num2" src={asset("/icons/recruit-part-back-2.svg")} />
+      <img className="num3" src={asset("/icons/recruit-part-back-3.svg")} />
     </Wrapper>
   );
 };

@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
-import closeIcon from "../../public/icons/close.svg";
-import copyIcon from "../../public/icons/copy.svg";
+import closeIcon from "@/assets/icons/close.svg";
+import copyIcon from "@/assets/icons/copy.svg";
 
 /* =========================
    1) Base 

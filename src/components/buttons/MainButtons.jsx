@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { asset } from "@/assets";
 
 /* =========================
     Main Button (Responsive)
@@ -154,11 +155,11 @@ const StyledMainButton = styled.button`
 
 /* ===== 아이콘 ===== */
 export const ArrowRightIcon = (props) => (
-  <ArrowIcon src="/icons/arrow-right.svg" alt="" {...props} />
+  <ArrowIcon src={asset("/icons/arrow-right.svg")} alt="" {...props} />
 );
 
 const ArrowIcon = styled.img`
   @media (max-width: 799px) {
-    content: url("/icons/arrow-right-2.svg");
+    content: url(${asset("/icons/arrow-right-2.svg")});
   }
 `;

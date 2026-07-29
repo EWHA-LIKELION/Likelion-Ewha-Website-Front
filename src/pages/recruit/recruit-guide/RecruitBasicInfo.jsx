@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { asset } from "@/assets";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { RecruitAPI } from "@/apis";
@@ -63,7 +64,7 @@ const RecruitBasicInfo = () => {
         <ScheduleInner>
           <ScheduleContentWrapper>
             <ScheduleTitle>
-              <img src="/icons/ellipse.svg" alt="icon" />
+              <img src={asset("/icons/ellipse.svg")} alt="icon" />
               <span>모집 일정</span>
             </ScheduleTitle>
 
@@ -106,7 +107,7 @@ const RecruitBasicInfo = () => {
       <TargetSection>
         <TargetInner>
           <TargetTitle>
-            <img src="/icons/ellipse.svg" alt="icon" />
+            <img src={asset("/icons/ellipse.svg")} alt="icon" />
             <span>모집 대상</span>
           </TargetTitle>
 
@@ -163,7 +164,7 @@ const RecruitBasicInfo = () => {
       <PartSection>
         <PartInner>
           <PartTitle>
-            <img src="/icons/ellipse-2.svg" alt="icon" />
+            <img src={asset("/icons/ellipse-2.svg")} alt="icon" />
             <span>모집 파트</span>
           </PartTitle>
 
@@ -173,7 +174,7 @@ const RecruitBasicInfo = () => {
               <span>PM · DESIGN</span>
               <LinkWrapper onClick={() => navigate("/?part=pm#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrow-right-3.svg" alt="icon" />
+                <img src={asset("/icons/arrow-right-3.svg")} alt="icon" />
               </LinkWrapper>
             </PartCard>
 
@@ -182,7 +183,7 @@ const RecruitBasicInfo = () => {
               <span>FRONTEND</span>
               <LinkWrapper onClick={() => navigate("/?part=fe#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrow-right-3.svg" alt="icon" />
+                <img src={asset("/icons/arrow-right-3.svg")} alt="icon" />
               </LinkWrapper>
             </PartCard>
 
@@ -191,7 +192,7 @@ const RecruitBasicInfo = () => {
               <span>BACKEND</span>
               <LinkWrapper onClick={() => navigate("/?part=be#curriculum")}>
                 <a>파트 소개 바로가기</a>
-                <img src="/icons/arrow-right-3.svg" alt="icon" />
+                <img src={asset("/icons/arrow-right-3.svg")} alt="icon" />
               </LinkWrapper>
             </PartCard>
           </PartCards>

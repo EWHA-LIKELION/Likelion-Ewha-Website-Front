@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { asset } from "@/assets";
 
 const BottomBar = () => {
   const handleBackToTop = () => {
@@ -10,12 +11,12 @@ const BottomBar = () => {
       <Inner>
         <TopRow>
           <LogoWrap>
-            <img src="/icons/group-bottom.svg" alt="LIKELION EWHA" />
+            <img src={asset("/icons/group-bottom.svg")} alt="LIKELION EWHA" />
           </LogoWrap>
 
           <BackToTopButton type="button" onClick={handleBackToTop}>
             <BackToTopText>Back to top</BackToTopText>
-            <BackToTopIcon src="/icons/back-to-top.svg" alt="" />
+            <BackToTopIcon src={asset("/icons/back-to-top.svg")} alt="" />
           </BackToTopButton>
         </TopRow>
 
@@ -27,13 +28,13 @@ const BottomBar = () => {
 
           <SocialRow>
             <SocialLink href="https://www.instagram.com/likelion_ewha/">
-              <img src="/icons/instagram.svg" alt="Instagram" />
+              <img src={asset("/icons/instagram.svg")} alt="Instagram" />
             </SocialLink>
             <SocialLink href="https://github.com/EWHA-LIKELION">
-              <img src="/icons/github.svg" alt="GitHub" />
+              <img src={asset("/icons/github.svg")} alt="GitHub" />
             </SocialLink>
             <SocialLink href="https://pf.kakao.com/_htxexfd">
-              <img src="/icons/kakao-talk.svg" alt="KakaoTalk" />
+              <img src={asset("/icons/kakao-talk.svg")} alt="KakaoTalk" />
             </SocialLink>
           </SocialRow>
 

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { asset } from "@/assets";
 import styled from "styled-components";
 
 const Sidebar = () => {
@@ -11,7 +12,7 @@ const Sidebar = () => {
       <Content>
         <TopBlock>
           <Logo>
-            <img src="/icons/logo-side.svg" alt="LIKELION EWHA" />
+            <img src={asset("/icons/logo-side.svg")} alt="LIKELION EWHA" />
           </Logo>
 
           <MenuGroup>
@@ -21,8 +22,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/apply-active.svg"
-                        : "/icons/apply-unactive.svg"
+                        ? asset("/icons/apply-active.svg")
+                        : asset("/icons/apply-unactive.svg")
                     }
                     alt=""
                   />
@@ -37,8 +38,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/clock-active.svg"
-                        : "/icons/clock-unactive.svg"
+                        ? asset("/icons/clock-active.svg")
+                        : asset("/icons/clock-unactive.svg")
                     }
                     alt=""
                   />
@@ -53,8 +54,8 @@ const Sidebar = () => {
                   <img
                     src={
                       isActive
-                        ? "/icons/cv-active.svg"
-                        : "/icons/cv-unactive.svg"
+                        ? asset("/icons/cv-active.svg")
+                        : asset("/icons/cv-unactive.svg")
                     }
                     alt=""
                   />
@@ -68,7 +69,7 @@ const Sidebar = () => {
         <BottomBlock>
           <Divider />
           <LogoutRow type="button" onClick={handleLogout} aria-label="로그아웃">
-            <img src="/icons/logout.svg" alt="" />
+            <img src={asset("/icons/logout.svg")} alt="" />
             <LogoutText>로그아웃</LogoutText>
           </LogoutRow>
         </BottomBlock>
