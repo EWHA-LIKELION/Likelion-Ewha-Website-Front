@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { asset } from "@/assets";
+import defaultImage from "@/assets/images/default-1.png";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
@@ -137,7 +139,7 @@ function Project() {
                   project={project.title}
                   description={project.description}
                   tags={[project.generation, project.category]}
-                  imageSrc={project.thumbnail || "/images/default1.png"}
+                  imageSrc={project.thumbnail || defaultImage}
                   styleType={1}
                 />
               </div>
@@ -150,7 +152,7 @@ function Project() {
               disabled={currentPage === 1}
               onClick={() => handlePageChange(currentPage - 1)}
             >
-              <img src="../../icons/leftPagination.svg" />
+              <img src={asset("/icons/left-pagination.svg")} />
             </PageBtn>
 
             {Array.from(
@@ -171,19 +173,19 @@ function Project() {
               disabled={currentPage === totalPages}
               onClick={() => handlePageChange(currentPage + 1)}
             >
-              <img src="../../icons/rightPagination.svg" />
+              <img src={asset("/icons/right-pagination.svg")} />
             </PageBtn>
           </Pagination>
         </Contents>
 
         <Design1>
-          <img src="/icons/designOrange.svg" />
+          <img src={asset("/icons/design-orange.svg")} />
         </Design1>
         <Design2>
-          <img src="/icons/designGreen.svg" />
+          <img src={asset("/icons/design-green.svg")} />
         </Design2>
         <Design3>
-          <img src="/icons/designOrange2.svg" />
+          <img src={asset("/icons/design-orange-2.svg")} />
         </Design3>
       </ProjectWrapper>
     </>

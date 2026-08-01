@@ -9,7 +9,8 @@ import {
   UnselectedRadio,
 } from "../../../components/buttons/SelectionButtons";
 
-import { TimeSelected } from "../../../components/buttons/TimeButtons";
+import { TimeButton } from "../../../components/buttons/TimeButtons";
+import { MainButton } from "../../../components/buttons/MainButtons";
 
 const MIN_TEXTAREA_HEIGHT = 266;
 const SUBMIT_BOTTOM_GAP = 160;
@@ -204,7 +205,7 @@ export default function Apply2Review() {
                           <TimeRow>
                             {times.map((t) => (
                               <span key={`${date}-${t}`} style={{ display: "inline-block" }}>
-                                <TimeSelected time={t} />
+                                <TimeButton variant="selected">{t}</TimeButton>
                               </span>
                             ))}
                           </TimeRow>
@@ -398,7 +399,11 @@ export default function Apply2Review() {
           </Section>
 
           <BottomRow $bottomGap={SUBMIT_BOTTOM_GAP}>
-            <BottomBtn type="button" onClick={() => navigate("/")}>
+            <BottomBtn
+              type="button"
+              variant="primary"
+              onClick={() => navigate("/")}
+            >
               홈으로
             </BottomBtn>
           </BottomRow>
@@ -854,23 +859,18 @@ const BottomRow = styled.div`
   margin-bottom: ${({ $bottomGap }) => $bottomGap}px;
 `;
 
-const BottomBtn = styled.button`
-  width: 390px;
+/* MainButton(primary) + 이 페이지의 px 기반 사이즈만 덮어씀 */
+const BottomBtn = styled(MainButton)`
   height: 52px;
-  border: none;
-  cursor: pointer;
-
-  border-radius: 40px;
-  background: var(--Primary-Main, #05da5b);
-  color: var(--Common-100, #fff);
-
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 0;
   font-size: 16px;
-  font-weight: 700;
   line-height: 24px;
 
   @media (max-width: 799px) {
     width: 100%;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
   }
 `;
 

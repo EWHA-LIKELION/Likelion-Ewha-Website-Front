@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { asset } from "@/assets";
 import RecruitStatusButton from "../../../components/buttons/RecruitStatusButton";
 
 const RecruitHero = () => {
@@ -45,12 +46,12 @@ const Inner = styled.div`
         rgba(0, 0, 0, 0.15) 70%,
         rgba(0, 0, 0, 0) 100%
         ),
-        url("/images/RecruitPcHero.png") center / cover no-repeat;
+        url(${asset("/images/recruit/recruit-hero-pc.png")}) center / cover no-repeat;
     
     @media (max-width: 799px) {
         height: auto;
         padding: 2.5rem 0;
-        background: url("/images/RecruitMoHero.png") center / cover no-repeat;
+        background: url(${asset("/images/recruit/recruit-hero-mo.png")}) center / cover no-repeat;
     }
 `;
 

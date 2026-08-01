@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { asset } from "@/assets";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import SegmentBar from "@/components/SegmentBar";
 import Curriculum from "@/components/Curriculum";
 import ProjectCard3 from "@/components/card/ProjectCard3";
 import Carousel2 from "@/components/carousel/Carousel2";
+import { MainButton } from "@/components/buttons/MainButtons";
 import { intercollegiates } from "@/data";
 import { useIsMobile } from "@/hooks";
 
@@ -36,7 +38,7 @@ const HomeMid = () => {
   return (
     <Wrapper>
       <Section className="curriculum" id="curriculum">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
         <Title className="point-eng-h2">curriculum</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           처음부터 차근 차근, 기초부터 심화까지
@@ -51,7 +53,7 @@ const HomeMid = () => {
         <Curriculum part={part} />
       </Section>
       <Section className="events">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
         <Title className="point-eng-h2">intercollegiate events</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           다양한 연합 행사에 참가하여 {isMobile && <br />}
@@ -70,19 +72,16 @@ const HomeMid = () => {
         </ProjectWrapper>
       </Section>
       <Section className="projects">
-        <img src="/icons/logoIcon.svg" className="logo-icon" />
+        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
         <Title className="point-eng-h2">projects</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           아기사자와 운영진들의 {isMobile && <br />}
           다양한 프로젝트를 확인해보세요!
         </SubTitle>
         <Carousel2 />
-        <Button
-          className={isMobile ? "body-bold" : "h4-bold"}
-          onClick={handleProjectMore}
-        >
+        <MainButton variant="dark" size="auto" onClick={handleProjectMore}>
           프로젝트 더보기
-        </Button>
+        </MainButton>
       </Section>
     </Wrapper>
   );
@@ -166,30 +165,3 @@ const ProjectWrapper = styled.div`
   }
 `;
 
-const Button = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  padding: 0.875rem 2.25rem;
-
-  border-radius: 2.5rem;
-  border: none;
-  background: var(--neutral-30, #474747);
-  color: var(--static-white);
-
-  transition: all 0.2s ease;
-
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  transition: all 0.2s ease;
-
-  @media (max-width: 799px) {
-    padding: 0.625rem 1.75rem;
-    border-radius: 1.25rem;
-  }
-`;

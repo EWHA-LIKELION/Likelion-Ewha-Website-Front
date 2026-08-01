@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { asset } from "@/assets";
+import defaultImage from "@/assets/images/default-1.png";
 import { Helmet } from "react-helmet-async";
 import DropDown1 from "/src/components/dropdown/Dropdown1";
 import MemberCard from "/src/components/card/MemberCard";
@@ -99,7 +101,7 @@ function People() {
                     part={m.part}
                     position={m.position || m.role}
                     department={m.department}
-                    imageSrc={m.photo || "/images/default1.png"}
+                    imageSrc={m.photo || defaultImage}
                     showPosition
                   />
                 ))}
@@ -152,7 +154,7 @@ function People() {
                       name={m.name}
                       part={m.part}
                       department={m.department}
-                      imageSrc={m.photo || "/images/default1.png"}
+                      imageSrc={m.photo || defaultImage}
                       showPosition={false}
                     />
                   ))}
@@ -162,13 +164,13 @@ function People() {
         </Container>
 
         <Design1>
-          <img src="/icons/designOrange.svg" />
+          <img src={asset("/icons/design-orange.svg")} />
         </Design1>
         <Design2>
-          <img src="/icons/designGreen.svg" />
+          <img src={asset("/icons/design-green.svg")} />
         </Design2>
         <Design3>
-          <img src="/icons/designOrange2.svg" />
+          <img src={asset("/icons/design-orange-2.svg")} />
         </Design3>
       </PeopleWrapper>
     </>

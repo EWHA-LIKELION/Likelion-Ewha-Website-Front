@@ -1,6 +1,8 @@
 import styled from "styled-components";
+import { asset } from "@/assets";
 import DropDown3 from "../../../components/dropdown/Dropdown3";
 import RecruitStatusButton from "../../../components/buttons/RecruitStatusButton";
+import { MainButton } from "../../../components/buttons/MainButtons";
 import { getFaqData } from "@/data";
 
 const RecruitDetailInfo = () => {
@@ -13,7 +15,7 @@ const RecruitDetailInfo = () => {
         <ActivityInner>
           <ActivityHeader>
             <ActivityTitleArea>
-              <img src="/icons/ellipse.svg" alt="icon" />
+              <img src={asset("/icons/ellipse.svg")} alt="icon" />
               <h2>활동 계획</h2>
               <p>* 활동 계획은 변경될 수 있습니다.</p>
             </ActivityTitleArea>
@@ -75,7 +77,7 @@ const RecruitDetailInfo = () => {
       <PreLectureSection>
         <PreLectureInner>
           <PreLectureTitle>
-            <img src="/icons/ellipse.svg" alt="icon" />
+            <img src={asset("/icons/ellipse.svg")} alt="icon" />
             <h2>선수강 강의 안내</h2>
           </PreLectureTitle>
 
@@ -99,12 +101,9 @@ const RecruitDetailInfo = () => {
                   </li>
                 </ul>
               </div>
-              <a
-                className="link-btn"
-                href="https://www.codecademy.com/learn/learn-html"
-              >
+              <LinkButton href="https://www.codecademy.com/learn/learn-html">
                 사이트 바로가기
-              </a>
+              </LinkButton>
             </PreLectureItem>
 
             <PreLectureItem>
@@ -115,12 +114,9 @@ const RecruitDetailInfo = () => {
                   <li>파트 2. 변수와 계산 (REPL, Shell 사용법 제외)</li>
                 </ul>
               </div>
-              <a
-                className="link-btn"
-                href="https://school.programmers.co.kr/learn/courses/2"
-              >
+              <LinkButton href="https://school.programmers.co.kr/learn/courses/2">
                 사이트 바로가기
-              </a>
+              </LinkButton>
             </PreLectureItem>
           </PreLectureList>
         </PreLectureInner>
@@ -130,7 +126,7 @@ const RecruitDetailInfo = () => {
       <FAQSection>
         <FAQInner>
           <FAQTitleArea>
-            <img src="/icons/ellipse4.svg" alt="icon" />
+            <img src={asset("/icons/ellipse-4.svg")} alt="icon" />
             <h2>자주 묻는 질문</h2>
           </FAQTitleArea>
 
@@ -150,7 +146,7 @@ const RecruitDetailInfo = () => {
       {/* 하단 지원 유도 섹션 */}
       <FooterBannerSection>
         <BannerContent>
-          <img src="/icons/ellipse.svg" alt="별 아이콘" />
+          <img src={asset("/icons/ellipse.svg")} alt="별 아이콘" />
           <h2>빛나는 내일, 이대 멋사와 함께하세요!</h2>
           <BannerButtons>
             <RecruitStatusButton pageType="recruit" recruitStyle="2" />
@@ -532,23 +528,6 @@ const PreLectureItem = styled.div`
     line-height: 1.5rem;
   }
 
-  .link-btn {
-    width: 12.375rem;
-    padding: 1.125rem 2.25rem;
-    border-radius: 2.5rem;
-    background: var(--Primary-sub, #ff9b38);
-    color: #ffffff;
-    color: var(--Static-White, #fff);
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.75rem;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
@@ -572,54 +551,35 @@ const PreLectureItem = styled.div`
       font-size: 0.75rem;
       line-height: 1.125rem;
     }
-
-    .link-btn {
-      all: unset;
-      box-sizing: border-box;
-      cursor: pointer;
-      width: 100%;
-      display: flex;
-      height: 2.625rem;
-      min-width: 15rem;
-      padding: 0.625rem 1.75rem;
-      justify-content: center;
-      align-items: center;
-      flex: 1 0 0;
-      border-radius: 1.25rem;
-      background: var(--Primary-sub, #ff9b38);
-      color: var(--Static-White, #fff);
-      text-align: center;
-      font-family: Pretendard;
-      font-size: 0.875rem;
-      font-weight: 700;
-      line-height: 1.375rem;
-    }
   }
 
   @media (max-width: 799px) and (min-width: 34.875rem) {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+`;
 
-    .link-btn {
-      all: unset;
-      box-sizing: border-box;
-      cursor: pointer;
-      width: 16rem;
-      height: 2.625rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 1.75rem;
-      border-radius: 1.25rem;
-      background: var(--Primary-sub, #ff9b38);
-      color: #fff;
-      font-family: Pretendard;
-      font-size: 0.875rem;
-      font-weight: 700;
-      white-space: nowrap;
-      flex: none;
-    }
+/* MainButton(sub) + 사전 강의 카드 레이아웃에 맞춘 너비만 덮어씀
+   styled(MainButton)에서는 as 대신 forwardedAs를 써야 MainButton 스타일이 유지됨 */
+const LinkButton = styled(MainButton).attrs({
+  forwardedAs: "a",
+  variant: "sub",
+})`
+  width: 12.375rem;
+  text-decoration: none;
+
+  @media (max-width: 799px) {
+    width: 100%;
+    min-width: 15rem;
+    height: 2.625rem;
+    flex: 1 0 0;
+  }
+
+  @media (max-width: 799px) and (min-width: 34.875rem) {
+    width: 16rem;
+    padding: 0 1.75rem;
+    flex: none;
   }
 `;
 

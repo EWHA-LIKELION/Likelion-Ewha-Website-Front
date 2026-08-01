@@ -1,75 +1,60 @@
 import React, { useState, useEffect } from "react";
+import { asset } from "@/assets";
+import ArrowRightSm from "@/assets/icons/arrow-right-sm.svg?react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks";
 
 const RecruitPart = () => {
-    const navigate = useNavigate();
-    const isMobile = useIsMobile();
-    
-    const handleClick = (partValue) => {
-        navigate("/recruit/apply/form", { state: { part: partValue } });
-    }; 
+  const navigate = useNavigate();
+  const isMobile = useIsMobile();
+
+  const handleClick = (partValue) => {
+    navigate("/recruit/apply/form", { state: { part: partValue } });
+  };
 
   return (
     <Wrapper>
       <Title className="point-eng-h2">RECRUIT</Title>
-      <Description className={isMobile ? "body-regular" : "h5-regular"}>이화여대 멋쟁이사자처럼에서 함께할 아기사자를 모집합니다!</Description>
+      <Description className={isMobile ? "body-regular" : "h5-regular"}>
+        이화여대 멋쟁이사자처럼에서 함께할 아기사자를 모집합니다!
+      </Description>
       <Date className="h3-extrabold">D-00</Date>
       <Period className="body-regular">0000년 00월 00일 ~ 00일</Period>
       <CardWrapper>
-        <Card 
-          className="pm"
-          onClick={() => handleClick("PM_DESIGN")}
-        >
-            <PartName>기획•디자인</PartName>
-            <Apply className="h5-bold pm">
+        <Card className="pm" onClick={() => handleClick("PM_DESIGN")}>
+          <PartName>기획•디자인</PartName>
+          <Apply className="h5-bold pm">
             <p>지원서 작성하기</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8.35938 2.35938L14 7.99995L8.35938 13.6405" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-              <path d="M13.9999 8L2 8" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-            </svg>
-            </Apply>
-            <img src="/icons/recruitPartFlower.svg"/>
+            <ArrowRightSm />
+          </Apply>
+          <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
-        <Card
-          className="fe"
-          onClick={() => handleClick("FRONTEND")}
-        >
-            <PartName>프론트엔드</PartName>
-            <Apply className="h5-bold fe">
+        <Card className="fe" onClick={() => handleClick("FRONTEND")}>
+          <PartName>프론트엔드</PartName>
+          <Apply className="h5-bold fe">
             <p>지원서 작성하기</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8.35938 2.35938L14 7.99995L8.35938 13.6405" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-              <path d="M13.9999 8L2 8" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-            </svg>
-            </Apply>
-            <img src="/icons/recruitPartFlower.svg"/>
+            <ArrowRightSm />
+          </Apply>
+          <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
-        <Card 
-          className="be"
-          onClick={() => handleClick("BACKEND")}
-        >
-            <PartName>백엔드</PartName>
-            <Apply className="h5-bold be">
+        <Card className="be" onClick={() => handleClick("BACKEND")}>
+          <PartName>백엔드</PartName>
+          <Apply className="h5-bold be">
             <p>지원서 작성하기</p>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8.35938 2.35938L14 7.99995L8.35938 13.6405" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-              <path d="M13.9999 8L2 8" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
-            </svg>
-            </Apply>
-            <img src="/icons/recruitPartFlower.svg"/>
-        </Card>  
+            <ArrowRightSm />
+          </Apply>
+          <img src={asset("/icons/recruit-part-flower.svg")} />
+        </Card>
       </CardWrapper>
-      <img className="num1" src="/icons/recruitPartBack1.svg"/>
-      <img className="num2" src="/icons/recruitPartBack2.svg"/>
-      <img className="num3" src="/icons/recruitPartBack3.svg"/>
+      <img className="num1" src={asset("/icons/recruit-part-back-1.svg")} />
+      <img className="num2" src={asset("/icons/recruit-part-back-2.svg")} />
+      <img className="num3" src={asset("/icons/recruit-part-back-3.svg")} />
     </Wrapper>
   );
-}
+};
 
 export default RecruitPart;
-
 
 const Wrapper = styled.div`
   min-height: calc(100vh - 5rem);
@@ -188,7 +173,7 @@ const Card = styled.button`
   justify-content: space-between;
   align-self: stretch;
   padding: 2rem;
-  
+
   border: none;
   border-radius: 0.75rem;
 
@@ -212,13 +197,13 @@ const Card = styled.button`
   }
 
   &.pm {
-    background: var(--green-90);
+    background: var(--yellow-90);
   }
-  &.fe{
-    background: var(--orange-80);
+  &.fe {
+    background: var(--blue-90);
   }
-  &.be{
-    background: var(--blue-70);
+  &.be {
+    background: var(--purple-90);
   }
 
   @media (max-width: 799px) {
@@ -232,7 +217,7 @@ const PartName = styled.div`
   color: var(--neutral-20);
   font-size: 1.25rem;
   font-weight: 800;
-  
+
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
@@ -250,13 +235,13 @@ const Apply = styled.div`
   font-weight: 700;
 
   &.pm {
-    color: var(--green-30);
+    color: var(--yellow-20);
   }
   &.fe {
-    color: var(--orange-30);
+    color: var(--blue-30);
   }
   &.be {
-    color: var(--blue-30);
+    color: var(--purple-30);
   }
 
   transition: all 0.2s ease;

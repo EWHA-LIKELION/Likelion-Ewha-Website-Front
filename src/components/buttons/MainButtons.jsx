@@ -1,64 +1,118 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import { asset } from "@/assets";
 
 /* =========================
-    Main Buttons (Responsive)
+    Main Button (Responsive)
+
+    사용 예시)
+    <MainButton variant="primary">지원하기</MainButton>
+    <MainButton variant="dark" size="wide" icon={<ArrowRightIcon />}>
+      13기 모집 안내 바로가기
+    </MainButton>
+    <MainButton variant="disabled">제출하기</MainButton>
+
+    개별 여백/너비만 다르면 styled(MainButton)으로 감싸 덮어쓰면 됩니다.
+    링크 버튼이 필요하면 <MainButton as="a" href="...">,
+    styled(MainButton) 안에서는 forwardedAs="a"를 씁니다.
 ========================= */
 
-/* Primary */
-export const SubmitButton = (props) => (
-  <PrimaryButton {...props}>제출하기</PrimaryButton>
+export const MainButton = ({
+  variant = "primary",
+  size = "default",
+  icon,
+  disabled,
+  children,
+  ...props
+}) => (
+  <StyledMainButton
+    $variant={variant}
+    $size={size}
+    disabled={(disabled ?? variant === "disabled") || undefined}
+    {...props}
+  >
+    <span>{children}</span>
+    {icon}
+  </StyledMainButton>
 );
 
-export const ApplyButton = (props) => (
-  <PrimaryButton {...props}>지원하기</PrimaryButton>
-);
-
-export const ApplyBlackButton = (props) => (
-  <PrimaryBlackButton {...props}>지원하기</PrimaryBlackButton>
-);
-
-/* Disabled */
-export const DisabledSubmitButton = (props) => (
-  <DisabledButton disabled {...props}>
-    제출하기
-  </DisabledButton>
-);
-
-/* Default */
-export const RecruitInfoButton = ({ generation, ...props }) => (
-  <DefaultButton {...props}>
-    <span>{generation ? `${generation}기 모집 안내 바로가기` : "모집 안내 바로가기"}</span>
-    <ArrowIcon src="/icons/arrowRight.svg" />
-  </DefaultButton>
-);
-
-export const RecruitAlarmButton = ({ generation, ...props }) => (
-  <DefaultButton {...props}>{generation ? `${generation}기 모집 알림 받기` : "모집 알림 받기"}</DefaultButton>
-);
-
-/* Recruit Check Button */
-export const RecruitCheckButton = ({ children, ...props }) => (
-  <DefaultButton {...props}>{children}</DefaultButton>
-);
-
-/* Recruit Disabled Button */
-export const RecruitDisabledButton = ({ generation, ...props }) => (
-  <RecruitDisabledStyle disabled {...props}>
-    {generation ? `${generation}기 지원 마감` : "지원 마감"}
-  </RecruitDisabledStyle>
-);
-
-export const HomeButton = (props) => (
-  <PrimaryButton {...props}>메인으로</PrimaryButton>
-);
+export default MainButton;
 
 /* =========================
     styled-components
 ========================= */
 
-const BaseButton = styled.button`
+/* ===== variant: 색상 ===== */
+const VARIANT_STYLES = {
+  /* 초록 배경 + 흰 글씨 */
+  primary: css`
+    background-color: #05da5b;
+    color: #ffffff;
+  `,
+  /* 초록 배경 + 검은 글씨 */
+  primaryBlack: css`
+    background-color: #05da5b;
+    color: #2a2a2a;
+  `,
+  /* 주황 배경 + 흰 글씨 */
+  sub: css`
+    background-color: var(--primary-sub, #ff9b38);
+    color: #ffffff;
+  `,
+  /* 진회색 배경 + 흰 글씨 */
+  dark: css`
+    background-color: #474747;
+    color: #ffffff;
+  `,
+  /* 회색 배경 + 흰 글씨 (비활성) */
+  disabled: css`
+    background-color: #a9a9a9;
+    color: #ffffff;
+
+    @media (max-width: 799px) {
+      background-color: #9b9b9b;
+    }
+  `,
+};
+
+/* ===== size: 너비/여백 ===== */
+const SIZE_STYLES = {
+  default: css`
+    width: 24.375rem;
+
+    @media (max-width: 799px) {
+      width: 12.5rem;
+    }
+  `,
+  /* 모바일에서 조금 더 넓은 버튼 */
+  wide: css`
+    width: 24.375rem;
+
+    @media (max-width: 799px) {
+      width: 13.75rem;
+      height: 2.625rem;
+      padding: 0.625rem 1.5rem 0.625rem 1.75rem;
+    }
+  `,
+  /* 너비 고정 없이 내용에 맞춰지는 버튼 */
+  auto: css`
+    padding: 0.875rem 2.25rem;
+
+    @media (max-width: 799px) {
+      padding: 0.625rem 1.75rem;
+    }
+  `,
+  /* 좁은 버튼 */
+  compact: css`
+    width: 12.5rem;
+
+    @media (max-width: 799px) {
+      width: 7.5rem;
+    }
+  `,
+};
+
+const StyledMainButton = styled.button`
   display: flex;
-  width: 24.375rem;
   padding: 1.125rem 2.25rem;
   justify-content: center;
   align-items: center;
@@ -88,67 +142,24 @@ const BaseButton = styled.button`
   }
 
   @media (max-width: 799px) {
-    width: 12.5rem;
     padding: 0.625rem 1.75rem;
     border-radius: 1.25rem;
     font-size: 0.875rem;
     line-height: 1.375rem;
     gap: 0.25rem;
   }
+
+  ${({ $variant }) => VARIANT_STYLES[$variant] ?? VARIANT_STYLES.primary}
+  ${({ $size }) => SIZE_STYLES[$size] ?? SIZE_STYLES.default}
 `;
 
-/* ===== Primary (white text) ===== */
-const PrimaryButton = styled(BaseButton)`
-  background-color: #05da5b;
-  color: #ffffff;
-`;
-
-/* ===== Primary (black text) ===== */
-const PrimaryBlackButton = styled(BaseButton)`
-  background-color: #05da5b;
-  color: #2a2a2a;
-
-  @media (max-width: 799px) {
-    color: #2a2a2a;
-  }
-`;
-
-/* ===== Disabled ===== */
-const DisabledButton = styled(BaseButton)`
-  background-color: #a9a9a9;
-  color: #ffffff;
-
-  @media (max-width: 799px) {
-    background-color: #9b9b9b;
-  }
-`;
-
-/* ===== Default ===== */
-const DefaultButton = styled(BaseButton)`
-  background-color: #474747;
-  color: #ffffff;
-
-  @media (max-width: 799px) {
-    width: 13.75rem;
-    height: 2.625rem;
-    padding: 0.625rem 1.5rem 0.625rem 1.75rem;
-  }
-`;
-
-const RecruitDisabledStyle = styled(BaseButton)`
-  background-color: #a9a9a9;
-  color: #ffffff;
-
-  @media (max-width: 799px) {
-    width: 13.75rem;
-    height: 2.625rem;
-    padding: 0.625rem 1.5rem 0.625rem 1.75rem;
-    background-color: #9b9b9b;
-  }
-`;
+/* ===== 아이콘 ===== */
+export const ArrowRightIcon = (props) => (
+  <ArrowIcon src={asset("/icons/arrow-right.svg")} alt="" {...props} />
+);
 
 const ArrowIcon = styled.img`
   @media (max-width: 799px) {
-    content: url('/icons/arrowRight2.svg');
+    content: url(${asset("/icons/arrow-right-2.svg")});
   }
 `;

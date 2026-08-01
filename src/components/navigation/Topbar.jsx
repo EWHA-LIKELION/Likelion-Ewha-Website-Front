@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { asset } from "@/assets";
 import styled from "styled-components";
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 
@@ -62,7 +63,7 @@ const TopBar = ({ onToggleMobileMenu }) => {
       <Topbar>
         <Inner>
           <Logo to="/" aria-label="LIKELION EWHA Home">
-            <img src="/icons/logotop.svg" alt="LIKELION EWHA" />
+            <img src={asset("/icons/logo-top.svg")} alt="LIKELION EWHA" />
           </Logo>
 
           <PcNav aria-label="Primary">
@@ -77,7 +78,7 @@ const TopBar = ({ onToggleMobileMenu }) => {
             aria-expanded={isOpen}
             onClick={toggleMenu}
           >
-            <img src="/icons/hamburger.svg" alt="" />
+            <img src={asset("/icons/hamburger.svg")} alt="" />
           </MoMenuButton>
         </Inner>
       </Topbar>

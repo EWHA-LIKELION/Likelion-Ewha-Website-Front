@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-const DEFAULT_IMAGE = "/icons/defaultImg.svg";
+import DEFAULT_IMAGE from "@/assets/icons/default-img.svg";
 
 const MemberCard = ({ 
   name = "이름", 

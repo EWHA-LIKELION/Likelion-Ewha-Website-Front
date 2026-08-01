@@ -359,9 +359,11 @@ body {
 }
 /* .Primitive: Colors */
 :root {
-  --blue-30: #0648aa;
+  --blue-30: #005d9f;
   --blue-50: #1869e2;
+  --blue-60: #2ea7ff;
   --blue-70: #acdeff;
+  --blue-90: #b7e1ff;
   --common-0: #000000;
   --common-100: #ffffff;
   --cool-neutral-10: #171719;
@@ -387,7 +389,7 @@ body {
   --green-70: #54e64c;
   --green-80: #83f57d;
   --green-90: #b0fcac;
-  --green-95: #ddffd9;
+  --green-95: #ebf9f1;
   --green-99: #f2fff6;
   --neutral-10: #171717;
   --neutral-15: #1c1c1c;
@@ -414,6 +416,9 @@ body {
   --orange-90: #fee6c6;
   --orange-95: #fef4e6;
   --orange-99: #fffcf7;
+  --purple-30: #692295;
+  --purple-60: #b256ea;
+  --purple-90: #ead1ff;
   --red-10: #3b0101;
   --red-20: #730303;
   --red-30: #b00c0c;
@@ -425,4 +430,7 @@ body {
   --red-90: #fed5d5;
   --red-95: #feecec;
   --red-99: #fffafa;
+  --yellow-20: #7c5f00;
+  --yellow-50: #fbc100;
+  --yellow-90: #ffeeb7;
 }

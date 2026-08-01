@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import ChevronDown16 from "@/assets/icons/chevron-down-16.svg?react";
 
 const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false, disabled = false }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,9 +50,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
           </SelectedText>
         </TextWrapper>
         <ArrowButton onClick={() => !disabled && setIsOpen(!isOpen)} $isOpen={isOpen} $disabled={disabled}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="9" viewBox="0 0 16 9" fill="none">
-            <path d="M0.530273 0.53125L7.53027 7.53125L14.5303 0.53125" stroke="#9B9B9B" strokeWidth="1.5" strokeLinejoin="round"/>
-          </svg>
+          <ChevronDown16 />
         </ArrowButton>
       </SelectButton>
       

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { curriculums } from "@/data";
 import { useIsMobile } from "@/hooks";
+import ChevronDown from "@/assets/icons/chevron-down.svg?react";
 
 const Curriculum = ({ part = "pm" }) => {
   let curriculum;
@@ -64,20 +65,7 @@ const Curriculum = ({ part = "pm" }) => {
                     </SessionTitle>
                   </SessionContent>
                   <ArrowButton $isOpen={isOpen}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18"
-                      height="10"
-                      viewBox="0 0 18 10"
-                      fill="none"
-                    >
-                      <path
-                        d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031"
-                        stroke="#9B9B9B"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ChevronDown />
                   </ArrowButton>
                 </DropdownButton>
                 <DescriptionContent

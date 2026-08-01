@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled, { keyframes } from "styled-components";
 import { Modal } from "../Modal";
-import IMAGES from "../../data/news.json";
+import { news as IMAGES } from "@/data";
 import { useIntersectionObserver } from "@/hooks";
 
 const ImageSlider = () => {

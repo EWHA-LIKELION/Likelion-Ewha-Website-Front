@@ -4,6 +4,8 @@ import styled, { css } from "styled-components";
 import { projects as projectsData } from "@/data";
 import ProjectCard2 from "../card/ProjectCard2";
 import { useIsMobile } from "@/hooks";
+import ChevronLeft from "@/assets/icons/chevron-left.svg?react";
+import ChevronRight from "@/assets/icons/chevron-right.svg?react";
 
 /* ===== 설정값 ===== */
 const CLONE_COUNT = 4;
@@ -96,9 +98,7 @@ const Carousel2 = () => {
       <Viewport>
         {/* 왼쪽 화살표 */}
         <ArrowButton $left onClick={handlePrev} $itemWidth={ITEM_WIDTH} $centerScale={CENTER_SCALE} $arrowGap={ARROW_GAP}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M16.5 3L7.5 12L16.5 21" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
-          </svg>
+          <ChevronLeft />
         </ArrowButton>
 
         {/* 캐러셀 */}
@@ -141,9 +141,7 @@ const Carousel2 = () => {
 
         {/* 오른쪽 화살표 */}
         <ArrowButton $right onClick={handleNext} $itemWidth={ITEM_WIDTH} $centerScale={CENTER_SCALE} $arrowGap={ARROW_GAP}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M7.5 21L16.5 12L7.5 3" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
-          </svg>
+          <ChevronRight />
         </ArrowButton>
       </Viewport>
     </CarouselWrapper>

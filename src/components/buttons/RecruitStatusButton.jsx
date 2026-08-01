@@ -8,14 +8,7 @@ import {
   NEXT_GENERATION,
   FALLBACK_SCHEDULE,
 } from "@/config/siteConfig";
-import {
-  RecruitAlarmButton,
-  RecruitInfoButton,
-  RecruitCheckButton,
-  RecruitDisabledButton,
-  ApplyButton,
-  ApplyBlackButton,
-} from "./MainButtons";
+import { MainButton, ArrowRightIcon } from "./MainButtons";
 
 // 모집 상태 계산 함수
 const getRecruitStatus = (schedule) => {
@@ -194,6 +187,13 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
     }
   };
 
+  // 모집 알림 버튼 (기수만 다름)
+  const renderAlarmButton = (generation) => (
+    <MainButton variant="dark" size="wide" onClick={openAlarmModal}>
+      {generation ? `${generation}기 모집 알림 받기` : "모집 알림 받기"}
+    </MainButton>
+  );
+
   // 버튼 렌더링
   const renderButton = () => {
     switch (recruitStatus) {
@@ -208,25 +208,39 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
         };
 
         if (pageType === "recruit") {
-          if (recruitStyle === "1") {
-            // return <ApplyButton onClick={goApply} />;
-            return <ApplyButton onClick={goExternalApply} />;
-          } else {
-            // return <ApplyBlackButton onClick={goApply} />;
-            return <ApplyBlackButton onClick={goExternalApply} />;
-          }
+          // onClick={goApply}
+          return (
+            <MainButton
+              variant={recruitStyle === "1" ? "primary" : "primaryBlack"}
+              onClick={goExternalApply}
+            >
+              지원하기
+            </MainButton>
+          );
         } else {
           return (
-            <RecruitInfoButton
-              generation={CURRENT_GENERATION}
+            <MainButton
+              variant="dark"
+              size="wide"
+              icon={<ArrowRightIcon />}
               onClick={goRecruitPage}
-            />
+            >
+              {CURRENT_GENERATION
+                ? `${CURRENT_GENERATION}기 모집 안내 바로가기`
+                : "모집 안내 바로가기"}
+            </MainButton>
           );
         }
       }
 
       case "CLOSED":
-        return <RecruitDisabledButton generation={CURRENT_GENERATION} />;
+        return (
+          <MainButton variant="disabled" size="wide">
+            {CURRENT_GENERATION
+              ? `${CURRENT_GENERATION}기 지원 마감`
+              : "지원 마감"}
+          </MainButton>
+        );
 
       case "FIRST_RESULT":
       case "FINAL_RESULT": {
@@ -237,28 +251,22 @@ const RecruitStatusButton = ({ pageType = "home", recruitStyle = "1" }) => {
               "1차 합격자 발표"
             : "최종 합격자 발표";
         return (
-          // <RecruitCheckButton onClick={openResultCodeModal}>
-          <RecruitCheckButton onClick={() => setIsResultModalOpen(true)}>
+          // onClick={openResultCodeModal}
+          <MainButton
+            variant="dark"
+            size="wide"
+            onClick={() => setIsResultModalOpen(true)}
+          >
             {btnText}
-          </RecruitCheckButton>
+          </MainButton>
         );
       }
       case "BEFORE":
-        return (
-          <RecruitAlarmButton
-            generation={CURRENT_GENERATION}
-            onClick={openAlarmModal}
-          />
-        );
+        return renderAlarmButton(CURRENT_GENERATION);
       case "DEFAULT":
       default:
         //아직 CURRENT_GENERATION 값이 갱신 되기 전 띄우는 버튼이기 때문에 +1 처리
-        return (
-          <RecruitAlarmButton
-            generation={NEXT_GENERATION}
-            onClick={openAlarmModal}
-          />
-        );
+        return renderAlarmButton(NEXT_GENERATION);
     }
   };
 

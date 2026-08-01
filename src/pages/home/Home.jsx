@@ -43,7 +43,7 @@ const Home = () => {
             name: "이화여대 멋쟁이사자처럼",
             alternateName: "Ewha LIKELION",
             url: "https://likelion.ewha.university",
-            logo: "https://likelion.ewha.university/icons/favicon.svg",
+            logo: "https://likelion.ewha.university/favicon.svg",
             description:
               "이화여자대학교의 IT 창업 동아리로 개발, 기획, 디자인을 배우며 함께 성장합니다.",
             foundingDate: "2013",

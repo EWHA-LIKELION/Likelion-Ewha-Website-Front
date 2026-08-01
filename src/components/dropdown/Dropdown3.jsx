@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import ChevronDown from "@/assets/icons/chevron-down.svg?react";
+import ChevronDown13 from "@/assets/icons/chevron-down-13.svg?react";
+import ChevronDown14 from "@/assets/icons/chevron-down-14.svg?react";
+import ChevronDown25 from "@/assets/icons/chevron-down-25.svg?react";
 
 const DropDown3 = ({ question, answer, styleType = 1 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +17,11 @@ const DropDown3 = ({ question, answer, styleType = 1 }) => {
       window.addEventListener("resize", handleResize);
       return () => window.removeEventListener("resize", handleResize);
     }, []);
+
+  // styleType 1 은 열림 상태에 따라 색이 바뀌고, 그 외에는 회색 고정
+  const Chevron = styleType === 1
+    ? (isMobile ? ChevronDown14 : ChevronDown25)
+    : (isMobile ? ChevronDown13 : ChevronDown);
 
   return (
     <Container $isOpen={isOpen} $styleType={styleType}>
@@ -34,27 +43,11 @@ const DropDown3 = ({ question, answer, styleType = 1 }) => {
           </QuestionText>
         </TextWrapper>
         <ArrowButton $isOpen={isOpen} $styleType={styleType}>
-          {styleType === 1 ? (
-            isMobile ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                <path d="M0.530334 0.530273L6.53033 6.53027L12.5303 0.530273" stroke={isOpen ? 'var(--primary-main)' : 'var(--neutral-70)'} strokeWidth="1.5" strokeLinejoin="round"/>
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="14" viewBox="0 0 25 14" fill="none">
-                <path d="M0.707031 0.707031L12.3737 12.3737L24.0404 0.707027" stroke={isOpen ? 'var(--primary-main)' : 'var(--neutral-70)'} strokeWidth="2" strokeLinejoin="round"/>
-              </svg>
-            )
-          ) : (
-            isMobile ? (
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="8" viewBox="0 0 13 8" fill="none">
-                <path d="M0.530334 0.530273L6.36367 6.36361L12.197 0.530273" stroke="#9B9B9B" strokeWidth="1.5" strokeLinejoin="round"/>
-              </svg>
-            ) : (
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="10" viewBox="0 0 18 10" fill="none">
-                <path d="M0.707031 0.707031L8.8737 8.8737L17.0404 0.707031" stroke="#9B9B9B" strokeWidth="2" strokeLinejoin="round"/>
-              </svg>
-            )
-          )}
+          <Chevron
+            {...(styleType === 1 && {
+              stroke: isOpen ? 'var(--primary-main)' : 'var(--neutral-70)',
+            })}
+          />
         </ArrowButton>
       </SelectButton>
       

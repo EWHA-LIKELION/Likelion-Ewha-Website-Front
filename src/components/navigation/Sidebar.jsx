@@ -1,5 +1,12 @@
 import { NavLink } from "react-router-dom";
+import { asset } from "@/assets";
 import styled from "styled-components";
+import ApplyIcon from "@/assets/icons/apply.svg?react";
+import ClockIcon from "@/assets/icons/clock.svg?react";
+import CvIcon from "@/assets/icons/cv.svg?react";
+
+const ACTIVE_COLOR = "#00FF67";
+const INACTIVE_COLOR = "#DCDCDC";
 
 const Sidebar = () => {
   const handleLogout = () => {
@@ -11,20 +18,16 @@ const Sidebar = () => {
       <Content>
         <TopBlock>
           <Logo>
-            <img src="/icons/logoside.svg" alt="LIKELION EWHA" />
+            <img src={asset("/icons/logo-side.svg")} alt="LIKELION EWHA" />
           </Logo>
 
           <MenuGroup>
             <MenuItem to="applicant" end>
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? "/icons/applyactive.svg"
-                        : "/icons/applyunactive.svg"
-                    }
-                    alt=""
+                  <ApplyIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>지원자 관리</MenuText>
                 </>
@@ -34,13 +37,9 @@ const Sidebar = () => {
             <MenuItem to="interview">
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? "/icons/clockactive.svg"
-                        : "/icons/clockunactive.svg"
-                    }
-                    alt=""
+                  <ClockIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>면접 관리</MenuText>
                 </>
@@ -50,13 +49,9 @@ const Sidebar = () => {
             <MenuItem to="application">
               {({ isActive }) => (
                 <>
-                  <img
-                    src={
-                      isActive
-                        ? "/icons/cvactive.svg"
-                        : "/icons/cvunactive.svg"
-                    }
-                    alt=""
+                  <CvIcon
+                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
+                    aria-hidden="true"
                   />
                   <MenuText $active={isActive}>지원서 관리</MenuText>
                 </>
@@ -68,7 +63,7 @@ const Sidebar = () => {
         <BottomBlock>
           <Divider />
           <LogoutRow type="button" onClick={handleLogout} aria-label="로그아웃">
-            <img src="/icons/logout.svg" alt="" />
+            <img src={asset("/icons/logout.svg")} alt="" />
             <LogoutText>로그아웃</LogoutText>
           </LogoutRow>
         </BottomBlock>
@@ -131,7 +126,7 @@ const MenuItem = styled(NavLink)`
   align-self: stretch;
   text-decoration: none;
 
-  img {
+  svg {
     display: block;
     width: auto;
     height: auto;
