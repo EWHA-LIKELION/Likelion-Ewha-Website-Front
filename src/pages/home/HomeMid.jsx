@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { asset } from "@/assets";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import SegmentBar from "@/components/SegmentBar";
-import Curriculum from "@/components/Curriculum";
+import Curriculum from "@/pages/home/Curriculum";
 import ProjectCard3 from "@/components/card/ProjectCard3";
 import Carousel2 from "@/components/carousel/Carousel2";
 import { MainButton } from "@/components/buttons/MainButtons";
@@ -164,4 +164,3 @@ const ProjectWrapper = styled.div`
     margin-top: 2rem;
   }
 `;
-
