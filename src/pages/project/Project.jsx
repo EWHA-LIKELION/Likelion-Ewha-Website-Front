@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import SegmentBar from "/src/components/SegmentBar.jsx";
-import DropDown1 from "/src/components/dropdown/Dropdown1";
+import Dropdown from "@/components/dropdown/Dropdown";
 import ProjectCard1 from "/src/components/card/ProjectCard1";
 import { projects } from "@/data";
 import { useIsMobile } from "@/hooks";
@@ -104,7 +104,7 @@ function Project() {
                 }}
               />
             ) : (
-              <DropDown1
+              <Dropdown
                 options={["전체", "해커톤", "졸업 프로젝트", "대동제 사이트"]}
                 defaultValue={category}
                 onSelect={(value) => {
@@ -114,7 +114,7 @@ function Project() {
               />
             )}
 
-            <DropDown1
+            <Dropdown
               options={["전체", "13기", "12기", "11기", "10기"]}
               defaultValue={"전체"}
               onSelect={(value) => {

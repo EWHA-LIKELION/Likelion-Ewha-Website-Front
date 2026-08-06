@@ -1,13 +1,8 @@
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useLayoutEffect,
-} from "react";
+import React, { useState, useRef, useEffect, useLayoutEffect } from "react";
 import styled from "styled-components";
 import ChevronDown from "@/assets/icons/chevron-down.svg?react";
 
-const DropDown1 = ({
+const Dropdown = ({
   options = [],
   defaultValue,
   placeholder = "선택하세요",
@@ -30,8 +25,7 @@ const DropDown1 = ({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // 화면 크기 감지
@@ -49,14 +43,14 @@ const DropDown1 = ({
     if (hiddenOptionsRef.current) {
       const items = hiddenOptionsRef.current.children;
       let maxWidth = 0;
-      
+
       for (let i = 0; i < items.length; i++) {
         const itemWidth = items[i].offsetWidth;
         if (itemWidth > maxWidth) {
           maxWidth = itemWidth;
         }
       }
-      
+
       setTextWidth(maxWidth);
     }
   }, [options, isMobile]);
@@ -98,10 +92,7 @@ const DropDown1 = ({
           ))}
         </OptionsList>
 
-        <ArrowButton
-          onClick={() => setIsOpen(!isOpen)}
-          $isOpen={isOpen}
-        >
+        <ArrowButton onClick={() => setIsOpen(!isOpen)} $isOpen={isOpen}>
           <ChevronDown stroke="white" />
         </ArrowButton>
       </SelectButton>
@@ -109,7 +100,10 @@ const DropDown1 = ({
       {/* 🔹 텍스트 너비 측정 전용 (화면에 안 보임) */}
       <HiddenOptionsList ref={hiddenOptionsRef}>
         {options.map((option, index) => (
-          <OptionItem key={index} className={isMobile ? "body-regular" : "h5-regular"}>
+          <OptionItem
+            key={index}
+            className={isMobile ? "body-regular" : "h5-regular"}
+          >
             {option}
           </OptionItem>
         ))}
@@ -118,8 +112,7 @@ const DropDown1 = ({
   );
 };
 
-export default DropDown1;
-
+export default Dropdown;
 
 const Container = styled.div`
   position: relative;
@@ -203,7 +196,9 @@ const OptionsList = styled.ul`
   visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
   opacity: ${(props) => (props.$isOpen ? "1" : "0")};
   pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
 
   @media (max-width: 799px) {
     max-height: 16.9rem;

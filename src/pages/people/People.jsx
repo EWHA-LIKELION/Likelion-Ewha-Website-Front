@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { asset } from "@/assets";
 import defaultImage from "@/assets/images/default-1.png";
 import { Helmet } from "react-helmet-async";
-import DropDown1 from "/src/components/dropdown/Dropdown1";
+import Dropdown from "@/components/dropdown/Dropdown";
 import MemberCard from "/src/components/card/MemberCard";
 import SegmentBar from "/src/components/SegmentBar";
 import { members } from "@/data";
@@ -67,7 +67,7 @@ function People() {
           </PeopleInfo>
 
           {/* 기수 선택 */}
-          <DropDown1
+          <Dropdown
             options={["13기", "12기", "11기", "10기"]}
             defaultValue={"13기"}
             onSelect={(value) => setSelectedGeneration(value)}
