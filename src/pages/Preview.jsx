@@ -1,10 +1,10 @@
+import FilterChip from "@/components/chip/FilterChip";
 import AdminDropdown from "@/components/dropdown/AdminDropdown";
-import Dropdown from "@/components/dropdown/Dropdown";
 
 const Preview = () => {
   return (
     <>
-      <span>
+      <span style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
         <AdminDropdown
           placeholder="지원파트"
           options={["기획･디자인", "프론트엔드", "백엔드"]}
@@ -23,6 +23,13 @@ const Preview = () => {
         />
       </span>
       <br />
+      <span style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
+        <FilterChip>기획･디자인</FilterChip>
+        <FilterChip>프론트엔드</FilterChip>
+        <FilterChip>대면</FilterChip>
+        <FilterChip>1차 심사중</FilterChip>
+        <FilterChip isReset>초기화</FilterChip>
+      </span>
     </>
   );
 };
