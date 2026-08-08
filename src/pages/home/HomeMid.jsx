@@ -46,7 +46,8 @@ const HomeMid = () => {
         <SegmentBar
           className="segment-bar-margin"
           items={["기획·디자인", "프론트엔드", "백엔드"]}
-          styleType={2}
+          size="s"
+          tone="light"
           onSelect={handleSelect}
           selected={partMap.indexOf(part)}
         />

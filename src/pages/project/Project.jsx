@@ -97,7 +97,8 @@ function Project() {
             {!isMobile ? (
               <SegmentBar
                 items={["전체", "해커톤", "졸업 프로젝트", "대동제 사이트"]}
-                styleType={1}
+                size="l"
+                tone="dark"
                 onSelect={(i, item) => {
                   setCategory(item);
                   setCurrentPage(1);

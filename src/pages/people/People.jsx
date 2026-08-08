@@ -138,7 +138,8 @@ function People() {
               {/* 파트 필터 */}
               <SegmentBar
                 items={["기획•디자인", "프론트엔드", "백엔드"]}
-                styleType={1}
+                size="l"
+                tone="dark"
                 onSelect={(index, item) => setSelectedPart(item)}
               />
 
