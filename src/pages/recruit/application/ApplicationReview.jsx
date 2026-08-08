@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../../../components/Input";
+import Input from "../../../components/input/Input";
 
 import {
   SelectedRadio,
