@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import { asset } from "@/assets";
-import DropDown1 from "@/components/dropdown/Dropdown1";
+import Dropdown from "@/components/dropdown/Dropdown";
 import SegmentBar from "@/components/SegmentBar";
 import AdminButton from "@/components/buttons/AdminButtons";
 import AdminInput from "@/components/input/AdminInput";
@@ -84,7 +84,7 @@ const RecruitmentSchedule = () => {
     <Wrapper>
       <h2 className="point-kor-h2">모집 일정 관리</h2>
       <Select>
-        <DropDown1 options={YEARS} defaultValue={year} onSelect={setYear} />
+        <Dropdown options={YEARS} defaultValue={year} onSelect={setYear} />
         {isEditing ? (
           <AdminButton type="submit" form={FORM_ID}>
             수정완료
