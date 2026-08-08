@@ -3,7 +3,6 @@ import { asset } from "@/assets";
 import styled from "styled-components";
 import ApplyIcon from "@/assets/icons/apply.svg?react";
 import ClockIcon from "@/assets/icons/clock.svg?react";
-import CvIcon from "@/assets/icons/cv.svg?react";
 
 const ACTIVE_COLOR = "#00FF67";
 const INACTIVE_COLOR = "#DCDCDC";
@@ -34,26 +33,14 @@ const Sidebar = () => {
               )}
             </MenuItem>
 
-            <MenuItem to="interview">
+            <MenuItem to="schedule">
               {({ isActive }) => (
                 <>
                   <ClockIcon
                     stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
                     aria-hidden="true"
                   />
-                  <MenuText $active={isActive}>면접 관리</MenuText>
-                </>
-              )}
-            </MenuItem>
-
-            <MenuItem to="application">
-              {({ isActive }) => (
-                <>
-                  <CvIcon
-                    stroke={isActive ? ACTIVE_COLOR : INACTIVE_COLOR}
-                    aria-hidden="true"
-                  />
-                  <MenuText $active={isActive}>지원서 관리</MenuText>
+                  <MenuText $active={isActive}>모집 일정 관리</MenuText>
                 </>
               )}
             </MenuItem>
@@ -136,7 +123,9 @@ const MenuItem = styled(NavLink)`
 const MenuText = styled.span`
   color: ${({ $active }) =>
     $active ? "#00FF67" : "var(--neutral-95, #DCDCDC)"};
-  font-family: Cafe24 PRO Slim, sans-serif;
+  font-family:
+    Cafe24 PRO Slim,
+    sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -174,7 +163,9 @@ const LogoutRow = styled.button`
 
 const LogoutText = styled.span`
   color: var(--neutral-70, #9b9b9b);
-  font-family: Cafe24 PRO Slim, sans-serif;
+  font-family:
+    Cafe24 PRO Slim,
+    sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;

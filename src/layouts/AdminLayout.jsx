@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/navigation/Sidebar.jsx";
+import Sidebar from "@/components/navigation/Sidebar.jsx";
 
 const LayoutAdmin = () => {
   return (
@@ -46,8 +46,8 @@ const DesktopSidebar = styled.aside`
 
 const MainArea = styled.main`
   flex: 1;
+  padding: 2.25rem 3.75rem;
   background: #fff;
-  padding: 20px;
   min-width: 0;
   min-height: 0;
   overflow-y: auto;
