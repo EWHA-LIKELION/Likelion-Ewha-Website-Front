@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { asset } from "@/assets";
-import DropDown3 from "../../../components/dropdown/Dropdown3";
+import TermsDropdown from "../../../components/dropdown/TermsDropdown";
 import RecruitStatusButton from "../../../components/buttons/RecruitStatusButton";
 import { MainButton } from "../../../components/buttons/MainButtons";
 import { getFaqData } from "@/data";
@@ -132,7 +132,7 @@ const RecruitDetailInfo = () => {
 
           <FAQList>
             {faqData.map((item) => (
-              <DropDown3
+              <TermsDropdown
                 key={item.id}
                 question={item.question}
                 answer={item.answer}

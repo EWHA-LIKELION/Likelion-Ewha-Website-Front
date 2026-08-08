@@ -10,10 +10,14 @@ import RecruitPart from "./pages/recruit/RecruitPart.jsx";
 import RecruitResult from "./pages/recruit/RecruitResult.jsx";
 import ApplyIntegrated from "./pages/recruit/application/Application.jsx";
 import Apply2Review from "./pages/recruit/application/ApplicationReview.jsx";
+import Preview from "./pages/Preview.jsx";
 
 function App() {
   return (
     <Routes>
+      {/* Preview */}
+      <Route path="preview" element={<Preview />} />
+
       {/* Public Layout */}
       <Route element={<Layout />}>
         <Route index element={<Home />} />

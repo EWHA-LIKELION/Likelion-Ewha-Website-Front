@@ -6,8 +6,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import Input from "../../../components/Input";
-import Dropdown2 from "../../../components/dropdown/Dropdown2";
-import Dropdown3 from "../../../components/dropdown/Dropdown3";
+import FAQDropdown from "../../../components/dropdown/FAQDropdown";
+import TermsDropdown from "../../../components/dropdown/TermsDropdown";
 import { api, ApplicationsAPI } from "@/apis";
 import { useIsMobile } from "@/hooks";
 
@@ -532,7 +532,7 @@ export default function ApplyIntegrated() {
                   </LabelWrapper>
                   <DropdownContainer>
                     <DropdownWrapper>
-                      <Dropdown2
+                      <FAQDropdown
                         options={yearOptions}
                         value={birthYear}
                         onChange={setBirthYear}
@@ -541,7 +541,7 @@ export default function ApplyIntegrated() {
                         unit="년"
                         error={!isBirthValid && (birthYear || birthMonth || birthDay)}
                       />
-                      <Dropdown2
+                      <FAQDropdown
                         options={monthOptions}
                         value={birthMonth}
                         onChange={setBirthMonth}
@@ -550,7 +550,7 @@ export default function ApplyIntegrated() {
                         unit=" 월"
                         error={!isBirthValid && (birthYear || birthMonth || birthDay)}
                       />
-                      <Dropdown2
+                      <FAQDropdown
                         options={dateOptions}
                         value={birthDay}
                         onChange={setBirthDay}
@@ -697,7 +697,7 @@ export default function ApplyIntegrated() {
                     <AsteriskMark>*</AsteriskMark>
                   </LabelWrapper>
 
-                  <Dropdown3
+                  <TermsDropdown
                     question="개인정보 수집 및 이용 동의서"
                     answer={PRIVACY_AGREE_TEXT}
                     styleType={2}

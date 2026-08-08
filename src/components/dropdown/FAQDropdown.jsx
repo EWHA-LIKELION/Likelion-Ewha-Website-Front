@@ -2,7 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import ChevronDown16 from "@/assets/icons/chevron-down-16.svg?react";
 
-const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요", onSelect, unit = "", error = false, disabled = false }) => {
+const FAQDropdown = ({
+  options = [],
+  defaultValue,
+  placeholder = "선택하세요",
+  onSelect,
+  unit = "",
+  error = false,
+  disabled = false,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(defaultValue || "");
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 799);
@@ -38,7 +46,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
 
   return (
     <Container ref={dropdownRef}>
-      <SelectButton 
+      <SelectButton
         $isOpen={isOpen}
         $error={error}
         $disabled={disabled}
@@ -49,11 +57,15 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
             {selectedValue ? `${selectedValue}${unit}` : placeholder}
           </SelectedText>
         </TextWrapper>
-        <ArrowButton onClick={() => !disabled && setIsOpen(!isOpen)} $isOpen={isOpen} $disabled={disabled}>
+        <ArrowButton
+          onClick={() => !disabled && setIsOpen(!isOpen)}
+          $isOpen={isOpen}
+          $disabled={disabled}
+        >
           <ChevronDown16 />
         </ArrowButton>
       </SelectButton>
-      
+
       <OptionsList $isOpen={isOpen}>
         {options.map((option, index) => (
           <OptionItem
@@ -70,7 +82,7 @@ const DropDown2 = ({ options = [], defaultValue, placeholder = "선택하세요"
   );
 };
 
-export default DropDown2;
+export default FAQDropdown;
 
 const Container = styled.div`
   position: relative;
@@ -85,8 +97,9 @@ const SelectButton = styled.button`
   gap: 0.5rem;
   background: var(--common-100);
   border-radius: 0.25rem;
-  border: 1px solid ${(props) => (props.$error ? 'var(--primary-sub)' : 'var(--neutral-95)')};
-  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'default')};
+  border: 1px solid
+    ${(props) => (props.$error ? "var(--primary-sub)" : "var(--neutral-95)")};
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "default")};
   transition: padding 0.2s ease;
 
   @media (max-width: 799px) {
@@ -117,17 +130,18 @@ const ArrowButton = styled.div`
   align-items: center;
   justify-content: center;
 
-  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
+  cursor: ${(props) => (props.$disabled ? "not-allowed" : "pointer")};
   transition: all 0.2s ease;
-  pointer-events: ${(props) => (props.$disabled ? 'none' : 'auto')};
+  pointer-events: ${(props) => (props.$disabled ? "none" : "auto")};
 
   &:hover {
-    filter: ${(props) => (props.$disabled ? 'none' : 'brightness(0.9)')};
+    filter: ${(props) => (props.$disabled ? "none" : "brightness(0.9)")};
   }
 
   svg {
     display: block;
-    transform: ${(props) => (props.$isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
+    transform: ${(props) =>
+      props.$isOpen ? "rotate(180deg)" : "rotate(0deg)"};
     transition: transform 0.2s ease;
   }
 
@@ -149,15 +163,17 @@ const OptionsList = styled.ul`
   overflow-y: auto;
   background: var(--common-100);
   border-radius: 0.25rem;
-  border: 1px solid var(--neutral-95); 
+  border: 1px solid var(--neutral-95);
   list-style: none;
   padding: 0;
   z-index: 1000;
-  
-  visibility: ${(props) => (props.$isOpen ? 'visible' : 'hidden')};
-  opacity: ${(props) => (props.$isOpen ? '1' : '0')};
-  pointer-events: ${(props) => (props.$isOpen ? 'auto' : 'none')};
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+  visibility: ${(props) => (props.$isOpen ? "visible" : "hidden")};
+  opacity: ${(props) => (props.$isOpen ? "1" : "0")};
+  pointer-events: ${(props) => (props.$isOpen ? "auto" : "none")};
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
 
   @media (max-width: 799px) {
     max-height: 9.3rem;
