@@ -52,6 +52,7 @@ const SegmentBar = ({
   style,
   className,
   selected,
+  readOnly = false,
 }) => {
   const [activeIndex, setActiveIndex] = useState(selected ?? 0);
   const isMobile = useIsMobile();
@@ -66,6 +67,7 @@ const SegmentBar = ({
   }, [selected]);
 
   const handleClick = (index) => {
+    if (readOnly) return;
     setActiveIndex(index);
     if (onSelect) {
       onSelect(index, items[index]);
@@ -80,6 +82,7 @@ const SegmentBar = ({
           $active={activeIndex === index}
           $size={sizeStyle}
           $tone={toneStyle}
+          $readOnly={readOnly}
           onClick={() => handleClick(index)}
           className={isMobile ? "body-regular" : sizeStyle.typography}
           data-text={item}
@@ -118,16 +121,27 @@ const Button = styled.button`
     overflow: hidden;
   }
 
-  background: ${({ $active, $tone }) =>
-    $active ? $tone.activeBg : "var(--common-100)"};
+  background: ${({ $readOnly, $active, $tone }) => {
+    if ($readOnly) return "var(--common-100)";
+    return $active ? $tone.activeBg : "var(--common-100)";
+  }};
 
-  color: ${({ $active, $tone }) => ($active ? $tone.activeColor : $tone.color)};
+  color: ${({ $readOnly, $active, $tone }) => {
+    if ($readOnly) {
+      return $active ? "var(--neutral-20)" : "var(--neutral-70)";
+    }
+    return $active ? $tone.activeColor : $tone.color;
+  }};
 
   font-weight: ${({ $active, $size }) =>
     $active ? $size.activeWeight : "inherit"};
 
   border: 1px solid
-    ${({ $active, $tone }) => ($active ? $tone.activeBg : $tone.border)};
+    ${({ $readOnly, $active, $tone }) => {
+      if ($readOnly) return "var(--neutral-95)";
+      return $active ? $tone.activeBg : $tone.border;
+    }};
+
   border-right: none;
 
   &:last-child {
@@ -135,11 +149,12 @@ const Button = styled.button`
       ${({ $active, $tone }) => ($active ? $tone.activeBg : $tone.border)};
   }
 
-  cursor: pointer;
+  cursor: ${({ $readOnly }) => ($readOnly ? "default" : "pointer")};
+
   transition: all 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    filter: brightness(0.9);
+    filter: ${({ $readOnly }) => ($readOnly ? "none" : "brightness(0.9)")};
   }
 `;
