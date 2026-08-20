@@ -24,6 +24,12 @@ export default AdminButton;
 
 /* ===== variant: 색상 ===== */
 const VARIANT_STYLES = {
+  /* 연한 초록 */
+  lightgreen: css`
+    background-color: #d6fddb;
+    color: #00bf40;
+    border: none;
+  `,
   /* 진한 초록 */
   green: css`
     background-color: #05da5b;
@@ -33,8 +39,8 @@ const VARIANT_STYLES = {
   /* 회색 아웃라인 */
   outline: css`
     color: #5c5c5c;
-    border: 1.5px solid var(--Neutral-95, #dcdcdc);
-    background: var(--Neutral-_100, #fff);
+    border: 1.5px solid var(--neutral-95);
+    background: white;
   `,
 };
 
