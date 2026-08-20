@@ -46,15 +46,24 @@ const DateWithTimeRange = ({ readOnly }) => (
 );
 
 /* 면접 일정 한 줄 */
-const Interview = ({ readOnly, onDelete }) => (
+const Interview = ({ readOnly, onCopy, onDelete }) => (
   <InterviewRow>
     <DateWithTimeRange readOnly={readOnly} />
-    <SegmentBar items={["대면", "비대면"]} size="s" tone="dark" />
+    <SegmentBar
+      items={["대면", "비대면"]}
+      size="s"
+      tone="dark"
+      readOnly={readOnly}
+    />
     <AdminInput variant="text" readOnly={readOnly} />
-    {!readOnly && (
-      <TrashButton type="button" aria-label="삭제" onClick={onDelete}>
+    {readOnly ? (
+      <IconButton type="button" aria-label="복사" onClick={onCopy}>
+        <img src={asset("/icons/copy.svg")} alt="" />
+      </IconButton>
+    ) : (
+      <IconButton type="button" aria-label="삭제" onClick={onDelete}>
         <img src={asset("/icons/trash.svg")} alt="" />
-      </TrashButton>
+      </IconButton>
     )}
   </InterviewRow>
 );
@@ -74,6 +83,15 @@ const RecruitmentSchedule = () => {
   const removeInterview = (id) =>
     setInterviews((prev) => prev.filter((interview) => interview.id !== id));
 
+  const copyInterviewLink = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      // TODO: 복사 완료 토스트 추가
+    } catch (error) {
+      console.error("면접 링크 복사 실패:", error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // TODO: 저장 API 호출. 각 인풋에 name을 붙여야 FormData로 값을 읽을 수 있다.
@@ -86,7 +104,7 @@ const RecruitmentSchedule = () => {
       <Select>
         <Dropdown options={YEARS} defaultValue={year} onSelect={setYear} />
         {isEditing ? (
-          <AdminButton type="submit" form={FORM_ID}>
+          <AdminButton variant="lightgreen" type="submit" form={FORM_ID}>
             수정완료
           </AdminButton>
         ) : (
@@ -122,6 +140,7 @@ const RecruitmentSchedule = () => {
               <Interview
                 key={interview.id}
                 readOnly={!isEditing}
+                onCopy={() => copyInterviewLink(interview.link)}
                 onDelete={() => removeInterview(interview.id)}
               />
             ))}
@@ -192,7 +211,7 @@ const InterviewCol = styled.div`
   gap: 1.5rem;
 `;
 
-const TrashButton = styled.button`
+const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
