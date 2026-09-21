@@ -1,13 +1,15 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { asset } from "@/assets";
 import CloseSmIcon from "@/assets/icons/close-sm.svg?react";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-import Input from "../../../components/Input";
-import FAQDropdown from "../../../components/dropdown/FAQDropdown";
-import TermsDropdown from "../../../components/dropdown/TermsDropdown";
+import Input from "@/components/input/Input";
+import FAQDropdown from "@/components/dropdown/FAQDropdown";
+import TermsDropdown from "@/components/dropdown/TermsDropdown";
+
 import { api, ApplicationsAPI } from "@/apis";
 import { useIsMobile } from "@/hooks";
 
@@ -15,10 +17,10 @@ import {
   SelectionButton,
   SelectedRadio,
   UnselectedRadio,
-} from "../../../components/buttons/SelectionButtons";
-import { TimeButton } from "../../../components/buttons/TimeButtons";
-import { MainButton } from "../../../components/buttons/MainButtons";
-import { Modal } from "../../../components/Modal.jsx";
+} from "@/components/buttons/SelectionButtons";
+import { TimeButton } from "@/components/buttons/TimeButtons";
+import { MainButton } from "@/components/buttons/MainButtons";
+import { Modal } from "@/components/Modal.jsx";
 
 const PRIVACY_AGREE_TEXT = `개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용 개인정보 수집 및 이용 관련 내용`;
 
@@ -113,13 +115,13 @@ function MoModal({ open, onClose, children }) {
     <MoOverlay onMouseDown={onClose}>
       <MoDialog onMouseDown={(e) => e.stopPropagation()}>{children}</MoDialog>
     </MoOverlay>,
-    root
+    root,
   );
 }
 
 function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
   const [code, setCode] = useState("");
-    useEffect(() => {
+  useEffect(() => {
     if (!isOpen) return;
     setCode(initialCode || "");
   }, [isOpen, initialCode]);
@@ -215,12 +217,19 @@ function ApplicationCodeModal({ isOpen, onClose, navigate, initialCode = "" }) {
             }}
           />
           <ModalButtonWrapper>
-            <ModalConfirmButton onClick={handleConfirm} $active={isCodeValid} disabled={!isCodeValid || isLoading}>
+            <ModalConfirmButton
+              onClick={handleConfirm}
+              $active={isCodeValid}
+              disabled={!isCodeValid || isLoading}
+            >
               {isLoading ? "확인 중..." : "확인"}
             </ModalConfirmButton>
             <ModalHelperText>
               지원 코드를 잊어버리셨나요?{" "}
-              <ModalHelperLink href="https://pf.kakao.com/_htxexfd" target="_blank">
+              <ModalHelperLink
+                href="https://pf.kakao.com/_htxexfd"
+                target="_blank"
+              >
                 카카오톡 문의하기
               </ModalHelperLink>
             </ModalHelperText>
@@ -258,7 +267,10 @@ export default function ApplyIntegrated() {
   const [privacyAgree, setPrivacyAgree] = useState(false);
   const [privacyOpen, setPrivacyOpen] = useState(false);
 
-  const yearOptions = Array.from({ length: 2010 - 1990 + 1 }, (_, i) => 1990 + i);
+  const yearOptions = Array.from(
+    { length: 2010 - 1990 + 1 },
+    (_, i) => 1990 + i,
+  );
   const monthOptions = Array.from({ length: 12 }, (_, i) => i + 1);
   const dateOptions = Array.from({ length: 31 }, (_, i) => i + 1);
 
@@ -267,19 +279,82 @@ export default function ApplyIntegrated() {
       date: "2026-03-06",
       label: "3월 6일",
       am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
-      pm: ["12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30"],
+      pm: [
+        "12:00",
+        "12:30",
+        "1:00",
+        "1:30",
+        "2:00",
+        "2:30",
+        "3:00",
+        "3:30",
+        "4:00",
+        "4:30",
+        "5:00",
+        "5:30",
+        "6:00",
+        "6:30",
+        "7:00",
+        "7:30",
+        "8:00",
+        "8:30",
+        "9:00",
+        "9:30",
+      ],
     },
     {
       date: "2026-03-07",
       label: "3월 7일",
       am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
-      pm: ["12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30"],
+      pm: [
+        "12:00",
+        "12:30",
+        "1:00",
+        "1:30",
+        "2:00",
+        "2:30",
+        "3:00",
+        "3:30",
+        "4:00",
+        "4:30",
+        "5:00",
+        "5:30",
+        "6:00",
+        "6:30",
+        "7:00",
+        "7:30",
+        "8:00",
+        "8:30",
+        "9:00",
+        "9:30",
+      ],
     },
     {
       date: "2026-03-08",
       label: "3월 8일",
       am: ["9:00", "9:30", "10:00", "10:30", "11:00", "11:30"],
-      pm: ["12:00", "12:30", "1:00", "1:30", "2:00", "2:30", "3:00", "3:30", "4:00", "4:30", "5:00", "5:30", "6:00", "6:30", "7:00", "7:30", "8:00", "8:30", "9:00", "9:30"],
+      pm: [
+        "12:00",
+        "12:30",
+        "1:00",
+        "1:30",
+        "2:00",
+        "2:30",
+        "3:00",
+        "3:30",
+        "4:00",
+        "4:30",
+        "5:00",
+        "5:30",
+        "6:00",
+        "6:30",
+        "7:00",
+        "7:30",
+        "8:00",
+        "8:30",
+        "9:00",
+        "9:30",
+      ],
     },
   ];
 
@@ -355,7 +430,9 @@ export default function ApplyIntegrated() {
   const isPhoneNumberValid = /^01[0]-\d{4}-\d{4}$/.test(phoneNumber);
   const isInterviewMethodValid = !!interviewMethod;
   const isPrivacyValid = !!privacyAgree;
-  const isTimeValid = Object.values(interviewAvailableTimes).some((arr) => Array.isArray(arr) && arr.length > 0);
+  const isTimeValid = Object.values(interviewAvailableTimes).some(
+    (arr) => Array.isArray(arr) && arr.length > 0,
+  );
   const isVideoValid = !!videoAgree;
 
   const canSubmit =
@@ -397,7 +474,9 @@ export default function ApplyIntegrated() {
 
     const baseURL = import.meta.env.VITE_API_BASE_URL;
     if (!baseURL) {
-      setSubmitError("API 주소(VITE_API_BASE_URL)가 설정되지 않았습니다. .env / Vercel 환경변수를 확인해주세요.");
+      setSubmitError(
+        "API 주소(VITE_API_BASE_URL)가 설정되지 않았습니다. .env / Vercel 환경변수를 확인해주세요.",
+      );
       return;
     }
 
@@ -408,7 +487,10 @@ export default function ApplyIntegrated() {
       const formData = new FormData();
 
       const birthday = formatBirthday(birthYear, birthMonth, birthDay) || "";
-      const interviewTimesISO = formatInterviewTimes(interviewAvailableTimes, INTERVIEW_DATES);
+      const interviewTimesISO = formatInterviewTimes(
+        interviewAvailableTimes,
+        INTERVIEW_DATES,
+      );
 
       formData.append("name", name.trim());
       formData.append("phone_number", phoneNumber.trim());
@@ -419,7 +501,9 @@ export default function ApplyIntegrated() {
       formData.append("interview_method", interviewMethod);
       formData.append("part", part);
 
-      interviewTimesISO.forEach((t) => formData.append("interview_available_times", t));
+      interviewTimesISO.forEach((t) =>
+        formData.append("interview_available_times", t),
+      );
 
       formData.append("personal_statement_1", q1.trim());
       formData.append("personal_statement_2", q2.trim());
@@ -429,7 +513,9 @@ export default function ApplyIntegrated() {
       const q5Trim = q5.trim();
       if (q5Trim.length > 0) formData.append("personal_statement_5", q5Trim);
 
-      precourseFiles.forEach((file) => formData.append("completed_prerequisites", file));
+      precourseFiles.forEach((file) =>
+        formData.append("completed_prerequisites", file),
+      );
       portfolioFiles.forEach((file) => formData.append("portfolios", file));
 
       const data = await ApplicationsAPI.createApplication(formData);
@@ -442,9 +528,16 @@ export default function ApplyIntegrated() {
     } catch (err) {
       const status = err?.response?.status;
 
-      if (status === 409) setSubmitError("이미 제출한 지원서가 있습니다. (409)");
-      else if (status === 400) setSubmitError("입력값이 올바르지 않습니다. 필수 항목/글자수/선택지를 확인해주세요. (400)");
-      else setSubmitError("제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+      if (status === 409)
+        setSubmitError("이미 제출한 지원서가 있습니다. (409)");
+      else if (status === 400)
+        setSubmitError(
+          "입력값이 올바르지 않습니다. 필수 항목/글자수/선택지를 확인해주세요. (400)",
+        );
+      else
+        setSubmitError(
+          "제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.",
+        );
     } finally {
       setIsSubmitting(false);
     }
@@ -453,13 +546,19 @@ export default function ApplyIntegrated() {
   return (
     <>
       <A1Page>
-        <ApplicationCodeModal   isOpen={isCodeModalOpen}  onClose={() => setIsCodeModalOpen(false)}   navigate={navigate} initialCode={applicationCode}/>
-
+        <ApplicationCodeModal
+          isOpen={isCodeModalOpen}
+          onClose={() => setIsCodeModalOpen(false)}
+          navigate={navigate}
+          initialCode={applicationCode}
+        />
 
         <A1Frame>
           <TitleWrapper>
             <PageName>지원서 작성</PageName>
-            <PartName>{PART_OPTIONS.find((p) => p.value === part)?.label}</PartName>
+            <PartName>
+              {PART_OPTIONS.find((p) => p.value === part)?.label}
+            </PartName>
           </TitleWrapper>
 
           <Section>
@@ -485,12 +584,14 @@ export default function ApplyIntegrated() {
                         !isNameValid && name.length > 0
                           ? "error"
                           : name.length > 0
-                          ? "focused"
-                          : "default"
+                            ? "focused"
+                            : "default"
                       }
                     />
                     <ErrorText $visible={!isNameValid && name.length > 0}>
-                      {!isNameValid && name.length > 0 ? "이름을 작성해주세요." : "\u00A0"}
+                      {!isNameValid && name.length > 0
+                        ? "이름을 작성해주세요."
+                        : "\u00A0"}
                     </ErrorText>
                   </InputWrapper>
                 </ItemContainer>
@@ -513,11 +614,13 @@ export default function ApplyIntegrated() {
                         !isPhoneNumberValid && phoneNumber.length > 0
                           ? "error"
                           : phoneNumber.length > 0
-                          ? "focused"
-                          : "default"
+                            ? "focused"
+                            : "default"
                       }
                     />
-                    <ErrorText $visible={!isPhoneNumberValid && phoneNumber.length > 0}>
+                    <ErrorText
+                      $visible={!isPhoneNumberValid && phoneNumber.length > 0}
+                    >
                       {!isPhoneNumberValid && phoneNumber.length > 0
                         ? "전화번호를 작성해주세요."
                         : "\u00A0"}
@@ -539,7 +642,9 @@ export default function ApplyIntegrated() {
                         onSelect={setBirthYear}
                         placeholder={"0000년"}
                         unit="년"
-                        error={!isBirthValid && (birthYear || birthMonth || birthDay)}
+                        error={
+                          !isBirthValid && (birthYear || birthMonth || birthDay)
+                        }
                       />
                       <FAQDropdown
                         options={monthOptions}
@@ -548,7 +653,9 @@ export default function ApplyIntegrated() {
                         onSelect={setBirthMonth}
                         placeholder={"00월"}
                         unit=" 월"
-                        error={!isBirthValid && (birthYear || birthMonth || birthDay)}
+                        error={
+                          !isBirthValid && (birthYear || birthMonth || birthDay)
+                        }
                       />
                       <FAQDropdown
                         options={dateOptions}
@@ -557,10 +664,16 @@ export default function ApplyIntegrated() {
                         onSelect={setBirthDay}
                         placeholder={"00일"}
                         unit=" 일"
-                        error={!isBirthValid && (birthYear || birthMonth || birthDay)}
+                        error={
+                          !isBirthValid && (birthYear || birthMonth || birthDay)
+                        }
                       />
                     </DropdownWrapper>
-                    <ErrorText $visible={!isBirthValid && (birthYear || birthMonth || birthDay)}>
+                    <ErrorText
+                      $visible={
+                        !isBirthValid && (birthYear || birthMonth || birthDay)
+                      }
+                    >
                       {!isBirthValid && (birthYear || birthMonth || birthDay)
                         ? "생년월일을 선택하세요."
                         : "\u00A0"}
@@ -574,8 +687,8 @@ export default function ApplyIntegrated() {
                     <AsteriskMark>*</AsteriskMark>
                   </LabelWrapper>
                   <ExampleContent>
-                    복수전공일 경우 본전공/복수전공(혹은 부전공)과 같이 작성해주세요.
-                    (예시) 경영학부/컴퓨터공학전공
+                    복수전공일 경우 본전공/복수전공(혹은 부전공)과 같이
+                    작성해주세요. (예시) 경영학부/컴퓨터공학전공
                   </ExampleContent>
                   <InputWrapper>
                     <Input
@@ -590,12 +703,16 @@ export default function ApplyIntegrated() {
                         !isDepartmentValid && department.length > 0
                           ? "error"
                           : department.length > 0
-                          ? "focused"
-                          : "default"
+                            ? "focused"
+                            : "default"
                       }
                     />
-                    <ErrorText $visible={!isDepartmentValid && department.length > 0}>
-                      {!isDepartmentValid && department.length > 0 ? "학과를 작성해주세요." : "\u00A0"}
+                    <ErrorText
+                      $visible={!isDepartmentValid && department.length > 0}
+                    >
+                      {!isDepartmentValid && department.length > 0
+                        ? "학과를 작성해주세요."
+                        : "\u00A0"}
                     </ErrorText>
                   </InputWrapper>
                 </ItemContainer>
@@ -618,12 +735,18 @@ export default function ApplyIntegrated() {
                         !isStudentNumberValid && studentNumber.length > 0
                           ? "error"
                           : studentNumber.length > 0
-                          ? "focused"
-                          : "default"
+                            ? "focused"
+                            : "default"
                       }
                     />
-                    <ErrorText $visible={!isStudentNumberValid && studentNumber.length > 0}>
-                      {!isStudentNumberValid && studentNumber.length > 0 ? "학번을 작성해주세요." : "\u00A0"}
+                    <ErrorText
+                      $visible={
+                        !isStudentNumberValid && studentNumber.length > 0
+                      }
+                    >
+                      {!isStudentNumberValid && studentNumber.length > 0
+                        ? "학번을 작성해주세요."
+                        : "\u00A0"}
                     </ErrorText>
                   </InputWrapper>
                 </ItemContainer>
@@ -646,12 +769,14 @@ export default function ApplyIntegrated() {
                         !isGradeValid && grade.length > 0
                           ? "error"
                           : grade.length > 0
-                          ? "focused"
-                          : "default"
+                            ? "focused"
+                            : "default"
                       }
                     />
                     <ErrorText $visible={!isGradeValid && grade.length > 0}>
-                      {!isGradeValid && grade.length > 0 ? "학년을 작성해주세요." : "\u00A0"}
+                      {!isGradeValid && grade.length > 0
+                        ? "학년을 작성해주세요."
+                        : "\u00A0"}
                     </ErrorText>
                   </InputWrapper>
                 </ItemContainer>
@@ -662,15 +787,20 @@ export default function ApplyIntegrated() {
                     <AsteriskMark>*</AsteriskMark>
                   </LabelWrapper>
                   <ExampleContent>
-                    2차 면접은 0/0~0/0 오프라인, 0/0 온라인으로 진행되며, 오프라인 면접 장소는 이화여자대학교 학생문화관입니다.
-                    지원자 분이 가진 열정과 역량을 더욱 잘 파악할 수 있도록 최대한 오프라인으로 참여하시는 것을 권장합니다.
-                    다만 개인 사정으로 인해 대면으로 학교에 방문하기 어려운 분에 한하여 온라인으로 참여하실 수 있습니다.
+                    2차 면접은 0/0~0/0 오프라인, 0/0 온라인으로 진행되며,
+                    오프라인 면접 장소는 이화여자대학교 학생문화관입니다. 지원자
+                    분이 가진 열정과 역량을 더욱 잘 파악할 수 있도록 최대한
+                    오프라인으로 참여하시는 것을 권장합니다. 다만 개인 사정으로
+                    인해 대면으로 학교에 방문하기 어려운 분에 한하여 온라인으로
+                    참여하실 수 있습니다.
                   </ExampleContent>
 
                   <ButtonRowPC>
                     <SelectionButton
                       variant={
-                        interviewMethod === "OFFLINE" ? "selected" : "unselected"
+                        interviewMethod === "OFFLINE"
+                          ? "selected"
+                          : "unselected"
                       }
                       onClick={() => setInterviewMethod("OFFLINE")}
                     >
@@ -686,8 +816,12 @@ export default function ApplyIntegrated() {
                     </SelectionButton>
                   </ButtonRowPC>
 
-                  <ErrorText $visible={!isInterviewMethodValid && interviewMethod !== ""}>
-                    {!isInterviewMethodValid && interviewMethod !== "" ? "면접 참여 방식을 선택해주세요." : "\u00A0"}
+                  <ErrorText
+                    $visible={!isInterviewMethodValid && interviewMethod !== ""}
+                  >
+                    {!isInterviewMethodValid && interviewMethod !== ""
+                      ? "면접 참여 방식을 선택해주세요."
+                      : "\u00A0"}
                   </ErrorText>
                 </ItemContainer>
 
@@ -706,15 +840,21 @@ export default function ApplyIntegrated() {
                   />
 
                   <RadioRow>
-                    <RadioLabel onClick={() => setPrivacyAgree((prev) => !prev)}>
+                    <RadioLabel
+                      onClick={() => setPrivacyAgree((prev) => !prev)}
+                    >
                       {privacyAgree ? <SelectedRadio /> : <UnselectedRadio />}
                       <AsteriskText>(필수)</AsteriskText>
                       <RadioText>개인정보 수집 및 이용에 동의합니다.</RadioText>
                     </RadioLabel>
                   </RadioRow>
 
-                  <ErrorText $visible={!isPrivacyValid && privacyAgree !== false}>
-                    {!isPrivacyValid && privacyAgree !== false ? "개인정보 수집 및 이용에 동의해주세요." : "\u00A0"}
+                  <ErrorText
+                    $visible={!isPrivacyValid && privacyAgree !== false}
+                  >
+                    {!isPrivacyValid && privacyAgree !== false
+                      ? "개인정보 수집 및 이용에 동의해주세요."
+                      : "\u00A0"}
                   </ErrorText>
                 </ItemContainer>
               </A1CardInner>
@@ -727,7 +867,9 @@ export default function ApplyIntegrated() {
               <A1CardInner>
                 <ItemContainer>
                   <LabelWrapper>
-                    <LongDesc>가능한 요일에 한해 최소 1개 이상의 시간을 선택해주세요.</LongDesc>
+                    <LongDesc>
+                      가능한 요일에 한해 최소 1개 이상의 시간을 선택해주세요.
+                    </LongDesc>
                     <AsteriskMark>*</AsteriskMark>
                   </LabelWrapper>
 
@@ -739,11 +881,16 @@ export default function ApplyIntegrated() {
                           <TimeLabel>오전</TimeLabel>
                           <TimeRow>
                             {am.map((time) => {
-                              const selected = (interviewAvailableTimes[date] || []).includes(`am_${time}`);
+                              const selected = (
+                                interviewAvailableTimes[date] || []
+                              ).includes(`am_${time}`);
                               return (
                                 <span
                                   key={`am_${time}`}
-                                  style={{ display: "inline-block", cursor: "pointer" }}
+                                  style={{
+                                    display: "inline-block",
+                                    cursor: "pointer",
+                                  }}
                                   onClick={() => toggleTime(date, time, "am")}
                                 >
                                   <TimeButton
@@ -759,11 +906,16 @@ export default function ApplyIntegrated() {
                           <TimeLabel>오후</TimeLabel>
                           <TimeRow>
                             {pm.map((time) => {
-                              const selected = (interviewAvailableTimes[date] || []).includes(`pm_${time}`);
+                              const selected = (
+                                interviewAvailableTimes[date] || []
+                              ).includes(`pm_${time}`);
                               return (
                                 <span
                                   key={`pm_${time}`}
-                                  style={{ display: "inline-block", cursor: "pointer" }}
+                                  style={{
+                                    display: "inline-block",
+                                    cursor: "pointer",
+                                  }}
                                   onClick={() => toggleTime(date, time, "pm")}
                                 >
                                   <TimeButton
@@ -791,7 +943,9 @@ export default function ApplyIntegrated() {
                     <AsteriskMark>*</AsteriskMark>
                   </LabelWrapper>
                   <ExampleContent>
-                    면접 진행시 면접 내용이 녹음 및 녹화됩니다. 녹화 영상은 본인 확인 및 평가를 위한 목적으로만 사용되며, 모집 이후 전면 폐기됩니다.
+                    면접 진행시 면접 내용이 녹음 및 녹화됩니다. 녹화 영상은 본인
+                    확인 및 평가를 위한 목적으로만 사용되며, 모집 이후 전면
+                    폐기됩니다.
                   </ExampleContent>
 
                   <RadioRow>
@@ -802,7 +956,9 @@ export default function ApplyIntegrated() {
                     </RadioLabel>
 
                     <ErrorText $visible={!isVideoValid && videoAgree !== false}>
-                      {!isVideoValid && videoAgree !== false ? "면접 영상 녹화에 동의해주세요." : "\u00A0"}
+                      {!isVideoValid && videoAgree !== false
+                        ? "면접 영상 녹화에 동의해주세요."
+                        : "\u00A0"}
                     </ErrorText>
                   </RadioRow>
                 </ItemContainer>
@@ -814,7 +970,6 @@ export default function ApplyIntegrated() {
 
       <A2Page>
         <Frame>
-
           <Sections>
             <Section2>
               <SectionTitle2 className="h4-bold">3. 자기소개서</SectionTitle2>
@@ -825,11 +980,14 @@ export default function ApplyIntegrated() {
                     <QHead>
                       <QTitleRow>
                         <QTitle className="h5-bold">
-                          1. 다양한 IT 동아리 중에서 멋쟁이사자처럼을 선택하여 지원하게 된 이유를 작성해주세요.
+                          1. 다양한 IT 동아리 중에서 멋쟁이사자처럼을 선택하여
+                          지원하게 된 이유를 작성해주세요.
                           <Req>*</Req>
                         </QTitle>
                       </QTitleRow>
-                      <QDesc className="footnote-regular">공백 포함 500자 이내로 작성해주세요.</QDesc>
+                      <QDesc className="footnote-regular">
+                        공백 포함 500자 이내로 작성해주세요.
+                      </QDesc>
                     </QHead>
 
                     <InputWrap>
@@ -846,7 +1004,9 @@ export default function ApplyIntegrated() {
 
                       <MetaRow>
                         {over1 ? (
-                          <OverText className="footnote-regular">공백 포함 500자를 초과하였습니다.</OverText>
+                          <OverText className="footnote-regular">
+                            공백 포함 500자를 초과하였습니다.
+                          </OverText>
                         ) : (
                           <span />
                         )}
@@ -861,11 +1021,15 @@ export default function ApplyIntegrated() {
                     <QHead>
                       <QTitleRow>
                         <QTitle className="h5-bold">
-                          2. 선택한 파트를 희망하는 이유와 관련 경험을 해본 적이 있는지, 그리고 해당 파트를 통해 어떤 성장을 희망하시는지 작성해주세요.
+                          2. 선택한 파트를 희망하는 이유와 관련 경험을 해본 적이
+                          있는지, 그리고 해당 파트를 통해 어떤 성장을
+                          희망하시는지 작성해주세요.
                           <Req>*</Req>
                         </QTitle>
                       </QTitleRow>
-                      <QDesc className="footnote-regular">공백 포함 500자 이내로 작성해주세요.</QDesc>
+                      <QDesc className="footnote-regular">
+                        공백 포함 500자 이내로 작성해주세요.
+                      </QDesc>
                     </QHead>
 
                     <InputWrap>
@@ -882,7 +1046,9 @@ export default function ApplyIntegrated() {
 
                       <MetaRow>
                         {over2 ? (
-                          <OverText className="footnote-regular">공백 포함 500자를 초과하였습니다.</OverText>
+                          <OverText className="footnote-regular">
+                            공백 포함 500자를 초과하였습니다.
+                          </OverText>
                         ) : (
                           <span />
                         )}
@@ -897,11 +1063,16 @@ export default function ApplyIntegrated() {
                     <QHead>
                       <QTitleRow>
                         <QTitle className="h5-bold">
-                          3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요시하는 공동체입니다. 지원자 본인이 협업과 팀워크를 진행해보았던 경험과, 그 경험을 멋쟁이사자처럼 대학에서 어떻게 적용할 수 있을지 작성해주세요.
+                          3. 멋쟁이사자처럼 대학은 협업과 팀워크를 중요시하는
+                          공동체입니다. 지원자 본인이 협업과 팀워크를
+                          진행해보았던 경험과, 그 경험을 멋쟁이사자처럼 대학에서
+                          어떻게 적용할 수 있을지 작성해주세요.
                           <Req>*</Req>
                         </QTitle>
                       </QTitleRow>
-                      <QDesc className="footnote-regular">공백 포함 500자 이내로 작성해주세요.</QDesc>
+                      <QDesc className="footnote-regular">
+                        공백 포함 500자 이내로 작성해주세요.
+                      </QDesc>
                     </QHead>
 
                     <InputWrap>
@@ -918,7 +1089,9 @@ export default function ApplyIntegrated() {
 
                       <MetaRow>
                         {over3 ? (
-                          <OverText className="footnote-regular">공백 포함 500자를 초과하였습니다.</OverText>
+                          <OverText className="footnote-regular">
+                            공백 포함 500자를 초과하였습니다.
+                          </OverText>
                         ) : (
                           <span />
                         )}
@@ -933,11 +1106,16 @@ export default function ApplyIntegrated() {
                     <QHead>
                       <QTitleRow>
                         <QTitle className="h5-bold">
-                          4. 멋쟁이사자처럼 대학은 최소 주 2회 모임 &amp; 10시간 이상의 시간 투자를 권장합니다. 활동 기간 동안 매주 어느 정도의 시간을 얼마나 열정적으로 할애할 수 있는지 작성해주세요.
+                          4. 멋쟁이사자처럼 대학은 최소 주 2회 모임 &amp; 10시간
+                          이상의 시간 투자를 권장합니다. 활동 기간 동안 매주
+                          어느 정도의 시간을 얼마나 열정적으로 할애할 수 있는지
+                          작성해주세요.
                           <Req>*</Req>
                         </QTitle>
                       </QTitleRow>
-                      <QDesc className="footnote-regular">공백 포함 500자 이내로 작성해주세요.</QDesc>
+                      <QDesc className="footnote-regular">
+                        공백 포함 500자 이내로 작성해주세요.
+                      </QDesc>
                     </QHead>
 
                     <InputWrap>
@@ -954,7 +1132,9 @@ export default function ApplyIntegrated() {
 
                       <MetaRow>
                         {over4 ? (
-                          <OverText className="footnote-regular">공백 포함 500자를 초과하였습니다.</OverText>
+                          <OverText className="footnote-regular">
+                            공백 포함 500자를 초과하였습니다.
+                          </OverText>
                         ) : (
                           <span />
                         )}
@@ -968,14 +1148,17 @@ export default function ApplyIntegrated() {
                   <EssayItem5>
                     <QTitleRow>
                       <QTitle className="h5-bold">
-                        5. 다룰 수 있는 프로그램과 언어, 활용 능력을 간단히 작성해주세요. (선택)
+                        5. 다룰 수 있는 프로그램과 언어, 활용 능력을 간단히
+                        작성해주세요. (선택)
                       </QTitle>
                     </QTitleRow>
 
                     <LongDesc2 className="footnote-regular">
-                      해당 문항은 지원자 분의 기본적인 역량을 파악하기 위한 것으로, 필수로 작성하지 않아도 됩니다.
+                      해당 문항은 지원자 분의 기본적인 역량을 파악하기 위한
+                      것으로, 필수로 작성하지 않아도 됩니다.
                       {"\n"}
-                      다룰 수 있는 프로그램/언어를 작성하지 않아도 평가에 불리하게 작용되지 않습니다.
+                      다룰 수 있는 프로그램/언어를 작성하지 않아도 평가에
+                      불리하게 작용되지 않습니다.
                       {"\n\n"}
                       활용 능력 작성 기준은 다음과 같습니다.
                       {"\n"}
@@ -985,7 +1168,8 @@ export default function ApplyIntegrated() {
                       {"\n"}
                       하: 기본적인 문법을 배운 적이 있으나 잘 모름
                       {"\n\n"}
-                      (예시) python(상), html/css(하), photoshop(중), premier(상)
+                      (예시) python(상), html/css(하), photoshop(중),
+                      premier(상)
                     </LongDesc2>
 
                     <InputWrap>
@@ -1012,13 +1196,19 @@ export default function ApplyIntegrated() {
                     <EtcItem>
                       <EtcTop>
                         <EtcText>
-                          <EtcTitle className="h5-bold">1. 선수강 강의 이수 내역</EtcTitle>
+                          <EtcTitle className="h5-bold">
+                            1. 선수강 강의 이수 내역
+                          </EtcTitle>
                           <EtcDesc className="footnote-regular">
-                            파일은 최대 {FILE_LIMIT}개까지 업로드할 수 있으며, 파일당 20MB 이내로 업로드해 주세요.
+                            파일은 최대 {FILE_LIMIT}개까지 업로드할 수 있으며,
+                            파일당 20MB 이내로 업로드해 주세요.
                           </EtcDesc>
                         </EtcText>
 
-                        <AddFileButton type="button" onClick={() => precourseRef.current?.click()}>
+                        <AddFileButton
+                          type="button"
+                          onClick={() => precourseRef.current?.click()}
+                        >
                           파일 추가
                         </AddFileButton>
                         <HiddenFileInput
@@ -1034,8 +1224,15 @@ export default function ApplyIntegrated() {
                         <FileList>
                           {precourseFiles.map((f, idx) => (
                             <FileRow key={`pre-${idx}`}>
-                              <FileName className="body-regular">{f.name}</FileName>
-                              <TrashButton type="button" onClick={() => removeFileAt(setPrecourseFiles, idx)}>
+                              <FileName className="body-regular">
+                                {f.name}
+                              </FileName>
+                              <TrashButton
+                                type="button"
+                                onClick={() =>
+                                  removeFileAt(setPrecourseFiles, idx)
+                                }
+                              >
                                 <img src={asset("/icons/trash.svg")} alt="" />
                               </TrashButton>
                             </FileRow>
@@ -1049,12 +1246,17 @@ export default function ApplyIntegrated() {
                         <EtcText>
                           <EtcTitle className="h5-bold">2. 포트폴리오</EtcTitle>
                           <EtcDesc className="footnote-regular">
-                            파일은 최대 {FILE_LIMIT}개까지 업로드할 수 있으며, 파일당 100MB 이내로 업로드해 주세요.
-                            {"\n"}* 필수는 아니지만, 기획/디자인 파트를 선택하신 분들은 포트폴리오를 제출하시는 것을 권장합니다.
+                            파일은 최대 {FILE_LIMIT}개까지 업로드할 수 있으며,
+                            파일당 100MB 이내로 업로드해 주세요.
+                            {"\n"}* 필수는 아니지만, 기획/디자인 파트를 선택하신
+                            분들은 포트폴리오를 제출하시는 것을 권장합니다.
                           </EtcDesc>
                         </EtcText>
 
-                        <AddFileButton type="button" onClick={() => portfolioRef.current?.click()}>
+                        <AddFileButton
+                          type="button"
+                          onClick={() => portfolioRef.current?.click()}
+                        >
                           파일 추가
                         </AddFileButton>
                         <HiddenFileInput
@@ -1070,8 +1272,15 @@ export default function ApplyIntegrated() {
                         <FileList>
                           {portfolioFiles.map((f, idx) => (
                             <FileRow key={`port-${idx}`}>
-                              <FileName className="body-regular">{f.name}</FileName>
-                              <TrashButton type="button" onClick={() => removeFileAt(setPortfolioFiles, idx)}>
+                              <FileName className="body-regular">
+                                {f.name}
+                              </FileName>
+                              <TrashButton
+                                type="button"
+                                onClick={() =>
+                                  removeFileAt(setPortfolioFiles, idx)
+                                }
+                              >
                                 <img src={asset("/icons/trash.svg")} alt="" />
                               </TrashButton>
                             </FileRow>
@@ -1093,7 +1302,11 @@ export default function ApplyIntegrated() {
                 >
                   {isSubmitting ? "제출 중..." : "제출하기"}
                 </MainButton>
-                {!!submitError && <SubmitError className="footnote-regular">{submitError}</SubmitError>}
+                {!!submitError && (
+                  <SubmitError className="footnote-regular">
+                    {submitError}
+                  </SubmitError>
+                )}
               </SubmitStack>
             </SubmitRow>
           </Sections>
@@ -1107,11 +1320,15 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="confirm"
             align="center"
-            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
+            icon={<ModalClover />}
             title="제출 완료하시겠습니까?"
             description={"지금 제출하시면 더이상 수정할 수 없습니다."}
             actions={[
-              { label: "취소", variant: "default", onClick: () => setConfirmOpen(false) },
+              {
+                label: "취소",
+                variant: "default",
+                onClick: () => setConfirmOpen(false),
+              },
               {
                 label: isSubmitting ? "제출 중..." : "확인",
                 variant: "primary",
@@ -1130,7 +1347,7 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="result"
             align="center"
-            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
+            icon={<ModalClover />}
             title="제출이 완료되었습니다"
             description={
               applicationCode
@@ -1145,8 +1362,15 @@ export default function ApplyIntegrated() {
             }}
             note={
               applicationCode ? (
-                <span style={{ display: "block", marginTop: 4, textDecoration: "none" }}>
-                  * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
+                <span
+                  style={{
+                    display: "block",
+                    marginTop: 4,
+                    textDecoration: "none",
+                  }}
+                >
+                  * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong>{" "}
+                  유의해주세요.
                 </span>
               ) : null
             }
@@ -1160,16 +1384,24 @@ export default function ApplyIntegrated() {
                   setIsCodeModalOpen(true);
                 },
               },
-              { label: "홈으로", variant: "primary", closeOnClick: false, onClick: () => navigate("/") },
+              {
+                label: "홈으로",
+                variant: "primary",
+                closeOnClick: false,
+                onClick: () => navigate("/"),
+              },
             ]}
           />
         )}
 
-        <MoModal open={isMobile && confirmOpen} onClose={() => setConfirmOpen(false)}>
+        <MoModal
+          open={isMobile && confirmOpen}
+          onClose={() => setConfirmOpen(false)}
+        >
           <MoDialogInner $variant="confirm">
             <MoTop>
               <MoIconRow>
-                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
+                <MoIcon />
               </MoIconRow>
 
               <MoTextBlock>
@@ -1180,21 +1412,34 @@ export default function ApplyIntegrated() {
             </MoTop>
 
             <MoActions>
-              <MoBtn type="button" $variant="ghost" onClick={() => setConfirmOpen(false)} disabled={isSubmitting}>
+              <MoBtn
+                type="button"
+                $variant="ghost"
+                onClick={() => setConfirmOpen(false)}
+                disabled={isSubmitting}
+              >
                 취소
               </MoBtn>
-              <MoBtn type="button" $variant="primary" onClick={onConfirmSubmit} disabled={isSubmitting}>
+              <MoBtn
+                type="button"
+                $variant="primary"
+                onClick={onConfirmSubmit}
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "제출 중..." : "확인"}
               </MoBtn>
             </MoActions>
           </MoDialogInner>
         </MoModal>
 
-        <MoModal open={isMobile && resultOpen} onClose={() => setResultOpen(false)}>
+        <MoModal
+          open={isMobile && resultOpen}
+          onClose={() => setResultOpen(false)}
+        >
           <MoDialogInner $variant="result">
             <MoTop>
               <MoIconRow>
-                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
+                <MoIcon />
               </MoIconRow>
 
               <MoTextBlock>
@@ -1204,15 +1449,15 @@ export default function ApplyIntegrated() {
                     <>
                       이화여대 멋쟁이사자처럼에 지원해주셔서 감사합니다!
                       <br />
-                      아래의 지원 코드를 통해 제출한 지원서를 열람할 수 있습니다.
+                      아래의 지원 코드를 통해 제출한 지원서를 열람할 수
+                      있습니다.
                     </>
                   ) : (
                     <>
                       제출은 완료되었습니다.
                       <br />
                       다만 서버 응답에 지원 코드가 포함되어 있지 않아
-                      <br />
-                      이 화면에서 코드를 표시할 수 없습니다.
+                      <br />이 화면에서 코드를 표시할 수 없습니다.
                     </>
                   )}
                 </MoDesc>
@@ -1222,7 +1467,9 @@ export default function ApplyIntegrated() {
             <MoBottom>
               <MoCodeWrap>
                 <MoCodeBox>
-                  <MoCodeText>{applicationCode || "지원 코드가 응답되지 않았습니다."}</MoCodeText>
+                  <MoCodeText>
+                    {applicationCode || "지원 코드가 응답되지 않았습니다."}
+                  </MoCodeText>
                   <MoCopyBtn
                     type="button"
                     aria-label="copy"
@@ -1239,7 +1486,8 @@ export default function ApplyIntegrated() {
 
                 {applicationCode && (
                   <MoNote>
-                    * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong> 유의해주세요.
+                    * 발급받은 코드는 <strong>다시 확인할 수 없으니</strong>{" "}
+                    유의해주세요.
                   </MoNote>
                 )}
               </MoCodeWrap>
@@ -1251,12 +1499,15 @@ export default function ApplyIntegrated() {
                   onClick={() => {
                     setResultOpen(false);
                     setIsCodeModalOpen(true);
-                  }} 
-
+                  }}
                 >
                   지원서 열람하기
                 </MoBtn>
-                <MoBtn type="button" $variant="primary" onClick={() => navigate("/")}>
+                <MoBtn
+                  type="button"
+                  $variant="primary"
+                  onClick={() => navigate("/")}
+                >
                   홈으로
                 </MoBtn>
               </MoActions>
@@ -1273,7 +1524,7 @@ const A1Page = styled.div`
   position: relative;
   width: 100%;
   min-width: 400px;
-  padding: 0 80px; 
+  padding: 0 80px;
   flex-direction: column;
   align-items: center;
   align-self: stretch;
@@ -1306,7 +1557,7 @@ const Section = styled.section`
   align-self: center;
 `;
 const SectionTitle = styled.div`
-  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
   font-family: Pretendard;
   font-size: 1.25rem;
   font-style: normal;
@@ -1326,7 +1577,7 @@ const TitleWrapper = styled.div`
   }
 `;
 const PageName = styled.div`
-  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
   font-family: "Cafe24 PRO Slim";
   font-size: 1.875rem;
   font-style: normal;
@@ -1336,7 +1587,7 @@ const PageName = styled.div`
   }
 `;
 const PartName = styled.div`
-  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2A2A2A));
+  color: var(--Atomic-Neutral-20, var(--Neutral-20, #2a2a2a));
   font-family: Pretendard;
   font-size: 1.25rem;
   font-style: normal;
@@ -1412,7 +1663,7 @@ const AsteriskMark = styled.span`
   display: flex;
   margin-left: 0.1rem;
 
-  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #FF7B2E));
+  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #ff7b2e));
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
@@ -1425,7 +1676,7 @@ const AsteriskText = styled.span`
   gap: 0.5rem;
   white-space: nowrap;
 
-  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #FF7B2E));
+  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #ff7b2e));
   text-align: center;
 
   font-family: Pretendard;
@@ -1537,7 +1788,7 @@ const DateBlock = styled.div`
 const DateLabel = styled.div`
   min-width: 70px;
   margin-top: 0.25rem;
-  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #FF7B2E));
+  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #ff7b2e));
 
   font-family: Pretendard;
   font-size: 0.875rem;
@@ -1613,7 +1864,7 @@ const RadioText = styled.span`
 const ErrorText = styled.div`
   margin-top: 2px;
   min-height: 1.25rem;
-  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #FF7B2E));
+  color: var(--Atomic-Red-Orange-60, var(--Red-Orange-60, #ff7b2e));
   font-family: Pretendard;
   font-size: 0.75rem;
   font-style: normal;
@@ -2024,7 +2275,11 @@ const InputForceTextarea = styled.div`
     resize: none !important;
 
     color: var(--neutral-20, #2a2a2a) !important;
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family:
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -2033,7 +2288,11 @@ const InputForceTextarea = styled.div`
 
   textarea::placeholder {
     color: var(--Atomic-Neutral-70, var(--Neutral-70, #9b9b9b)) !important;
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family:
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -2053,7 +2312,11 @@ const InputForceSingle = styled.div`
 
   input {
     color: var(--neutral-20, #2a2a2a) !important;
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family:
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -2062,7 +2325,11 @@ const InputForceSingle = styled.div`
 
   input::placeholder {
     color: var(--Atomic-Neutral-70, var(--Neutral-70, #9b9b9b)) !important;
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family:
+      Pretendard,
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif !important;
     font-size: 14px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -2119,7 +2386,11 @@ const AddFileButton = styled.button`
   border: none;
   cursor: pointer;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 12px;
   font-weight: 700;
   line-height: 20px;
@@ -2241,7 +2512,12 @@ const MoIconRow = styled.div`
   align-items: flex-start;
   gap: 10px;
 `;
-const MoIcon = styled.img`
+const ModalClover = styled(CloverIcon)`
+  color: #05da5b;
+`;
+
+const MoIcon = styled(CloverIcon)`
+  color: #05da5b;
   width: 24px;
   height: 25.799px;
   flex-shrink: 0;
@@ -2261,7 +2537,11 @@ const MoTitle = styled.div`
   color: var(--Neutral-20, #2a2a2a);
   text-align: center;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2273,7 +2553,11 @@ const MoDesc = styled.div`
   color: var(--Neutral-50, #737373);
   text-align: center;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -2284,7 +2568,11 @@ const MoError = styled.div`
   color: var(--orange-60, #ff7b2e);
   text-align: center;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -2324,7 +2612,11 @@ const MoCodeText = styled.div`
   flex: 1 0 0;
 
   color: var(--Neutral-50, #737373);
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 14px;
   font-weight: 700;
   line-height: 22px;
@@ -2354,7 +2646,11 @@ const MoNote = styled.div`
   color: var(--Red-Orange-60, #ff7b2e);
   text-align: center;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -2380,17 +2676,28 @@ const MoBtn = styled.button`
   gap: 8px;
   flex: 1 0 0;
 
-  border-radius: ${({ $variant }) => ($variant === "primary" ? "999px" : "40px")};
-  border: ${({ $variant }) => ($variant === "primary" ? "none" : "1.5px solid var(--Neutral-95, #DCDCDC)")};
+  border-radius: ${({ $variant }) =>
+    $variant === "primary" ? "999px" : "40px"};
+  border: ${({ $variant }) =>
+    $variant === "primary" ? "none" : "1.5px solid var(--Neutral-95, #DCDCDC)"};
   background: ${({ $variant }) =>
-    $variant === "primary" ? "var(--Primary-Main, #05DA5B)" : "var(--Common-100, #FFF)"};
+    $variant === "primary"
+      ? "var(--Primary-Main, #05DA5B)"
+      : "var(--Common-100, #FFF)"};
 
   cursor: pointer;
 
-  color: ${({ $variant }) => ($variant === "primary" ? "var(--Common-100, #FFF)" : "var(--Neutral-70, #9B9B9B)")};
+  color: ${({ $variant }) =>
+    $variant === "primary"
+      ? "var(--Common-100, #FFF)"
+      : "var(--Neutral-70, #9B9B9B)"};
   text-align: center;
 
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    Pretendard,
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 700;

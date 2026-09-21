@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import cloverIcon from "@/assets/icons/clover.svg";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import {
   OPERATING_YEARS,
   EWHA_OPERATING_YEARS,
@@ -76,7 +76,7 @@ const IntroSection2 = () => {
       {/* === [Part 2] 연두색 영역: LIKELION AT EWHA === */}
       <GreenArea>
         <InnerContainer $column>
-          <FlowerIcon src={cloverIcon} alt="clover" />
+          <FlowerIcon />
           <h2 className="center-title">LIKELION AT EWHA</h2>
           <p className="center-subtitle">멋쟁이사자처럼 이화여대</p>
 
@@ -279,11 +279,11 @@ const GreenArea = styled.div`
   }
 `;
 
-const FlowerIcon = styled.img`
+const FlowerIcon = styled(CloverIcon)`
   width: 2rem;
   height: 2.14988rem;
   aspect-ratio: 32/34.4;
-  fill: var(--Neutral-20, #2a2a2a);
+  color: var(--Neutral-20, #2a2a2a);
   @media (max-width: 799px) {
     width: 1.25rem;
     height: 1.34369rem;

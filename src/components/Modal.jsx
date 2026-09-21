@@ -490,6 +490,12 @@ const IconSlot = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
+
+  > svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
 `;
 
 const IconEmoji = styled.div`

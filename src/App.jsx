@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Layout from "./layouts/Layout.jsx";
-import LayoutAdmin from "./layouts/AdminLayout.jsx";
+import AdminLayout from "./layouts/AdminLayout.jsx";
 import Home from "./pages/home/Home";
 import Project from "./pages/project/Project.jsx";
 import ProjectDetail from "./pages/project/ProjectDetail.jsx";
@@ -11,6 +11,7 @@ import RecruitResult from "./pages/recruit/RecruitResult.jsx";
 import ApplyIntegrated from "./pages/recruit/application/Application.jsx";
 import Apply2Review from "./pages/recruit/application/ApplicationReview.jsx";
 import Preview from "./pages/Preview.jsx";
+import RecruitmentSchedule from "./pages/admin/RecruitmentSchedule.jsx";
 
 function App() {
   return (
@@ -33,13 +34,12 @@ function App() {
       </Route>
 
       {/* Admin Layout: /admin/* 는 전부 여기로 */}
-      <Route path="admin" element={<LayoutAdmin />}>
+      <Route path="admin" element={<AdminLayout />}>
         {/* 테스트용 기본 화면 */}
         <Route path="preview" element={<div>ADMIN PREVIEW</div>} />
         {/* 실제 Admin pages */}
         <Route path="applicant" element={<div>APPLICANT</div>} />
-        <Route path="interview" element={<div>INTERVIEW</div>} />
-        <Route path="application" element={<div>APPLICATION</div>} />
+        <Route path="schedule" element={<RecruitmentSchedule />} />
       </Route>
     </Routes>
   );

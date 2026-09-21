@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { asset } from "@/assets";
+import DiamondPattern from "@/assets/icons/diamond-pattern.svg?react";
 import defaultImage from "@/assets/images/default-1.png";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -97,7 +98,8 @@ function Project() {
             {!isMobile ? (
               <SegmentBar
                 items={["전체", "해커톤", "졸업 프로젝트", "대동제 사이트"]}
-                styleType={1}
+                size="l"
+                tone="dark"
                 onSelect={(i, item) => {
                   setCategory(item);
                   setCurrentPage(1);
@@ -179,10 +181,10 @@ function Project() {
         </Contents>
 
         <Design1>
-          <img src={asset("/icons/design-orange.svg")} />
+          <DiamondPattern />
         </Design1>
         <Design2>
-          <img src={asset("/icons/design-green.svg")} />
+          <img src={asset("/icons/green.svg")} />
         </Design2>
         <Design3>
           <img src={asset("/icons/design-orange-2.svg")} />
@@ -351,7 +353,8 @@ const Design1 = styled.div`
   top: -1.25rem;
   left: 2.5rem;
 
-  img {
+  svg {
+    color: rgba(255, 155, 56, 0.35);
     aspect-ratio: 230 / 145;
     width: 14.375rem;
     height: auto;
@@ -362,7 +365,7 @@ const Design1 = styled.div`
     left: 2.8125rem;
     top: 0;
 
-    img {
+    svg {
       width: 3.75rem;
     }
   }

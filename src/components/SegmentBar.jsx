@@ -2,10 +2,63 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useIsMobile } from "@/hooks";
 
+/* =========================
+    Segment Bar
 
-const SegmentBar = ({ items = [], styleType = 1, onSelect, style, className, selected }) => {
+    size(l | s)와 tone(dark | light)을 자유롭게 조합한다.
+
+    사용 예시)
+    <SegmentBar items={items} size="l" tone="dark" />
+    <SegmentBar items={items} size="s" tone="light" />
+========================= */
+
+/* ===== size: 여백 / 타이포 ===== */
+const SIZES = {
+  l: {
+    padding: "1rem 1.5rem",
+    mobilePadding: "0.75rem 1.5rem",
+    typography: "h5-regular",
+    activeWeight: 700,
+  },
+  s: {
+    padding: "0.72rem 1.5rem",
+    mobilePadding: "0.5rem 0.88rem",
+    typography: "body-regular",
+    activeWeight: 800,
+  },
+};
+
+/* ===== tone: 색상 ===== */
+const TONES = {
+  dark: {
+    activeBg: "var(--neutral-20)",
+    activeColor: "var(--common-100)",
+    color: "var(--neutral-30)",
+    border: "var(--neutral-90)",
+  },
+  light: {
+    activeBg: "var(--neutral-40)",
+    activeColor: "var(--common-100)",
+    color: "var(--neutral-70)",
+    border: "var(--neutral-95)",
+  },
+};
+
+const SegmentBar = ({
+  items = [],
+  size = "l",
+  tone = "dark",
+  onSelect,
+  style,
+  className,
+  selected,
+  readOnly = false,
+}) => {
   const [activeIndex, setActiveIndex] = useState(selected ?? 0);
   const isMobile = useIsMobile();
+
+  const sizeStyle = SIZES[size] ?? SIZES.l;
+  const toneStyle = TONES[tone] ?? TONES.dark;
 
   useEffect(() => {
     if (selected !== undefined && selected !== activeIndex) {
@@ -14,6 +67,7 @@ const SegmentBar = ({ items = [], styleType = 1, onSelect, style, className, sel
   }, [selected]);
 
   const handleClick = (index) => {
+    if (readOnly) return;
     setActiveIndex(index);
     if (onSelect) {
       onSelect(index, items[index]);
@@ -21,19 +75,16 @@ const SegmentBar = ({ items = [], styleType = 1, onSelect, style, className, sel
   };
 
   return (
-    <Wrapper className={className} style={style} $styleType={styleType}>
+    <Wrapper className={className} style={style}>
       {items.map((item, index) => (
         <Button
           key={index}
           $active={activeIndex === index}
-          $styleType={styleType}
-          $count={items.length}
+          $size={sizeStyle}
+          $tone={toneStyle}
+          $readOnly={readOnly}
           onClick={() => handleClick(index)}
-          className={
-            isMobile 
-              ? 'body-regular' 
-              : (styleType === 1 ? 'h5-regular' : 'body-regular')
-          }
+          className={isMobile ? "body-regular" : sizeStyle.typography}
           data-text={item}
         >
           {item}
@@ -54,98 +105,56 @@ const Wrapper = styled.div`
 
 const Button = styled.button`
   position: relative;
-  padding: ${(props) => {
-    if (props.$styleType === 1) {
-      return "1rem 1.5rem";
-    } else {
-      return "0.72rem 1.5rem";
-    }
-  }};
+  padding: ${({ $size }) => $size.padding};
 
-  @media (max-width:799px) {
-    padding: ${(props) => {
-      if (props.$styleType === 1) {
-        return "0.75rem 1.5rem";
-      } else {
-        return "0.5rem 0.88rem";
-      }
-    }};
+  @media (max-width: 799px) {
+    padding: ${({ $size }) => $size.mobilePadding};
   }
 
-  {/*font-weight 미리 렌더링해서 클릭했을때 width 변화 없도록*/}
+  /* font-weight 미리 렌더링해서 클릭했을 때 width 변화 없도록 */
   &::before {
     content: attr(data-text);
-    font-weight: ${(props) => (props.$styleType === 1 ? "700" : "800")};
+    font-weight: ${({ $size }) => $size.activeWeight};
     visibility: hidden;
     height: 0;
     display: block;
     overflow: hidden;
   }
 
-  background: ${(props) => {
-    if (props.$styleType === 1) {
-      return props.$active ? "var(--neutral-20)" : "var(--common-100)";
-    } else {
-      return props.$active ? "var(--neutral-40)" : "var(--common-100)";
-    }
+  background: ${({ $readOnly, $active, $tone }) => {
+    if ($readOnly) return "var(--common-100)";
+    return $active ? $tone.activeBg : "var(--common-100)";
   }};
 
-  color: ${(props) => {
-    if (props.$styleType === 1) {
-      return props.$active ? "var(--common-100)" : "var(--neutral-30)";
-    } else {
-      return props.$active ? "var(--common-100)" : "var(--neutral-70)";
+  color: ${({ $readOnly, $active, $tone }) => {
+    if ($readOnly) {
+      return $active ? "var(--neutral-20)" : "var(--neutral-70)";
     }
+    return $active ? $tone.activeColor : $tone.color;
   }};
 
-  font-weight: ${(props) => {
-    if (props.$styleType === 1) {
-      return props.$active ? "700" : "inherit";
-    } else {
-      return props.$active ? "800" : "inherit";
-    }
-  }};
+  font-weight: ${({ $active, $size }) =>
+    $active ? $size.activeWeight : "inherit"};
 
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  
-  &:hover {
-    filter: brightness(0.9);
-  }
-
-  border: 1px solid ${(props) => {
-    if (props.$active) {
-      if (props.$styleType === 1) {
-        return " var(--neutral-20)";
-      } else {
-        return "var(--neutral-40)";
-      }
-    }
-
-    if (props.$styleType === 1) {
-      return "var(--neutral-90)";
-    } else {
-      return "var(--neutral-95)";
-    }
-  }};
+  border: 1px solid
+    ${({ $readOnly, $active, $tone }) => {
+      if ($readOnly) return "var(--neutral-95)";
+      return $active ? $tone.activeBg : $tone.border;
+    }};
 
   border-right: none;
-  
+
   &:last-child {
-    border-right: 1px solid ${(props) => {
-    if (props.$active) {
-      if (props.$styleType === 1) {
-        return "var(--neutral-20)";
-      } else {
-        return "var(--neutral-40)";
-      }
-    }
-    if (props.$styleType === 1) {
-      return "var(--neutral-90)";
-    } else {
-      return "var(--neutral-95)";
-    }
-  }};
+    border-right: 1px solid
+      ${({ $active, $tone }) => ($active ? $tone.activeBg : $tone.border)};
+  }
+
+  cursor: ${({ $readOnly }) => ($readOnly ? "default" : "pointer")};
+
+  transition: all 0.2s ease;
+  white-space: nowrap;
+
+  &:hover {
+    filter: ${({ $readOnly }) => ($readOnly ? "none" : "brightness(0.9)")};
   }
 `;
