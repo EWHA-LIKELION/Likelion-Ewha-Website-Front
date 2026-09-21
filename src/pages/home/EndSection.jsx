@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import Carousel1 from "../../components/carousel/Carousel1";
 import ImageSlider from "../../components/carousel/ImageSlider";
-import CloverIcon from "@/assets/icons/clover.svg";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import Clover1Icon from "@/assets/icons/clover-1.svg";
 import orangePattern from "@/assets/icons/orange-1.svg";
 import greenPattern from "@/assets/icons/green.svg";
@@ -25,7 +25,7 @@ const EndSection = () => {
 
           <div className="text-box">
             <IconBox>
-              <img src={CloverIcon} alt="icon" />
+              <CloverIcon />
             </IconBox>
             <h2 className="title">REVIEW</h2>
             <p className="subtitle">
@@ -50,7 +50,7 @@ const EndSection = () => {
         <InnerContainer $column>
           <div className="news-header">
             <IconBox>
-              <img src={CloverIcon} alt="icon" />
+              <CloverIcon />
             </IconBox>
             <div className="text-group">
               <h2 className="title">NEWS</h2>
@@ -121,7 +121,8 @@ const InnerContainer = styled.div`
 `;
 
 const IconBox = styled.div`
-  img {
+  svg {
+    color: #2a2a2a;
     width: 2rem;
     height: 2rem;
     object-fit: contain;

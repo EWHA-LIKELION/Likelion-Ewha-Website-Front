@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { asset } from "@/assets";
 import ArrowRightSm from "@/assets/icons/arrow-right-sm.svg?react";
+import DiamondPattern from "@/assets/icons/diamond-pattern.svg?react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks";
@@ -47,7 +48,7 @@ const RecruitPart = () => {
           <img src={asset("/icons/recruit-part-flower.svg")} />
         </Card>
       </CardWrapper>
-      <img className="num1" src={asset("/icons/recruit-part-back-1.svg")} />
+      <DiamondPattern className="num1" />
       <img className="num2" src={asset("/icons/recruit-part-back-2.svg")} />
       <img className="num3" src={asset("/icons/recruit-part-back-3.svg")} />
     </Wrapper>
@@ -69,7 +70,8 @@ const Wrapper = styled.div`
 
   padding: 5rem;
 
-  img.num1 {
+  .num1 {
+    color: #ffeeb7;
     position: absolute;
     left: 2.89888rem;
     top: 0;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { asset } from "@/assets";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import TermsDropdown from "../../../components/dropdown/TermsDropdown";
 import RecruitStatusButton from "../../../components/buttons/RecruitStatusButton";
 import { MainButton } from "../../../components/buttons/MainButtons";
@@ -15,7 +15,7 @@ const RecruitDetailInfo = () => {
         <ActivityInner>
           <ActivityHeader>
             <ActivityTitleArea>
-              <img src={asset("/icons/ellipse.svg")} alt="icon" />
+              <CloverIcon />
               <h2>활동 계획</h2>
               <p>* 활동 계획은 변경될 수 있습니다.</p>
             </ActivityTitleArea>
@@ -77,7 +77,7 @@ const RecruitDetailInfo = () => {
       <PreLectureSection>
         <PreLectureInner>
           <PreLectureTitle>
-            <img src={asset("/icons/ellipse.svg")} alt="icon" />
+            <CloverIcon />
             <h2>선수강 강의 안내</h2>
           </PreLectureTitle>
 
@@ -126,7 +126,7 @@ const RecruitDetailInfo = () => {
       <FAQSection>
         <FAQInner>
           <FAQTitleArea>
-            <img src={asset("/icons/ellipse-4.svg")} alt="icon" />
+            <CloverIcon />
             <h2>자주 묻는 질문</h2>
           </FAQTitleArea>
 
@@ -146,7 +146,7 @@ const RecruitDetailInfo = () => {
       {/* 하단 지원 유도 섹션 */}
       <FooterBannerSection>
         <BannerContent>
-          <img src={asset("/icons/ellipse.svg")} alt="별 아이콘" />
+          <CloverIcon />
           <h2>빛나는 내일, 이대 멋사와 함께하세요!</h2>
           <BannerButtons>
             <RecruitStatusButton pageType="recruit" recruitStyle="2" />
@@ -207,7 +207,8 @@ const ActivityTitleArea = styled.div`
   flex-direction: column;
   gap: 0.7rem;
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
   }
 
@@ -228,7 +229,7 @@ const ActivityTitleArea = styled.div`
   @media (max-width: 799px) {
     gap: 0.47rem;
 
-    img {
+    svg {
       width: 1.25rem;
     }
 
@@ -439,7 +440,8 @@ const PreLectureTitle = styled.div`
     line-height: 3.125rem;
   }
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
     height: 2.14988rem;
   }
@@ -455,7 +457,7 @@ const PreLectureTitle = styled.div`
       line-height: 2.25rem;
     }
 
-    img {
+    svg {
       width: 1.25rem;
       height: 1.34369rem;
     }
@@ -603,7 +605,8 @@ const BannerContent = styled.div`
   align-items: center;
   text-align: center;
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
     margin-bottom: 0.5rem;
   }
@@ -621,7 +624,7 @@ const BannerContent = styled.div`
   transition: all 0.2s ease;
 
   @media (max-width: 799px) {
-    img {
+    svg {
       width: 1.25rem;
     }
 
@@ -684,7 +687,8 @@ const FAQTitleArea = styled.div`
   margin-bottom: 2rem;
   width: 100%;
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
   }
 
@@ -703,7 +707,7 @@ const FAQTitleArea = styled.div`
     gap: 0.47rem;
     margin-bottom: 1.25rem;
 
-    img {
+    svg {
       width: 1.25rem;
       height: 1.34369rem;
     }

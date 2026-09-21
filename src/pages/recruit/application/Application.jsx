@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { asset } from "@/assets";
 import CloseSmIcon from "@/assets/icons/close-sm.svg?react";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import { createPortal } from "react-dom";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
@@ -1319,7 +1320,7 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="confirm"
             align="center"
-            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
+            icon={<ModalClover />}
             title="제출 완료하시겠습니까?"
             description={"지금 제출하시면 더이상 수정할 수 없습니다."}
             actions={[
@@ -1346,7 +1347,7 @@ export default function ApplyIntegrated() {
             showClose={false}
             type="result"
             align="center"
-            icon={{ src: asset("/icons/ellipse-7.svg"), alt: "" }}
+            icon={<ModalClover />}
             title="제출이 완료되었습니다"
             description={
               applicationCode
@@ -1400,7 +1401,7 @@ export default function ApplyIntegrated() {
           <MoDialogInner $variant="confirm">
             <MoTop>
               <MoIconRow>
-                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
+                <MoIcon />
               </MoIconRow>
 
               <MoTextBlock>
@@ -1438,7 +1439,7 @@ export default function ApplyIntegrated() {
           <MoDialogInner $variant="result">
             <MoTop>
               <MoIconRow>
-                <MoIcon src={asset("/icons/ellipse-7.svg")} alt="" />
+                <MoIcon />
               </MoIconRow>
 
               <MoTextBlock>
@@ -2511,7 +2512,12 @@ const MoIconRow = styled.div`
   align-items: flex-start;
   gap: 10px;
 `;
-const MoIcon = styled.img`
+const ModalClover = styled(CloverIcon)`
+  color: #05da5b;
+`;
+
+const MoIcon = styled(CloverIcon)`
+  color: #05da5b;
   width: 24px;
   height: 25.799px;
   flex-shrink: 0;

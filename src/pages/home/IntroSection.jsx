@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-import orangePattern from "@/assets/icons/orange.svg";
+import DiamondPattern from "@/assets/icons/diamond-pattern.svg?react";
 import greenPattern from "@/assets/icons/green.svg";
 import Clover1Icon from "@/assets/icons/clover-1.svg";
 import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
@@ -8,7 +8,7 @@ import RecruitStatusButton from "../../components/buttons/RecruitStatusButton";
 const IntroSection = () => {
   return (
     <Section>
-      <PatternTop src={orangePattern} alt="" aria-hidden="true" />
+      <PatternTop aria-hidden="true" />
       <PatternBottom src={greenPattern} alt="" aria-hidden="true" />
 
       <Content>
@@ -72,7 +72,8 @@ const Section = styled.section`
   }
 `;
 
-const PatternTop = styled.img`
+const PatternTop = styled(DiamondPattern)`
+  color: rgba(255, 155, 56, 0.35);
   position: absolute;
   z-index: 0;
   display: block;

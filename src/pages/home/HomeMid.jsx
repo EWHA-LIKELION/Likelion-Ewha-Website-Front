@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { asset } from "@/assets";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import SegmentBar from "@/components/SegmentBar";
@@ -38,7 +38,7 @@ const HomeMid = () => {
   return (
     <Wrapper>
       <Section className="curriculum" id="curriculum">
-        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
+        <CloverIcon className="logo-icon" />
         <Title className="point-eng-h2">curriculum</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           처음부터 차근 차근, 기초부터 심화까지
@@ -54,7 +54,7 @@ const HomeMid = () => {
         <Curriculum part={part} />
       </Section>
       <Section className="events">
-        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
+        <CloverIcon className="logo-icon" />
         <Title className="point-eng-h2">intercollegiate events</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           다양한 연합 행사에 참가하여 {isMobile && <br />}
@@ -73,7 +73,7 @@ const HomeMid = () => {
         </ProjectWrapper>
       </Section>
       <Section className="projects">
-        <img src={asset("/icons/logo-icon.svg")} className="logo-icon" />
+        <CloverIcon className="logo-icon" />
         <Title className="point-eng-h2">projects</Title>
         <SubTitle className={isMobile ? "point-kor-h5" : "point-kor-h3"}>
           아기사자와 운영진들의 {isMobile && <br />}
@@ -96,6 +96,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   .logo-icon {
+    color: #05da5b;
     width: 2rem;
     height: 2.14988rem;
     margin-bottom: 0.75rem;

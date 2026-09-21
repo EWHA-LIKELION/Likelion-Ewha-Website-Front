@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { asset } from "@/assets";
+import CloverIcon from "@/assets/icons/clover.svg?react";
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { RecruitAPI } from "@/apis";
@@ -64,7 +65,7 @@ const RecruitBasicInfo = () => {
         <ScheduleInner>
           <ScheduleContentWrapper>
             <ScheduleTitle>
-              <img src={asset("/icons/ellipse.svg")} alt="icon" />
+              <CloverIcon />
               <span>모집 일정</span>
             </ScheduleTitle>
 
@@ -107,7 +108,7 @@ const RecruitBasicInfo = () => {
       <TargetSection>
         <TargetInner>
           <TargetTitle>
-            <img src={asset("/icons/ellipse.svg")} alt="icon" />
+            <CloverIcon />
             <span>모집 대상</span>
           </TargetTitle>
 
@@ -164,7 +165,7 @@ const RecruitBasicInfo = () => {
       <PartSection>
         <PartInner>
           <PartTitle>
-            <img src={asset("/icons/ellipse-2.svg")} alt="icon" />
+            <CloverIcon />
             <span>모집 파트</span>
           </PartTitle>
 
@@ -251,7 +252,8 @@ const ScheduleTitle = styled.h2`
   font-size: 2.25rem;
   font-weight: 700;
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
     height: auto;
   }
@@ -264,7 +266,7 @@ const ScheduleTitle = styled.h2`
     margin-bottom: 1rem;
     gap: 0.5rem;
 
-    img {
+    svg {
       width: 1.25rem;
     }
   }
@@ -435,7 +437,8 @@ const TargetTitle = styled.h2`
   font-weight: 700;
   line-height: 3.125rem;
 
-  img {
+  svg {
+    color: #05da5b;
     width: 2rem;
   }
 
@@ -447,7 +450,7 @@ const TargetTitle = styled.h2`
     margin-bottom: 1rem;
     gap: 0.5rem;
 
-    img {
+    svg {
       width: 1.25rem;
     }
   }
@@ -600,7 +603,8 @@ const PartTitle = styled.h2`
   font-weight: 700;
   line-height: 3.125rem;
 
-  img {
+  svg {
+    color: #2a2a2a;
     width: 2rem;
   }
 
@@ -612,7 +616,7 @@ const PartTitle = styled.h2`
     margin-bottom: 1.25rem;
     gap: 0.4rem;
 
-    img {
+    svg {
       width: 1.25rem;
     }
   }
