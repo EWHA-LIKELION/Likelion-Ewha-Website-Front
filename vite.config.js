@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
@@ -11,5 +12,10 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  // vitest: 위 resolve.alias(@)와 plugins를 그대로 사용
+  test: {
+    environment: 'node',
+    include: ['src/**/*.test.{js,jsx,ts,tsx}'],
   },
 })
