@@ -37,14 +37,16 @@ const PART_OPTIONS = [
   { value: "BACKEND", label: "백엔드" },
 ];
 
-function formatBirthday(year, month, day) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function formatBirthday(year, month, day) {
   if (!year || !month || !day) return null;
   const mm = String(month).padStart(2, "0");
   const dd = String(day).padStart(2, "0");
   return `${year}-${mm}-${dd}`;
 }
 
-function convertTo24Hour(time, isPM) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function convertTo24Hour(time, isPM) {
   const [hourStr, minuteStr] = time.split(":");
   let hour = parseInt(hourStr, 10);
   const minute = minuteStr || "00";
@@ -58,7 +60,8 @@ function convertTo24Hour(time, isPM) {
   return `${String(hour).padStart(2, "0")}:${minute}`;
 }
 
-function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
   const result = [];
 
   for (const dateInfo of interviewDates) {
