@@ -37,14 +37,16 @@ const PART_OPTIONS = [
   { value: "BACKEND", label: "백엔드" },
 ];
 
-function formatBirthday(year, month, day) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function formatBirthday(year, month, day) {
   if (!year || !month || !day) return null;
   const mm = String(month).padStart(2, "0");
   const dd = String(day).padStart(2, "0");
   return `${year}-${mm}-${dd}`;
 }
 
-function convertTo24Hour(time, isPM) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function convertTo24Hour(time, isPM) {
   const [hourStr, minuteStr] = time.split(":");
   let hour = parseInt(hourStr, 10);
   const minute = minuteStr || "00";
@@ -58,7 +60,8 @@ function convertTo24Hour(time, isPM) {
   return `${String(hour).padStart(2, "0")}:${minute}`;
 }
 
-function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
   const result = [];
 
   for (const dateInfo of interviewDates) {
@@ -75,6 +78,65 @@ function formatInterviewTimes(interviewAvailableTimes, interviewDates) {
   }
 
   return result;
+}
+
+// eslint-disable-next-line react-refresh/only-export-components -- 특성 테스트용 export
+export function buildFormData({
+  name,
+  phoneNumber,
+  birthYear,
+  birthMonth,
+  birthDay,
+  department,
+  studentNumber,
+  grade,
+  interviewMethod,
+  part,
+  interviewAvailableTimes,
+  interviewDates,
+  q1,
+  q2,
+  q3,
+  q4,
+  q5,
+  precourseFiles,
+  portfolioFiles,
+}) {
+  const formData = new FormData();
+
+  const birthday = formatBirthday(birthYear, birthMonth, birthDay) || "";
+  const interviewTimesISO = formatInterviewTimes(
+    interviewAvailableTimes,
+    interviewDates,
+  );
+
+  formData.append("name", name.trim());
+  formData.append("phone_number", phoneNumber.trim());
+  formData.append("birthday", birthday);
+  formData.append("department", department.trim());
+  formData.append("student_number", studentNumber.trim());
+  formData.append("grade", grade.trim());
+  formData.append("interview_method", interviewMethod);
+  formData.append("part", part);
+
+  interviewTimesISO.forEach((t) =>
+    formData.append("interview_available_times", t),
+  );
+
+  formData.append("personal_statement_1", q1.trim());
+  formData.append("personal_statement_2", q2.trim());
+  formData.append("personal_statement_3", q3.trim());
+  formData.append("personal_statement_4", q4.trim());
+
+  const q5Trim = q5.trim();
+  if (q5Trim.length > 0) formData.append("personal_statement_5", q5Trim);
+
+  precourseFiles.forEach((file) =>
+    formData.append("completed_prerequisites", file),
+  );
+  portfolioFiles.forEach((file) => formData.append("portfolios", file));
+
+  return formData;
 }
 
 function ensureModalRoot() {
@@ -484,39 +546,27 @@ export default function ApplyIntegrated() {
     setSubmitError("");
 
     try {
-      const formData = new FormData();
-
-      const birthday = formatBirthday(birthYear, birthMonth, birthDay) || "";
-      const interviewTimesISO = formatInterviewTimes(
+      const formData = buildFormData({
+        name,
+        phoneNumber,
+        birthYear,
+        birthMonth,
+        birthDay,
+        department,
+        studentNumber,
+        grade,
+        interviewMethod,
+        part,
         interviewAvailableTimes,
-        INTERVIEW_DATES,
-      );
-
-      formData.append("name", name.trim());
-      formData.append("phone_number", phoneNumber.trim());
-      formData.append("birthday", birthday);
-      formData.append("department", department.trim());
-      formData.append("student_number", studentNumber.trim());
-      formData.append("grade", grade.trim());
-      formData.append("interview_method", interviewMethod);
-      formData.append("part", part);
-
-      interviewTimesISO.forEach((t) =>
-        formData.append("interview_available_times", t),
-      );
-
-      formData.append("personal_statement_1", q1.trim());
-      formData.append("personal_statement_2", q2.trim());
-      formData.append("personal_statement_3", q3.trim());
-      formData.append("personal_statement_4", q4.trim());
-
-      const q5Trim = q5.trim();
-      if (q5Trim.length > 0) formData.append("personal_statement_5", q5Trim);
-
-      precourseFiles.forEach((file) =>
-        formData.append("completed_prerequisites", file),
-      );
-      portfolioFiles.forEach((file) => formData.append("portfolios", file));
+        interviewDates: INTERVIEW_DATES,
+        q1,
+        q2,
+        q3,
+        q4,
+        q5,
+        precourseFiles,
+        portfolioFiles,
+      });
 
       const data = await ApplicationsAPI.createApplication(formData);
       const codeFromServer = data?.application_code || "";
